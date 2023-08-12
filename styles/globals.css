@@ -62,7 +62,7 @@
 
 @layer base {
   * {
-    @apply border-border ring-border;
+    @apply border-border ring-ring;
   }
   *:hover {
     @apply transition-all;
