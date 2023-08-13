@@ -38,14 +38,14 @@ export const Icons = {
       <g clip-path="url(#clip0_409_2569)">
         <path
           d="M39.445 16.0557L16.5566 38.944"
-          stroke="white"
+          stroke="currentColor"
           stroke-width="2.00971"
           stroke-linecap="round"
           stroke-linejoin="round"
         />
         <path
           d="M18.8477 16.0557H39.4472V36.6552"
-          stroke="white"
+          stroke="currentColor"
           stroke-width="2.00971"
           stroke-linecap="round"
           stroke-linejoin="round"
