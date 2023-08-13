@@ -36,7 +36,11 @@ export default function FaqsPage() {
                 <motion.div
                   key={el.label + idx}
                   initial={{ height: 0, opacity: 0 }}
-                  animate={{ height: 'auto', opacity: 1 }}
+                  animate={{
+                    height: 'auto',
+                    opacity: 1,
+                    transition: { ease: 'linear' },
+                  }}
                   transition={{ type: 'tween', delay: 0.1, duration: 0.2 }}
                 >
                   <Accordion.Content className="pt-7 text-muted">
