@@ -24,7 +24,7 @@ export default function Footer({ className, ...props }: FooterProps) {
               </Link>
             ))}
           </div>
-          <div className="inline-flex h-[54px] w-[179.05px] items-start justify-start gap-[22.74px] bg-sky-500 px-[28.42px] py-[14.21px]">
+          <div className="inline-flex h-[54px] w-[179.05px] items-start justify-start gap-[22.74px] bg-primary px-[28.42px] py-[14.21px]">
             <Link href={'/'}>
               <Icons.facebook className="fill-white stroke-none transition-all hover:fill-none hover:stroke-white" />
             </Link>
