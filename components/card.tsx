@@ -11,6 +11,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   icon?: (props: any) => JSX.Element;
   text: string;
   image?: string;
+  portfolioPage?: boolean;
   squared?: boolean;
   roundedIcon?: boolean;
 }
@@ -31,7 +32,8 @@ export default function Card({
           'space-y-3 overflow-hidden rounded-lg bg-card  p-7 lg:p-8',
           className,
           {
-            'bg-secondary group/image hover:shadow-md cursor-pointer': image,
+            'group/image hover:shadow-md cursor-pointer': image,
+            'bg-secondary': image && !props.portfolioPage,
           }
         )}
         {...props}

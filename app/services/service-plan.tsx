@@ -15,8 +15,10 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
   return (
     <div className="bg-card">
       <div className={cn('container py-12', className, {})} {...props}>
-        <Caption>Service plans</Caption>
-        <Typography variant={'heading'}>Diensten</Typography>
+        <Caption className="justify-center">Service plans</Caption>
+        <Typography variant={'heading'} className="text-center mt-3">
+          Diensten
+        </Typography>
         <Tabs.Root defaultValue={tabs[0]}>
           <Tabs.List className="my-11 flex justify-between gap-4">
             {tabs.map((tab) => (
