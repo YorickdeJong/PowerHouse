@@ -83,6 +83,24 @@ export const Images = {
       height={300}
     />
   ),
+  person1: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/person1.png`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  person2: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/person2.png`}
+      alt="    "
+      width={250}
+      height={300}
+    />
+  ),
   calendar: (props: any) => (
     <Image
       {...props}

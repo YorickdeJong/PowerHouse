@@ -5,7 +5,7 @@ export const siteConfig = {
   description: 'Wij MAKEN WEBSITES MEt PASSIE',
   nav: [
     { title: 'Home', href: '/' },
-    { title: 'About us', href: '/' },
+    { title: 'About us', href: '/about' },
     { title: 'Services', href: '/#' },
     { title: 'Portfolio', href: '/' },
     { title: 'FAQ’S', href: '/' },
