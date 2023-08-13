@@ -13,12 +13,12 @@ export default function Booking({ className, ...props }: BookingProps) {
   return (
     <section className="bg-card">
       <div className={cn('container   pb-20 pt-12', className, {})} {...props}>
-        <Caption className="mb-4">Portfolio</Caption>
-        <Typography variant={'title'}>ons werk</Typography>
+        <Caption className="mb-4">Book Blue Waterfall</Caption>
+        <Typography variant={'title'}>Maak een afspraak</Typography>
         <Typography variant={'muted'}>
           Boek een gesprek met Blue Waterfall om uw digitale bedrijf te starten
         </Typography>
-        <div className="w-fit border-4 border-dashed border-primary">
+        <div className="w-fit mt-4 border-4 border-dashed border-primary">
           <Button className="rounded-none">
             Maak een gratis afspraak &rarr;
           </Button>
