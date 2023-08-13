@@ -1,0 +1,13 @@
+/* any thing inside will be dark */
+.blue-overlay {
+  position: relative;
+}
+
+.blue-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  @apply bg-[#010412]/80;
+}

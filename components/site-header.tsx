@@ -3,28 +3,33 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { AlignJustify, X } from 'lucide-react';
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 
-import Brand from './ui/brand';
+import Brand from './brand';
+import { Icons } from './icons';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const path = usePathname();
   return (
-    <section>
-      <nav className="container flex items-center justify-between">
+    <section
+      className={cn('', {
+        'absolute bg-transparent top-0 inset-x-0 z-40': path === '/',
+      })}
+    >
+      <nav className="container  flex items-center justify-between px-5 py-9">
         <Brand />
         <NavContent />
         {!isMenuOpen ? (
-          <AlignJustify
+          <Icons.menu
             onClick={() => setIsMenuOpen(true)}
             size={36}
             className="cursor-pointer text-foreground lg:hidden"
           />
         ) : (
-          <X
+          <Icons.x
             onClick={() => setIsMenuOpen(false)}
             size={36}
             className="cursor-pointer text-foreground lg:hidden"
