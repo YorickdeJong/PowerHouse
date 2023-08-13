@@ -1,3 +1,4 @@
+import Booking from './booking';
 import Hero from './hero';
 import KwaliteitenSection from './kwaliteiten-section';
 import OnzeDienstenSection from './onze-diensten-section';
@@ -12,6 +13,7 @@ export default function IndexPage() {
       <KwaliteitenSection />
       <Portfolio />
       <Reviews />
+      <Booking />
     </section>
   );
 }

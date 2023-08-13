@@ -83,6 +83,15 @@ export const Images = {
       height={300}
     />
   ),
+  calendar: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/calendar.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
   letsTalk: (props: LucideProps) => (
     <svg
       {...props}
