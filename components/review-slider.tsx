@@ -3,7 +3,7 @@
 import { HTMLAttributes } from 'react';
 import Image from 'next/image';
 import useSwiperRef from '@/hook/swiper';
-import { Navigation } from 'swiper/modules';
+import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { cn } from '@/lib/utils';
@@ -24,8 +24,9 @@ export default function ReviewSlider({
       {...props}
     >
       <Swiper
-        modules={[Navigation]}
-        className="relative"
+        modules={[Navigation, Pagination]}
+        pagination={true}
+        className="relative py-12"
         navigation={{
           prevEl: prevEl,
           nextEl: nextEl,
@@ -44,7 +45,7 @@ export default function ReviewSlider({
         >
           <Images.right />
         </div>
-        {Array.from(Array(15)).map((el) => (
+        {Array.from(Array(7)).map((el) => (
           <SwiperSlide key={el}>
             {({ isActive }) => (
               <div

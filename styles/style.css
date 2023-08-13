@@ -2,6 +2,19 @@
 @import 'swiper/css/thumbs';
 @import 'swiper/css/free-mode';
 @import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+:root {
+  --swiper-pagination-bullet-inactive-opacity: 1;
+  --swiper-pagination-bullet-inactive-color: transparent;
+}
+.swiper-pagination-bullet {
+  border: 1px solid #676974 !important;
+}
+.swiper-pagination-bullet-active {
+  border: 0px !important;
+}
+
 /* any thing inside will be dark */
 .blue-overlay {
   position: relative;
