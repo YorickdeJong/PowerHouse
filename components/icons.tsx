@@ -29,6 +29,22 @@ export const Icons = {
   star: () => (
     <Image src={'/assets/images/star.svg'} alt="star" width={30} height={22} />
   ),
+  starPrimary: () => (
+    <Image
+      src={'/assets/images/star-primary.svg'}
+      alt="star"
+      width={30}
+      height={22}
+    />
+  ),
+  starDark: () => (
+    <Image
+      src={'/assets/images/star-dark.svg'}
+      alt="star"
+      width={30}
+      height={22}
+    />
+  ),
   x: X,
   menu: AlignRight,
   arrowUp: (props: LucideProps) => (

@@ -6,6 +6,8 @@ import { Icons } from './icons';
 
 interface CaptionProps extends HTMLAttributes<HTMLDivElement> {
   childrenClassName?: string;
+  dark?: boolean;
+  primary?: boolean;
 }
 
 export default function Caption({
@@ -15,7 +17,14 @@ export default function Caption({
 }: CaptionProps) {
   return (
     <div className={cn('flex items-center gap-1', className)}>
-      <Icons.star />
+      {props.dark ? (
+        <Icons.starDark />
+      ) : props.primary ? (
+        <Icons.starPrimary />
+      ) : (
+        <Icons.star />
+      )}
+
       <p
         className={cn(
           'font-bold uppercase text-primary',
