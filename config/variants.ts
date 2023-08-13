@@ -9,4 +9,5 @@ export const defaultVariants: Variants = {
   visible: { x: 0, y: 0, opacity: 1 },
   scaleUp: { y: 0, opacity: 1, scale: 1 },
   scaleDown: { y: 300, opacity: 0, scale: 0.1 },
+  scale0: { opacity: 0, scale: 0.1 },
 };
