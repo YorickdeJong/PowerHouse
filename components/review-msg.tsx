@@ -16,7 +16,7 @@ export default function ReviewMsg({ className, ...props }: ReviewMsgProps) {
         {Array.from(Array(5)).map((idx) => (
           <Images.yellowStar className="mr-1 inline-block aspect-square w-3 md:w-4" />
         ))}
-        <Typography variant={'muted'} className="mt-3 mb-8">
+        <Typography variant={'muted'} className="mb-8 mt-3">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla orci
           augue, bibendum id risus in, tristique dictum urna. In imperdiet enim
           ullamcorper aliquam porta. Duis ultricies metus posuere consequat
