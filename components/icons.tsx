@@ -1,9 +1,21 @@
 import Image from 'next/image';
-import { AlignRight, LucideProps, Moon, SunMedium, X } from 'lucide-react';
+import {
+  AlignRight,
+  Facebook,
+  Linkedin,
+  LucideProps,
+  Moon,
+  SunMedium,
+  Twitter,
+  X,
+} from 'lucide-react';
 
 export const Icons = {
   sun: SunMedium,
   moon: Moon,
+  facebook: Facebook,
+  twitter: Twitter,
+  linkedin: Linkedin,
   logo: () => (
     <Image
       src={'/assets/images/logo.png'}

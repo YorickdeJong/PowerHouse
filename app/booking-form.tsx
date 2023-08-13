@@ -16,12 +16,12 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
         <Typography variant={'muted'} size={'sm'}>
           Stuur ons een bericht zodat wij jou kunnen helpen
         </Typography>
-        <form className="bg-white rounded-xl shadow py-4 px-5 mt-8">
-          <p className="text-background font-bold">Stuur ons een bericht</p>
+        <form className="mt-8 rounded-xl bg-white px-5 py-4 shadow">
+          <p className="font-bold text-background">Stuur ons een bericht</p>
           {fields.map((field) => (
             <div
               key={field.label}
-              className="py-2.5 space-y-2 border-b border-border/10 focus-within:border-border/40 text-background"
+              className="space-y-2 border-b border-border/10 py-2.5 text-background focus-within:border-border/40"
             >
               <label htmlFor={field.label} className="text-xs">
                 {field.label}
@@ -33,7 +33,7 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
               />
             </div>
           ))}
-          <Button className="w-full text-xs mt-8">Stuur</Button>
+          <Button className="mt-8 w-full text-xs">Stuur</Button>
         </form>
       </div>
     </div>
