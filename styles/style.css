@@ -1,3 +1,7 @@
+@import 'swiper/css';
+@import 'swiper/css/thumbs';
+@import 'swiper/css/free-mode';
+@import 'swiper/css/navigation';
 /* any thing inside will be dark */
 .blue-overlay {
   position: relative;
