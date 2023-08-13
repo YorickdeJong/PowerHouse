@@ -13,10 +13,10 @@ export default function VerhaalSection({
   ...props
 }: VerhaalSectionProps) {
   return (
-    <section className="bg-white py-14">
+    <section className="bg-white pt-14">
       <div className={cn('container', className, {})} {...props}>
         <Caption dark>hoe we zijn gestrart</Caption>
-        <Typography variant={'title'} className="text-background">
+        <Typography variant={'title'} className="text-background mt-4 mb-2">
           ons verhaal
         </Typography>
         <Typography variant={'muted'} className="text-background">
@@ -27,7 +27,11 @@ export default function VerhaalSection({
           Holly stroke erumpent answer rise our time-turner cursed. Mimbletonia
           come gnomes dirt die chalice.
         </Typography>
-        <Motion initial="down" className="mt-10">
+        <Motion
+          initial="down"
+          whileInView={{ y: 5, opacity: 1 }}
+          className="mt-10"
+        >
           <Images.capsule className="hue-rotate-30" />
         </Motion>
       </div>

@@ -26,11 +26,9 @@ export default function Caption({
       )}
 
       <p
-        className={cn(
-          'font-bold uppercase text-primary',
-          childrenClassName,
-          {}
-        )}
+        className={cn('font-bold uppercase text-primary', childrenClassName, {
+          'text-background': props.primary,
+        })}
         {...props}
       />
     </div>

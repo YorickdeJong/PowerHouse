@@ -8,6 +8,7 @@ import Motion from './motion';
 
 interface LetsTalkProps extends HTMLAttributes<HTMLDivElement> {
   light?: boolean;
+  reversed?: boolean;
 }
 
 export default function LetsTalk({
@@ -27,7 +28,11 @@ export default function LetsTalk({
     >
       <Images.letsTalk className="animate-spin [animation-duration:60s]" />
       <Motion asChild whileInView={{ scale: [0, 1.5, 0.8, 1] }}>
-        <Icons.arrowUp className="absolute inset-0 m-auto" />
+        <Icons.arrowUp
+          className={cn('absolute inset-0 m-auto', {
+            'scale-x-[-1]': props.reversed,
+          })}
+        />
       </Motion>
     </section>
   );
