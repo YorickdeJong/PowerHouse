@@ -5,6 +5,7 @@ import { cn } from '@/lib/utils';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import { Icons } from '@/components/icons';
+import Motion from '@/components/motion';
 
 interface OnzeDienstenSectionProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -32,9 +33,11 @@ export default function OnzeDienstenSection({
               <p className="text-[22px] font-bold uppercase group-hover:text-primary ">
                 {link.title}
               </p>
-              <div className="h-9 w-9 rounded-full p-1 group-hover:block  group-hover:bg-primary">
-                <Icons.arrowUp />
-              </div>
+              <Motion initial="hidden">
+                <div className="grid h-9 w-9 place-content-center rounded-full p-1 group-hover:bg-primary">
+                  <Icons.arrowUp className="p-3" />
+                </div>
+              </Motion>
             </div>
           ))}
         </div>

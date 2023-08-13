@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
+import Card from '@/components/card';
 import { Images } from '@/components/images';
 import LetsTalk from '@/components/lets-talk';
 import Motion from '@/components/motion';
@@ -30,6 +31,37 @@ export default function KwaliteitenSection({
           <Images.capsule />
         </Motion>
       </div>
+      <Motion
+        transition={{ staggerChildren: 0 }}
+        className="mt-10 grid grid-cols-1 gap-5"
+      >
+        {data.map((el) => (
+          <Card {...el} key={el.label} />
+        ))}
+      </Motion>
     </div>
   );
 }
+
+const data = [
+  {
+    label: 'Assertiviteit',
+    icon: Images.react,
+    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'partner',
+    icon: Images[24],
+    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'wordt gezien',
+    icon: Images.people,
+    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+  {
+    label: 'gemak',
+    icon: Images.tree,
+    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+  },
+];

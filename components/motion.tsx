@@ -10,7 +10,7 @@ interface MotionProps extends HtmlHTMLAttributes<HTMLDivElement> {
   as?: ElementType;
   asChild?: boolean;
   variants?: Variants;
-  repeat?: boolean;
+  always?: boolean;
 }
 
 const Component = forwardRef<HTMLDivElement, MotionProps>(
@@ -32,10 +32,10 @@ const withVariants =
       <Comp
         variants={defaultVariants}
         whileInView={props.animate || 'visible'}
-        viewport={{ once: props.repeat ? false : true }}
+        viewport={{ once: !props.always }}
         transition={{
           delay: 0.1,
-          duration: 0.5,
+          duration: 0.2,
           type: 'spring',
           ...props.transition,
         }}

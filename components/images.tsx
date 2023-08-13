@@ -12,6 +12,60 @@ export const Images = {
       height={300}
     />
   ),
+  react: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/react.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  people: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/people.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  tree: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/tree.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  24: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/24.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  left: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/left.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  right: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/right.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
   letsTalk: (props: LucideProps) => (
     <svg
       {...props}
