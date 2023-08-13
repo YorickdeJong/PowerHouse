@@ -1,14 +1,5 @@
 import Image from 'next/image';
-import {
-  AlignRight,
-  LucideProps,
-  Moon,
-  SunMedium,
-  X,
-  type Icon as LucideIcon,
-} from 'lucide-react';
-
-export type Icon = LucideIcon;
+import { AlignRight, LucideProps, Moon, SunMedium, X } from 'lucide-react';
 
 export const Icons = {
   sun: SunMedium,

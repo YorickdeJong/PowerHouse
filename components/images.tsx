@@ -1,7 +1,6 @@
 import Image from 'next/image';
-import { LucideProps, type Icon as LucideIcon } from 'lucide-react';
+import { LucideProps } from 'lucide-react';
 
-export type Icon = LucideIcon;
 export const Images = {
   capsule: (props: any) => (
     <Image
