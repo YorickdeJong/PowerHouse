@@ -1,4 +1,5 @@
 import Booking from './booking';
+import BookingForm from './booking-form';
 import Hero from './hero';
 import KwaliteitenSection from './kwaliteiten-section';
 import OnzeDienstenSection from './onze-diensten-section';
@@ -14,6 +15,7 @@ export default function IndexPage() {
       <Portfolio />
       <Reviews />
       <Booking />
+      <BookingForm />
     </section>
   );
 }
