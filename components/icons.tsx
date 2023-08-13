@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import {
   AlignRight,
+  LucideProps,
   Moon,
   SunMedium,
   X,
@@ -20,6 +21,12 @@ export const Icons = {
       height={100}
     />
   ),
+  star: () => (
+    <Image src={'/assets/images/star.svg'} alt="star" width={30} height={22} />
+  ),
   x: X,
   menu: AlignRight,
+  arrowUp: (props: LucideProps) => (
+    <Image src={'/assets/images/arrow.svg'} alt="star" width={50} height={50} />
+  ),
 };

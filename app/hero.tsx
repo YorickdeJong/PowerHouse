@@ -20,7 +20,7 @@ export default function Hero({ className, ...props }: HeroProps) {
         />
       </div>
       <div className="absolute inset-0 m-auto h-fit w-fit">
-        <div className="max-w-screen-sm space-y-5 text-center md:max-w-screen-md">
+        <div className="container max-w-screen-sm space-y-5 text-center md:max-w-screen-md">
           <Typography variant={'heading'}>
             WIJ MAKEN WEBSITES MET PASSIE
           </Typography>
