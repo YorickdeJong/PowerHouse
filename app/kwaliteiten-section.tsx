@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
+import LetsTalk from '@/components/lets-talk';
 
 interface KwaliteitenSectionProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -21,7 +22,9 @@ export default function KwaliteitenSection({
         Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor
         incididunt ut labore et dolore magna aliqua.
       </Typography>
-      <hr className="my-8" />
+      <div>
+        <LetsTalk />
+      </div>
     </div>
   );
 }
