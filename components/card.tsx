@@ -65,7 +65,12 @@ export default function Card({
           )}
           <p className="grow text-xl font-bold uppercase">{label}</p>
           <Motion initial="hidden">
-            <div className="grid h-5 w-5 place-content-center rounded-full bg-primary p-1">
+            <div
+              className={cn(
+                'grid h-5 w-5 place-content-center rounded-full bg-primary p-1',
+                { hidden: !image }
+              )}
+            >
               <Icons.arrowUp className="p-5 text-background" />
             </div>
           </Motion>

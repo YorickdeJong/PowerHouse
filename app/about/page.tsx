@@ -1,6 +1,7 @@
 import { Typography } from '@/components/ui/typography';
 import Breadcrumb from '@/components/breadcrumb';
 
+import Benefits from './benefits';
 import Person from './person';
 
 export default function AboutPage() {
@@ -11,6 +12,7 @@ export default function AboutPage() {
         Over ons
       </Typography>
       <Person />
+      <Benefits />
     </section>
   );
 }
