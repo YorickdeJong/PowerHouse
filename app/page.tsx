@@ -1,6 +1,7 @@
 import Hero from './hero';
 import KwaliteitenSection from './kwaliteiten-section';
 import OnzeDienstenSection from './onze-diensten-section';
+import Portfolio from './portfolio';
 
 export default function IndexPage() {
   return (
@@ -8,6 +9,7 @@ export default function IndexPage() {
       <Hero />
       <OnzeDienstenSection />
       <KwaliteitenSection />
+      <Portfolio />
     </section>
   );
 }
