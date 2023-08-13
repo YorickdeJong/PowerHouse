@@ -5,6 +5,9 @@ import { Images } from '@/components/images';
 import LetsTalk from '@/components/lets-talk';
 import Motion from '@/components/motion';
 
+import ServicePlan from './service-plan';
+import Services from './services';
+
 export default function ServicesPage() {
   return (
     <section>
@@ -29,7 +32,9 @@ export default function ServicesPage() {
         <Motion initial="down">
           <Images.capsule />
         </Motion>
+        <Services />
       </div>
+      <ServicePlan />
     </section>
   );
 }

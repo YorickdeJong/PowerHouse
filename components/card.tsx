@@ -11,6 +11,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   icon?: (props: any) => JSX.Element;
   text: string;
   image?: string;
+  squared?: boolean;
   roundedIcon?: boolean;
 }
 
@@ -45,7 +46,11 @@ export default function Card({
           />
         )}
         {icon && (
-          <div className="h-[70px] w-[70px] rounded-full bg-secondary">
+          <div
+            className={cn('h-[70px] w-[70px] rounded-full bg-secondary', {
+              'rounded-2xl': props.squared,
+            })}
+          >
             {icon?.({ className: 'p-4' })}
           </div>
         )}
