@@ -31,7 +31,7 @@ const withVariants =
     (
       <Comp
         variants={defaultVariants}
-        whileInView={props.animate || 'visible'}
+        whileInView={props.whileInView || 'visible'}
         viewport={{ once: !props.always }}
         transition={{
           delay: 0.1,

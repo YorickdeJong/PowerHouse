@@ -4,9 +4,10 @@ export const siteConfig = {
   name: 'Blue Waterfall',
   description: 'Wij MAKEN WEBSITES MEt PASSIE',
   nav: [
-    { title: 'home', href: '/' },
-    { title: 'blog', href: '/blog' },
-    { title: 'contact', href: '/#contact' },
-    { title: 'about', href: '/about' },
+    { title: 'Home', href: '/' },
+    { title: 'About us', href: '/' },
+    { title: 'Services', href: '/#' },
+    { title: 'Portfolio', href: '/' },
+    { title: 'FAQ’S', href: '/' },
   ],
 };
