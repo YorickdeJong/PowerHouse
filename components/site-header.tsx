@@ -72,7 +72,7 @@ const NavContent = () => {
 const NavContentMob = ({ setIsMenuOpen }: { setIsMenuOpen: Function }) => {
   return (
     <>
-      <ul className="absolute inset-x-0 p-5 gap-4 bg-card mx-2 rounded-xl shadow-xl flex flex-col items-start lg:hidden">
+      <ul className="absolute inset-x-0 mx-2 flex flex-col items-start gap-4 rounded-xl bg-card p-5 shadow-xl lg:hidden">
         {siteConfig.nav.map((_) => (
           <li onClick={() => setIsMenuOpen(false)} key={_.title}>
             <h3 className="capitalize hover:text-primary/50">

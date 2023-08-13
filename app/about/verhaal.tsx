@@ -16,7 +16,7 @@ export default function VerhaalSection({
     <section className="bg-white pt-14">
       <div className={cn('container', className, {})} {...props}>
         <Caption dark>hoe we zijn gestrart</Caption>
-        <Typography variant={'title'} className="text-background mt-4 mb-2">
+        <Typography variant={'title'} className="mb-2 mt-4 text-background">
           ons verhaal
         </Typography>
         <Typography variant={'muted'} className="text-background">

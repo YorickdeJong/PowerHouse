@@ -18,7 +18,7 @@ export default function Booking({ className, ...props }: BookingProps) {
         <Typography variant={'muted'}>
           Boek een gesprek met Blue Waterfall om uw digitale bedrijf te starten
         </Typography>
-        <div className="w-fit mt-4 border-4 border-dashed border-primary">
+        <div className="mt-4 w-fit border-4 border-dashed border-primary">
           <Button className="rounded-none">
             Maak een gratis afspraak &rarr;
           </Button>

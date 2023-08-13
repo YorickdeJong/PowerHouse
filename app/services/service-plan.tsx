@@ -18,7 +18,7 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
         <Caption>Service plans</Caption>
         <Typography variant={'heading'}>Diensten</Typography>
         <Tabs.Root defaultValue={tabs[0]}>
-          <Tabs.List className="flex justify-between gap-4 my-11">
+          <Tabs.List className="my-11 flex justify-between gap-4">
             {tabs.map((tab) => (
               <Tabs.Trigger asChild key={tab} value={tab}>
                 <Button
