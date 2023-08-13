@@ -3,8 +3,8 @@ import Image from 'next/image';
 
 import { cn } from '@/lib/utils';
 import { Typography } from '@/components/ui/typography';
-import { Icons } from '@/components/assets';
 import Caption from '@/components/caption';
+import { Icons } from '@/components/icons';
 
 interface OnzeDienstenSectionProps extends HTMLAttributes<HTMLDivElement> {}
 

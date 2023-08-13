@@ -7,8 +7,8 @@ import { usePathname } from 'next/navigation';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
 
-import { Icons } from './assets';
 import Brand from './brand';
+import { Icons } from './icons';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);

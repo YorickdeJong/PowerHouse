@@ -2,7 +2,7 @@ import { HTMLAttributes } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { Icons } from './assets';
+import { Icons } from './icons';
 
 interface CaptionProps extends HTMLAttributes<HTMLDivElement> {
   childrenClassName?: string;

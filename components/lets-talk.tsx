@@ -2,23 +2,24 @@ import { HTMLAttributes } from 'react';
 
 import { cn } from '@/lib/utils';
 
-import { Icons, Images } from './assets';
+import { Icons } from './icons';
+import { Images } from './images';
 import Motion from './motion';
 
 interface LetsTalkProps extends HTMLAttributes<HTMLDivElement> {
-  white?: boolean;
+  light?: boolean;
 }
 
 export default function LetsTalk({
   className,
-  white,
+  light,
   ...props
 }: LetsTalkProps) {
   return (
     <section
       className={cn(
         'relative aspect-square w-fit rounded-full bg-primary p-2',
-        { 'bg-foreground': white },
+        { 'bg-foreground text-background': light },
         className,
         {}
       )}
