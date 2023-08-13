@@ -5,6 +5,7 @@ import {
   Linkedin,
   LucideProps,
   Moon,
+  Phone,
   SunMedium,
   Twitter,
   X,
@@ -16,6 +17,7 @@ export const Icons = {
   facebook: Facebook,
   twitter: Twitter,
   linkedin: Linkedin,
+  phone: Phone,
   logo: () => (
     <Image
       src={'/assets/images/logo.png'}

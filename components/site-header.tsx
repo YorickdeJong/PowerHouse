@@ -9,6 +9,7 @@ import { cn } from '@/lib/utils';
 
 import Brand from './brand';
 import { Icons } from './icons';
+import { Button } from './ui/button';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -34,8 +35,13 @@ export default function Navbar() {
             size={36}
             className="cursor-pointer text-foreground lg:hidden"
           />
-        )}
+        )}{' '}
+        <Button variant={'outline'} className="max-lg:hidden">
+          <Icons.phone className="pr-2" />
+          Vrijblijvende Afspraak
+        </Button>
       </nav>
+
       {isMenuOpen && <NavContentMob setIsMenuOpen={setIsMenuOpen} />}
     </section>
   );
@@ -45,7 +51,7 @@ const NavContent = () => {
   const path = usePathname();
   return (
     <>
-      <ul className="flex items-center max-lg:hidden ">
+      <ul className="ml-20 flex items-center gap-12 max-lg:hidden ">
         {siteConfig.nav.map((_) => (
           <li
             key={_.title}
@@ -66,10 +72,10 @@ const NavContent = () => {
 const NavContentMob = ({ setIsMenuOpen }: { setIsMenuOpen: Function }) => {
   return (
     <>
-      <ul className="absolute inset-x-0 flex flex-col items-start lg:hidden">
+      <ul className="absolute inset-x-0 p-5 gap-4 bg-card mx-2 rounded-xl shadow-xl flex flex-col items-start lg:hidden">
         {siteConfig.nav.map((_) => (
           <li onClick={() => setIsMenuOpen(false)} key={_.title}>
-            <h3 className="capitalize">
+            <h3 className="capitalize hover:text-primary/50">
               <Link href={_.href}>{_.title}</Link>
             </h3>
           </li>
