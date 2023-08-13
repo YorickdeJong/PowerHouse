@@ -57,7 +57,7 @@ export default function Card({
                 initial={{ left: 0 }}
                 whileInView={{
                   left: '18px',
-                  transition: { delay: 0.1, duration: 0.8 },
+                  transition: { delay: 0.5, duration: 1.5 },
                 }}
                 className="absolute left-0 top-0 h-2.5 w-2.5 rounded-full bg-white"
               />

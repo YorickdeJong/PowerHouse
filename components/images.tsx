@@ -65,6 +65,24 @@ export const Images = {
       height={300}
     />
   ),
+  quote: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/quote.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
+  yellowStar: (props: any) => (
+    <Image
+      {...props}
+      src={`/assets/images/yellow-star.svg`}
+      alt="    "
+      width={600}
+      height={300}
+    />
+  ),
   letsTalk: (props: LucideProps) => (
     <svg
       {...props}
