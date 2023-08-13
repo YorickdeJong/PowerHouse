@@ -1,30 +1,24 @@
 import { Typography } from '@/components/ui/typography';
-import Breadcrumb from '@/components/breadcrumb';
-import Caption from '@/components/caption';
 import Card from '@/components/card';
 
 export default function PortfolioPage() {
   return (
-    <section>
-      <div className="container">
-        <Breadcrumb pageTitle="PortFolio" />
-        <Caption className="mt-20">PortFolio</Caption>
-        <Typography className="mt-5" variant={'title'}>
-          PortFolio
-        </Typography>
-        <Typography className="mt-3" variant={'muted'}>
-          Op deze pagina ziet u een paar van onze projecten ter inspiratie. Per
-          project gaan we in op de probleemstelling, de oplossing en het
-          verkregen resultaat. U kunt ons ook altijd bellen om meer informatie
-          te krijgen over onze voltooide projecten.
-        </Typography>
-        <div className="mt-10 grid grid-cols-1 gap-16">
-          {data.map((el) => (
-            <Card portfolioPage key={el.label} {...el} />
-          ))}
-        </div>
+    <>
+      <Typography className="mt-5" variant={'title'}>
+        PortFolio
+      </Typography>
+      <Typography className="mt-3" variant={'muted'}>
+        Op deze pagina ziet u een paar van onze projecten ter inspiratie. Per
+        project gaan we in op de probleemstelling, de oplossing en het verkregen
+        resultaat. U kunt ons ook altijd bellen om meer informatie te krijgen
+        over onze voltooide projecten.
+      </Typography>
+      <div className="mt-10 grid grid-cols-1 gap-16">
+        {data.map((el) => (
+          <Card portfolioPage key={el.label} {...el} />
+        ))}
       </div>
-    </section>
+    </>
   );
 }
 

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
@@ -14,6 +14,7 @@ import { Button } from './ui/button';
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const path = usePathname();
+  const { push } = useRouter();
   return (
     <section
       className={cn('', {
@@ -36,7 +37,11 @@ export default function Navbar() {
             className="cursor-pointer text-foreground lg:hidden"
           />
         )}{' '}
-        <Button variant={'outline'} className="max-lg:hidden">
+        <Button
+          onClick={() => push('/booking')}
+          variant={'outline'}
+          className="max-lg:hidden"
+        >
           <Icons.phone className="pr-2" />
           Vrijblijvende Afspraak
         </Button>

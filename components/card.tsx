@@ -1,5 +1,6 @@
 import { HTMLAttributes } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 
@@ -14,35 +15,42 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   portfolioPage?: boolean;
   squared?: boolean;
   roundedIcon?: boolean;
+  postImage?: string;
 }
 
 export default function Card({
   className,
   icon,
+  postImage,
   label,
   text,
   roundedIcon,
   image,
   ...props
 }: CardProps) {
+  const Comp = image ? Link : 'section';
   return (
     <Motion initial="down" transition={{ delay: 0 }} asChild>
-      <section
+      <Comp
+        href={'/portfolio/' + label.toLowerCase().replaceAll(' ', '-')}
         className={cn(
-          'space-y-3 overflow-hidden rounded-lg bg-card  p-7 lg:p-8',
+          'block space-y-3 overflow-hidden rounded-lg bg-card  p-7 lg:p-8',
           className,
           {
             'group/image hover:shadow-md cursor-pointer': image,
             'bg-secondary': image && !props.portfolioPage,
+            'bg-transparent p-0': postImage,
           }
         )}
-        {...props}
       >
-        {image && (
+        {(image || postImage) && (
           <Image
-            src={image}
+            src={image! || postImage!}
             alt=""
-            className="aspect-square w-full -translate-y-7 scale-x-125 object-cover"
+            className={cn(
+              'aspect-square w-full -translate-y-7 scale-x-125 object-cover',
+              { 'object-contain scale-x-100 translate-y-0 mb-12': postImage }
+            )}
             width={400}
             height={400}
           />
@@ -70,7 +78,13 @@ export default function Card({
               />
             </div>
           )}
-          <p className="grow text-xl font-bold uppercase">{label}</p>
+          <p
+            className={cn('grow text-xl font-bold uppercase', {
+              'text-2xl': postImage,
+            })}
+          >
+            {label}
+          </p>
           <Motion initial="hidden">
             <div
               className={cn(
@@ -83,7 +97,7 @@ export default function Card({
           </Motion>
         </div>
         <p className="leading-relaxed text-muted">{text}</p>
-      </section>
+      </Comp>
     </Motion>
   );
 }

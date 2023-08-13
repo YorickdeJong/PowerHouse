@@ -27,7 +27,6 @@ export default function Booking({ className, ...props }: BookingProps) {
           initial="scaleDown"
           whileInView={'scaleUp'}
           transition={{ delay: 0, ease: 'linear' }}
-          always
         >
           <Images.calendar className="mt-8" />
         </Motion>

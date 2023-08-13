@@ -1,5 +1,6 @@
 import { HTMLAttributes } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
@@ -29,7 +30,9 @@ export default function Hero({ className, ...props }: HeroProps) {
             dat jouw ambities online te zien zijn
           </Typography>
           <div className="flex items-center justify-center gap-5 max-md:flex-col">
-            <Button>Vrijblijvende afspraak &rarr;</Button>
+            <Link href={'/booking'}>
+              <Button>Vrijblijvende afspraak &rarr;</Button>
+            </Link>
             <Button variant={'link'}>Learn More</Button>
           </div>
         </div>
