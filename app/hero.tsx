@@ -14,21 +14,24 @@ interface HeroProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function Hero({ className, ...props }: HeroProps) {
   const target = useRef(null);
-  const y = useScrollTransform({
+  const _y = useScrollTransform({
     target,
     offset: ['start start', 'end start'],
-    outputRange: [0, 500],
+    outputRange: [0, 100],
   });
+
   const opacity = useScrollTransform({
     target,
     offset: ['start start', 'end start'],
     outputRange: [1, 0],
   });
-  const scale = useScrollTransform({
+  const _scale = useScrollTransform({
     target,
     offset: ['start start', 'end start'],
     outputRange: [1, 1.2],
   });
+  const scale = useSpring(_scale);
+  const y = useSpring(_y);
 
   return (
     <section
