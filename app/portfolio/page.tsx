@@ -13,7 +13,7 @@ export default function PortfolioPage() {
         resultaat. U kunt ons ook altijd bellen om meer informatie te krijgen
         over onze voltooide projecten.
       </Typography>
-      <div className="mt-10 grid grid-cols-1 md:grid-cols-2 md:mt-40 gap-16">
+      <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2">
         {data.map((el) => (
           <Card portfolioPage key={el.label} {...el} />
         ))}

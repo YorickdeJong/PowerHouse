@@ -11,7 +11,7 @@ export default function Services({ className, ...props }: ServicesProps) {
     <>
       <div
         className={cn(
-          'my-7 grid grid-cols-1 lg:grid-cols-2 container gap-5',
+          'container my-7 grid grid-cols-1 gap-5 lg:grid-cols-2',
           className,
           {}
         )}

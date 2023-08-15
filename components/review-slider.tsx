@@ -37,13 +37,13 @@ export default function ReviewSlider({
         slidesPerView={3}
       >
         <div
-          className="fixed translate-y-2 -left-7 z-10 my-auto aspect-square h-10 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[40%]"
+          className="fixed -left-7 z-10 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[40%]"
           ref={prevRef}
         >
           <Images.left />
         </div>
         <div
-          className="fixed translate-y-2 -right-7 z-50 my-auto aspect-square h-10 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:right-[40%]"
+          className="fixed -right-7 z-50 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:right-[40%]"
           ref={nextRef}
         >
           <Images.right />

@@ -24,7 +24,7 @@ export default function OnzeDienstenSection({
           incididunt ut labore et dolore magna aliqua.
         </Typography>
         <hr className="my-8" />
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+        <div className="grid grid-cols-1 items-center gap-5 md:grid-cols-2">
           <div>
             {links.map((link) => (
               <div

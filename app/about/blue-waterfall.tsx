@@ -12,7 +12,7 @@ export default function BlueWaterfall({
   ...props
 }: BlueWaterfallProps) {
   return (
-    <div className="max-md:mb-10 bg-primary pb-24 pt-14">
+    <div className="bg-primary pb-24 pt-14 max-md:mb-10">
       <div className={cn('container relative', className, {})} {...props}>
         <Caption primary>ons bedrijf</Caption>
         <Typography variant={'title'} className="mb-2 mt-4">

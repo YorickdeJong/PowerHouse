@@ -37,7 +37,7 @@ export default function Booking({ className, ...props }: BookingProps) {
           whileInView={'scaleUp'}
           transition={{ delay: 0, ease: 'linear' }}
         >
-          <Images.calendar className="mt-8 md:scale-90 origin-top-left" />
+          <Images.calendar className="mt-8 origin-top-left md:scale-90" />
         </Motion>
       </div>
     </section>

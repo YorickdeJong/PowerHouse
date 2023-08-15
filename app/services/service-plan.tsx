@@ -22,7 +22,7 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
         <Typography variant={'heading'} className="mt-3 text-center">
           Diensten
         </Typography>
-        <Tabs.Root defaultValue={tabs[0]} className="lg:flex gap-6 lg:mt-12">
+        <Tabs.Root defaultValue={tabs[0]} className="gap-6 lg:mt-12 lg:flex">
           <Tabs.List className="my-11 flex justify-between gap-4 lg:hidden">
             {tabs.map((tab) => (
               <Tabs.Trigger asChild key={tab} value={tab}>

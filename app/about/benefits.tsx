@@ -11,7 +11,7 @@ export default function Benefits({ className, ...props }: BenefitsProps) {
   return (
     <div className={cn('', className, {})} {...props}>
       <Caption>Benefits for choosing us</Caption>
-      <div className="grid grid-cols-1 lg:grid-cols-2 items-center lg:gap-20">
+      <div className="grid grid-cols-1 items-center lg:grid-cols-2 lg:gap-20">
         <Typography variant={'title'} className="mb-2 mt-4">
           Waarom Blue waterfall kiezen?
         </Typography>

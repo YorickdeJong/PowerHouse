@@ -36,7 +36,7 @@ export default function KwaliteitenSection({
         </div>
         <Motion
           transition={{ staggerChildren: 0 }}
-          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5"
+          className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2"
         >
           {data.map((el) => (
             <Card {...el} key={el.label} />
