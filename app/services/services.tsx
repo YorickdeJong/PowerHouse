@@ -10,7 +10,11 @@ export default function Services({ className, ...props }: ServicesProps) {
   return (
     <>
       <div
-        className={cn('my-7 grid grid-cols-1 gap-5', className, {})}
+        className={cn(
+          'my-7 grid grid-cols-1 lg:grid-cols-2 container gap-5',
+          className,
+          {}
+        )}
         {...props}
       >
         {data.map((el) => (

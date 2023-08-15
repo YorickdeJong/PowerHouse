@@ -1,6 +1,7 @@
 'use client';
 
-import { HTMLAttributes } from 'react';
+import { Fragment, HTMLAttributes } from 'react';
+import { useMediaQuery } from '@/hook/media-query';
 import * as Tabs from '@radix-ui/react-tabs';
 
 import { cn } from '@/lib/utils';
@@ -12,15 +13,17 @@ import PriceCard from '@/components/price-card';
 interface ServicePlanProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function ServicePlan({ className, ...props }: ServicePlanProps) {
+  const isLg = useMediaQuery('lg');
+  const Comp = isLg ? Fragment : Tabs.Content;
   return (
     <div className="bg-card">
       <div className={cn('container py-12', className, {})} {...props}>
         <Caption className="justify-center">Service plans</Caption>
-        <Typography variant={'heading'} className="text-center mt-3">
+        <Typography variant={'heading'} className="mt-3 text-center">
           Diensten
         </Typography>
-        <Tabs.Root defaultValue={tabs[0]}>
-          <Tabs.List className="my-11 flex justify-between gap-4">
+        <Tabs.Root defaultValue={tabs[0]} className="lg:flex gap-6 lg:mt-12">
+          <Tabs.List className="my-11 flex justify-between gap-4 lg:hidden">
             {tabs.map((tab) => (
               <Tabs.Trigger asChild key={tab} value={tab}>
                 <Button
@@ -33,9 +36,9 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
             ))}
           </Tabs.List>
           {tabs.map((tab) => (
-            <Tabs.Content key={tab} value={tab}>
+            <Comp key={tab} value={tab}>
               <PriceCard tab={tab} />
-            </Tabs.Content>
+            </Comp>
           ))}
         </Tabs.Root>
       </div>
