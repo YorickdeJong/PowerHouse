@@ -14,8 +14,10 @@ export default function Reviews({ className, ...props }: ReviewsProps) {
       <Typography variant={'heading'}>Revews</Typography>
       <Caption className="mb-4 mt-16">Wat onze klanten over ons zeggen</Caption>
       <Typography variant={'title'}>testimonials</Typography>
-      <ReviewMsg />
-      <ReviewSlider />
+      <div className="grid md:mt-32 grid-cols-1 md:grid-cols-3 md:gap-4">
+        <ReviewMsg />
+        <ReviewSlider className="md:col-span-2" />
+      </div>
     </div>
   );
 }

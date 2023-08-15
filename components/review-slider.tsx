@@ -3,6 +3,7 @@
 
 import { HTMLAttributes } from 'react';
 import Image from 'next/image';
+import { useMediaQuery } from '@/hook/media-query';
 import useSwiperRef from '@/hook/swiper';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
@@ -18,6 +19,7 @@ export default function ReviewSlider({
   ...props
 }: ReviewSliderProps) {
   const [nextEl, nextRef] = useSwiperRef();
+  const isMd = useMediaQuery('md');
   const [prevEl, prevRef] = useSwiperRef();
   return (
     <div
@@ -35,13 +37,13 @@ export default function ReviewSlider({
         slidesPerView={3}
       >
         <div
-          className="fixed inset-y-0 -left-7 z-10 my-auto aspect-square h-10 cursor-pointer transition-all active:scale-95"
+          className="fixed translate-y-2 -left-7 z-10 my-auto aspect-square h-10 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[40%]"
           ref={prevRef}
         >
           <Images.left />
         </div>
         <div
-          className="fixed inset-y-0 -right-7 z-50 my-auto aspect-square h-10 cursor-pointer transition-all active:scale-95"
+          className="fixed translate-y-2 -right-7 z-50 my-auto aspect-square h-10 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:right-[40%]"
           ref={nextRef}
         >
           <Images.right />
@@ -61,11 +63,11 @@ export default function ReviewSlider({
                   className={cn(
                     'aspect-square rounded-full ring-4 ring-background ',
                     {
-                      ' block w-14 aspect-square': !isActive,
+                      ' block w-14 md:w-32 aspect-square': !isActive,
                     }
                   )}
-                  width={200}
-                  height={200}
+                  width={isMd ? 280 : 200}
+                  height={isMd ? 280 : 200}
                 />
               </div>
             )}

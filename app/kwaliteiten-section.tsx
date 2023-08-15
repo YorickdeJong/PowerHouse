@@ -17,28 +17,32 @@ export default function KwaliteitenSection({
   return (
     <div className={cn('container  py-20', className, {})} {...props}>
       <Typography variant={'heading'}>kwaliteiten</Typography>
-      <Caption className="mb-4 mt-16">Over Ons</Caption>
-      <Typography variant={'title'}>
-        waarom voor blue waterfall kiezen?
-      </Typography>
-      <Typography variant={'muted'} className="mt-2">
-        Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor
-        incididunt ut labore et dolore magna aliqua.
-      </Typography>
-      <div className="mt-10">
-        <LetsTalk className="translate-y-4" />
-        <Motion initial="down">
-          <Images.capsule />
+      <div className="grid grid-cols-1 md:grid-cols-2 ">
+        <div>
+          <Caption className="mb-4 mt-16">Over Ons</Caption>
+          <Typography variant={'title'}>
+            waarom voor blue waterfall kiezen?
+          </Typography>
+          <Typography variant={'muted'} className="mt-2">
+            Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor
+            incididunt ut labore et dolore magna aliqua.
+          </Typography>
+          <div className="mt-10">
+            <LetsTalk className="translate-y-4" />
+            <Motion initial="down">
+              <Images.capsule />
+            </Motion>
+          </div>
+        </div>
+        <Motion
+          transition={{ staggerChildren: 0 }}
+          className="mt-10 grid grid-cols-1 md:grid-cols-2 gap-5"
+        >
+          {data.map((el) => (
+            <Card {...el} key={el.label} />
+          ))}
         </Motion>
       </div>
-      <Motion
-        transition={{ staggerChildren: 0 }}
-        className="mt-10 grid grid-cols-1 gap-5"
-      >
-        {data.map((el) => (
-          <Card {...el} key={el.label} />
-        ))}
-      </Motion>
     </div>
   );
 }

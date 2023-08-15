@@ -18,7 +18,7 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
           <Typography variant={'title'}>ons werk</Typography>
           <Button variant={'outline'}>Bekijk alles</Button>
         </div>
-        <div className="mt-10 grid grid-cols-1 gap-16">
+        <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
           {data.map((el) => (
             <Card key={el.label} {...el} />
           ))}

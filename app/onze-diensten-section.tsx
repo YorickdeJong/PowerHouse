@@ -24,30 +24,32 @@ export default function OnzeDienstenSection({
           incididunt ut labore et dolore magna aliqua.
         </Typography>
         <hr className="my-8" />
-        <div>
-          {links.map((link) => (
-            <div
-              key={link.title}
-              className="group flex cursor-pointer items-center justify-between border-b border-border/50 py-5"
-            >
-              <p className="text-[22px] font-bold uppercase group-hover:text-primary ">
-                {link.title}
-              </p>
-              <Motion initial="hidden">
-                <div className="grid h-9 w-9 place-content-center rounded-full p-1 group-hover:bg-primary">
-                  <Icons.arrowUp className="p-3" />
-                </div>
-              </Motion>
-            </div>
-          ))}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 items-center">
+          <div>
+            {links.map((link) => (
+              <div
+                key={link.title}
+                className="group flex cursor-pointer items-center justify-between border-b border-border/50 py-5"
+              >
+                <p className="text-[22px] font-bold uppercase group-hover:text-primary ">
+                  {link.title}
+                </p>
+                <Motion initial="hidden">
+                  <div className="grid h-9 w-9 place-content-center rounded-full p-1 group-hover:bg-primary">
+                    <Icons.arrowUp className="p-3" />
+                  </div>
+                </Motion>
+              </div>
+            ))}
+          </div>
+          <Image
+            src={`/assets/images/video.svg`}
+            alt=""
+            className="mt-20 aspect-video w-full cursor-pointer"
+            width={388}
+            height={226}
+          />
         </div>
-        <Image
-          src={`/assets/images/video.svg`}
-          alt=""
-          className="mt-20 aspect-video w-full cursor-pointer"
-          width={388}
-          height={226}
-        />
       </div>
     </section>
   );
