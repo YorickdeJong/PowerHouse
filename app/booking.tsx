@@ -12,9 +12,18 @@ interface BookingProps extends HTMLAttributes<HTMLDivElement> {}
 export default function Booking({ className, ...props }: BookingProps) {
   return (
     <section className="bg-card">
-      <div className={cn('container   pb-20 pt-12', className, {})} {...props}>
+      <div
+        className={cn(
+          'container   pb-20 pt-12 md:px-24 md:pt-20',
+          className,
+          {}
+        )}
+        {...props}
+      >
         <Caption className="mb-4">Book Blue Waterfall</Caption>
-        <Typography variant={'title'}>Maak een afspraak</Typography>
+        <Typography variant={'title'} className="whitespace-nowrap">
+          Maak een afspraak
+        </Typography>
         <Typography variant={'muted'}>
           Boek een gesprek met Blue Waterfall om uw digitale bedrijf te starten
         </Typography>
@@ -28,7 +37,7 @@ export default function Booking({ className, ...props }: BookingProps) {
           whileInView={'scaleUp'}
           transition={{ delay: 0, ease: 'linear' }}
         >
-          <Images.calendar className="mt-8" />
+          <Images.calendar className="mt-8 md:scale-90 origin-top-left" />
         </Motion>
       </div>
     </section>

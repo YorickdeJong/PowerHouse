@@ -14,8 +14,10 @@ export default function IndexPage() {
       <KwaliteitenSection />
       <Portfolio />
       <Reviews />
-      <Booking />
-      <BookingForm />
+      <div className="grid grid-cols-1 md:grid-cols-2">
+        <Booking />
+        <BookingForm />
+      </div>
     </section>
   );
 }
