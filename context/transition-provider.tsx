@@ -21,13 +21,6 @@ export default function TransitionProvider({
         key={path}
       >
         {children}
-        {/* <Motion
-        className="fixed inset-0 h-screen origin-bottom bg-card"
-        animate={{ scaleY: 0 }}
-        initial={{ scaleY: 1 }}
-        exit={{ scaleY: 0 }}
-        transition={{ duration: 1, type: 'spring' }}
-      /> */}
       </Motion>
     </AnimatePresence>
   );
