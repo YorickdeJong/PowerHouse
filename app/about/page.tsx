@@ -17,8 +17,10 @@ export default function AboutPage() {
         <Person />
         <Benefits />
       </div>
-      <VerhaalSection />
-      <BlueWaterfall />
+      <div className="lg:flex">
+        <VerhaalSection />
+        <BlueWaterfall />
+      </div>
     </section>
   );
 }

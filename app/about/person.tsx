@@ -20,7 +20,7 @@ export default function Person({ className, ...props }: PersonProps) {
     <>
       <div
         className={cn(
-          'grid grid-cols-2 [&_img]:w-full [&_img]:object-cover',
+          'grid grid-cols-2 md:grid-cols-4 [&_img]:w-full [&_img]:object-cover',
           className,
           {}
         )}
@@ -40,8 +40,9 @@ export default function Person({ className, ...props }: PersonProps) {
         </Motion>
       </div>{' '}
       {/* @ts-ignore */}
-      <Motion style={{ opacity }}>
-        <Images.capsule />
+      <Motion style={{ opacity }} className="flex">
+        <Images.capsule className="w-full" />
+        <Images.capsule className="w-full max-md:hidden" />
       </Motion>
     </>
   );
