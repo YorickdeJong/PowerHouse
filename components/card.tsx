@@ -49,7 +49,10 @@ export default function Card({
             alt=""
             className={cn(
               'aspect-square w-full -translate-y-7 scale-x-125 object-cover',
-              { 'object-contain scale-x-100 translate-y-0 mb-12': postImage }
+              {
+                'object-contain scale-x-100 translate-y-0 mb-12': postImage,
+                'md:h-96': props.portfolioPage,
+              }
             )}
             width={400}
             height={400}
