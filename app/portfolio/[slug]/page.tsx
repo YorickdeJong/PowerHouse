@@ -1,7 +1,26 @@
+'use client';
+
+import { useRef } from 'react';
+import useScrollTransform from '@/hook/scroll-transform';
+
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
+import Motion from '@/components/motion';
 
 export default function PortfolioSlugPage() {
+  const target = useRef(null);
+  const height = useScrollTransform({
+    target,
+    outputRange: ['0%', '75%'],
+    inputRange: [0, 0.5],
+    offset: ['start center', 'end start'],
+  });
+  const scale = useScrollTransform({
+    target,
+    outputRange: [1, 0],
+    inputRange: [0, 0.5],
+    offset: ['start center', 'end start'],
+  });
   return (
     <section>
       <Typography className="mt-5" variant={'title'}>
@@ -18,15 +37,30 @@ export default function PortfolioSlugPage() {
         phoenix cauldron scales granger grayback. Totalus three-headed to
         locomotor rise.
       </Typography>{' '}
-      <div className="mt-10 mb-20 grid grid-cols-1 gap-16">
+      <div
+        ref={target}
+        className="relative mb-20 mt-10 grid grid-cols-1 gap-16 "
+      >
+        <div className="absolute inset-0 hidden flex-col items-center lg:flex">
+          <Motion
+            style={{ scale: scale as any }}
+            className="h-[70.39px] w-[70.39px] origin-bottom rounded-full bg-card"
+          />
+          <Motion
+            style={{
+              height: height as any,
+            }}
+            className="h-0 w-[7.62px] bg-card"
+          />
+        </div>
         {data.map((el) => (
-          <Card key={el.label} {...el} />
+          <Card portfolioDetailsPage key={el.label} {...el} />
         ))}
       </div>
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
-      <div className="mt-10 grid grid-cols-1 gap-16">
-        {related.map((el) => (
-          <Card key={el.label} {...el} />
+      <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
+        {related.map((el, idx) => (
+          <Card key={el.label} orderLast {...el} />
         ))}
       </div>
     </section>

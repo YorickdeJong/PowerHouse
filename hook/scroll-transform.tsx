@@ -6,6 +6,11 @@ const useScrollTransform = ({
   inputRange = [0, 1],
   outputRange,
   offset = ['start end', 'end end'],
+}: {
+  target: any;
+  inputRange?: [number, number];
+  outputRange: [any, any];
+  offset?: [string, string];
 }) => {
   const { scrollYProgress } = useScroll({
     target,

@@ -14,7 +14,7 @@ export default function FaqsPage() {
 
   return (
     <>
-      <div className="container py-12">
+      <div className="container max-w-[816px] py-12">
         <Caption className="justify-center">The things peoples asked</Caption>
         <Typography variant={'title'} className="mt-3 text-center">
           Frequently asked Questions

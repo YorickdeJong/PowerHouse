@@ -14,7 +14,9 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   image?: string;
   portfolioPage?: boolean;
   squared?: boolean;
+  orderLast?: boolean;
   roundedIcon?: boolean;
+  portfolioDetailsPage?: boolean;
   postImage?: string;
 }
 
@@ -30,7 +32,7 @@ export default function Card({
 }: CardProps) {
   const Comp = image ? Link : 'section';
   return (
-    <Motion initial="down" transition={{ delay: 0 }} asChild>
+    <Motion initial="down" asChild>
       <Comp
         href={'/portfolio/' + label.toLowerCase().replaceAll(' ', '-')}
         className={cn(
@@ -39,6 +41,8 @@ export default function Card({
           {
             'group/image hover:shadow-md cursor-pointer': image,
             'bg-secondary': image && !props.portfolioPage,
+            'lg:grid lg:grid-cols-2 lg:gap-72 lg:items-center':
+              props.portfolioDetailsPage,
             'bg-transparent p-0': postImage,
           }
         )}
@@ -58,48 +62,51 @@ export default function Card({
             height={400}
           />
         )}
-        {icon && (
-          <div
-            className={cn('h-[70px] w-[70px] rounded-full bg-secondary', {
-              'rounded-2xl': props.squared,
-            })}
-          >
-            {icon?.({ className: 'p-4' })}
-          </div>
-        )}
-        <div className="flex items-center gap-4">
-          {image && (
-            <div className="relative h-2.5 w-7">
-              <div className="absolute left-0 top-[4px] h-0.5 w-[23px] bg-white" />
-              <Motion
-                initial={{ left: 0 }}
-                whileInView={{
-                  left: '18px',
-                  transition: { delay: 0.5, duration: 1.5 },
-                }}
-                className="absolute left-0 top-0 h-2.5 w-2.5 rounded-full bg-white"
-              />
+        <div>
+          {icon && (
+            <div
+              className={cn('h-[70px] w-[70px] rounded-full bg-secondary', {
+                'rounded-2xl': props.squared,
+              })}
+            >
+              {icon?.({ className: 'p-4' })}
             </div>
           )}
-          <p
-            className={cn('grow text-xl font-bold uppercase', {
-              'text-2xl': postImage,
-            })}
-          >
-            {label}
-          </p>
-          <Motion initial="hidden">
-            <div
-              className={cn(
-                'grid h-5 w-5 place-content-center rounded-full bg-primary p-1',
-                { hidden: !image }
-              )}
+          <div className="flex items-center gap-4">
+            {image && (
+              <div className="relative h-2.5 w-7">
+                <div className="absolute left-0 top-[4px] h-0.5 w-[23px] bg-white" />
+                <Motion
+                  initial={{ left: 0 }}
+                  whileInView={{
+                    left: '18px',
+                    transition: { delay: 0.5, duration: 1.5 },
+                  }}
+                  className="absolute left-0 top-0 h-2.5 w-2.5 rounded-full bg-white"
+                />
+              </div>
+            )}
+            <p
+              className={cn('grow text-xl font-bold uppercase', {
+                'text-2xl': postImage,
+                'lg:text-[40px] lg:mb-4': props.portfolioDetailsPage,
+              })}
             >
-              <Icons.arrowUp className="p-5 text-background" />
-            </div>
-          </Motion>
+              {label}
+            </p>
+            <Motion initial="hidden">
+              <div
+                className={cn(
+                  'grid h-5 w-5 place-content-center rounded-full bg-primary p-1',
+                  { hidden: !image }
+                )}
+              >
+                <Icons.arrowUp className="p-5 text-background" />
+              </div>
+            </Motion>
+          </div>
+          <p className="leading-relaxed text-muted">{text}</p>
         </div>
-        <p className="leading-relaxed text-muted">{text}</p>
       </Comp>
     </Motion>
   );
