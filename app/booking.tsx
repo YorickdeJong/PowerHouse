@@ -32,13 +32,9 @@ export default function Booking({ className, ...props }: BookingProps) {
             Maak een gratis afspraak &rarr;
           </Button>
         </div>
-        <Motion
-          initial="scaleDown"
-          whileInView={'scaleUp'}
-          transition={{ delay: 0, ease: 'linear' }}
-        >
+        <div>
           <Images.calendar className="mt-8 origin-top-left md:scale-90" />
-        </Motion>
+        </div>
       </div>
     </section>
   );
