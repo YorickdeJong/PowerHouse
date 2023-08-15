@@ -14,7 +14,7 @@ export default function PrivacyPage() {
         <div>
           {data.map((text) => (
             <div key={text.label}>
-              <h4 className="text-2xl mt-12 font-bold capitalize leading-[40px] mb-5 text-stone-300">
+              <h4 className="mb-5 mt-12 text-2xl font-bold capitalize leading-[40px] text-stone-300">
                 {text.label}
               </h4>
               <Typography variant={'muted'}>{text.content}</Typography>{' '}
