@@ -76,3 +76,12 @@
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
+
+
+@font-face {
+  font-family: 'Trap';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/public/Trap-Regular.ttf') format('ttf');
+}

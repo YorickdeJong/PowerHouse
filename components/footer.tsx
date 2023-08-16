@@ -40,7 +40,7 @@ export default function Footer({ className, ...props }: FooterProps) {
         </div>
       </div>{' '}
       <div className=" my-5 text-center text-neutral-200">
-        All rights reserved by Blue water
+        All rights reserved by Blue Waterfall
       </div>
     </div>
   );

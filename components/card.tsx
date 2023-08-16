@@ -30,6 +30,7 @@ export default function Card({
   image,
   ...props
 }: CardProps) {
+  console.log('image', image)
   const Comp = image ? Link : 'section';
   return (
     <Motion initial="down" asChild>
@@ -111,9 +112,27 @@ export default function Card({
               </div>
             </Motion>
           </div>
-          <p className="leading-relaxed text-muted">{text}</p>
+          {text[0]?.children ? <TextRenderer textBlocks={text} /> :
+            <p className="leading-relaxed text-muted">{text}</p>
+          }
         </div>
       </Comp>
     </Motion>
+  );
+}
+
+
+function TextRenderer({ textBlocks = [] }) { // Default to an empty array if not provided
+  if (!Array.isArray(textBlocks)) { // Check if textBlocks is indeed an array
+    return null; // or some error message or fallback component
+  }
+
+  return (
+    <div>
+      {textBlocks.map(block => {
+        const content = block.children.map(child => child.text || '').join(' ');
+        return <p className="leading-relaxed text-muted" key={block._key}>{content}</p>;
+      })}
+    </div>
   );
 }
