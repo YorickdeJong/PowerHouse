@@ -11,7 +11,10 @@ export default function TransitionProvider({
 }) {
   const path = usePathname();
   return (
-    <Motion initial={'left'} key={path}>
+    <Motion
+      initial={Math.round(Math.random() * 10) % 2 === 0 ? 'left' : 'right'}
+      key={path}
+    >
       {children}
     </Motion>
   );

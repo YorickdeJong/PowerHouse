@@ -9,6 +9,7 @@ import { motion, useSpring } from 'framer-motion';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
+import Motion from '@/components/motion';
 
 interface HeroProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -52,7 +53,10 @@ export default function Hero({ className, ...props }: HeroProps) {
         />
       </motion.div>
       <div className="absolute inset-0 m-auto h-fit w-fit">
-        <div className="container max-w-screen-sm space-y-5 text-center md:max-w-screen-md">
+        <Motion
+          initial="hidden"
+          className="container max-w-screen-sm space-y-5 text-center md:max-w-screen-md"
+        >
           <Typography variant={'heading'}>
             WIJ MAKEN WEBSITES MET <span className="text-primary">PASSIE</span>
           </Typography>
@@ -64,9 +68,9 @@ export default function Hero({ className, ...props }: HeroProps) {
             <Link href={'/booking'}>
               <Button>Vrijblijvende afspraak &rarr;</Button>
             </Link>
-            <Button variant={'link'}>Learn More</Button>
+            {/* <Button variant={'link'}>Learn More</Button> */}
           </div>
-        </div>
+        </Motion>
       </div>
     </section>
   );
