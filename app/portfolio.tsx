@@ -5,10 +5,17 @@ import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import Card from '@/components/card';
+import {getReviews} from '@/sanity/sanity-utils'
+
 
 interface PortfolioProps extends HTMLAttributes<HTMLDivElement> {}
 
-export default function Portfolio({ className, ...props }: PortfolioProps) {
+
+
+
+export default async function Portfolio({ className, ...props }: PortfolioProps) {
+  const reviews = await getReviews();
+
   return (
     <section className="bg-card">
       <div className={cn('container  py-20', className, {})} {...props}>
@@ -19,7 +26,8 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
           <Button variant={'outline'}>Bekijk alles</Button>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-          {data.map((el) => (
+          {reviews.map((el) => (
+            console.log('el', el),
             <Card key={el.label} {...el} />
           ))}
         </div>
@@ -27,6 +35,7 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
     </section>
   );
 }
+
 
 const data = [
   {
