@@ -14,7 +14,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   image?: string;
   portfolioPage?: boolean;
   squared?: boolean;
-  orderLast?: boolean;
+  reversed?: boolean;
   roundedIcon?: boolean;
   portfolioDetailsPage?: boolean;
   postImage?: string;
@@ -37,7 +37,7 @@ export default function Card({
       <Comp
         href={'/portfolio/' + label.toLowerCase().replaceAll(' ', '-')}
         className={cn(
-          'block space-y-3 overflow-hidden rounded-lg bg-card  p-7 lg:p-8',
+          'block space-y-3 overflow-hidden rounded-2xl bg-card  p-7 lg:p-8',
           className,
           {
             'group/image hover:shadow-md cursor-pointer': image,
@@ -53,10 +53,10 @@ export default function Card({
             src={image! || postImage!}
             alt=""
             className={cn(
-              'aspect-square w-full -translate-y-7 scale-x-125 object-cover',
+              '-mb-2 aspect-square w-full -translate-y-9 scale-x-125 object-cover object-top',
               {
                 'object-contain scale-x-100 translate-y-0 mb-12': postImage,
-                'md:h-96': props.portfolioPage,
+                'lg:order-last': props.reversed,
               }
             )}
             width={400}
@@ -66,9 +66,12 @@ export default function Card({
         <div>
           {icon && (
             <div
-              className={cn('h-[70px] w-[70px] rounded-full bg-secondary', {
-                'rounded-2xl': props.squared,
-              })}
+              className={cn(
+                'mb-8 h-[70px] w-[70px] rounded-full bg-secondary',
+                {
+                  'rounded-2xl': props.squared,
+                }
+              )}
             >
               {icon?.({ className: 'p-4' })}
             </div>
@@ -88,10 +91,13 @@ export default function Card({
               </div>
             )}
             <p
-              className={cn('grow text-xl font-bold uppercase', {
-                'text-2xl': postImage,
-                'lg:text-[40px] lg:mb-4': props.portfolioDetailsPage,
-              })}
+              className={cn(
+                'mb-2 grow text-xl font-bold uppercase md:text-2xl',
+                {
+                  'text-2xl': postImage,
+                  'lg:text-[40px] lg:mb-4': props.portfolioDetailsPage,
+                }
+              )}
             >
               {label}
             </p>

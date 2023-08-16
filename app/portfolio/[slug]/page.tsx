@@ -1,14 +1,18 @@
 'use client';
 
 import { useRef } from 'react';
+import { usePathname } from 'next/navigation';
 import useScrollTransform from '@/hook/scroll-transform';
 
+import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 import Motion from '@/components/motion';
 
 export default function PortfolioSlugPage() {
   const target = useRef(null);
+  const path = usePathname();
+  const isDesktopProject = path.includes('etm');
   const height = useScrollTransform({
     target,
     outputRange: ['0%', '75%'],
@@ -37,6 +41,11 @@ export default function PortfolioSlugPage() {
         phoenix cauldron scales granger grayback. Totalus three-headed to
         locomotor rise.
       </Typography>{' '}
+      {isDesktopProject && (
+        <Button variant={'outline'} className="mt-9">
+          Bekijk de website &rarr;
+        </Button>
+      )}
       <div
         ref={target}
         className="relative mb-20 mt-10 grid grid-cols-1 gap-16 "
@@ -53,14 +62,19 @@ export default function PortfolioSlugPage() {
             className="h-0 w-[7.62px] bg-card"
           />
         </div>
-        {data.map((el) => (
-          <Card portfolioDetailsPage key={el.label} {...el} />
+        {(isDesktopProject ? desktopProjectData : data).map((el, idx) => (
+          <Card
+            portfolioDetailsPage
+            reversed={idx === 1}
+            key={el.label}
+            {...el}
+          />
         ))}
       </div>
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
         {related.map((el, idx) => (
-          <Card key={el.label} orderLast {...el} />
+          <Card key={el.label} {...el} />
         ))}
       </div>
     </section>
@@ -79,6 +93,23 @@ const data = [
   },
   {
     postImage: '/assets/images/post/mobile3.png',
+    label: 'resultaat',
+    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
+  },
+];
+const desktopProjectData = [
+  {
+    postImage: '/assets/images/post/desktop.png',
+    label: 'Probleem',
+    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
+  },
+  {
+    postImage: '/assets/images/post/desktop2.png',
+    label: 'oplossing',
+    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
+  },
+  {
+    postImage: '/assets/images/post/desktop3.png',
     label: 'resultaat',
     text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
   },

@@ -5,6 +5,7 @@ import { HTMLAttributes } from 'react';
 import Image from 'next/image';
 import { useMediaQuery } from '@/hook/media-query';
 import useSwiperRef from '@/hook/swiper';
+import useSlider from '@/store/slider';
 import { Navigation, Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
@@ -38,6 +39,9 @@ export default function ReviewSlider({
       >
         <div
           className="fixed -left-7 z-10 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[40%]"
+          onClick={() =>
+            useSlider.setState({ reviewId: Math.round(Math.random() * 10) })
+          }
           ref={prevRef}
         >
           <Images.left />
@@ -45,6 +49,9 @@ export default function ReviewSlider({
         <div
           className="fixed -right-7 z-50 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:right-[40%]"
           ref={nextRef}
+          onClick={() =>
+            useSlider.setState({ reviewId: Math.round(Math.random() * 10) })
+          }
         >
           <Images.right />
         </div>

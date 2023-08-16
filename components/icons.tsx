@@ -4,6 +4,7 @@ import {
   Brain,
   Facebook,
   Linkedin,
+  Loader2,
   LucideProps,
   Moon,
   Phone,
@@ -85,6 +86,7 @@ export const Icons = {
   ),
   x: X,
   menu: AlignRight,
+  loader: Loader2,
   arrowUp: (props: LucideProps) => (
     <svg
       {...props}
@@ -151,6 +153,31 @@ export const Icons = {
     >
       <path
         d="M7 11H15M21 11C21 16.5228 16.5228 21 11 21C5.47715 21 1 16.5228 1 11C1 5.47715 5.47715 1 11 1C16.5228 1 21 5.47715 21 11Z"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+    </svg>
+  ),
+  plus: (props: LucideProps) => (
+    <svg
+      {...props}
+      width="23"
+      height="23"
+      viewBox="0 0 23 23"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M7.62305 12H15.623M21.623 12C21.623 17.5228 17.1459 22 11.623 22C6.1002 22 1.62305 17.5228 1.62305 12C1.62305 6.47715 6.1002 2 11.623 2C17.1459 2 21.623 6.47715 21.623 12Z"
+        stroke="white"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      />
+      <path
+        d="M11.7383 7.87125L11.6357 15.8706M11.5588 21.8701C6.03637 21.7993 1.61701 17.2651 1.68784 11.7427C1.75868 6.22027 6.29288 1.80091 11.8153 1.87175C17.3377 1.94258 21.757 6.47678 21.6862 11.9992C21.6154 17.5216 17.0812 21.9409 11.5588 21.8701Z"
         stroke="white"
         stroke-width="2"
         stroke-linecap="round"

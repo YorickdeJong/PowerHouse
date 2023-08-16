@@ -67,11 +67,12 @@
     @apply transition-all;
   }
   html {
+    overflow-x: hidden;
     --scroll-behavior: smooth !important;
     scroll-behavior: smooth !important;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-foreground overflow-x-hidden;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }

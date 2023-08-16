@@ -49,7 +49,7 @@ export default function Footer({ className, ...props }: FooterProps) {
 const links = [
   { label: 'Home', href: '/' },
   { label: 'Diensten', href: '/services' },
-  { label: 'Over ons', href: '/portfolio' },
+  { label: 'Over ons', href: '/about' },
   { label: 'FAQ’S', href: '/faqs' },
   { label: 'Ons werk', href: '/portfolio' },
   { label: 'Privacy & AVG', href: '/privacy' },

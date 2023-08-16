@@ -9,7 +9,7 @@ export default function PrivacyPage() {
           ons privacy en cookiebeleid
         </Caption>
         <Typography variant={'title'} className="mt-3 text-center">
-          pRIVACy & avg
+          privacy & avg
         </Typography>
         <div>
           {data.map((text) => (

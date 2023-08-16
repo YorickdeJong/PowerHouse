@@ -1,4 +1,5 @@
 import { HTMLAttributes } from 'react';
+import Link from 'next/link';
 
 import { cn } from '@/lib/utils';
 
@@ -53,7 +54,9 @@ export default function PriceCard({
               />
             ))}
           </div>
-          <Button className="w-full">Maak een gratis afspraak</Button>
+          <Link href={'/booking'}>
+            <Button className="w-full">Maak een gratis afspraak</Button>
+          </Link>
         </div>
       </div>
     </>
