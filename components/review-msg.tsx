@@ -1,15 +1,15 @@
-import { HTMLAttributes } from 'react';
+'use client';
 
-import { cn } from '@/lib/utils';
+import { HTMLAttributes } from 'react';
+import useSlider from '@/store/slider';
 
 import { Images } from './images';
+import Motion from './motion';
 import { Typography } from './ui/typography';
 
-interface ReviewMsgProps extends HTMLAttributes<HTMLDivElement> {}
-
-export default function ReviewMsg({ className, ...props }: ReviewMsgProps) {
+export default function ReviewMsg() {
   return (
-    <div className={cn('', className, {})} {...props}>
+    <Motion initial="right" key={useSlider.getState().reviewId}>
       <Images.quote className="ml-auto block aspect-square w-14 scale-y-[-1]" />
       <div>
         <p className="text-xl font-semibold text-foreground">Elisha Atif</p>
@@ -24,6 +24,6 @@ export default function ReviewMsg({ className, ...props }: ReviewMsgProps) {
         </Typography>
       </div>
       <Images.quote className="aspect-square w-14" />
-    </div>
+    </Motion>
   );
 }

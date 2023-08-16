@@ -3,7 +3,6 @@
 
 import { useState } from 'react';
 import * as Accordion from '@radix-ui/react-accordion';
-import { motion } from 'framer-motion';
 
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
@@ -28,26 +27,15 @@ export default function FaqsPage() {
           {Array.from(Array(7).fill(data)).map((el, idx) => (
             <Accordion.Item key={el.label} value={el.label + idx}>
               <Accordion.Header>
-                <Accordion.Trigger className="flex w-full items-center justify-between  rounded-lg bg-card p-6 text-sm  font-medium">
-                  {el.label} <Icons.minus />
+                <Accordion.Trigger className="group flex w-full items-center justify-between  rounded-lg bg-card p-6 text-sm  font-medium">
+                  {el.label}{' '}
+                  <Icons.minus className="hidden group-data-[state=open]:block" />
+                  <Icons.plus className="group-data-[state=open]:hidden" />
                 </Accordion.Trigger>
               </Accordion.Header>
-              {accordion === el.label + idx && (
-                <motion.div
-                  key={el.label + idx}
-                  initial={{ height: 0, opacity: 0 }}
-                  animate={{
-                    height: 'auto',
-                    opacity: 1,
-                    transition: { ease: 'linear' },
-                  }}
-                  transition={{ type: 'tween', delay: 0.1, duration: 0.2 }}
-                >
-                  <Accordion.Content className="pt-7 text-muted">
-                    {el.text}
-                  </Accordion.Content>
-                </motion.div>
-              )}
+              <Accordion.Content className="pt-7 text-muted data-[state=close]:animate-slideUp data-[state=open]:animate-slideDown">
+                {el.text}
+              </Accordion.Content>
             </Accordion.Item>
           ))}
         </Accordion.Root>
