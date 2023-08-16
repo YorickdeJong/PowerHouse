@@ -1,5 +1,8 @@
-import { HTMLAttributes } from 'react';
+'use client';
+
+import { HTMLAttributes, useState } from 'react';
 import Image from 'next/image';
+import * as Tabs from '@radix-ui/react-tabs';
 
 import { cn } from '@/lib/utils';
 import { Typography } from '@/components/ui/typography';
@@ -13,35 +16,45 @@ export default function OnzeDienstenSection({
   className,
   ...props
 }: OnzeDienstenSectionProps) {
+  const [text, setText] = useState();
   return (
-    <section className="bg-card">
+    <Tabs.Root
+      onValueChange={setText as any}
+      className="bg-card"
+      defaultValue={links[0].title}
+    >
       <div className={cn('container  py-20', className, {})} {...props}>
         <Typography variant={'heading'}>ONZE DIENSTEN</Typography>
         <Caption className="mb-4 mt-16">Our Services</Caption>
         <Typography variant={'title'}>wAT WIJ U KUNNEN BIEDEN</Typography>
+
         <Typography variant={'muted'} className="mt-2">
-          Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor
-          incididunt ut labore et dolore magna aliqua.
+          {links.map((link) => (
+            <Tabs.Content value={link.title} key={link.title}>
+              <Motion key={text} initial="hidden">
+                {link.text}
+              </Motion>
+            </Tabs.Content>
+          ))}
         </Typography>
         <hr className="my-8" />
         <div className="grid grid-cols-1 items-center gap-5 md:grid-cols-2">
-          <div>
+          <Tabs.List>
             {links.map((link) => (
-              <div
-                key={link.title}
-                className="group flex cursor-pointer items-center justify-between border-b border-border/50 py-5"
-              >
-                <p className="text-[22px] font-bold uppercase group-hover:text-primary ">
-                  {link.title}
-                </p>
-                <Motion initial="hidden">
-                  <div className="grid h-9 w-9 place-content-center rounded-full p-1 group-hover:bg-primary">
-                    <Icons.arrowUp className="p-3" />
-                  </div>
-                </Motion>
-              </div>
+              <Tabs.Trigger asChild value={link.title} key={link.title}>
+                <div className="group flex cursor-pointer items-center justify-between border-b border-border/50 py-5">
+                  <p className="text-[22px] font-bold uppercase group-hover:text-primary ">
+                    {link.title}
+                  </p>
+                  <Motion initial="hidden">
+                    <div className="grid h-9 w-9 place-content-center rounded-full p-1 group-hover:bg-primary">
+                      <Icons.arrowUp className="p-3" />
+                    </div>
+                  </Motion>
+                </div>
+              </Tabs.Trigger>
             ))}
-          </div>
+          </Tabs.List>
           <Image
             src={`/assets/images/video.svg`}
             alt=""
@@ -51,25 +64,25 @@ export default function OnzeDienstenSection({
           />
         </div>
       </div>
-    </section>
+    </Tabs.Root>
   );
 }
 
 const links = [
   {
     title: 'business strategie',
-    href: '',
+    text: ' ipsum dolor sit amet consectetur adipisicing elit. ullam odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae asperiores eos, quisquam iste nostrum fuga.',
   },
   {
     title: 'design & development',
-    href: '',
+    text: 'elit odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae asperiores dignissimos libero dolor ea fugit possimus eos, quisquam iste nostrum fuga.',
   },
   {
     title: 'marketing',
-    href: '',
+    text: 'ullam odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae asperiores dignissimos libero dolor ea fugit possimus eos, quisquam iste nostrum fuga.',
   },
   {
     title: 'onderhoud',
-    href: '',
+    text: 'libero dolor ea fugit possimus eos, quisquam iste nostrum fuga. adipisicing elit. ullam odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae dignissimos ',
   },
 ];
