@@ -45,7 +45,7 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
               </label>
               {field.type === 'textarea' ? (
                 <textarea
-                  className="w-full text-sm bg-transparent outline-none"
+                  className="w-full bg-transparent text-sm outline-none"
                   placeholder={field.placeholder}
                 />
               ) : (

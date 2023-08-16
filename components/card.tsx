@@ -52,7 +52,7 @@ export default function Card({
             src={image! || postImage!}
             alt=""
             className={cn(
-              'aspect-square w-full -translate-y-9 object-top -mb-2 scale-x-125 object-cover',
+              '-mb-2 aspect-square w-full -translate-y-9 scale-x-125 object-cover object-top',
               {
                 'object-contain scale-x-100 translate-y-0 mb-12': postImage,
                 'md:h-': props.portfolioPage,
@@ -66,7 +66,7 @@ export default function Card({
           {icon && (
             <div
               className={cn(
-                'h-[70px] mb-8 w-[70px] rounded-full bg-secondary',
+                'mb-8 h-[70px] w-[70px] rounded-full bg-secondary',
                 {
                   'rounded-2xl': props.squared,
                 }
@@ -91,7 +91,7 @@ export default function Card({
             )}
             <p
               className={cn(
-                'grow text-xl md:text-2xl mb-2 font-bold uppercase',
+                'mb-2 grow text-xl font-bold uppercase md:text-2xl',
                 {
                   'text-2xl': postImage,
                   'lg:text-[40px] lg:mb-4': props.portfolioDetailsPage,
