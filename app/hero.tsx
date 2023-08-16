@@ -54,7 +54,7 @@ export default function Hero({ className, ...props }: HeroProps) {
       <div className="absolute inset-0 m-auto h-fit w-fit">
         <div className="container max-w-screen-sm space-y-5 text-center md:max-w-screen-md">
           <Typography variant={'heading'}>
-            WIJ MAKEN WEBSITES MET PASSIE
+            WIJ MAKEN WEBSITES MET <span className="text-primary">PASSIE</span>
           </Typography>
           <Typography variant={'muted'}>
             Blue Waterfall helpt jou met webdesign, webmarketing en zorgt ervoor

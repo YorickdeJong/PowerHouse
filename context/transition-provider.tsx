@@ -12,14 +12,8 @@ export default function TransitionProvider({
 }) {
   const path = usePathname();
   return (
-    <AnimatePresence initial={false} mode="wait">
-      <Motion
-        initial={{ x: -1000, opacity: 0 }}
-        animate="visible"
-        transition={{ delay: 0, duration: 0.4 }}
-        exit={{ x: 1000, opacity: 0 }}
-        key={path}
-      >
+    <AnimatePresence mode="wait">
+      <Motion style={{ opacity: 0 }} initial={'down'} key={path}>
         {children}
       </Motion>
     </AnimatePresence>
