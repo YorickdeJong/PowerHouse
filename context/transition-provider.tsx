@@ -12,10 +12,13 @@ export default function TransitionProvider({
 }) {
   const path = usePathname();
   return (
-    <AnimatePresence mode="wait">
-      <Motion style={{ opacity: 0 }} initial={'down'} key={path}>
-        {children}
-      </Motion>
-    </AnimatePresence>
+    <Motion style={{ opacity: 0 }} initial={'left'} key={path}>
+      {children}
+    </Motion>
   );
 }
+
+{
+  /* </AnimatePresence> */
+}
+// <AnimatePresence mode="wait">
