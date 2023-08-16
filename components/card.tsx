@@ -90,7 +90,7 @@ export default function Card({
               </div>
             )}
             <p
-              className={cn('grow text-xl font-bold uppercase', {
+              className={cn('grow text-xl mb-2 font-bold uppercase', {
                 'text-2xl': postImage,
                 'lg:text-[40px] lg:mb-4': props.portfolioDetailsPage,
               })}
