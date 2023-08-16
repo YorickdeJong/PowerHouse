@@ -14,7 +14,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   image?: string;
   portfolioPage?: boolean;
   squared?: boolean;
-  orderLast?: boolean;
+  reversed?: boolean;
   roundedIcon?: boolean;
   portfolioDetailsPage?: boolean;
   postImage?: string;
@@ -55,7 +55,7 @@ export default function Card({
               '-mb-2 aspect-square w-full -translate-y-9 scale-x-125 object-cover object-top',
               {
                 'object-contain scale-x-100 translate-y-0 mb-12': postImage,
-                'md:h-': props.portfolioPage,
+                'lg:order-last': props.reversed,
               }
             )}
             width={400}

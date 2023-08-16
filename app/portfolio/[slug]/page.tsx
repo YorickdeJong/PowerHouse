@@ -53,14 +53,19 @@ export default function PortfolioSlugPage() {
             className="h-0 w-[7.62px] bg-card"
           />
         </div>
-        {data.map((el) => (
-          <Card portfolioDetailsPage key={el.label} {...el} />
+        {data.map((el, idx) => (
+          <Card
+            portfolioDetailsPage
+            reversed={idx === 1}
+            key={el.label}
+            {...el}
+          />
         ))}
       </div>
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
         {related.map((el, idx) => (
-          <Card key={el.label} orderLast {...el} />
+          <Card key={el.label} {...el} />
         ))}
       </div>
     </section>
