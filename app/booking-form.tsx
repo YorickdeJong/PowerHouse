@@ -1,12 +1,26 @@
-import { HTMLAttributes } from 'react';
+'use client';
+
+import { HTMLAttributes, useState } from 'react';
+import { toast } from 'react-hot-toast';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
+import { Icons } from '@/components/icons';
 
 interface BookingFormProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function BookingForm({ className, ...props }: BookingFormProps) {
+  const [isLoading, setIsLoading] = useState(false);
+  function handleSubmit(e: any) {
+    e.preventDefault();
+    setIsLoading(true);
+    setTimeout(() => {
+      setIsLoading(false);
+      toast.success('Message was successfully sent');
+    }, 3000);
+  }
+
   return (
     <div className="bg-secondary  max-md:-mt-4 max-md:rounded-t-xl">
       <div
@@ -29,14 +43,27 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
               <label htmlFor={field.label} className="text-xs">
                 {field.label}
               </label>
-              <input
-                className="w-full text-sm"
-                type={field.type}
-                placeholder={field.placeholder}
-              />
+              {field.type === 'textarea' ? (
+                <textarea
+                  className="w-full text-sm bg-transparent outline-none"
+                  placeholder={field.placeholder}
+                />
+              ) : (
+                <input
+                  className="w-full text-sm"
+                  type={field.type}
+                  placeholder={field.placeholder}
+                />
+              )}
             </div>
           ))}
-          <Button className="mt-8 w-full text-xs">Stuur</Button>
+          <Button className="mt-8 w-full text-xs" onClick={handleSubmit}>
+            {isLoading ? (
+              <Icons.loader className={cn('animate-spin ', {})} />
+            ) : (
+              'Stuur'
+            )}
+          </Button>
         </form>
       </div>
     </div>
@@ -57,6 +84,6 @@ const fields = [
   {
     label: 'Bericht',
     placeholder: 'Schrijf hier je bericht',
-    type: 'text',
+    type: 'textarea',
   },
 ];

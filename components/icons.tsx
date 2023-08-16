@@ -4,6 +4,7 @@ import {
   Brain,
   Facebook,
   Linkedin,
+  Loader2,
   LucideProps,
   Moon,
   Phone,
@@ -85,6 +86,7 @@ export const Icons = {
   ),
   x: X,
   menu: AlignRight,
+  loader: Loader2,
   arrowUp: (props: LucideProps) => (
     <svg
       {...props}
