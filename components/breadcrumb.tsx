@@ -1,5 +1,8 @@
+'use client';
+
 import { HTMLAttributes } from 'react';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
 
@@ -8,6 +11,8 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
+  const path = usePathname();
+  const slug = path.includes('/portfolio/') && path.split('/portfolio/')[1];
   return (
     <div
       className={cn(
@@ -21,7 +26,12 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
         Home
       </Link>
       <div>/</div>
-      <div className="text-zinc-500">{props.pageTitle}</div>
+      <div className="text-zinc-500">{props.pageTitle}</div>{' '}
+      {slug && (
+        <>
+          <div>/</div> <div className="text-zinc-500">{slug}</div>{' '}
+        </>
+      )}
     </div>
   );
 }
