@@ -55,7 +55,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
               </div>
               <Footer />
             </div>
-            <TailwindIndicator />
+            {/* <TailwindIndicator /> */}
             <Toaster position="top-right" />
             <GoToTop />
           </ThemeProvider>
