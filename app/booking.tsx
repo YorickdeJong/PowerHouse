@@ -21,7 +21,7 @@ export default function Booking({ className, ...props }: BookingProps) {
         {...props}
       >
         <Caption className="mb-4">Book Blue Waterfall</Caption>
-        <Typography variant={'title'} className="whitespace-nowrap">
+        <Typography variant={'title'} className="md:whitespace-nowrap">
           Maak een afspraak
         </Typography>
         <Typography variant={'muted'}>

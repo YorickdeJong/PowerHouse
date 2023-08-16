@@ -36,7 +36,7 @@ export default function Card({
       <Comp
         href={'/portfolio/' + label.toLowerCase().replaceAll(' ', '-')}
         className={cn(
-          'block space-y-3 overflow-hidden rounded-lg bg-card  p-7 lg:p-8',
+          'block space-y-3 overflow-hidden rounded-2xl bg-card  p-7 lg:p-8',
           className,
           {
             'group/image hover:shadow-md cursor-pointer': image,
@@ -52,10 +52,10 @@ export default function Card({
             src={image! || postImage!}
             alt=""
             className={cn(
-              'aspect-square w-full -translate-y-7 scale-x-125 object-cover',
+              'aspect-square w-full -translate-y-9 object-top -mb-2 scale-x-125 object-cover',
               {
                 'object-contain scale-x-100 translate-y-0 mb-12': postImage,
-                'md:h-96': props.portfolioPage,
+                'md:h-': props.portfolioPage,
               }
             )}
             width={400}
@@ -65,9 +65,12 @@ export default function Card({
         <div>
           {icon && (
             <div
-              className={cn('h-[70px] w-[70px] rounded-full bg-secondary', {
-                'rounded-2xl': props.squared,
-              })}
+              className={cn(
+                'h-[70px] mb-8 w-[70px] rounded-full bg-secondary',
+                {
+                  'rounded-2xl': props.squared,
+                }
+              )}
             >
               {icon?.({ className: 'p-4' })}
             </div>

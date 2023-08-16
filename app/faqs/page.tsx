@@ -27,7 +27,7 @@ export default function FaqsPage() {
           {Array.from(Array(7).fill(data)).map((el, idx) => (
             <Accordion.Item key={el.label} value={el.label + idx}>
               <Accordion.Header>
-                <Accordion.Trigger className="group flex w-full items-center justify-between  rounded-lg bg-card p-6 text-sm  font-medium">
+                <Accordion.Trigger className="group flex w-full items-center text-left justify-between  rounded-lg bg-card p-6 text-sm  font-medium">
                   {el.label}{' '}
                   <Icons.minus className="hidden group-data-[state=open]:block" />
                   <Icons.plus className="group-data-[state=open]:hidden" />
