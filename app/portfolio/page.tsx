@@ -1,7 +1,11 @@
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
+import { getPortfolio } from '@/sanity/sanity-utils';
 
-export default function PortfolioPage() {
+export default async function PortfolioPage() {
+  const portfolio = await getPortfolio();
+
+
   return (
     <>
       <Typography className="mt-5" variant={'title'}>
@@ -14,13 +18,15 @@ export default function PortfolioPage() {
         over onze voltooide projecten.
       </Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2">
-        {data.map((el) => (
+        {portfolio.map((el) => (
           <Card portfolioPage key={el.label} {...el} />
         ))}
       </div>
     </>
   );
 }
+
+
 
 const data = [
   {

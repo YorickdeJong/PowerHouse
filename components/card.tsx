@@ -7,6 +7,33 @@ import { cn } from '@/lib/utils';
 import { Icons } from './icons';
 import Motion from './motion';
 
+
+interface ImageDetail {
+  alt: string;
+  text: Array<{type: string; children?: Array<any>; [key: string]: any}>;
+}
+
+interface ProjectDetail {
+  detailImage: {
+    _type: string;
+    asset: {
+      _ref: string;
+      _type: string;
+    };
+    hotspot?: {
+      x: number;
+      y: number;
+    };
+    crop?: {
+      top: number;
+      bottom: number;
+      left: number;
+      right: number;
+    };
+    fields: ImageDetail;
+  };
+}
+
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
   icon?: (props: any) => JSX.Element;
@@ -18,6 +45,9 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   roundedIcon?: boolean;
   portfolioDetailsPage?: boolean;
   postImage?: string;
+  titleProjectPage?: string;
+  subHeaderProjectPage?: string;
+  projectDetails: ProjectDetail[];
 }
 
 export default function Card({
@@ -28,14 +58,31 @@ export default function Card({
   text,
   roundedIcon,
   image,
+  titleProjectPage,
+  subHeaderProjectPage,
+  projectDetails,
   ...props
 }: CardProps) {
-  console.log('image', image)
   const Comp = image ? Link : 'section';
+
+
+  console.log('projectDetails', projectDetails)
+  const textRaw = TextRendererRawText(subHeaderProjectPage)
+
+  const linkHref = {
+    pathname: `/portfolio/${label.toLowerCase().replaceAll(' ', '-')}`,
+    query: {
+      title: titleProjectPage,
+      subTitle: textRaw,
+      projectDetails: projectDetails,
+    },
+  };
+
+
   return (
     <Motion initial="down" asChild>
       <Comp
-        href={'/portfolio/' + label.toLowerCase().replaceAll(' ', '-')}
+        href={linkHref}
         className={cn(
           'block space-y-3 overflow-hidden rounded-2xl bg-card  p-7 lg:p-8',
           className,
@@ -59,8 +106,8 @@ export default function Card({
                 'lg:order-last': props.reversed,
               }
             )}
-            width={400}
-            height={400}
+            width={600}
+            height={600}
           />
         )}
         <div>
@@ -135,4 +182,14 @@ function TextRenderer({ textBlocks = [] }) { // Default to an empty array if not
       })}
     </div>
   );
+}
+
+function TextRendererRawText(textBlocks = []) {
+  if (!Array.isArray(textBlocks)) {
+    return null;
+  }
+
+  return textBlocks.map(block => {
+    return block.children.map(child => child.text || '').join(' ');
+  }).join(' ');
 }

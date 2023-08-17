@@ -21,6 +21,7 @@ export default function FaqsPage() {
 
         <Accordion.Root
           onValueChange={setAccordion}
+          value={accordion}
           type="single"
           className="my-10 space-y-7"
         >

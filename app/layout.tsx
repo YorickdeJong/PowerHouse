@@ -12,6 +12,7 @@ import Footer from '@/components/footer';
 import GoToTop from '@/components/goto-top';
 import SiteHeader from '@/components/site-header';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { wrapper } from '../store/store'
 
 export const dynamic = 'force-dynamic';
 

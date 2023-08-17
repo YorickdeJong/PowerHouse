@@ -16,8 +16,8 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
   const isLg = useMediaQuery('lg');
   const Comp = isLg ? Fragment : Tabs.Content;
   return (
-    <div className="bg-card">
-      <div className={cn('container py-12', className, {})} {...props}>
+    <div className="bg-card ">
+      <div className={cn('container py-16', className, {})} {...props}>
         <Caption className="justify-center">Service plans</Caption>
         <Typography variant={'heading'} className="mt-3 text-center">
           Diensten

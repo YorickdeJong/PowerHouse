@@ -15,6 +15,7 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const path = usePathname();
   const { push } = useRouter();
+
   return (
     <section
       className={cn('', {
@@ -64,7 +65,7 @@ const NavContent = () => {
               '': _.href === '/' ? path === '/' : path.includes(_.href),
             })}
           >
-            <h3 className="capitalize">
+            <h3 className="capitalize text-lg">
               <Link href={_.href}>{_.title}</Link>
             </h3>
           </li>

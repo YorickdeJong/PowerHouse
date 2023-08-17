@@ -11,11 +11,12 @@ export default function Services({ className, ...props }: ServicesProps) {
     <>
       <div
         className={cn(
-          'container my-7 grid grid-cols-1 gap-5 lg:grid-cols-2',
+          'container my-12 mb-24 grid grid-cols-1 gap-5 lg:grid-cols-2',
           className,
           {}
         )}
         {...props}
+        
       >
         {data.map((el) => (
           <Card squared key={el.label} {...el} />

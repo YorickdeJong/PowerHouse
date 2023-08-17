@@ -86,18 +86,40 @@ export const Images = {
   person1: (props: any) => (
     <Image
       {...props}
-      src={`/assets/images/person1.png`}
+      key={1}
+      src={`/assets/images/person_one.png`}
       alt="    "
-      width={600}
+      width={1500}
       height={300}
     />
   ),
   person2: (props: any) => (
     <Image
       {...props}
-      src={`/assets/images/person2.png`}
+      key={2}
+      src={`/assets/images/person_two.png`}
       alt="    "
-      width={250}
+      width={2000}
+      height={300}
+    />
+  ),
+  person3: (props: any) => (
+    <Image
+      {...props}
+      key={3}
+      src={`/assets/images/person_three.png`}
+      alt="    "
+      width={1500}
+      height={300}
+    />
+  ),
+  person4: (props: any) => (
+    <Image
+      {...props}
+      key={4}
+      src={`/assets/images/person_four.png`}
+      alt="    "
+      width={2000}
       height={300}
     />
   ),

@@ -1,7 +1,8 @@
 'use client';
 
 import { useRef } from 'react';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+
 import useScrollTransform from '@/hook/scroll-transform';
 
 import { Button } from '@/components/ui/button';
@@ -9,7 +10,34 @@ import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 import Motion from '@/components/motion';
 
-export default function PortfolioSlugPage() {
+
+export async function getServerSideProps(context) {
+  const { slug } = context.params;
+
+  // Fetch the specific portfolio data based on the slug
+  const portfolioItem = await getPortfolioItemBySlug(slug);
+
+  if (!portfolioItem) {
+    return {
+      notFound: true,
+    };
+  }
+
+  return {
+    props: { portfolioItem },
+  };
+}
+
+export default function PortfolioSlugPage({portfolioItem}) {
+
+  console.log('portfolioiTEM', portfolioItem)
+  const router = useSearchParams();
+  const title = router.get('title')
+  const subTitle = router.get('subTitle')
+  const projectDetails = router.get('projectDetails')
+
+
+  console.log('projectDetails', projectDetails)
   const target = useRef(null);
   const path = usePathname();
   const isDesktopProject = path.includes('etm');
@@ -28,18 +56,10 @@ export default function PortfolioSlugPage() {
   return (
     <section>
       <Typography className="mt-5" variant={'title'}>
-        Learning bot - APP
+        {title}
       </Typography>{' '}
       <Typography className="mt-3" variant={'muted'}>
-        Disciplinary sir tonight keeper rise seek. Drills of holly so bertie red
-        grindylows last. Soul peg-leg werewolf snargaluff biting. Daily hiya he
-        fritters prince. Moon rock-cake in diadem eye werewolf nose fritters
-        spleens.
-        <br />
-        <br />
-        Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky
-        phoenix cauldron scales granger grayback. Totalus three-headed to
-        locomotor rise.
+        {subTitle}
       </Typography>{' '}
       {isDesktopProject && (
         <Button variant={'outline'} className="mt-9">
@@ -80,6 +100,8 @@ export default function PortfolioSlugPage() {
     </section>
   );
 }
+
+
 const data = [
   {
     postImage: '/assets/images/post/mobile.png',

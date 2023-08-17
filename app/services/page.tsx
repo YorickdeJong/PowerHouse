@@ -15,9 +15,9 @@ export default function ServicesPage() {
         <Breadcrumb pageTitle="Services" />
         <div className="grid grid-cols-1 md:grid-cols-2 md:gap-20">
           <div>
-            <Caption className="mt-20">What We are offering</Caption>
+            <Caption className="mt-20">Wat wij jou bieden</Caption>
             <Typography className="mt-5" variant={'title'}>
-              Our Services{' '}
+              Onze Diensten{' '}
             </Typography>
             <Typography className="mt-3" variant={'muted'}>
               Order norwegian dragon-scale tap-dancing fanged wizard grindylows

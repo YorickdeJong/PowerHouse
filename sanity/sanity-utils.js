@@ -42,3 +42,29 @@ export async function getReviews() {
         }`
     )
 }
+
+
+export async function getPortfolio() {
+    const client = createClient({
+        projectId: "guw6sng1", //id from your sanity project
+        dataset: "production", 
+        apiVersion: '2023-08-15',
+    });
+
+
+    return client.fetch(
+        groq`*[_type == "portfolio"]{
+            _id,
+            _createdAt,
+            label, 
+            'slug': slug.current,
+            "image": image.asset->url,
+            url, 
+            text,
+            titleProjectPage,
+            subHeaderProjectPage,
+            projectDetails
+        }`
+    )
+}
+

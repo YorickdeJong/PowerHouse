@@ -59,7 +59,7 @@ export const Icons = {
   phone: Phone,
   logo: () => (
     <Image
-      src={'/assets/images/logo.png'}
+      src={'/assets/images/logo-waterfall.png'}
       alt="logo"
       width={100}
       height={100}
