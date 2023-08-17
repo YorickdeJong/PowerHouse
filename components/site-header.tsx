@@ -57,7 +57,7 @@ const NavContent = () => {
   const path = usePathname();
   return (
     <>
-      <ul className="ml-20 flex items-center gap-12 max-lg:hidden ">
+      <ul className="ml-16 flex items-center gap-12 max-lg:hidden ">
         {siteConfig.nav.map((_) => (
           <li
             key={_.title}

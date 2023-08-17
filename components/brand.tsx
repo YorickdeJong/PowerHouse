@@ -12,7 +12,7 @@ export default function Brand({
   ...props
 }: HtmlHTMLAttributes<HTMLAnchorElement> & CompType) {
   return (
-    <Link href={'/'} {...props} className={cn('', {}, className)}>
+    <Link href={'/'} {...props} className={cn('ml-4', {}, className)}>
       <Icons.logo />
     </Link>
   );

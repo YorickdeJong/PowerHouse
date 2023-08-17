@@ -53,24 +53,24 @@ export default function Hero({ className, ...props }: HeroProps) {
         />
       </motion.div>
       <div className="absolute inset-0 m-auto h-fit w-fit">
-        <Motion
-          initial="hidden"
-          className="container max-w-screen-sm space-y-5 text-center md:max-w-screen-md"
-        >
-          <Typography variant={'heading'}>
-            WIJ MAKEN WEBSITES MET <span className="text-primary">PASSIE</span>
-          </Typography>
-          <Typography variant={'muted'}>
-            Blue Waterfall helpt jou met webdesign, webmarketing en zorgt ervoor
-            dat jouw ambities online te zien zijn
-          </Typography>
-          <div className="flex items-center justify-center gap-5 max-md:flex-col">
-            <Link href={'/booking'}>
-              <Button>Vrijblijvende afspraak &rarr;</Button>
-            </Link>
-            {/* <Button variant={'link'}>Learn More</Button> */}
-          </div>
-        </Motion>
+      <Motion
+  initial="hidden"
+  className="container max-w-screen-lg space-y-5 text-center md:max-w-screen-xl" // Adjusted the max-width here
+>
+  <Typography variant={'heading'} className="max-w-5xl mx-auto"> 
+    WIJ MAKEN WEBSITES MET <span className="text-primary">PASSIE</span>
+  </Typography>
+  <Typography variant={'muted'} className="max-w-2xl mx-auto">
+    Blue Waterfall helpt jou met webdesign, webmarketing en zorgt ervoor
+    dat jouw ambities online te zien zijn
+  </Typography>
+  <div className="flex items-center justify-center gap-5 max-md:flex-col">
+    <Link href={'/booking'}>
+      <Button>Vrijblijvende afspraak &rarr;</Button>
+    </Link>
+    {/* <Button variant={'link'}>Learn More</Button> */}
+  </div>
+</Motion>
       </div>
     </section>
   );

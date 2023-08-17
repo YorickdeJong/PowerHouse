@@ -2,45 +2,43 @@
 
 import { useRef } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-
+import config from '@/sanity.config';
 import useScrollTransform from '@/hook/scroll-transform';
 
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 import Motion from '@/components/motion';
+import imageUrlBuilder from '@sanity/image-url'
 
 
-export async function getServerSideProps(context) {
-  const { slug } = context.params;
+const builder = imageUrlBuilder(config)
 
-  // Fetch the specific portfolio data based on the slug
-  const portfolioItem = await getPortfolioItemBySlug(slug);
 
-  if (!portfolioItem) {
-    return {
-      notFound: true,
-    };
-  }
-
-  return {
-    props: { portfolioItem },
-  };
+function urlFor(source) {
+  return builder.image(source)
 }
 
-export default function PortfolioSlugPage({portfolioItem}) {
-
-  console.log('portfolioiTEM', portfolioItem)
-  const router = useSearchParams();
-  const title = router.get('title')
-  const subTitle = router.get('subTitle')
-  const projectDetails = router.get('projectDetails')
-
-
-  console.log('projectDetails', projectDetails)
+export default function PortfolioSlugPage({}) {
   const target = useRef(null);
   const path = usePathname();
-  const isDesktopProject = path.includes('etm');
+  const isDesktopProject = path.includes('etm') || path?.includes('blue-elite');
+  const router = useSearchParams();
+  
+  const title = router.get('title')
+  let subTitle = router.get('subTitle');
+
+  // Parse the string to get the object
+  const renderedSubTitle = renderRichText(JSON.parse(subTitle));
+
+
+  const projectDetails = router.get('projectDetails')
+  const parsedProjectDetails = JSON.parse(projectDetails);
+  const transformedData = transformData(parsedProjectDetails);
+
+
+  console.log('desktop true', isDesktopProject)
+
   const height = useScrollTransform({
     target,
     outputRange: ['0%', '75%'],
@@ -59,7 +57,7 @@ export default function PortfolioSlugPage({portfolioItem}) {
         {title}
       </Typography>{' '}
       <Typography className="mt-3" variant={'muted'}>
-        {subTitle}
+        {renderedSubTitle}
       </Typography>{' '}
       {isDesktopProject && (
         <Button variant={'outline'} className="mt-9">
@@ -68,7 +66,7 @@ export default function PortfolioSlugPage({portfolioItem}) {
       )}
       <div
         ref={target}
-        className="relative mb-20 mt-10 grid grid-cols-1 gap-16 "
+        className="relative mb-20 mt-20 grid grid-cols-1 gap-16 "
       >
         <div className="absolute inset-0 hidden flex-col items-center lg:flex">
           <Motion
@@ -82,14 +80,17 @@ export default function PortfolioSlugPage({portfolioItem}) {
             className="h-0 w-[7.62px] bg-card"
           />
         </div>
-        {(isDesktopProject ? desktopProjectData : data).map((el, idx) => (
-          <Card
-            portfolioDetailsPage
-            reversed={idx === 1}
-            key={el.label}
-            {...el}
-          />
-        ))}
+        <div className='mt-20'>
+          {(transformedData).map((el, idx) => (
+            <Card
+              isDesktopProject
+              portfolioDetailsPage
+              reversed={idx === 1}
+              key={el.label}
+              {...el}
+            />
+          ))}
+        </div>
       </div>
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
@@ -102,23 +103,7 @@ export default function PortfolioSlugPage({portfolioItem}) {
 }
 
 
-const data = [
-  {
-    postImage: '/assets/images/post/mobile.png',
-    label: 'Probleem',
-    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
-  },
-  {
-    postImage: '/assets/images/post/mobile2.png',
-    label: 'oplossing',
-    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
-  },
-  {
-    postImage: '/assets/images/post/mobile3.png',
-    label: 'resultaat',
-    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
-  },
-];
+
 const desktopProjectData = [
   {
     postImage: '/assets/images/post/desktop.png',
@@ -157,3 +142,31 @@ const related = [
     text: 'Hoops raw-steak spine portkey dress grayback stroke gringotts hungarian sticking. ',
   },
 ];
+
+
+function renderRichText(content) {
+  return content.map(block => {
+    switch (block._type) {
+      case 'block':
+        return (
+          <p key={block._key}>
+            {block.children.map(span => span.text).join('')}
+          </p>
+        );
+      // Add more cases if you have other _type values in your rich text content
+      default:
+        return null;
+    }
+  });
+}
+
+
+function transformData(data) {
+  const labels = ['Probleem', 'oplossing', 'resultaat']
+  return data.map((item, index) => (
+    {
+    postImage: urlFor(item).url(),
+    label: labels[index],
+    text: item.text && item.text[0] && item.text[0].children[0].text
+  }));
+}

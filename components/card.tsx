@@ -47,6 +47,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   postImage?: string;
   titleProjectPage?: string;
   subHeaderProjectPage?: string;
+  isDesktopProject: boolean,
   projectDetails: ProjectDetail[];
 }
 
@@ -60,24 +61,22 @@ export default function Card({
   image,
   titleProjectPage,
   subHeaderProjectPage,
+  isDesktopProject,
   projectDetails,
   ...props
 }: CardProps) {
   const Comp = image ? Link : 'section';
 
-
-  console.log('projectDetails', projectDetails)
-  const textRaw = TextRendererRawText(subHeaderProjectPage)
-
   const linkHref = {
     pathname: `/portfolio/${label.toLowerCase().replaceAll(' ', '-')}`,
     query: {
       title: titleProjectPage,
-      subTitle: textRaw,
-      projectDetails: projectDetails,
+      subTitle: JSON.stringify(subHeaderProjectPage),
+      projectDetails: JSON.stringify(projectDetails),
     },
   };
 
+  const imageStyle = isDesktopProject && {  marginTop: 80, paddingBottom: 25 } ; // Example aspect ratios
 
   return (
     <Motion initial="down" asChild>
@@ -94,14 +93,17 @@ export default function Card({
             'bg-transparent p-0': postImage,
           }
         )}
-      >
+        >
         {(image || postImage) && (
           <Image
             src={image! || postImage!}
             alt=""
+            style={imageStyle}
             className={cn(
-              '-mb-2 aspect-square w-full -translate-y-9 scale-x-125 object-cover object-top',
+              '-mb-2 w-full -translate-y-9 scale-x-125 object-cover object-top',
               {
+                'aspect-square': !isDesktopProject,
+                'aspect-16:9': isDesktopProject, // Add your custom aspect ratio class here
                 'object-contain scale-x-100 translate-y-0 mb-12': postImage,
                 'lg:order-last': props.reversed,
               }
@@ -184,12 +186,3 @@ function TextRenderer({ textBlocks = [] }) { // Default to an empty array if not
   );
 }
 
-function TextRendererRawText(textBlocks = []) {
-  if (!Array.isArray(textBlocks)) {
-    return null;
-  }
-
-  return textBlocks.map(block => {
-    return block.children.map(child => child.text || '').join(' ');
-  }).join(' ');
-}
