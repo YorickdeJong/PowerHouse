@@ -2,21 +2,19 @@
 
 import { useRef } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
-import config from '@/sanity.config';
 import useScrollTransform from '@/hook/scroll-transform';
+import config from '@/sanity.config';
+import imageUrlBuilder from '@sanity/image-url';
 
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 import Motion from '@/components/motion';
-import imageUrlBuilder from '@sanity/image-url'
 
-
-const builder = imageUrlBuilder(config)
-
+const builder = imageUrlBuilder(config);
 
 function urlFor(source) {
-  return builder.image(source)
+  return builder.image(source);
 }
 
 export default function PortfolioSlugPage({}) {
@@ -24,20 +22,18 @@ export default function PortfolioSlugPage({}) {
   const path = usePathname();
   const isDesktopProject = path.includes('etm') || path?.includes('blue-elite');
   const router = useSearchParams();
-  
-  const title = router.get('title')
+
+  const title = router.get('title');
   let subTitle = router.get('subTitle');
 
   // Parse the string to get the object
   const renderedSubTitle = renderRichText(JSON.parse(subTitle));
 
-
-  const projectDetails = router.get('projectDetails')
+  const projectDetails = router.get('projectDetails');
   const parsedProjectDetails = JSON.parse(projectDetails);
   const transformedData = transformData(parsedProjectDetails);
 
-
-  console.log('desktop true', isDesktopProject)
+  console.log('desktop true', isDesktopProject);
 
   const height = useScrollTransform({
     target,
@@ -66,7 +62,7 @@ export default function PortfolioSlugPage({}) {
       )}
       <div
         ref={target}
-        className="relative mb-20 mt-20 grid grid-cols-1 gap-16 "
+        className="relative my-20 grid grid-cols-1 gap-16 "
       >
         <div className="absolute inset-0 hidden flex-col items-center lg:flex">
           <Motion
@@ -80,8 +76,8 @@ export default function PortfolioSlugPage({}) {
             className="h-0 w-[7.62px] bg-card"
           />
         </div>
-        <div className='mt-20'>
-          {(transformedData).map((el, idx) => (
+        <div className="mt-20">
+          {transformedData.map((el, idx) => (
             <Card
               isDesktopProject
               portfolioDetailsPage
@@ -95,14 +91,12 @@ export default function PortfolioSlugPage({}) {
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
         {related.map((el, idx) => (
-          <Card key={el.label} {...el} />
+          <Card isDesktopProject = {false} key={el.label} {...el} />
         ))}
       </div>
     </section>
   );
 }
-
-
 
 const desktopProjectData = [
   {
@@ -143,14 +137,13 @@ const related = [
   },
 ];
 
-
 function renderRichText(content) {
-  return content.map(block => {
+  return content.map((block) => {
     switch (block._type) {
       case 'block':
         return (
           <p key={block._key}>
-            {block.children.map(span => span.text).join('')}
+            {block.children.map((span) => span.text).join('')}
           </p>
         );
       // Add more cases if you have other _type values in your rich text content
@@ -160,13 +153,11 @@ function renderRichText(content) {
   });
 }
 
-
 function transformData(data) {
-  const labels = ['Probleem', 'oplossing', 'resultaat']
-  return data.map((item, index) => (
-    {
+  const labels = ['Probleem', 'oplossing', 'resultaat'];
+  return data.map((item, index) => ({
     postImage: urlFor(item).url(),
     label: labels[index],
-    text: item.text && item.text[0] && item.text[0].children[0].text
+    text: item.text && item.text[0] && item.text[0].children[0].text,
   }));
 }

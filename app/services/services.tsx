@@ -16,7 +16,6 @@ export default function Services({ className, ...props }: ServicesProps) {
           {}
         )}
         {...props}
-        
       >
         {data.map((el) => (
           <Card squared key={el.label} {...el} />

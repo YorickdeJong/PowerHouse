@@ -1,19 +1,18 @@
 import { HTMLAttributes } from 'react';
+import { getReviews } from '@/sanity/sanity-utils';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import Card from '@/components/card';
-import {getReviews} from '@/sanity/sanity-utils'
-
 
 interface PortfolioProps extends HTMLAttributes<HTMLDivElement> {}
 
-
-
-
-export default async function Portfolio({ className, ...props }: PortfolioProps) {
+export default async function Portfolio({
+  className,
+  ...props
+}: PortfolioProps) {
   const reviews = await getReviews();
 
   return (

@@ -13,8 +13,6 @@ import GoToTop from '@/components/goto-top';
 import SiteHeader from '@/components/site-header';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
 
-
-
 export const dynamic = 'force-dynamic';
 
 export const metadata: Metadata = {

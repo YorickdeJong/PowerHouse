@@ -7,10 +7,9 @@ import { cn } from '@/lib/utils';
 import { Icons } from './icons';
 import Motion from './motion';
 
-
 interface ImageDetail {
   alt: string;
-  text: Array<{type: string; children?: Array<any>; [key: string]: any}>;
+  text: Array<{ type: string; children?: Array<any>; [key: string]: any }>;
 }
 
 interface ProjectDetail {
@@ -47,7 +46,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   postImage?: string;
   titleProjectPage?: string;
   subHeaderProjectPage?: string;
-  isDesktopProject: boolean,
+  isDesktopProject: boolean;
   projectDetails: ProjectDetail[];
 }
 
@@ -76,7 +75,7 @@ export default function Card({
     },
   };
 
-  const imageStyle = isDesktopProject && {  marginTop: 80, paddingBottom: 25 } ; // Example aspect ratios
+  const imageStyle = isDesktopProject && { marginTop: 80, paddingBottom: 25 }; // Example aspect ratios
 
   return (
     <Motion initial="down" asChild>
@@ -93,7 +92,7 @@ export default function Card({
             'bg-transparent p-0': postImage,
           }
         )}
-        >
+      >
         {(image || postImage) && (
           <Image
             src={image! || postImage!}
@@ -161,28 +160,36 @@ export default function Card({
               </div>
             </Motion>
           </div>
-          {text[0]?.children ? <TextRenderer textBlocks={text} /> :
+          {text[0]?.children ? (
+            <TextRenderer textBlocks={text} />
+          ) : (
             <p className="leading-relaxed text-muted">{text}</p>
-          }
+          )}
         </div>
       </Comp>
     </Motion>
   );
 }
 
-
-function TextRenderer({ textBlocks = [] }) { // Default to an empty array if not provided
-  if (!Array.isArray(textBlocks)) { // Check if textBlocks is indeed an array
+function TextRenderer({ textBlocks = [] }) {
+  // Default to an empty array if not provided
+  if (!Array.isArray(textBlocks)) {
+    // Check if textBlocks is indeed an array
     return null; // or some error message or fallback component
   }
 
   return (
     <div>
-      {textBlocks.map(block => {
-        const content = block.children.map(child => child.text || '').join(' ');
-        return <p className="leading-relaxed text-muted" key={block._key}>{content}</p>;
+      {textBlocks.map((block) => {
+        const content = block.children
+          .map((child) => child.text || '')
+          .join(' ');
+        return (
+          <p className="leading-relaxed text-muted" key={block._key}>
+            {content}
+          </p>
+        );
       })}
     </div>
   );
 }
-

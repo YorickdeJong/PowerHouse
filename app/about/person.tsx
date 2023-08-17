@@ -36,7 +36,7 @@ export default function Person({ className, ...props }: PersonProps) {
           <Images.person3 className="rotate-12" />
         </Motion>
         <Motion style={{ x: x4 }}>
-          <Images.person4/>
+          <Images.person4 />
         </Motion>
       </div>{' '}
       {/* @ts-ignore */}

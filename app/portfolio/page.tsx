@@ -1,10 +1,10 @@
+import { getPortfolio } from '@/sanity/sanity-utils';
+
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
-import { getPortfolio } from '@/sanity/sanity-utils';
 
 export default async function PortfolioPage() {
   const portfolio = await getPortfolio();
-
 
   return (
     <>
@@ -25,8 +25,6 @@ export default async function PortfolioPage() {
     </>
   );
 }
-
-
 
 const data = [
   {
