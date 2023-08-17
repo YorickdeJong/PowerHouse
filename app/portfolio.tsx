@@ -1,32 +1,35 @@
 'use client'
 import { useState, useEffect, HTMLAttributes } from 'react';
-import { getReviews } from '@/sanity/sanity-utils';
+import { getPortfolio, getReviews } from '@/sanity/sanity-utils';
 
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import Card from '@/components/card';
+import Link from 'next/link';
 
 interface PortfolioProps extends HTMLAttributes<HTMLDivElement> {}
 
-type Review = {
+type Portfolio = {
   label: string;
   text: string;
   // ... other properties of a review
 };
 
 export default function Portfolio({ className, ...props }: PortfolioProps) {
-  const [reviews, setReviews] = useState<Review[]>([]);
+  const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
   
   useEffect(() => {
-    async function fetchReviews() {
-      const data = await getReviews();
-      console.log('reviews', data)
-      setReviews(data);
+    async function fetchPortfolio() {
+      const data = await getPortfolio();
+      const randomizedData = data.sort(() => 0.5 - Math.random());
+      // Select the first three items
+      const selectedData = randomizedData.slice(0, 3);
+      setPortfolio(selectedData);
     }
 
-    fetchReviews();
+    fetchPortfolio();
   }, []);
 
   return (
@@ -36,10 +39,12 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
         <Caption className="mb-4 mt-16">Portfolio</Caption>
         <div className="flex items-center justify-between">
           <Typography variant={'title'}>ons werk</Typography>
-          <Button variant={'outline'}>Bekijk alles</Button>
+          <Link href={`/portfolio`}>
+            <Button variant={'outline'}>Bekijk alles</Button>
+          </Link>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-            {reviews.map((el) => (
+            {portfolio.map((el) => (
               <Card 
                 projectDetails={[]} 
                 isDesktopProject={false} 

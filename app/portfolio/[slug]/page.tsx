@@ -10,6 +10,9 @@ import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 import Motion from '@/components/motion';
+import { useState } from 'react';
+import { useEffect } from 'react';
+import { getPortfolio } from '@/sanity/sanity-utils';
 
 const builder = imageUrlBuilder(config);
 
@@ -17,19 +20,42 @@ function urlFor(source: any) {
   return builder.image(source);
 }
 
+type Portfolio = {
+  label: string;
+  text: string;
+  // ... other properties of a review
+};
+
+
 export default function PortfolioSlugPage({}) {
   const target = useRef(null);
   const path = usePathname();
-  const isDesktopProject = path.includes('etm') || path?.includes('blue-elite');
+  const isDesktopProject = path?.includes('etm') || path?.includes('blue-elite');
   const router = useSearchParams();
+  const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
+  
+  useEffect(() => {
+    async function fetchPortfolio() {
+      const data = await getPortfolio();
+      console.log('data', data)
+      const randomizedData = data.sort(() => 0.5 - Math.random());
+      // Select the first three items
+      const selectedData = randomizedData.slice(0, 3);
+      setPortfolio(selectedData);
+    }
 
-  const title = router.get('title');
-  let subTitle = router.get('subTitle');
+    fetchPortfolio();
+  }, []);
+
+  const title = router ? router.get('title') : null;
+  let subTitle = router ? router.get('subTitle') : null;
+
+
 
   // Parse the string to get the object
   const renderedSubTitle = renderRichText(JSON.parse(subTitle || '{}'));
 
-  const projectDetails = router.get('projectDetails');
+  const projectDetails = router ? router.get('projectDetails') : null;
   const parsedProjectDetails = JSON.parse(projectDetails || '{}');
   const transformedData = transformData(parsedProjectDetails);
 
@@ -91,7 +117,7 @@ export default function PortfolioSlugPage({}) {
       </div>
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
-        {related.map((el, idx) => (
+        {portfolio.map((el, idx) => (
           <Card projectDetails = {[]} isDesktopProject = {false} key={el.label} {...el} />
         ))}
       </div>

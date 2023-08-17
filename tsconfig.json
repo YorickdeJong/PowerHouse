@@ -22,7 +22,9 @@
         "name": "next"
       }
     ],
-    "strictNullChecks": true
+    "strictNullChecks": true,
+    "typeRoots": ["./types", "./node_modules/@types"],  // Add this line
+    "types": ["nodemailer"]  // And this line
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
