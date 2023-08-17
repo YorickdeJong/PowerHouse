@@ -36,7 +36,7 @@ interface ProjectDetail {
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
   icon?: (props: any) => JSX.Element;
-  text: string;
+  text: any;
   image?: string;
   portfolioPage?: boolean;
   squared?: boolean;
@@ -75,7 +75,7 @@ export default function Card({
     },
   };
 
-  const imageStyle = isDesktopProject && { marginTop: 80, paddingBottom: 25 }; // Example aspect ratios
+  const imageStyle = isDesktopProject ? { marginTop: 80, paddingBottom: 25 } : undefined;
 
   return (
     <Motion initial="down" asChild>
@@ -171,7 +171,12 @@ export default function Card({
   );
 }
 
-function TextRenderer({ textBlocks = [] }) {
+interface TextBlock {
+  _key: string;
+  children: Array<{ text: string }>;
+}
+
+function TextRenderer({ textBlocks = [] }: { textBlocks?: TextBlock[] }) {
   // Default to an empty array if not provided
   if (!Array.isArray(textBlocks)) {
     // Check if textBlocks is indeed an array
@@ -182,7 +187,7 @@ function TextRenderer({ textBlocks = [] }) {
     <div>
       {textBlocks.map((block) => {
         const content = block.children
-          .map((child) => child.text || '')
+          .map((child : any) => child.text || '')
           .join(' ');
         return (
           <p className="leading-relaxed text-muted" key={block._key}>

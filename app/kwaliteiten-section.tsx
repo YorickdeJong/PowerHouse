@@ -39,7 +39,7 @@ export default function KwaliteitenSection({
           className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2"
         >
           {data.map((el) => (
-            <Card {...el} key={el.label} />
+            <Card projectDetails = {[]} isDesktopProject = {false} {...el} key={el.label} />
           ))}
         </Motion>
       </div>

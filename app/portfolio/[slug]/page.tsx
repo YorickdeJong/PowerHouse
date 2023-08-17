@@ -13,7 +13,7 @@ import Motion from '@/components/motion';
 
 const builder = imageUrlBuilder(config);
 
-function urlFor(source) {
+function urlFor(source: any) {
   return builder.image(source);
 }
 
@@ -27,10 +27,10 @@ export default function PortfolioSlugPage({}) {
   let subTitle = router.get('subTitle');
 
   // Parse the string to get the object
-  const renderedSubTitle = renderRichText(JSON.parse(subTitle));
+  const renderedSubTitle = renderRichText(JSON.parse(subTitle || '{}'));
 
   const projectDetails = router.get('projectDetails');
-  const parsedProjectDetails = JSON.parse(projectDetails);
+  const parsedProjectDetails = JSON.parse(projectDetails || '{}');
   const transformedData = transformData(parsedProjectDetails);
 
   console.log('desktop true', isDesktopProject);
@@ -77,9 +77,10 @@ export default function PortfolioSlugPage({}) {
           />
         </div>
         <div className="mt-20">
-          {transformedData.map((el, idx) => (
+          {transformedData.map((el : any, idx : any) => (
             <Card
               isDesktopProject
+              projectDetails = {[]}
               portfolioDetailsPage
               reversed={idx === 1}
               key={el.label}
@@ -91,30 +92,13 @@ export default function PortfolioSlugPage({}) {
       <Typography variant={'title'}>Bekijk ook andere cases</Typography>
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2 lg:grid-cols-3">
         {related.map((el, idx) => (
-          <Card isDesktopProject = {false} key={el.label} {...el} />
+          <Card projectDetails = {[]} isDesktopProject = {false} key={el.label} {...el} />
         ))}
       </div>
     </section>
   );
 }
 
-const desktopProjectData = [
-  {
-    postImage: '/assets/images/post/desktop.png',
-    label: 'Probleem',
-    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
-  },
-  {
-    postImage: '/assets/images/post/desktop2.png',
-    label: 'oplossing',
-    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
-  },
-  {
-    postImage: '/assets/images/post/desktop3.png',
-    label: 'resultaat',
-    text: 'Daily hiya he fritters prince. Moon rock-cake in diadem eye werewolf nose fritters spleens. Fire-whisky ickle poltergeist cloak grindylows easy mrs hoops. Winky phoenix cauldron scales granger grayback. Totalus three-headed to locomotor rise.',
-  },
-];
 
 const related = [
   {
@@ -137,13 +121,13 @@ const related = [
   },
 ];
 
-function renderRichText(content) {
-  return content.map((block) => {
+function renderRichText(content : any) {
+  return content.map((block : any) => {
     switch (block._type) {
       case 'block':
         return (
           <p key={block._key}>
-            {block.children.map((span) => span.text).join('')}
+            {block.children.map((span : any) => span.text).join('')}
           </p>
         );
       // Add more cases if you have other _type values in your rich text content
@@ -153,9 +137,9 @@ function renderRichText(content) {
   });
 }
 
-function transformData(data) {
+function transformData(data : any) {
   const labels = ['Probleem', 'oplossing', 'resultaat'];
-  return data.map((item, index) => ({
+  return data.map((item  : any, index  : any) => ({
     postImage: urlFor(item).url(),
     label: labels[index],
     text: item.text && item.text[0] && item.text[0].children[0].text,

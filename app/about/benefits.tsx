@@ -22,7 +22,7 @@ export default function Benefits({ className, ...props }: BenefitsProps) {
       </div>
       <div className="my-10 grid grid-cols-1 gap-10 lg:grid-cols-4">
         {data.map((item) => (
-          <Card key={item.label} {...item} />
+          <Card projectDetails = {[]} isDesktopProject = {false} key={item.label} {...item} />
         ))}
       </div>
     </div>

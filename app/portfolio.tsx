@@ -1,4 +1,5 @@
-import { HTMLAttributes } from 'react';
+'use client'
+import { useState, useEffect, HTMLAttributes } from 'react';
 import { getReviews } from '@/sanity/sanity-utils';
 
 import { cn } from '@/lib/utils';
@@ -9,11 +10,24 @@ import Card from '@/components/card';
 
 interface PortfolioProps extends HTMLAttributes<HTMLDivElement> {}
 
-export default async function Portfolio({
-  className,
-  ...props
-}: PortfolioProps) {
-  const reviews = await getReviews();
+type Review = {
+  label: string;
+  text: string;
+  // ... other properties of a review
+};
+
+export default function Portfolio({ className, ...props }: PortfolioProps) {
+  const [reviews, setReviews] = useState<Review[]>([]);
+  
+  useEffect(() => {
+    async function fetchReviews() {
+      const data = await getReviews();
+      console.log('reviews', data)
+      setReviews(data);
+    }
+
+    fetchReviews();
+  }, []);
 
   return (
     <section className="bg-card">
@@ -25,9 +39,14 @@ export default async function Portfolio({
           <Button variant={'outline'}>Bekijk alles</Button>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-          {reviews.map((el) => (
-            <Card key={el.label} {...el} />
-          ))}
+            {reviews.map((el) => (
+              <Card 
+                projectDetails={[]} 
+                isDesktopProject={false} 
+                key={el.label} 
+                {...el} 
+              />
+            ))}
         </div>
       </div>
     </section>
