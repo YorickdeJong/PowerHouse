@@ -4,8 +4,8 @@ const reviews = {
     type: 'document',
     fields: [
         {
-            name: 'label',
-            title: 'label',
+            name: 'name',
+            title: 'name',
             type: 'string',
         },
         {
@@ -36,8 +36,13 @@ const reviews = {
             type: 'url'
         },
         {
-            name: 'text',
-            title: 'text',
+            name: 'stars',
+            title: 'stars',
+            type: 'number',
+        },
+        {
+            name: 'reviewText',
+            title: 'reviewText',
             type: 'array',
             of: [{type: 'block'}], //allows rich text
         }

@@ -34,11 +34,12 @@ export async function getReviews() {
         groq`*[_type == "reviews"]{
             _id,
             _createdAt,
-            label, 
+            name, 
             'slug': slug.current,
             "image": image.asset->url,
-            url, 
-            text
+            url,
+            stars, 
+            reviewText
         }`
     )
 }

@@ -47,7 +47,7 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
 
 
   return (
-    <div className="bg-secondary  max-md:-mt-4 max-md:rounded-t-xl">
+    <div className="bg-secondary  mt-14 max-md:-mt-4 max-md:rounded-t-xl">
       <div
         className={cn('` container py-12 md:px-14', className, {})}
         {...props}
@@ -67,7 +67,7 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
               key={field.label}
               className="space-y-2 border-b border-border/10 py-2.5 text-background focus-within:border-border/40 md:space-y-7"
             >
-              <label htmlFor={field.label} className="text-xs">
+              <label htmlFor={field.label} className="text-xs mt-16">
                 {field.label}
               </label>
               {field.type === 'textarea' ? (
@@ -75,6 +75,7 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
                   className="w-full bg-transparent text-sm outline-none"
                   placeholder={field.placeholder}
                   name={field.name}  // <-- Add this
+                  rows="15"
                 />
               ) : (
                 <input
@@ -82,6 +83,7 @@ export default function BookingForm({ className, ...props }: BookingFormProps) {
                   type={field.type}
                   placeholder={field.placeholder}
                   name={field.name}  // <-- Add this
+                  rows="5"
                 />
               )}
             </div>

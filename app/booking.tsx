@@ -1,15 +1,19 @@
-import { HTMLAttributes } from 'react';
-
+'use client'
+import { HTMLAttributes, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import { Images } from '@/components/images';
 import Motion from '@/components/motion';
+import Head from 'next/head';
+import { InlineWidget } from "react-calendly";
 
 interface BookingProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function Booking({ className, ...props }: BookingProps) {
+
+
   return (
     <section className="bg-card">
       <div
@@ -27,15 +31,42 @@ export default function Booking({ className, ...props }: BookingProps) {
         <Typography variant={'muted'}>
           Boek een gesprek met Blue Waterfall om uw digitale bedrijf te starten
         </Typography>
-        <div className="mt-4 w-fit border-4 border-dashed border-primary">
-          <Button className="rounded-none">
-            Maak een gratis afspraak &rarr;
-          </Button>
+        <div className="mt-8 origin-top-left md:scale-90">
+          <InlineWidget url="https://calendly.com/yorickdejong/introductory-call?primary_color=0085ff" 
+          styles={{
+            height: '840px',
+            width: 640,
+          }}
+
+          />
         </div>
-        <div>
-          <Images.calendar className="mt-8 origin-top-left md:scale-90" />
-        </div>
+       
+
       </div>
     </section>
   );
 }
+
+
+// import Head from 'next/head';
+// [...]
+  // useEffect(() => {
+  //   window.Calendly.initInlineWidget({
+  //     url: 'https://calendly.com/my-calendar/30min?month=2022-05',
+  //     parentElement: document.getElementById('calendly-inline-widget')
+  //   });
+  // }, [])
+//   return (
+//     <>
+      // <Head>
+      //   <script src="https://assets.calendly.com/assets/external/widget.js"></script>
+      // </Head>
+      // <>
+      //     <div
+      //       id="calendly-inline-widget"
+      //       style={{minWidth: 320, height: 580}}
+      //       data-auto-load="false"
+      //     >
+      //     </div>
+      // </>
+// [...]

@@ -13,15 +13,29 @@ import { cn } from '@/lib/utils';
 
 import { Images } from './images';
 
-interface ReviewSliderProps extends HTMLAttributes<HTMLDivElement> {}
+interface ReviewSliderProps {
+  className?: string;
+  images: any[];
+  setCurrentReviewIndex: any;
+  [key: string]: any; // for other props
+}
 
 export default function ReviewSlider({
   className,
+  images,
+  setCurrentReviewIndex,
   ...props
 }: ReviewSliderProps) {
   const [nextEl, nextRef] = useSwiperRef();
   const isMd = useMediaQuery('md');
   const [prevEl, prevRef] = useSwiperRef();
+
+
+  // Handle slide change event
+  const handleSlideChange = (swiper: any) => {
+    setCurrentReviewIndex(swiper.activeIndex);
+  };
+
   return (
     <div
       className={cn('translate-x-0 translate-y-0', className, {})}
@@ -36,9 +50,11 @@ export default function ReviewSlider({
           nextEl: nextEl,
         }}
         slidesPerView={3}
+        onSlideChange={handleSlideChange}
+        loop={true} // Add this line to enable looping
       >
         <div
-          className="fixed -left-7 z-10 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[40%]"
+          className="fixed -left-7 z-10 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[38%]"
           onClick={() =>
             useSlider.setState({ reviewId: Math.round(Math.random() * 10) })
           }
@@ -47,7 +63,7 @@ export default function ReviewSlider({
           <Images.left />
         </div>
         <div
-          className="fixed -right-7 z-50 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:right-[40%]"
+          className="fixed -right-7 z-50 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:right-[38%]"
           ref={nextRef}
           onClick={() =>
             useSlider.setState({ reviewId: Math.round(Math.random() * 10) })
@@ -55,8 +71,8 @@ export default function ReviewSlider({
         >
           <Images.right />
         </div>
-        {Array.from(Array(7)).map((el) => (
-          <SwiperSlide key={el}>
+        {images?.map((imageSrc, index) => (
+          <SwiperSlide key={index}>
             {({ isActive }) => (
               <div
                 className={cn(
@@ -65,7 +81,7 @@ export default function ReviewSlider({
                 )}
               >
                 <Image
-                  src={`https://s3-alpha-sig.figma.com/img/3a10/e5f6/7e898cb1de3745b2e95972e140cb46dd?Expires=1692576000&Signature=eDyWF3~k4FW96D2MiUcJo611T69Rx~9rFYWSlnisiJQrrwNmjKlouzVIdBjM7Cph4Uk2y66rIiITA2lt-VkSz6tQrq207sJQw~2jBTkYFKBU35csRk9Mm3dwtR8SPQ8REmRgU1apR3hEBawrE-d223ZgAr6jnYbfG1vhaRr3vJMPAssd85qkCUUEyhqz~TjYt8y86CoKMvwMyIg~T54qkI-oTrGo3lGAp2daTxCyeKkfi4hWcpclJ15GwM8jfQ0nxcc4GEJZGmWEKIPSLujDsDUE8e9lwBlgJS6e3JqT1dN3v7LsXvsg8QQSq2OWmBrfcoW-G6VzgHxBN5LmKG9WVw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4`}
+                  src={imageSrc.image}
                   alt=""
                   className={cn(
                     'aspect-square rounded-full ring-4 ring-background ',
