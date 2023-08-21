@@ -55,13 +55,13 @@ export default function OnzeDienstenSection({
               </Tabs.Trigger>
             ))}
           </Tabs.List>
-          <Image
+          {/* <Image
             src={`/assets/images/video.svg`}
             alt=""
             className="mt-20 aspect-video w-full cursor-pointer"
             width={388}
             height={226}
-          />
+          /> */}
         </div>
       </div>
     </Tabs.Root>
@@ -71,18 +71,23 @@ export default function OnzeDienstenSection({
 const links = [
   {
     title: 'business strategie',
-    text: ' ipsum dolor sit amet consectetur adipisicing elit. ullam odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae asperiores eos, quisquam iste nostrum fuga.',
+    text: `Bij de eerste stap is ons doel is om uw kernwaarden, de reden waarom u uw bedrijf bent gestart en uw producten te 
+    begrijpen, zodat we een website kunnen creëren die echt bij u past en gepaste klanten aantrekt`,
   },
   {
     title: 'design & development',
-    text: 'elit odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae asperiores dignissimos libero dolor ea fugit possimus eos, quisquam iste nostrum fuga.',
+    text: `We zijn toegewijd aan het ontwerp en de ontwikkeling van uw website. Met de hulp van ervaren ontwerpers brengen we uw bedrijf visueel tot leven. 
+    Onze samenwerking met bekwame programmeurs zorgt voor een naadloze overgang van ontwerp naar implementatie, waardoor uw visie werkelijkheid wordt.`,
   },
   {
     title: 'marketing',
-    text: 'ullam odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae asperiores dignissimos libero dolor ea fugit possimus eos, quisquam iste nostrum fuga.',
+    text: `Wij, en jij waarschijnlijk ook, willen dat jouw website potentiële klanten aantrekt. Daarom gaan wij aan de slag om uw website online vindbaar te maken.
+    Door het optimaliseren van uw website voor googles zoekmachine en advertenties voor jouw website te maken, zorgen wij ervoor dat mensen uw website bezoeken.`,
   },
   {
     title: 'onderhoud',
-    text: 'libero dolor ea fugit possimus eos, quisquam iste nostrum fuga. adipisicing elit. ullam odio hic nisi voluptatem reprehenderit, cum quidem aliquam beatae dignissimos ',
+    text: `We uiten onze voortdurende toewijding aan het succes van uw bedrijf. Een website up-to-date houden is onmisbaar voor het genereren van online klanten.
+    Een niet goed werkende of verouderde website zorgt ervoor dat jij klanten kan kwijt raken. Geen zorgen, met onze hulp zullen jouw klanten altijd te vreden zijn over jouw website. 
+    `,
   },
 ];

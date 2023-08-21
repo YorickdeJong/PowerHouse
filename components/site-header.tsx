@@ -62,7 +62,7 @@ const NavContent = () => {
           <li
             key={_.title}
             className={cn('', {
-              '': _.href === '/' ? path === '/' : path.includes(_.href),
+              '': _.href === '/' ? path === '/' : path?.includes(_.href),
             })}
           >
             <h3 className="capitalize text-lg">

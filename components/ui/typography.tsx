@@ -13,14 +13,14 @@ const typographyVariants = cva('', {
     },
     variant: {
       default: '',
-      heading: 'max-[400px]:text-4xl text-7xl md:text-[90px] uppercase', // increased sizes
+      heading: 'text-3xl md:text-4xl lg:text-8xl uppercase', // text-3xl for mobile, text-4xl for medium screens, text-7xl for large screens
       title:
-        'text-5xl font-bold uppercase leading-[48px] lg:text-[52px] lg:leading-[68px]', // increased sizes
-      muted: 'text-lg text-muted leading-relaxed', // added text-base for a default size
+        'text-4xl md:text-5xl lg:text-[55px] font-bold uppercase leading-[48px] lg:leading-[68px]', // text-4xl for mobile, text-5xl for medium screens
+      muted: 'text-base md:text-lg text-muted leading-relaxed', // text-base for mobile, text-lg for medium screens
     },
     size: {
-      sm: 'text-sm md:text-base',
-      lg: 'text-lg md:text-xl',
+      sm: 'text-xs md:text-sm lg:text-base', // text-xs for mobile, text-sm for medium screens, text-base for large screens
+      lg: 'text-base md:text-lg lg:text-xl', // text-base for mobile, text-lg for medium screens, text-xl for large screens
     },
   },
   defaultVariants: {

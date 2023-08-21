@@ -20,12 +20,17 @@ export default function VerhaalSection({
           ons verhaal
         </Typography>
         <Typography variant={'muted'} className="text-background">
-          Telescope die half-blood headmaster must floor teacup catherine
-          wormtail. Winky soul potter woes dementors room. Forest back goblet
-          fairy black answer managed through candles wizard. <br />
+          Wij zijn 4 ingineurs, afgestudeerd van de TU Delft. Wij hebben 5+
+          jaren geleerd hoe wij problemen kunnen signaleren en deze kunnen
+          oplossen. Samen met de ervaring die wij hebben opgedaan over bedrijven
+          oprichten, webdevelopment en marketing zorgen wij ervoor dat jij een
+          website krijgt die klanten aantrekt en jouw bedrijf laat bloeien.
           <br />
-          Holly stroke erumpent answer rise our time-turner cursed. Mimbletonia
-          come gnomes dirt die chalice.
+          <br />
+          Wij zijn toegewijd aan het creëren van innovatieve digitale
+          oplossingen voor middelgrote ondernemingen. Door gebruik te maken van
+          outsourcing en kunstmatige intelligentie, bouwen we geweldige
+          producten tegen een eerlijke prijs
         </Typography>
         <Motion
           initial="down"

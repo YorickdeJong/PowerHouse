@@ -75,7 +75,9 @@ export default function Card({
     },
   };
 
-  const imageStyle = isDesktopProject ? { marginTop: 80, paddingBottom: 25 } : undefined;
+  const imageStyle = isDesktopProject
+    ? { marginTop: 80, paddingBottom: 25 }
+    : undefined;
 
   return (
     <Motion initial="down" asChild>
@@ -187,7 +189,7 @@ function TextRenderer({ textBlocks = [] }: { textBlocks?: TextBlock[] }) {
     <div>
       {textBlocks.map((block) => {
         const content = block.children
-          .map((child : any) => child.text || '')
+          .map((child: any) => child.text || '')
           .join(' ');
         return (
           <p className="leading-relaxed text-muted" key={block._key}>

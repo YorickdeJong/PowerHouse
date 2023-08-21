@@ -1,7 +1,7 @@
 // @ts-nocheck
 'use client';
 
-import { HTMLAttributes } from 'react';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useMediaQuery } from '@/hook/media-query';
 import useSwiperRef from '@/hook/swiper';
@@ -16,6 +16,7 @@ import { Images } from './images';
 interface ReviewSliderProps {
   className?: string;
   images: any[];
+  currentReviewIndex: any;
   setCurrentReviewIndex: any;
   [key: string]: any; // for other props
 }
@@ -23,17 +24,21 @@ interface ReviewSliderProps {
 export default function ReviewSlider({
   className,
   images,
+  currentReviewIndex,
   setCurrentReviewIndex,
   ...props
 }: ReviewSliderProps) {
   const [nextEl, nextRef] = useSwiperRef();
   const isMd = useMediaQuery('md');
   const [prevEl, prevRef] = useSwiperRef();
+  const [activeIndex, setActiveIndex] = useState(0);
 
-
-  // Handle slide change event
+  useEffect(() => {
+    setCurrentReviewIndex(0);
+  }, []);
   const handleSlideChange = (swiper: any) => {
-    setCurrentReviewIndex(swiper.activeIndex);
+    setCurrentReviewIndex(swiper.realIndex);
+    setActiveIndex(swiper.realIndex);
   };
 
   return (
@@ -51,7 +56,7 @@ export default function ReviewSlider({
         }}
         slidesPerView={3}
         onSlideChange={handleSlideChange}
-        loop={true} // Add this line to enable looping
+        loop={true}
       >
         <div
           className="fixed -left-7 z-10 my-auto aspect-square h-10 translate-y-2 cursor-pointer transition-all active:scale-95 max-md:inset-y-0 md:left-[38%]"
@@ -73,27 +78,28 @@ export default function ReviewSlider({
         </div>
         {images?.map((imageSrc, index) => (
           <SwiperSlide key={index}>
-            {({ isActive }) => (
-              <div
+            <div
+              className={cn(
+                'ml-auto w-fit rounded-full bg-gradient-to-r from-transparent from-50% to-primary to-50% p-[5px]',
+                {
+                  '-translate-y-1/2 mt-[50%] to-[#676974]':
+                    index !== activeIndex,
+                }
+              )}
+            >
+              <Image
+                src={imageSrc.image}
+                alt=""
                 className={cn(
-                  'ml-auto w-fit rounded-full bg-gradient-to-r from-transparent from-50% to-primary to-50% p-[5px]',
-                  { '-translate-y-1/2 mt-[50%] to-[#676974]': !isActive }
+                  'aspect-square rounded-full ring-4 ring-background ',
+                  {
+                    ' block w-14 md:w-32 aspect-square': index !== activeIndex,
+                  }
                 )}
-              >
-                <Image
-                  src={imageSrc.image}
-                  alt=""
-                  className={cn(
-                    'aspect-square rounded-full ring-4 ring-background ',
-                    {
-                      ' block w-14 md:w-32 aspect-square': !isActive,
-                    }
-                  )}
-                  width={isMd ? 280 : 200}
-                  height={isMd ? 280 : 200}
-                />
-              </div>
-            )}
+                width={isMd ? 280 : 200}
+                height={isMd ? 280 : 200}
+              />
+            </div>
           </SwiperSlide>
         ))}
       </Swiper>

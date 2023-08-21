@@ -13,8 +13,8 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
 export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   const path = usePathname();
   const slug =
-    path.includes('/portfolio/') &&
-    path.split('/portfolio/')[1].replaceAll('-', ' ');
+    path?.includes('/portfolio/') &&
+    path?.split('/portfolio/')[1].replaceAll('-', ' ');
   return (
     <div
       className={cn(

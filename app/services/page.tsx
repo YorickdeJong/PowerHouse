@@ -20,15 +20,18 @@ export default function ServicesPage() {
               Onze Diensten{' '}
             </Typography>
             <Typography className="mt-3" variant={'muted'}>
-              Order norwegian dragon-scale tap-dancing fanged wizard grindylows
-              werewolf wool. Head petrificus ministry-of-magic polyjuice knew.{' '}
+              Blue Waterfall geeft jouw bedrijf een volledig pakket, zodat jij
+              manieren klanten binnenhaalt via het web. Want, laten we eerlijk
+              zijn. U wilt niet een website laten bouwen voor uw plezier. Nee, u
+              doet dit met het doel om meer klanten te genereren via het web.
               <br />
               <br />
-              Chalice stroke remembrall hunt fat phials mudbloods unwilling
-              banges. Shack yer in restricted charm treats crush who. <br />
-              <br /> Glory impedimenta parvati dervish dirigible dead dirt
-              stairs. Out downfall wingardium you robes keeper sorcerer&apos;s
-              spleens feast.{' '}
+              Wij snappen dit volkomen. Daarom hebben wij onze strategie hierop
+              aangepast. Door met ons in zee te gaan, zorgen wij ervoor dat uw
+              website wordt bezocht en u hiermee potentiële klanten binnen
+              haalt.
+              <br />
+              <br />
             </Typography>
           </div>
           <div className="flex flex-col justify-end">

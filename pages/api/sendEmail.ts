@@ -3,12 +3,12 @@ import nodemailer from 'nodemailer';
 export default async function handler(req: any, res: any) {
   if (req.method === 'POST') {
     const { name, email, message } = req.body;
-    
-    console.log('name', name)
-    console.log('email', email)
-    console.log('message', message)
 
-    console.log(process.env.EMAIL_USER)
+    console.log('name', name);
+    console.log('email', email);
+    console.log('message', message);
+
+    console.log(process.env.EMAIL_USER);
     const transporter = nodemailer.createTransport({
       service: 'Gmail', // You can use other services like Yahoo, Outlook, etc.
       auth: {
@@ -32,7 +32,7 @@ export default async function handler(req: any, res: any) {
       await transporter.sendMail(mailOptions);
       res.status(200).send('Email sent successfully');
     } catch (error) {
-      console.log('error', error)
+      console.log('error', error);
       res.status(500).send('Error sending email');
     }
   } else {

@@ -18,7 +18,7 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
   return (
     <div className="bg-card ">
       <div className={cn('container py-16', className, {})} {...props}>
-        <Caption className="justify-center">Service plans</Caption>
+        <Caption className="justify-center">SERVICEPLANNEN</Caption>
         <Typography variant={'heading'} className="mt-3 text-center">
           Diensten
         </Typography>
@@ -35,15 +35,17 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
               </Tabs.Trigger>
             ))}
           </Tabs.List>
-          {tabs.map((tab) => (
-            <Comp key={tab} value={tab}>
-              <PriceCard tab={tab} />
-            </Comp>
-          ))}
+          <div className="grid grid-cols-3 gap-4">
+            {tabs.map((tab) => (
+              <Comp key={tab} value={tab}>
+                <PriceCard tab={tab} />
+              </Comp>
+            ))}
+          </div>
         </Tabs.Root>
       </div>
     </div>
   );
 }
 
-const tabs = ['basic', 'standard', 'custom'];
+const tabs = ['basis', 'standaard', 'custom'];

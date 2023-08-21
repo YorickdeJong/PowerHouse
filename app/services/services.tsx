@@ -18,7 +18,13 @@ export default function Services({ className, ...props }: ServicesProps) {
         {...props}
       >
         {data.map((el) => (
-          <Card projectDetails = {[]} isDesktopProject = {false} squared key={el.label} {...el} />
+          <Card
+            projectDetails={[]}
+            isDesktopProject={false}
+            squared
+            key={el.label}
+            {...el}
+          />
         ))}
       </div>
     </>

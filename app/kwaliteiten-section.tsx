@@ -24,8 +24,8 @@ export default function KwaliteitenSection({
             waarom voor blue waterfall kiezen?
           </Typography>
           <Typography variant={'muted'} className="mt-2">
-            Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua.
+            Wij maken niet een gewone website voor jou. Als jij bij ons boekt
+            zorgen wij ervoor dat jouw bedrijf klanten binnen haalt.
           </Typography>
           <div className="mt-10">
             <LetsTalk className="translate-y-4" />
@@ -36,10 +36,15 @@ export default function KwaliteitenSection({
         </div>
         <Motion
           transition={{ staggerChildren: 0 }}
-          className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2"
+          className="pb-10 mt-10 md:mt-0 lg:mt-0 grid grid-cols-1 gap-5 md:grid-cols-2"
         >
           {data.map((el) => (
-            <Card projectDetails = {[]} isDesktopProject = {false} {...el} key={el.label} />
+            <Card
+              projectDetails={[]}
+              isDesktopProject={false}
+              {...el}
+              key={el.label}
+            />
           ))}
         </Motion>
       </div>
@@ -51,21 +56,21 @@ const data = [
   {
     label: 'Assertiviteit',
     icon: Images.react,
-    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    text: 'Wij zijn proactief in het bouwen van uw website, luisteren naar uw ideeën en bieden strategische tips om effectief nieuwe klanten aan te trekken.',
   },
   {
     label: 'partner',
     icon: Images[24],
-    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    text: 'Jij kent jouw klanten het best; daarom zien wij u als partner in het aantrekken van meer klanten voor uw bedrijf.',
   },
   {
     label: 'wordt gezien',
     icon: Images.people,
-    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    text: 'Niemand zit te wachten om geld te betalen voor het bouwen van een website, om daarna onvindbaar te zijn. Wij zorgen dat klanten uw website bezoeken.',
   },
   {
     label: 'gemak',
     icon: Images.tree,
-    text: 'Lorem ipsum dolor sit amet,adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+    text: 'Tijdens onze samenwerking zit u niet te wachten op hoofdpijn door onduidelijke communicatie o.i.d. Wij zorgen ervoor dat jouw traject vlekkeloos verloopt.',
   },
 ];

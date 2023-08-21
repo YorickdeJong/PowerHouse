@@ -1,5 +1,7 @@
-'use client'
-import { useState, useEffect, HTMLAttributes } from 'react';
+'use client';
+
+import { HTMLAttributes, useEffect, useState } from 'react';
+import Link from 'next/link';
 import { getPortfolio, getReviews } from '@/sanity/sanity-utils';
 
 import { cn } from '@/lib/utils';
@@ -7,7 +9,6 @@ import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import Card from '@/components/card';
-import Link from 'next/link';
 
 interface PortfolioProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -19,7 +20,7 @@ type Portfolio = {
 
 export default function Portfolio({ className, ...props }: PortfolioProps) {
   const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
-  
+
   useEffect(() => {
     async function fetchPortfolio() {
       const data = await getPortfolio();
@@ -44,14 +45,14 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
           </Link>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
-            {portfolio.map((el) => (
-              <Card 
-                projectDetails={[]} 
-                isDesktopProject={false} 
-                key={el.label} 
-                {...el} 
-              />
-            ))}
+          {portfolio.map((el) => (
+            <Card
+              projectDetails={[]}
+              isDesktopProject={false}
+              key={el.label}
+              {...el}
+            />
+          ))}
         </div>
       </div>
     </section>
