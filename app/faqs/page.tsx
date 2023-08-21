@@ -21,7 +21,7 @@ export default function FaqsPage() {
 
   return (
     <>
-      <div className="container max-w-[900px] py-12">
+      <div className="container max-w-[800px] md:max-w-[900px] py-12">
         <Caption className="justify-center">The things peoples asked</Caption>
         <Typography variant={'title'} className="mt-3 text-center">
           Frequently asked Questions
@@ -39,14 +39,14 @@ export default function FaqsPage() {
                 <Accordion.Header>
                   <Accordion.Trigger
                     onClick={() => toggleAccordionItem(value)}
-                    className="group flex w-full items-center justify-between rounded-lg  bg-card p-6 text-left text-lg  font-medium"
+                    className="group flex w-full items-center justify-between rounded-lg  bg-card p-6 text-left text-sm md:text-lg font-medium"
                   >
                     {el.label}{' '}
-                    <Icons.minus className="hidden group-data-[state=open]:block" />
-                    <Icons.plus className="group-data-[state=open]:hidden" />
+                    <Icons.minus className="hidden group-data-[state=open]:block ml-8" />
+                    <Icons.plus className="group-data-[state=open]:hidden ml-8" />
                   </Accordion.Trigger>
                 </Accordion.Header>
-                <Accordion.Content className="pt-7 text-muted text-lg data-[state=close]:animate-slideUp data-[state=open]:animate-slideDown">
+                <Accordion.Content className="pt-7 px-4 text-muted text-sm md:text-lg data-[state=close]:animate-slideUp data-[state=open]:animate-slideDown">
                   {el.text}
                 </Accordion.Content>
               </Accordion.Item>

@@ -27,6 +27,7 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
             {tabs.map((tab) => (
               <Tabs.Trigger asChild key={tab} value={tab}>
                 <Button
+                  style={{ width: '110px', height: '40px' }}
                   className="px-6 capitalize max-[380px]:px-3"
                   size={'sm'}
                 >
@@ -35,7 +36,7 @@ export default function ServicePlan({ className, ...props }: ServicePlanProps) {
               </Tabs.Trigger>
             ))}
           </Tabs.List>
-          <div className="grid grid-cols-3 gap-4">
+          <div className="grid md:grid-cols-3 gap-4">
             {tabs.map((tab) => (
               <Comp key={tab} value={tab}>
                 <PriceCard tab={tab} />

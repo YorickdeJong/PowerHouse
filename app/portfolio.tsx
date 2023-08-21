@@ -41,7 +41,7 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
         <div className="flex items-center justify-between">
           <Typography variant={'title'}>ons werk</Typography>
           <Link href={`/portfolio`}>
-            <Button variant={'outline'}>Bekijk alles</Button>
+            <Button variant={'outline'} className='py-2 px-4'>Bekijk alles</Button>
           </Link>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">

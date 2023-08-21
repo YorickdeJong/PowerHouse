@@ -3,11 +3,6 @@ import { getPortfolio } from '@/sanity/sanity-utils';
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 
-type Portfolio = {
-  label: string;
-  text: string;
-  // ... other properties of a review
-};
 
 export default async function PortfolioPage() {
   const portfolio = await getPortfolio();

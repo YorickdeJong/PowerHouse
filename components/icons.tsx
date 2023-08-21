@@ -144,6 +144,7 @@ export const Icons = {
   ),
   minus: (props: LucideProps) => (
     <svg
+      style={{ minWidth: '22px', minHeight: '22px' }}
       {...props}
       width="22"
       height="22"
@@ -162,6 +163,7 @@ export const Icons = {
   ),
   plus: (props: LucideProps) => (
     <svg
+      style={{ minWidth: '22px', minHeight: '22px' }}
       {...props}
       width="23"
       height="23"

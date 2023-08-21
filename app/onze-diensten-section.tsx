@@ -1,6 +1,6 @@
 'use client';
 
-import { HTMLAttributes, useState } from 'react';
+import { HTMLAttributes, useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import * as Tabs from '@radix-ui/react-tabs';
 
@@ -17,6 +17,7 @@ export default function OnzeDienstenSection({
   ...props
 }: OnzeDienstenSectionProps) {
   const [text, setText] = useState();
+
   return (
     <Tabs.Root
       onValueChange={setText as any}
@@ -26,9 +27,9 @@ export default function OnzeDienstenSection({
       <div className={cn('container  py-20', className, {})} {...props}>
         <Typography variant={'heading'}>ONZE DIENSTEN</Typography>
         <Caption className="mb-4 mt-16">Our Services</Caption>
-        <Typography variant={'title'}>wAT WIJ U KUNNEN BIEDEN</Typography>
+        <Typography variant={'title'}>WAT WIJ U KUNNEN BIEDEN</Typography>
 
-        <Typography variant={'muted'} className="mt-2">
+        <Typography variant={'muted'} className="mt-2 text-container">
           {links.map((link) => (
             <Tabs.Content value={link.title} key={link.title}>
               <Motion key={text} initial="hidden">
@@ -39,12 +40,12 @@ export default function OnzeDienstenSection({
         </Typography>
         <hr className="my-8" />
         <div className="grid grid-cols-1 items-center gap-5 md:grid-cols-2">
-          <Tabs.List>
-            {links.map((link) => (
-              <Tabs.Trigger asChild value={link.title} key={link.title}>
-                <div className="group flex cursor-pointer items-center justify-between border-b border-border/50 py-5">
-                  <p className="text-[22px] font-bold uppercase group-hover:text-primary ">
-                    {link.title}
+        <Tabs.List>
+          {links.map((link) => (
+            <Tabs.Trigger asChild value={link.title} key={link.title}>
+              <div className="group flex cursor-pointer items-center justify-between border-b border-border/50 py-5">
+                <p className={`text-[22px] font-bold uppercase ${text === link.title ? 'text-blue-500' : ''} group-hover:font-extrabold`}>
+                  {link.title}
                   </p>
                   <Motion initial="hidden">
                     <div className="grid h-9 w-9 place-content-center rounded-full p-1 group-hover:bg-primary">

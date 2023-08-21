@@ -58,6 +58,9 @@ export default function Hero({ className, ...props }: HeroProps) {
           autoPlay
           loop
           muted
+          onError={(e) => {
+            console.error("Video Error", e);
+          }}
         >
           <source src="/waterfal_video.mp4" type="video/mp4" />
           Your browser does not support the video tag.
