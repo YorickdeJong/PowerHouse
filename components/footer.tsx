@@ -53,4 +53,5 @@ const links = [
   { label: 'FAQ’S', href: '/faqs' },
   { label: 'Ons werk', href: '/portfolio' },
   { label: 'Privacy & AVG', href: '/privacy' },
+  { label: 'Technologie', href: '/technologie' },
 ];
