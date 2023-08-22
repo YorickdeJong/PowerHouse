@@ -16,7 +16,7 @@ const typographyVariants = cva('', {
       heading: 'text-3xl md:text-4xl lg:text-8xl uppercase', // text-3xl for mobile, text-4xl for medium screens, text-7xl for large screens
       title:
         'text-4xl md:text-5xl lg:text-[55px] font-bold uppercase leading-[48px] lg:leading-[68px]', // text-4xl for mobile, text-5xl for medium screens
-      muted: 'text-base md:text-lg text-muted leading-relaxed', // text-base for mobile, text-lg for medium screens
+      muted: 'text-base md:text-lg text-muted leading-relaxed md:leading-9', // text-base for mobile, text-lg for medium screens
     },
     size: {
       sm: 'text-xs md:text-sm lg:text-base', // text-xs for mobile, text-sm for medium screens, text-base for large screens

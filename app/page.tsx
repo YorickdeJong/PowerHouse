@@ -1,10 +1,17 @@
-import Booking from './booking';
-import BookingForm from './booking-form';
+import dynamic from 'next/dynamic';
+// import Booking from './booking';
+// import BookingForm from './booking-form';
 import Hero from './hero';
 import KwaliteitenSection from './kwaliteiten-section';
 import OnzeDienstenSection from './onze-diensten-section';
-import Portfolio from './portfolio';
-import Reviews from './reviews';
+// import Portfolio from './portfolio';
+// import Reviews from './reviews';
+
+
+const Booking = dynamic(()=>import('./booking'))
+const BookingForm = dynamic(()=>import('./booking-form'))
+const Reviews = dynamic(()=>import('./reviews'))
+const Portfolio = dynamic(()=>import('./portfolio'))
 
 export default function IndexPage() {
   return (
