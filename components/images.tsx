@@ -99,7 +99,7 @@ export const Images = {
       key={2}
       src={`/assets/images/Nick.png`}
       alt="    "
-      width={2000}
+      width={1500}
       height={300}
     />
   ),
@@ -119,7 +119,7 @@ export const Images = {
       key={4}
       src={`/assets/images/Yorick.png`}
       alt="    "
-      width={2000}
+      width={1500}
       height={300}
     />
   ),
