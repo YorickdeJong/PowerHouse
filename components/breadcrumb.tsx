@@ -14,7 +14,8 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   const path = usePathname();
   const slug =
     path?.includes('/portfolio/') &&
-    path?.split('/portfolio/')[1].replaceAll('-', ' ');
+    path?.split('/portfolio/')[1].replaceAll('-', ' ') || 
+    path?.includes('/technologie/') && path?.split('/technologie/')[1].replaceAll('-', ' ');
   return (
     <div
       className={cn(

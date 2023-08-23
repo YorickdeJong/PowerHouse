@@ -5,11 +5,10 @@ import StackCard from '@/components/stackCard';
 
 export default function ServicesPage() {
 
-  const el = {}
   return (
     <section>
       <div className="container">
-        <Breadcrumb pageTitle="Services" />
+        <Breadcrumb pageTitle="Technologie" />
           <div>
             <Caption className="mt-20">Technologie waar wij mee werken</Caption>
             <Typography className="mt-5" variant={'title'}>

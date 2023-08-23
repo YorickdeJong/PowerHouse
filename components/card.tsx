@@ -154,7 +154,7 @@ export default function Card({
               </div>
             </Motion>
           </div>
-          {text[0]?.children ? (
+          {text[0] && text[0]?.children ? (
             <TextRenderer textBlocks={text} />
           ) : (
             <p className="leading-relaxed text-muted">{text}</p>

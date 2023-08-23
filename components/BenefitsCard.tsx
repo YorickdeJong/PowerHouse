@@ -11,12 +11,14 @@ import { Typography } from './ui/typography';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   text: any;
+  iphone: boolean;
   heading?: string
 }
 
 export default function BenefitsCard({
   className,
   text,
+  iphone,
   heading,
   ...props
 }: CardProps) {
@@ -25,22 +27,30 @@ export default function BenefitsCard({
     <Motion initial="down" asChild>
       <section
         className={cn(
-          'block space-y-3 overflow-hidden rounded-2xl bg-secondary pb-20 my-2 transform transition-transform duration-300 hover:scale-115 relative',
+          'block space-y-3 overflow-hidden rounded-2xl bg-secondary pt-16 pb-20 my-2 transform transition-transform duration-300 hover:scale-115 relative',
           className,
           {
-            'group/image hover:shadow-md cursor-pointer bg-secondary' : true
+            'group/image hover:shadow-md cursor-pointer bg-secondary' : true,
+            'pb-10': iphone,
+            'pt-9': iphone
           }
         )}
       >
 
-        <div className="flex mt-16 mx-8">
+        <div className="flex mx-8">
             <div className="absolute inset-0 bg-black opacity-0 hover:opacity-40 transition-opacity duration-300"></div>
             {/* Text */}
-            <div className="flex-1 flex flex-col justify-center mx-10">
+            <div className={cn("flex-1 flex flex-col justify-center mx-10",
+            {
+              'mx-2':iphone,
+
+
+            }
+            )}>
                 <h4 className="mb-8 text-4xl font-bold capitalize leading-[40px] text-stone-300">
                 {heading}
                 </h4>
-                <Typography variant={'muted'}>
+                <Typography variant={'muted'} className='leading-8'>
                 {text}
                 </Typography>
             </div>

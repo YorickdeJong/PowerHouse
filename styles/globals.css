@@ -67,12 +67,11 @@
     @apply transition-all;
   }
   html {
-    overflow-x: hidden;
     --scroll-behavior: smooth !important;
     scroll-behavior: smooth !important;
   }
   body {
-    @apply bg-background text-foreground overflow-x-hidden;
+    @apply bg-background text-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
@@ -83,5 +82,5 @@
   font-style: normal;
   font-weight: 400;
   font-display: swap;
-  src: url('/public/Trap-Regular.ttf') format('ttf');
+  src: url('/Trap-Regular.ttf') format('ttf');
 }

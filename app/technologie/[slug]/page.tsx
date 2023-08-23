@@ -15,6 +15,7 @@ import Image from 'next/image';
 import BenefitsCard from '@/components/BenefitsCard';
 import { cn } from '@/lib/utils';
 import { useTechnologyState } from '@/context/technologie-provider';
+import { useMediaQuery } from '@/hook/media-query';
 
 const builder = imageUrlBuilder(config);
 
@@ -25,20 +26,28 @@ function urlFor(source: any) {
 
 
 export default function TechnologySlugPage({}) {
-    const { technologyState } = useTechnologyState();
+  const { technologyState } = useTechnologyState();
+  const iphone = useMediaQuery('(max-width: 1000px)');
+
   return (
     <section
     >
-     <Image
-        className="h-screen w-full object-contain md:max-h-[700px] md:w-full md:origin-right md:object-cover md:max-md:scale-[2]"
-        src = '/assets/images/Banner3.png'
-        width={2200}
-        height={1000}
-        alt = ''
-        style = {{opacity: 0.9}}
+      <div className="relative h-[400px]">
+          <Image
+            className="absolute top-0 left-0 object-cover w-full h-full"
+            src="/assets/images/Banner3.png"
+            layout="fill"
+            alt=""
+            quality={100}
           />
-            <div className="md:w-[80%] md:max-w-[2000px] mx-auto align-center mt-32">
-                <Breadcrumb pageTitle="Services" />
+        </div>
+            <div className={cn("md:w-[80%] md:max-w-[2000px] mx-auto align-center mt-32",
+                    {
+                      'mx-10 mt-16': iphone,
+                      
+                    }
+                )}>
+                <Breadcrumb pageTitle="Technologie" />
                     <div>
                         <div className="w-[80%]">
                             <Caption className="mt-20">Technologie</Caption>
@@ -68,11 +77,14 @@ export default function TechnologySlugPage({}) {
                     <div
                         className={cn(
                         'my-12 mb-24 grid grid-cols-1 gap-8 lg:grid-cols-2',
-                        {}
+                        {
+                          'my-8': iphone,
+                        }
                         )}
                     >
                     {technologyState?.textArray?.map((stack, index) => (
                         <BenefitsCard
+                            iphone={iphone}
                             {...stack}
                         />
                     ))}
