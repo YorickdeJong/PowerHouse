@@ -53,18 +53,19 @@ export default function Hero({ className, ...props }: HeroProps) {
           width={1024}
           height={600}
         /> */}
+      <div dangerouslySetInnerHTML={{ __html: `
         <video
-          className="h-screen w-full object-cover md:max-h-screen md:min-h-[500px] md:w-full md:origin-right md:object-cover md:max-md:scale-[2]"
+          style="height: 100vh; width: 100%; object-fit: cover;"
           autoPlay
           loop
           muted
-          onError={(e) => {
-            console.error("Video Error", e);
-          }}
+          playsinline
         >
           <source src="/Waterfall_2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
+      `}}
+      />
       </motion.div>
       <div className="absolute inset-0 m-auto h-fit w-full pb-28 md:pb-0">
         <Motion
