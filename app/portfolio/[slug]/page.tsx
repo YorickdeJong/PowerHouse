@@ -26,18 +26,16 @@ type Portfolio = {
 };
 
 export default function PortfolioSlugPage({}) {
-  const { projectState, setProjectState } = useProjectState();
+  const { projectState, setProjectStateHandler } = useProjectState();
   const target = useRef(null);
   const path = usePathname();
   const isDesktopProject =
     path?.includes('etm') || path?.includes('blue-elite');
-  const router = useSearchParams();
   const [portfolio, setPortfolio] = useState<Portfolio[]>([]);
 
   useEffect(() => {
     async function fetchPortfolio() {
       const data = await getPortfolio();
-      console.log('data', data);
       const randomizedData = data.sort(() => 0.5 - Math.random());
       // Select the first three items
       const selectedData = randomizedData.slice(0, 3);
@@ -48,18 +46,13 @@ export default function PortfolioSlugPage({}) {
   }, []);
 
 
-  console.log('state', projectState)
-  const title = router ? router.get('title') : null;
-  let subTitle = router ? router.get('subTitle') : null;
+  const title = projectState.title
+  let subTitle = projectState.subTitle
 
   // Parse the string to get the object
   const renderedSubTitle = renderRichText(JSON.parse(subTitle || '{}'));
-
-  const projectDetails = router ? router.get('projectDetails') : null;
-  const parsedProjectDetails = JSON.parse(projectDetails || '{}');
-  const transformedData = transformData(parsedProjectDetails);
-
-  console.log('desktop true', isDesktopProject);
+  const projectDetails = projectState.projectDetails
+  const transformedData = transformData(projectDetails);
 
   const height = useScrollTransform({
     target,
@@ -73,6 +66,8 @@ export default function PortfolioSlugPage({}) {
     inputRange: [0, 0.5],
     offset: ['start center', 'end start'],
   });
+
+  
   return (
     <section>
       <Typography className="mt-5" variant={'title'}>
@@ -129,6 +124,9 @@ export default function PortfolioSlugPage({}) {
 
 
 function renderRichText(content: any) {
+  if (!content[0]) {
+    return null
+  }
   return content.map((block: any) => {
     switch (block._type) {
       case 'block':

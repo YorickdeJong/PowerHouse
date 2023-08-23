@@ -3,6 +3,7 @@ import { HTMLAttributes } from 'react';
 import { cn } from '@/lib/utils';
 import Card from '@/components/card';
 import { Icons } from '@/components/icons';
+import IconCard from '@/components/IconCards';
 
 interface ServicesProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -18,9 +19,7 @@ export default function Services({ className, ...props }: ServicesProps) {
         {...props}
       >
         {data.map((el) => (
-          <Card
-            projectDetails={[]}
-            isDesktopProject={false}
+          <IconCard
             squared
             key={el.label}
             {...el}

@@ -11,9 +11,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
         <div className="container">
           <Breadcrumb pageTitle="PortFolio" />
           <Caption className="mt-20">PortFolio</Caption>
-          <ProjectProvider>
               {children}
-          </ProjectProvider>
         </div>
       </section>
     </>

@@ -12,6 +12,7 @@ import Footer from '@/components/footer';
 import GoToTop from '@/components/goto-top';
 import SiteHeader from '@/components/site-header';
 import { TailwindIndicator } from '@/components/tailwind-indicator';
+import { ProjectProvider } from '@/context/portfolio-provider';
 
 export const dynamic = 'force-dynamic';
 
@@ -47,18 +48,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
-              <div className="flex-1">
-                <TransitionProvider>{children}</TransitionProvider>
+        <ProjectProvider>
+            <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+              <div className="relative flex min-h-screen flex-col">
+                <SiteHeader />
+                <div className="flex-1">
+                  <TransitionProvider>{children}</TransitionProvider>
+                </div>
+                <Footer />
               </div>
-              <Footer />
-            </div>
-            {/* <TailwindIndicator /> */}
-            <Toaster position="top-right" />
-            <GoToTop />
-          </ThemeProvider>
+              {/* <TailwindIndicator /> */}
+              <Toaster position="top-right" />
+              <GoToTop />
+            </ThemeProvider>
+        </ProjectProvider>
         </body>
       </html>
     </>

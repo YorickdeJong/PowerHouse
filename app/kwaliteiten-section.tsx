@@ -7,6 +7,7 @@ import Card from '@/components/card';
 import { Images } from '@/components/images';
 import LetsTalk from '@/components/lets-talk';
 import Motion from '@/components/motion';
+import IconCard from '@/components/IconCards';
 
 interface KwaliteitenSectionProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -39,9 +40,9 @@ export default function KwaliteitenSection({
           className="pb-10 mt-10 md:mt-0 lg:mt-0 grid grid-cols-1 gap-5 md:grid-cols-2"
         >
           {data.map((el) => (
-            <Card
-              projectDetails={[]}
-              isDesktopProject={false}
+            <IconCard
+              // projectDetails={[]}
+              // isDesktopProject={false}
               {...el}
               key={el.label}
             />
