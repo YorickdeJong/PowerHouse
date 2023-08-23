@@ -4,6 +4,7 @@ import { cn } from '@/lib/utils';
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
 import Card from '@/components/card';
+import IconCard from '@/components/IconCards';
 
 interface BenefitsProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -22,9 +23,7 @@ export default function Benefits({ className, ...props }: BenefitsProps) {
       </div>
       <div className="my-10 grid grid-cols-1 gap-10 lg:grid-cols-4">
         {data.map((item) => (
-          <Card
-            projectDetails={[]}
-            isDesktopProject={false}
+          <IconCard
             key={item.label}
             {...item}
           />

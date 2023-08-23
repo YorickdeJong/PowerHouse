@@ -44,7 +44,7 @@ export default function IconCard({
         )}
       >
         <div>
-            <div
+            {icon && <div
                 className={cn(
                 'mb-8 h-[70px] w-[70px] rounded-full bg-secondary',
                 {
@@ -54,6 +54,7 @@ export default function IconCard({
             >
             {icon?.({ className: 'p-4' })}
             </div>
+            }   
                 <p
                     className={cn(
                         'mb-2 grow text-xl font-bold uppercase md:text-2xl',

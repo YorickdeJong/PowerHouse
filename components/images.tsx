@@ -87,7 +87,7 @@ export const Images = {
     <Image
       {...props}
       key={1}
-      src={`/assets/images/Olivier-min.png`}
+      src={`/assets/images/Olivier-min-1-min.jpg`}
       alt="    "
       width={1500}
       height={300}
@@ -97,7 +97,7 @@ export const Images = {
     <Image
       {...props}
       key={2}
-      src={`/assets/images/Nick-min.png`}
+      src={`/assets/images/Nick-min-1-min.jpg`}
       alt="    "
       width={1500}
       height={300}
@@ -117,7 +117,7 @@ export const Images = {
     <Image
       {...props}
       key={4}
-      src={`/assets/images/Yorick-min.png`}
+      src={`/assets/images/Yorick-min-8-min.jpg`}
       alt="    "
       width={1500}
       height={300}
