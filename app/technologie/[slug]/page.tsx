@@ -14,6 +14,7 @@ import Caption from '@/components/caption';
 import Image from 'next/image';
 import BenefitsCard from '@/components/BenefitsCard';
 import { cn } from '@/lib/utils';
+import { useTechnologyState } from '@/context/technologie-provider';
 
 const builder = imageUrlBuilder(config);
 
@@ -24,7 +25,7 @@ function urlFor(source: any) {
 
 
 export default function TechnologySlugPage({}) {
-const stack = {}
+    const { technologyState } = useTechnologyState();
   return (
     <section
     >
@@ -41,38 +42,37 @@ const stack = {}
                     <div>
                         <div className="w-[80%]">
                             <Caption className="mt-20">Technologie</Caption>
-                            <Typography className="mt-5" variant={'title'}>
-                                NextJs
+                            {/* label */}
+                            <Typography className="mt-5" variant={'title'}> 
+                            {technologyState.label}
                             </Typography>
+                            {/* Text 1 */}
                             <Typography className="mt-3 md:text-xl" variant={'muted'}>
-                            Next.js biedt een reeks functies en optimalisaties die zijn ontworpen om de ontwikkeling van 
-                            moderne webapplicaties te versnellen, waaronder:
+                            {technologyState.textOne}
                             </Typography>
-
+                            {/* label */}
                             <h4 className="mb-5 mt-12 text-3xl font-bold capitalize leading-[40px] text-stone-300">
-                                Wat is NextJS?
+                                Wat is {technologyState.label}?
                             </h4>
-
+                            {/* Text 2 */}
                             <Typography className="mt-3 md:text-xl" variant={'muted'}>
-                                Next.js is een open-source React-framework dat is ontwikkeld door Vercel. Het is ontworpen om 
-                                de ontwikkeling van server-side rendered (SSR) en statisch gegenereerde (SSG) React-applicaties te vergemakkelijken.
+                            {technologyState.textTwo}
                             </Typography>
                         </div>
 
                     <h4 className="mb-5 mt-12 text-3xl font-bold capitalize leading-[40px] text-stone-300">
                         Voordelen
                     </h4>
+
+                    {/* Array with header + text */}
                     <div
                         className={cn(
                         'my-12 mb-24 grid grid-cols-1 gap-8 lg:grid-cols-2',
                         {}
                         )}
                     >
-                    {stacks.map((stack, index) => (
+                    {technologyState?.textArray?.map((stack, index) => (
                         <BenefitsCard
-                            projectDetails={[]}
-                            isDesktopProject={false}
-                            portfolioPage
                             {...stack}
                         />
                     ))}
@@ -90,26 +90,22 @@ const stacks =  [
         bouwtijd en ze serveren als statische bestanden.
         `,
         label: 'SNEL',
-        image: '',
     },
     {
         text: `Next.js biedt ingebouwde server-side rendering (SSR), waardoor je volledig gerenderde HTML-pagina's kunt 
         serveren voor verbeterde SEO en prestaties. 
         Dit kan bijzonder voordelig zijn voor dynamische inhoud waar zoekmachinezichtbaarheid belangrijk is.`,
         label: 'SEO OPTIMALISATIE',
-        image: '',
     },
     {
         text: `Het framework is zeer uitbreidbaar en kan gemakkelijk worden aangepast als de website groeit. Dit maakt 
         het een aantrekkelijke keuze voor zowel startups als grotere ondernemingen. Het maakt langetermijnonderhoud ook gemakkelijker.`,
         label: 'FLEXIBILITEIT EN SCHAALBAARHEID',
-        image: '',
     },
     {
         text: `Next.js biedt ingebouwde API-routing, waardoor je zowel frontend als backend in één oplossing kunt hebben. Dit vereenvoudigt 
         de architectuur en maakt beheer gemakkelijker. Voor klanten die een uniforme oplossing willen, is dit bijzonder aantrekkelijk.`,
         label: 'FRONT EN BACKEND',
-        image: '',
     },
 ]
 

@@ -8,66 +8,18 @@ import { Icons } from './icons';
 import Motion from './motion';
 import { Typography } from './ui/typography';
 
-interface ImageDetail {
-  alt: string;
-  text: Array<{ type: string; children?: Array<any>; [key: string]: any }>;
-}
-
-interface ProjectDetail {
-  detailImage: {
-    _type: string;
-    asset: {
-      _ref: string;
-      _type: string;
-    };
-    hotspot?: {
-      x: number;
-      y: number;
-    };
-    crop?: {
-      top: number;
-      bottom: number;
-      left: number;
-      right: number;
-    };
-    fields: ImageDetail;
-  };
-}
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
-  label: string;
-  icon?: (props: any) => JSX.Element;
   text: any;
-  image?: string;
-  portfolioPage?: boolean;
-  squared?: boolean;
-  reversed?: boolean;
-  roundedIcon?: boolean;
-  portfolioDetailsPage?: boolean;
-  postImage?: string;
-  titleProjectPage?: string;
-  subHeaderProjectPage?: string;
-  isDesktopProject: boolean;
-  projectDetails: ProjectDetail[];
+  heading?: string
 }
 
 export default function BenefitsCard({
   className,
-  icon,
-  postImage,
-  label,
   text,
-  roundedIcon,
-  image,
-  titleProjectPage,
-  subHeaderProjectPage,
-  isDesktopProject,
-  projectDetails,
+  heading,
   ...props
 }: CardProps) {
-  const linkHref = {
-    pathname: `/technologie/${label.toLowerCase().replaceAll(' ', '-')}`,
-  };
 
   return (
     <Motion initial="down" asChild>
@@ -76,10 +28,7 @@ export default function BenefitsCard({
           'block space-y-3 overflow-hidden rounded-2xl bg-secondary pb-20 my-2 transform transition-transform duration-300 hover:scale-115 relative',
           className,
           {
-            'group/image hover:shadow-md cursor-pointer': image,
-            'bg-primary': image && !props.portfolioPage,
-            'lg:grid lg:grid-cols-2 lg:gap-72 lg:items-center': props.portfolioDetailsPage,
-            'bg-transparent p-0': postImage,
+            'group/image hover:shadow-md cursor-pointer bg-secondary' : true
           }
         )}
       >
@@ -89,7 +38,7 @@ export default function BenefitsCard({
             {/* Text */}
             <div className="flex-1 flex flex-col justify-center mx-10">
                 <h4 className="mb-8 text-4xl font-bold capitalize leading-[40px] text-stone-300">
-                {label}
+                {heading}
                 </h4>
                 <Typography variant={'muted'}>
                 {text}
