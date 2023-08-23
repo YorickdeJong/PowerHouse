@@ -60,7 +60,7 @@ export async function getPortfolio() {
             label, 
             'slug': slug.current,
             "image": image.asset->url,
-            url, 
+            websiteUrl, 
             text,
             titleProjectPage,
             subHeaderProjectPage,

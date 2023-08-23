@@ -7,6 +7,7 @@ import Card from '@/components/card';
 
 export default async function PortfolioPage() {
   const portfolio = await getPortfolio();
+  console.log('portfolio', portfolio);
 
   return (
     <>
@@ -22,9 +23,10 @@ export default async function PortfolioPage() {
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2">
         {portfolio.map((el: any) => (
           <Card
-            // projectDetails={[]}
-            // isDesktopProject={false}
-            // portfolioPage
+            projectDetails={[]}
+            isDesktopProject={false}
+            portfolioPage
+            url = {el.websiteUrl}
             key={el.label}
             {...el}
           />

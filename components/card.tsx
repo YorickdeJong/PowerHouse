@@ -38,6 +38,7 @@ interface ProjectDetail {
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
   text: any;
+  url: string | '';
   image?: string;
   portfolioPage?: boolean;
   squared?: boolean;
@@ -56,6 +57,7 @@ export default function Card({
   postImage,
   label,
   text,
+  url,
   roundedIcon,
   image,
   titleProjectPage,
@@ -67,9 +69,9 @@ export default function Card({
   const { setProjectStateHandler } = useProjectState();
 
   const handleDivClick = () => {
-    console.log('check clicked')
     setProjectStateHandler({
       title: titleProjectPage,
+      url:  url,
       subTitle: JSON.stringify(subHeaderProjectPage),
       projectDetails: projectDetails,
     });

@@ -31,12 +31,14 @@ interface ProjectDetail {
 interface ProjectState {
     title?: string | null;
     subTitle?: string | null;
+    url: string | '';
     projectDetails: ProjectDetail[];
 }
 
 const initialState: ProjectState = {
   title: null,
   subTitle: null,
+  url: '',
   projectDetails: [],
 };
 

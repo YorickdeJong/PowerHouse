@@ -30,8 +30,8 @@ const portfolio = {
             ]
         },
         {
-            name: 'url',
-            title: 'URL',
+            name: 'websiteUrl',
+            title: 'Website URL',
             type: 'url'
         },
         {
@@ -81,3 +81,4 @@ const portfolio = {
 }
 
 export default portfolio;
+

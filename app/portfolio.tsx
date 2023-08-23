@@ -15,6 +15,7 @@ interface PortfolioProps extends HTMLAttributes<HTMLDivElement> {}
 type Portfolio = {
   label: string;
   text: string;
+  websiteUrl: string;
   // ... other properties of a review
 };
 
@@ -24,6 +25,7 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
   useEffect(() => {
     async function fetchPortfolio() {
       const data = await getPortfolio();
+
       const randomizedData = data.sort(() => 0.5 - Math.random());
       // Select the first three items
       const selectedData = randomizedData.slice(0, 3);
@@ -32,6 +34,8 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
 
     fetchPortfolio();
   }, []);
+
+  console.log('portfolio', portfolio);
 
   return (
     <section className="bg-card">
@@ -47,6 +51,7 @@ export default function Portfolio({ className, ...props }: PortfolioProps) {
         <div className="mt-10 grid grid-cols-1 gap-16 md:grid-cols-2 lg:grid-cols-3">
           {portfolio.map((el) => (
             <Card
+              url = {el.websiteUrl}
               projectDetails={[]}
               isDesktopProject={false}
               key={el.label}
