@@ -62,7 +62,7 @@ export default function Hero({ className, ...props }: HeroProps) {
             console.error("Video Error", e);
           }}
         >
-          <source src="/waterfal_video.mp4" type="video/mp4" />
+          <source src="/Waterfall_2.mp4" type="video/mp4" />
           Your browser does not support the video tag.
         </video>
       </motion.div>

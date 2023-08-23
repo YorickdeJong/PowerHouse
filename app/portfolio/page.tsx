@@ -1,3 +1,4 @@
+
 import { getPortfolio } from '@/sanity/sanity-utils';
 
 import { Typography } from '@/components/ui/typography';
@@ -21,9 +22,9 @@ export default async function PortfolioPage() {
       <div className="mt-10 grid grid-cols-1 gap-16 md:mt-40 md:grid-cols-2">
         {portfolio.map((el: any) => (
           <Card
-            projectDetails={[]}
-            isDesktopProject={false}
-            portfolioPage
+            // projectDetails={[]}
+            // isDesktopProject={false}
+            // portfolioPage
             key={el.label}
             {...el}
           />

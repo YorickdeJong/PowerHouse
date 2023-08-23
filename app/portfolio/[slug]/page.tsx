@@ -11,6 +11,7 @@ import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Card from '@/components/card';
 import Motion from '@/components/motion';
+import { useProjectState } from '@/context/portfolio-provider';
 
 const builder = imageUrlBuilder(config);
 
@@ -25,6 +26,7 @@ type Portfolio = {
 };
 
 export default function PortfolioSlugPage({}) {
+  const { projectState, setProjectState } = useProjectState();
   const target = useRef(null);
   const path = usePathname();
   const isDesktopProject =
@@ -45,6 +47,8 @@ export default function PortfolioSlugPage({}) {
     fetchPortfolio();
   }, []);
 
+
+  console.log('state', projectState)
   const title = router ? router.get('title') : null;
   let subTitle = router ? router.get('subTitle') : null;
 
