@@ -46,13 +46,6 @@ export default function Hero({ className, ...props }: HeroProps) {
         transition={{ duration: 2, type: 'spring' }}
         className="blue-overlay"
       >
-        {/* <Image
-          src={`https://s3-alpha-sig.figma.com/img/5cdd/fbd0/44f2660a20dd6837ff31aefdfff9cc7c?Expires=1692576000&Signature=J7QBjHCorAEyJJpKTDyJGdW1uf7ZWKJIhdnmS6zuQduWYGJFnJ3jDy0yD40Zwsq-hu8bz8q2bg-nbPBBgswKmSgLndwhQuyF-dN4p0O9RoiEQ1TpXs4462CE9lRzUZbNk1A4Yh7Mb4WqK29PEy7-9K5Te137U7py6XqfGdbeznXbFYTd4gX6vH6SZXKeWa0Wzx9jHb7NbQ6NI0UMONXY4oj79jFaexTDC5DsbY4ChL7cF34PxBCBryidl1ildplJzFn7t9i9oHdgrwCagV7lkkwb0u9ijsl-y~uJlwsMDbaH3DLTwBwxUiiQP~LJBQW3icIcbICAQN8C6s2IXUJ8sA__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4`}
-          alt=""
-          className="h-screen w-full object-cover md:max-h-screen md:min-h-[500px] md:w-full md:origin-right md:object-cover md:max-md:scale-[2]"
-          width={1024}
-          height={600}
-        /> */}
       <div dangerouslySetInnerHTML={{ __html: `
         <video
           style="height: 100vh; width: 100%; object-fit: cover;"
@@ -73,14 +66,13 @@ export default function Hero({ className, ...props }: HeroProps) {
           className="container max-w-screen-lg space-y-5 text-center md:max-w-screen-xl" // Adjusted the max-width here
         >
           <Typography variant={'heading'} className="max-w-5xl mx-auto">
-            WIJ MAKEN WEBSITES MET <span className="text-primary">PASSIE</span>
+            Place your header <span className='text-primary'>here</span>
           </Typography>
           <Typography
             variant={'muted'}
             className="max-w-3xl md:text-2xl mx-auto"
           >
-            Blue Waterfall zorgt ervoor dat jij met jouw website klanten
-            binnenhaalt, om zo jouw bedrijf te laten groeien
+            Place a fitting subtitle here
           </Typography>
           <div
             className="flex items-center justify-center gap-5 max-md:flex-col"
@@ -88,7 +80,7 @@ export default function Hero({ className, ...props }: HeroProps) {
           >
             <Link href={'/booking'}>
               <Button className="md:text-xl">
-                Vrijblijvende afspraak &rarr;
+                Your call to action  &rarr;
               </Button>
             </Link>
             {/* <Button variant={'link'}>Learn More</Button> */}

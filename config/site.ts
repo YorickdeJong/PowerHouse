@@ -5,9 +5,6 @@ export const siteConfig = {
   description: 'Wij MAKEN WEBSITES MET PASSIE',
   nav: [
     { title: 'Home', href: '/' },
-    { title: 'Over Ons', href: '/about' },
-    { title: 'Diensten', href: '/services' },
-    { title: 'Portfolio', href: '/portfolio' },
-    { title: 'FAQ’S', href: '/faqs' },
+    { title: 'Services', href: '/services' },
   ],
 };

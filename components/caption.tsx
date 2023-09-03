@@ -17,14 +17,6 @@ export default function Caption({
 }: CaptionProps) {
   return (
     <div className={cn('flex items-center gap-1', className)}>
-      {props.dark ? (
-        <Icons.starDark />
-      ) : props.primary ? (
-        <Icons.starPrimary />
-      ) : (
-        <Icons.star />
-      )}
-
       <p
         className={cn('font-bold uppercase text-primary', childrenClassName, {
           'text-background': props.primary,

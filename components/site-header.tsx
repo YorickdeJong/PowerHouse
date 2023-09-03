@@ -44,7 +44,7 @@ export default function Navbar() {
           className="max-lg:hidden"
         >
           <Icons.phone className="pr-2" />
-          Vrijblijvende Afspraak
+          Your call to action
         </Button>
       </nav>
 

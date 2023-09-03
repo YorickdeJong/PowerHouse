@@ -1,7 +1,6 @@
 import { ThemeProvider } from '@/context/theme-provider';
 import TransitionProvider from '@/context/transition-provider';
 
-import '@/styles/globals.css';
 import { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 
@@ -11,9 +10,9 @@ import { cn } from '@/lib/utils';
 import Footer from '@/components/footer';
 import GoToTop from '@/components/goto-top';
 import SiteHeader from '@/components/site-header';
-import { TailwindIndicator } from '@/components/tailwind-indicator';
-import { ProjectProvider } from '@/context/portfolio-provider';
-import { TechnologyProvider } from '@/context/technologie-provider';
+
+import '@/styles/globals.css'; //import global css here --> styles/global.css
+
 
 export const dynamic = 'force-dynamic';
 
@@ -49,8 +48,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-        <ProjectProvider>
-            <TechnologyProvider>
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                 <div className="relative flex min-h-screen flex-col">
                   <SiteHeader />
@@ -63,8 +60,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
                 <Toaster position="top-right" />
                 <GoToTop />
               </ThemeProvider>
-            </TechnologyProvider>
-        </ProjectProvider>
         </body>
       </html>
     </>

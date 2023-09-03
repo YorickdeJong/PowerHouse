@@ -39,8 +39,8 @@ export default function Footer({ className, ...props }: FooterProps) {
           </Link>
         </div>
       </div>{' '}
-      <div className=" my-5 text-center text-neutral-200">
-        All rights reserved by Blue Waterfall
+      <div className=" my-5 text-center text-neutral-200 mr-20">
+        All rights reserved by ...
       </div>
     </div>
   );
@@ -48,10 +48,5 @@ export default function Footer({ className, ...props }: FooterProps) {
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'Diensten', href: '/services' },
-  { label: 'Over ons', href: '/about' },
-  { label: 'FAQ’S', href: '/faqs' },
-  { label: 'Ons werk', href: '/portfolio' },
-  { label: 'Privacy & AVG', href: '/privacy' },
-  { label: 'Technologie', href: '/technologie' },
+  { label: 'Services', href: '/services' },
 ];

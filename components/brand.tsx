@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { cn } from '@/lib/utils';
 
 import { Icons } from './icons';
+import { Images } from './images';
 
 interface CompType {}
 
@@ -13,7 +14,7 @@ export default function Brand({
 }: HtmlHTMLAttributes<HTMLAnchorElement> & CompType) {
   return (
     <Link href={'/'} {...props} className={cn('ml-4', {}, className)}>
-      <Icons.logo />
+      <Images.logo />
     </Link>
   );
 }
