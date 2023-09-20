@@ -10,6 +10,7 @@ import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Typography } from '@/components/ui/typography';
 import Motion from '@/components/motion';
+import { Images } from '@/components/images';
 
 interface HeroProps extends HTMLAttributes<HTMLDivElement> {}
 
@@ -21,71 +22,35 @@ export default function Hero({ className, ...props }: HeroProps) {
     outputRange: [0, 100],
   });
 
-  const opacity = useScrollTransform({
-    target,
-    offset: ['start start', 'end start'],
-    outputRange: [1, 0],
-  });
-  const _scale = useScrollTransform({
-    target,
-    offset: ['start start', 'end start'],
-    outputRange: [1, 1.2],
-  });
-  const scale = useSpring(_scale);
-  const y = useSpring(_y);
-
-  const marginTop = { marginTop: 50 };
-
   return (
     <section
       ref={target}
-      className={cn('relative overflow-hidden', className, {})}
+      className={cn('relative md:h-[700px] container', className, {})}
     >
-      <motion.div
-        style={{ y, opacity, scale }}
-        transition={{ duration: 2, type: 'spring' }}
-        className="blue-overlay"
-      >
-      <div dangerouslySetInnerHTML={{ __html: `
-        <video
-          style="height: 100vh; width: 100%; object-fit: cover;"
-          autoPlay
-          loop
-          muted
-          playsinline
-        >
-          <source src="/Waterfall_2.mp4" type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
-      `}}
-      />
-      </motion.div>
-      <div className="absolute inset-0 m-auto h-fit w-full pb-28 md:pb-0">
-        <Motion
-          initial="hidden"
-          className="container max-w-screen-lg space-y-5 text-center md:max-w-screen-xl" // Adjusted the max-width here
-        >
-          <Typography variant={'heading'} className="max-w-5xl mx-auto">
-            Place your header <span className='text-primary'>here</span>
-          </Typography>
-          <Typography
-            variant={'muted'}
-            className="max-w-3xl md:text-2xl mx-auto"
-          >
-            Place a fitting subtitle here
-          </Typography>
-          <div
-            className="flex items-center justify-center gap-5 max-md:flex-col"
-            style={marginTop}
-          >
-            <Link href={'/booking'}>
-              <Button className="md:text-xl">
-                Your call to action  &rarr;
-              </Button>
-            </Link>
-            {/* <Button variant={'link'}>Learn More</Button> */}
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
+          <div className="space-y-5 isolate pt-36">
+              <div className=" ">
+                <Typography variant = 'heading' className='text-secondary leading-10 lg:text-5xl' level={1}>
+                  BOOST JOUW WORKOUT MET ZELFVERTROUWEN EN STIJL
+                </Typography>
+                  <Typography variant = 'muted' className="lg:text-md max-w-[500px] mt-6 text-dark/70 lg:leading-[35px]">
+                  GoGym is speciaal ontworpen om je te laten schitteren tijdens je workouts. Elk kledingstuk is niet alleen stijlvol is, maar ook bestand tegen squats, vlekken 
+                </Typography>
+
+                <Button variant = 'default' className="rounded-full  mt-10 text-white text-md py-3 text-center ring-gray-900/10 hover:ring-gray-900/20">
+                  Bekijk al onze producten{' '}
+                  <Link href="/shop" className="font-semibold text-white ml-4">
+                    <span className="absolute inset-0 " aria-hidden="true" />
+                    <span aria-hidden="true">&rarr;</span>
+                  </Link>
+                </Button>
           </div>
-        </Motion>
+        </div>
+        <div className='w-[700px]'>
+          <Images.homepage 
+            className='mt-28  ml-[-80px] object-cover object-top'
+          />
+        </div>
       </div>
     </section>
   );

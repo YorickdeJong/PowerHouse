@@ -10,8 +10,8 @@ interface FooterProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function Footer({ className, ...props }: FooterProps) {
   return (
-    <div className={cn('pt-14', className, {})} {...props}>
-      <div className="mx-5 items-center justify-between border-y border-y-border/40 py-6 md:flex">
+    <div className={cn('pt-14 bg-tertairy/100', className, {})} {...props}>
+      <div className="mx-5 items-center justify-between border-y border-y-neutral/20 py-6 md:flex">
         <Brand />
         <div className="flex items-end justify-between">
           <div className="inline-flex gap-[23px] pb-4 pt-8 max-md:flex-col">
@@ -39,8 +39,8 @@ export default function Footer({ className, ...props }: FooterProps) {
           </Link>
         </div>
       </div>{' '}
-      <div className=" my-5 text-center text-neutral-200 mr-20">
-        All rights reserved by ...
+      <div className=" my-8 text-center text-neutral-200 mr-20">
+        All rights reserved by Blue Waterfall
       </div>
     </div>
   );
@@ -48,5 +48,8 @@ export default function Footer({ className, ...props }: FooterProps) {
 
 const links = [
   { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
+  { label: 'Shop', href: '/shop' },
+  { label: 'Over Ons', href: '/about' },
+  { label: 'Contact', href: '/contact' },
+  { label: 'Voorwaarden', href: '/voorwaarden' },
 ];

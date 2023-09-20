@@ -9,7 +9,7 @@ module.exports = {
       center: true,
       padding: '2rem',
       screens: {
-        '2xl': '1400px',
+        '2xl': '1300px',
       },
     },
     extend: {
@@ -20,12 +20,24 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: '#73A3B4',
+          foreground: '#73A3B4-foreground',
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: '#4E7583',
+          foreground: '#4E7583',
+        },
+        tertairy: {
+          DEFAULT: '#6786A3',
+          foreground: '#6786A3',
+        },
+        neutral: {
+          DEFAULT: 'hsl(var(--neutral))',
+          foreground: 'hsl(var(--neutral-foreground))',
+        },
+        dark: {
+          DEFAULT: 'hsl(var(--dark))',
+          foreground: 'hsl(var(--dark-foreground))',
         },
         destructive: {
           DEFAULT: 'hsl(var(--destructive))',
@@ -49,9 +61,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['var(--font-sans)', ...fontFamily.sans],
+        sans: ['Inter', ...fontFamily.sans],
         mono: ['var(--font-mono)', ...fontFamily.mono],
-        trap: ['Trap', ...fontFamily.sans],
+        // trap: ['Trap', ...fontFamily.sans],
 
       },
       keyframes: {

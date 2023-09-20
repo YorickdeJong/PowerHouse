@@ -20,11 +20,21 @@
     --card: 229 43% 10%;
     --card-foreground: var(--foreground);
 
-    --primary: 209 100% 50%;
+    --primary: 298 30% 70%;
     --primary-foreground: var(--foreground);
 
-    --secondary: 228 26% 15%;
+    --secondary: 182 80% 59%;
     --secondary-foreground: var(--foreground);
+
+    --tertairy: 126 80% 59%;
+    --tertairy-foreground: var(--foreground);
+
+    --neutral: 0 0% 95%;
+    --neutral-foreground: var(--foreground);
+
+    --dark: 0 0% 20%;
+    --dark-foreground: var(--foreground);
+
 
     --accent: var(--primary);
     --accent-foreground: var(--background);
@@ -77,10 +87,10 @@
 }
 
 
-@font-face {
-  font-family: 'Trap';
+/* @font-face {
+  font-family: 'Inter';
   font-style: normal;
   font-weight: 400;
   font-display: swap;
   src: url('/Trap-Regular.ttf') format('ttf');
-}
+} */

@@ -12,6 +12,7 @@ import GoToTop from '@/components/goto-top';
 import SiteHeader from '@/components/site-header';
 
 import '@/styles/globals.css'; //import global css here --> styles/global.css
+import ShoppingCart from '@/components/shoppingCart';
 
 
 export const dynamic = 'force-dynamic';
@@ -44,13 +45,14 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            'min-h-screen bg-background font-trap antialiased',
+            'min-h-screen bg-white font-trap antialiased',
             fontSans.variable
           )}
         >
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                 <div className="relative flex min-h-screen flex-col">
                   <SiteHeader />
+                  <ShoppingCart />
                   <div className="flex-1">
                     <TransitionProvider>{children}</TransitionProvider>
                   </div>

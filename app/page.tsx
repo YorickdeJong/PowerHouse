@@ -1,5 +1,8 @@
 import dynamic from 'next/dynamic';
 import Hero from './hero';
+import NewCollection from './new_collection';
+import Banner from './banner';
+import Seamless from './seamless_collection';
 
 //Define your components in the Page.tsx
 // The /app/ route is your home page
@@ -12,6 +15,9 @@ export default function IndexPage() {
   return (
     <section className="">
       <Hero />
+      <NewCollection />
+      <Banner />
+      <Seamless />
     </section>
   );
 }

@@ -12,10 +12,12 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
 
 export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   const path = usePathname();
-  const slug =
-    path?.includes('/portfolio/') &&
-    path?.split('/portfolio/')[1].replaceAll('-', ' ') || 
-    path?.includes('/technologie/') && path?.split('/technologie/')[1].replaceAll('-', ' ');
+  const slug = path?.replaceAll('-', ' ')
+  const slugSpace = slug?.split('/').filter(item => item.trim() !== '');
+  let accumulatedPath = '';
+  
+
+  console.log(slugSpace)
   return (
     <div
       className={cn(
@@ -25,16 +27,30 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
       )}
       {...props}
     >
-      <Link href={'/'} className="hover:text-zinc-500">
+      <Link href={'/'} className="hover:text-zinc-600">
         Home
       </Link>
-      <div>/</div>
-      <div className="text-zinc-500">{props.pageTitle}</div>{' '}
-      {slug && (
+      
+      
+      {slugSpace && (
         <>
-          <div>/</div> <div className="capitalize text-zinc-500">{slug}</div>{' '}
-        </>
-      )}
+        {slugSpace.map((slug : string, index: number) => {
+          accumulatedPath += `/${slug}`;
+          if (index < slugSpace.length - 1){
+            return (
+              <>
+              /{' '}<Link href={accumulatedPath} className={`capitalize text-zinc-${500 + 200 * (index + 1)}`}> {slug} </Link>{' '}
+              </>
+            )
+          }
+          return (
+            <>
+              /{' '}<div className="capitalize text-zinc-500"> {slug} </div>{' '}
+            </>
+          )
+            })}
+          </>
+          )}
     </div>
   );
 }
