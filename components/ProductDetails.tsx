@@ -136,7 +136,6 @@ export default function PorductDetails({item} : any) {
                         <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                         <div className="flex items-center space-x-3">
                             {colorObjects.map((color: any, index: number) => {
-
                                 return (
                                     <RadioGroup.Option
                                         key={index}
@@ -233,9 +232,9 @@ export default function PorductDetails({item} : any) {
                       type="submit"
                       className="mt-10 flex w-full justify-between rounded-full  bg-neutral px-8 py-2 text-base font-medium text-white hover:bg-primary/20 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
                     >
-                      <Typography variant='muted' className='text-dark/80'>+</Typography>
-                      <Typography variant='muted' className='text-dark/80'>1</Typography>
                       <Typography variant='muted' className='text-dark/80'>-</Typography>
+                      <Typography variant='muted' className='text-dark/80'>1</Typography>
+                      <Typography variant='muted' className='text-dark/80'>+</Typography>
                     </button>
 
                     <button
