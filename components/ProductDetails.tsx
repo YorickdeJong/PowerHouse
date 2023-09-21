@@ -50,8 +50,6 @@ const product = {
       { name: 'XL', inStock: true },
       { name: '2XL', inStock: true },
     ],
-    description:
-      'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. ',
     highlights: [
       'Hand cut and sewn locally',
       'Dyed with our proprietary colors',
