@@ -12,7 +12,7 @@ import Reviews from "./Reviews";
 export default function ZoomImage({images}: any) {
 
     const [showPreview, setShowPreview] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(images[0].node.url);
+    const [selectedImage, setSelectedImage] = useState(images[0]?.node?.url);
 
 
     const handleMouseMove = (e: any) => {

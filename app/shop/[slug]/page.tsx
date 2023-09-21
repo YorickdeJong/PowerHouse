@@ -1,4 +1,4 @@
-import PorductDetails from "@/components/ProductDetails";
+import PorductDetails from "@/components/productDetails/ProductDetails";
 import Reviews from "@/components/Reviews";
 import ZoomImage from "@/components/ZoomImage";
 import Breadcrumb from "@/components/breadcrumb";
@@ -38,13 +38,12 @@ export default async function ServicesPage({params} : any) {
         console.log('error', error);
     }
 
-    console.log('images', item?.images?.edges)
     return (
       <section className='mt-16 mx-auto md:ml-10 pb-40'>
         <div className="container">
             <div className="flex xl:flex-row flex-col">
                <div>
-                    <ZoomImage images={item?.images?.edges} items={items}/>
+                    <ZoomImage images={item?.images?.edges} />
                </div>
                <div className="lg:ml-28">
                     <Breadcrumb pageTitle = 'Shop' />
@@ -87,6 +86,7 @@ export default async function ServicesPage({params} : any) {
 const productQuery = `
 query ProductByHandle($handle: String!) {
     product(handle: $handle) {
+        id
         title
         handle
         description
@@ -154,47 +154,3 @@ query Products {
     }
   }
 `
-
-const items = 
-{
-        title: 'Legacy Legging',
-        text: 'Body Fit',
-        image: '/assets/images/legging_1.png',
-        price: '€29.99',
-        kleuren: '2 kleuren'
-    }
-
-
-
-const images = [
-    '/assets/images/legging_1.png',
-    '/assets/images/sub_image_1.png',
-    '/assets/images/sub_image_2.png',
-    '/assets/images/sub_image_3.png',
-    '/assets/images/sub_image_4.png',
-
-]
-
-const cards = [
-    {
-        title: 'Legacy Legging',
-        text: 'Body Fit',
-        image: '/assets/images/legging_1.png',
-        price: '€29.99',
-        kleuren: '2'
-    },
-    {
-        title: 'Legacy Legging',
-        text: 'Body Fit',
-        image: '/assets/images/legging_2.png',
-        price: '€29.99',
-        kleuren: '2'
-    },
-    {
-        title: 'Legacy Legging',
-        text: 'Body Fit',
-        image: '/assets/images/legging_3.png',
-        price: '€29.99',
-        kleuren: '2'
-    }
-]

@@ -33,17 +33,7 @@ export default function Card({
   handle,
   ...props
 }: CardProps) {
-  // Function to get the route name by slicing the title up to the comma
-  const getRouteName = (title: any) => {
-    const commaIndex = title.indexOf(',');
-    if (commaIndex !== -1) {
-      return title.slice(0, commaIndex);
-    }
-    return title;
-  };
 
-  const routeName = getRouteName(title);
-  console.log('handle', handle)
 
   const linkHref = {
     pathname: `/shop/${handle|| ''}`,

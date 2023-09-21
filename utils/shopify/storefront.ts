@@ -1,10 +1,10 @@
 import gql from "graphql-tag";
 
 export async function storefront({ query, variables } : any) {
-
     const endpoint = process.env.SHOPIFY_STORE_DOMAIN || '';
     const key = process.env.SHOPIFY_STORE_FRONT_ACCESS_TOKEN || ''; 
 
+    
     try {
       const result = await fetch(endpoint, {
         method: 'POST',
