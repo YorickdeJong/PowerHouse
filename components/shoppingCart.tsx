@@ -4,6 +4,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Typography from './ui/typography'
+import { storefront } from '@/utils/shopify/storefront'
 
 const products = [
   {
@@ -30,20 +31,40 @@ const products = [
   // More products...
 ]
 
+
+interface CartItemsProps {
+  item: any[];
+  quantity: number;
+  selectedColor: {};
+  selectedSize: {};
+} 
+
 export default function ShoppingCart() {
   const [open, setOpen] = useState(true)
-
+  const [cartItems, setCartItems] = useState<CartItemsProps[]>([{
+    item: [],
+    quantity: 0,
+    selectedColor: {},
+    selectedSize: {}
+  }]);
 
   function close() {
     setOpen(false);
     window.history.replaceState(null, '', window.location.pathname + window.location.search);
   }
 
+ 
   useEffect(() => {
+    const storedCart = localStorage.getItem('cart');
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+    setCartItems(cart);
+
+ 
     function handleHashChange() {
       if (window.location.hash === '#cart-aside') {
         setOpen(true);
-      } else {
+      } 
+      else {
         close()
       }
     }
@@ -57,15 +78,24 @@ export default function ShoppingCart() {
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
     };
-  }, []);
+  }, [open]);
 
+
+  function removeCartItem(id: string) {
+    const storedCart = localStorage.getItem('cart');
+    const cart = storedCart ? JSON.parse(storedCart) : [];
+    const newCart = cart.filter((item: any) => item.item.id !== id);
+    localStorage.setItem('cart', JSON.stringify(newCart));
+    setCartItems(newCart);
+  }
 
   if (!open) {
     return (
-      <></>
+      <div></div>
     )
   }
 
+  console.log('cartItems', cartItems)
 
   return (
   <Transition.Root show={open} as={Fragment}>
@@ -113,18 +143,19 @@ export default function ShoppingCart() {
                         </div>
 
                         {/* Product list */}
+                        {cartItems.length > 0 && 
                         <div className="mt-20">
                           <Typography variant='title' className='text-dark lg:text-2xl mb-10'>Uw Producten</Typography>
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              {products.map((product) => (
-                                <li key={product.id} className="flex py-6">
+                              {cartItems.map((product) => (
+                                <li key={product.item?.id} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <Image
                                       width={600}
                                       height={600}
-                                      src={product.imageSrc}
-                                      alt={product.imageAlt}
+                                      src={product?.item?.images?.edges[0]?.node?.url}
+                                      alt={product?.item?.images?.edges[0]?.node?.altText}
                                       className="h-full w-full object-cover object-center "
                                     />
                                   </div>
@@ -133,18 +164,22 @@ export default function ShoppingCart() {
                                     <div>
                                       <div className="flex justify-between text-base font-medium text-gray-900">
                                         <h3>
-                                          <a href={product.href}>{product.name}</a>
+                                          {product?.item?.title}
                                         </h3>
-                                        <p className="ml-4">{product.price}</p>
+                                        <p className="ml-4">€ {product?.item?.priceRange?.minVariantPrice?.amount}</p>
                                       </div>
-                                      <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                                      <div className='flex flex-row mt-1'>
+                                        <p className=" text-sm text-gray-500">{product?.selectedColor?.name}</p>
+                                        <p className=" text-sm text-gray-500 ml-4">Maat: {product?.selectedSize?.name?.toUpperCase()}</p>
+                                      </div>
                                     </div>
-                                    <div className="flex flex-1 items-end justify-between text-sm">
-                                      <p className="text-gray-500">Qty {product.quantity}</p>
+                                    <div className="flex flex-1 mt-6 justify-between text-sm">
+                                      <p className="text-gray-500">Qty {product?.quantity}</p>
 
                                       <div className="flex">
                                         <button
                                           type="button"
+                                          onClick = {() => removeCartItem(product.item.id)}
                                           className="font-medium text-secondary hover:text-indigo-500"
                                         >
                                           Remove
@@ -157,8 +192,8 @@ export default function ShoppingCart() {
                             </ul>
                           </div>
                         </div>
+                      }
                       </div>
-
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
