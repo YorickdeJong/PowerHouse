@@ -7,24 +7,48 @@ import { Button } from "@/components/ui/button";
 import Typography from "@/components/ui/typography";
 import { cn } from "@/lib/utils";
 import Image from "next/image";
+import gql from "graphql-tag";
+import { storefront } from "@/utils/shopify/storefront";
 
 
+export default async function ServicesPage({params} : any) {
 
+    const handle = params.slug; // Get handle from URL
+    let item = []
+    try {
+        const products = await storefront({
+            query: productQuery,
+            variables: { handle: handle }
+        });
+        item = products.body.data.product;
+    } 
+    catch (error) {
+        console.log('error', error);
+    }
 
-export default function ServicesPage() {
+    let recommendedProducts = []
 
+    try {
+        const products = await storefront({
+            query: RecommendedProducts,
+        });
+        recommendedProducts = products.body.data.products.edges;
+    } 
+    catch (error) {
+        console.log('error', error);
+    }
 
-
+    console.log('images', item?.images?.edges)
     return (
       <section className='mt-16 mx-auto md:ml-10 pb-40'>
         <div className="container">
             <div className="flex xl:flex-row flex-col">
                <div>
-                    <ZoomImage images={images} items={items}/>
+                    <ZoomImage images={item?.images?.edges} items={items}/>
                </div>
                <div className="lg:ml-28">
                     <Breadcrumb pageTitle = 'Shop' />
-                    <PorductDetails />
+                    <PorductDetails item = {item}/>
                 </div>
             </div>
 
@@ -37,14 +61,15 @@ export default function ServicesPage() {
                 </Typography>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                    {cards.map((card: any) => ( 
+                    {recommendedProducts.map((card: any) => ( 
                         <Card 
                             className="box-shadow-2xl mb-4 md:mb-0"
-                            title={card.title}
-                            text={card.text}
-                            image={card.image}
-                            price={card.price}
-                            kleuren={card.kleuren}
+                            title={card?.node?.title || ''}
+                            text={card?.node?.variants?.edges[0]?.node?.selectedOptions?.find((option : any) => option?.name === "Style")?.value || 'Body Fit'}
+                            image={card?.node?.images?.edges[0]?.node?.url || ''}
+                            price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
+                            kleuren={card?.node?.variants?.edges?.length || ''}
+                            handle={card?.node?.handle || ''}
                         />    
                     
                     ))}
@@ -58,8 +83,80 @@ export default function ServicesPage() {
   }
   
 
-  const items = 
-    {
+
+const productQuery = `
+query ProductByHandle($handle: String!) {
+    product(handle: $handle) {
+        title
+        handle
+        description
+        priceRange {
+            minVariantPrice {
+                amount
+            }
+        }
+        images(first: 6) {  
+            edges {
+                node {
+                    url
+                    altText
+                }
+            }
+        }
+        variants(first: 30) {  
+            edges {
+                node {
+                    title
+                    selectedOptions {
+                        name 
+                        value 
+                    }
+                }
+            }
+        }
+    }  
+}
+`
+
+const RecommendedProducts = `
+query Products {
+    products(first: 3) {
+      edges {
+        node {
+          title
+          handle
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+          variants(first: 3) {  
+            edges {
+              node {
+                title
+                selectedOptions {
+                  name 
+                  value 
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+const items = 
+{
         title: 'Legacy Legging',
         text: 'Body Fit',
         image: '/assets/images/legging_1.png',

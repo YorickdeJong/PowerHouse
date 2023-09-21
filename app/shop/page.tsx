@@ -3,11 +3,22 @@ import Caption from '@/components/caption';
 import Filter from '../../components/Filter';
 import Card from '@/components/card';
 import Breadcrumb from '@/components/breadcrumb';
+import { storefront } from '@/utils/shopify/storefront';
 
 // container prop defines max width of your container
 // Typography is a component that defines the font size and weight
 
-export default function ServicesPage() {
+export default async function ServicesPage() {
+
+  let items = []
+  try {
+      const products = await storefront({query})
+      items = products.body.data.products.edges
+  }
+  catch(error) {
+      console.log('error', error)
+  }
+
   return (
     <section className='bg-white pb-40' >
       <div className="container">
@@ -24,11 +35,12 @@ export default function ServicesPage() {
                   {index !==0 && <hr className="my-2 mb-4 border-none bg-dark/10 h-[1px] sm:hidden"/>}
                     <Card 
                         className="box-shadow-2xl mb-4 md:mb-0 md:mt-12"
-                        title={card.title}
-                        text={card.text}
-                        image={card.image}
-                        price={card.price}
-                        kleuren={card.kleuren}
+                        title={card?.node?.title || ''}
+                        text={card?.node?.variants?.edges[0]?.node?.selectedOptions?.find((option : any) => option?.name === "Style")?.value || 'Body Fit'}
+                        image={card?.node?.images?.edges[0]?.node?.url || ''}
+                        price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
+                        kleuren={card?.node?.variants?.edges?.length || ''}
+                        handle={card?.node?.handle || ''}
                     />    
                 </>
               ))}
@@ -41,48 +53,39 @@ export default function ServicesPage() {
 }
 
 
-const items = [
-  {
-      title: 'Legacy Legging',
-      text: 'Body Fit',
-      image: '/assets/images/legging_1.png',
-      price: '€29.99',
-      kleuren: '2 kleuren'
-  },
-  {
-      title: 'Legacy Legging',
-      text: 'Body Fit',
-      image: '/assets/images/legging_2.png',
-      price: '€29.99',
-      kleuren: '2 kleuren'
-  },
-  {
-      title: 'Legacy Legging',
-      text: 'Body Fit',
-      image: '/assets/images/legging_3.png',
-      price: '€29.99',
-      kleuren: '2 kleuren'
-  },
-  {
-    title: 'Legacy Legging',
-    text: 'Body Fit',
-    image: '/assets/images/legging_1.png',
-    price: '€29.99',
-    kleuren: '2 kleuren'
-},
-{
-    title: 'Legacy Legging',
-    text: 'Body Fit',
-    image: '/assets/images/legging_2.png',
-    price: '€29.99',
-    kleuren: '2 kleuren'
-},
-{
-    title: 'Legacy Legging',
-    text: 'Body Fit',
-    image: '/assets/images/legging_3.png',
-    price: '€29.99',
-    kleuren: '2 kleuren'
-}
-]
-
+const query = `
+query Products {
+    products(first: 6) {
+      edges {
+        node {
+          title
+          handle
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+          variants(first: 3) {  
+            edges {
+              node {
+                title
+                selectedOptions {
+                  name 
+                  value 
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

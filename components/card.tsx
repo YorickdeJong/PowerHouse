@@ -17,6 +17,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   price: string | '';
   kleuren?: string;
   hoverText?: string;
+  handle: string | '';
   houseCard?: boolean;
 }
 
@@ -29,6 +30,7 @@ export default function Card({
   kleuren,
   price,
   hoverText,
+  handle,
   ...props
 }: CardProps) {
   // Function to get the route name by slicing the title up to the comma
@@ -41,9 +43,10 @@ export default function Card({
   };
 
   const routeName = getRouteName(title);
+  console.log('handle', handle)
 
   const linkHref = {
-    pathname: `/shop/${routeName.toLowerCase().replaceAll(' ', '-')}` || '',
+    pathname: `/shop/${handle|| ''}`,
   };
   
   return (

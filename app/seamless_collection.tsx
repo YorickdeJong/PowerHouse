@@ -16,8 +16,6 @@ export default async function Seamless() {
         console.log('error', error)
     }
 
-    console.log('items', items[1]?.node?.variants?.edges[0]?.node?.selectedOptions?.find((option : any) => option?.name === "Style")?.value)
-
 
     return (
         <section className="bg-white mb-20 lg:mb-0 lg:h-[1100px]">
@@ -40,6 +38,7 @@ export default async function Seamless() {
                                 image={card?.node?.images?.edges[0]?.node?.url || ''}
                                 price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
                                 kleuren={card?.node?.variants?.edges?.length || ''}
+                                handle={card?.node?.handle || ''}
                             />    
                     ))}
                     

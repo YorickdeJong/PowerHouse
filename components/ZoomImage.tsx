@@ -9,10 +9,10 @@ import Reviews from "./Reviews";
 
 
 
-export default function ZoomImage({items, images}: any) {
+export default function ZoomImage({images}: any) {
 
     const [showPreview, setShowPreview] = useState(false);
-    const [selectedImage, setSelectedImage] = useState(images[0]);
+    const [selectedImage, setSelectedImage] = useState(images[0].node.url);
 
 
     const handleMouseMove = (e: any) => {
@@ -24,7 +24,7 @@ export default function ZoomImage({items, images}: any) {
         const posX = e.nativeEvent.offsetX;
         const posY = e.nativeEvent.offsetY;
   
-        preview.style.backgroundImage = `url(${items.image!})`;
+        preview.style.backgroundImage = `url(${images[0].node.url!})`;
         preview.style.backgroundSize = `${1000}px ${600}px`;
         preview.style.backgroundPosition = `-${posX * x}px -${posY * y}px`;
       }
@@ -42,12 +42,12 @@ export default function ZoomImage({items, images}: any) {
         <div className="flex lg:flex-row flex-col">
                 <div className="grid grid-cols-4 lg:grid-cols-1 lg:mr-10 gap-3 h-[0px] lg:h-[500px]">
                         {images.map((image: any) => {
-                            if (image !== selectedImage) {
+                            if (image.node.url !== selectedImage) {
                                 return (
                                     <div className="lg:h-24 lg:w-24 overflow-hidden rounded-xl">
                                             <Image 
-                                                onClick={() => setSelectedImage(image)}
-                                                src={image}
+                                                onClick={() => setSelectedImage(image.node.url)}
+                                                src={image.node.url}
                                                 alt= 'sub image'
                                                 width={100}
                                                 height={100}
@@ -73,12 +73,12 @@ export default function ZoomImage({items, images}: any) {
 
                 <div className="grid grid-cols-4 w-[450px] lg:mr-10 mt-6 gap-3 lg:h-[0px]">
                         {images.map((image: any) => {
-                            if (image !== selectedImage) {
+                            if (image.node.url !== selectedImage) {
                                 return (
                                     <div className=" lg:h-0 lg:w-0 overflow-hidden rounded-xl">
                                             <Image 
-                                                onClick={() => setSelectedImage(image)}
-                                                src={image}
+                                                onClick={() => setSelectedImage(image.node.url)}
+                                                src={image.node.url}
                                                 alt= 'sub image'
                                                 width={100}
                                                 height={100}

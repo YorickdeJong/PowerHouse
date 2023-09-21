@@ -62,10 +62,26 @@ const product = {
       'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
   }
 
-export default function PorductDetails() {
+export default function PorductDetails({item} : any) {
+    const selectedOptions = item.variants.edges.map((variantEdge: any) => variantEdge.node.selectedOptions);
+    const uniqueColors = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Color").map((option : any) => option.value.toLowerCase()))];
+    const uniqueSizes = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Size").map((option : any) => option.value.toLowerCase()))];
+    
+    
+    const colorObjects = uniqueColors.map(col => ({
+        name: col,
+        class: `bg-${col}`,  // or any transformation you want
+        selectedClass: `ring-${col}`  // or any transformation you want
+    }));
 
-    const [selectedColor, setSelectedColor] = useState(product.colors[0])
-    const [selectedSize, setSelectedSize] = useState(product.sizes[2])
+
+    const sizeObjects = uniqueSizes.map(size => ({
+        name: size,
+        inStock: true
+    }));
+
+    const [selectedColor, setSelectedColor] = useState(colorObjects[0])
+    const [selectedSize, setSelectedSize] = useState(sizeObjects[0])
 
     return (
             <div className="max-w-sm pb-16 pt-10 lg:max-w-md  lg:pb-24 lg:pt-4">
@@ -74,9 +90,9 @@ export default function PorductDetails() {
                 <div className="">
 
                 {/* Title + description */}
-                  <Typography variant='title' className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl" level={1}>{product.name}</Typography>
-                  <div className="space-y-6">
-                      <p className="text-base text-gray-900 mt-6">{product.description}</p>
+                  <Typography variant='title' className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl" level={1}>{item.title}</Typography>
+                  <div className="space-y-6 mb-10">
+                      <p className="text-base text-gray-900 ">{item.description}</p>
                   </div>
 
                     
@@ -104,7 +120,7 @@ export default function PorductDetails() {
                   </div>
       
                   {/* Price */}
-                  <p className="text-3xl tracking-tight text-gray-900 mt-5 font-bold">{product.price}</p>
+                  <p className="text-3xl tracking-tight text-gray-900 mt-5 font-bold">€ {item.priceRange.minVariantPrice.amount}</p>
                   <div className='flex flex-row my-6'>
                     <Icons.view />
                     <Typography variant='muted' className='text-dark/80 lg:text-sm ml-2'><span className='font-bold'>{product.viewAmount}</span> mensen hebben dit product bekeken</Typography>
@@ -119,33 +135,35 @@ export default function PorductDetails() {
                       <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                         <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
                         <div className="flex items-center space-x-3">
-                          {product.colors.map((color) => (
-                            <RadioGroup.Option
-                              key={color.name}
-                              value={color}
-                              className={({ active, checked }: any) =>
-                                classNames(
-                                  color.selectedClass,
-                                  active && checked ? 'ring ring-offset-1' : '',
-                                  !active && checked ? 'ring-2' : '',
-                                  'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
-                                )
-                              }
-                            >
-                              <RadioGroup.Label as="span" className="sr-only">
-                                {color.name}
-                              </RadioGroup.Label>
-                              <span
-                                aria-hidden="true"
-                                className={classNames(
-                                  color.class,
-                                  'h-8 w-8 rounded-full border border-black border-opacity-10'
-                                )}
-                              />
-                            </RadioGroup.Option>
-                          ))}
+                            {colorObjects.map((color: any, index: number) => {
+
+                                return (
+                                    <RadioGroup.Option
+                                        key={index}
+                                        value={color}
+                                        className={({ active, checked }: any) =>
+                                            classNames(
+                                                color.selectedClass,
+                                                active && checked ? 'ring ring-offset-1' : '',
+                                                !active && checked ? 'ring-2' : '',
+                                                'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
+                                            )
+                                        }
+                                    >
+                                        <RadioGroup.Label as="span" className="sr-only">
+                                            {color.name}
+                                        </RadioGroup.Label>
+                                        <span
+                                            aria-hidden="true"
+                                            className={
+                                                `h-8 w-8 '${color.class}' rounded-full border border-black border-opacity-10`
+                                            }
+                                        />
+                                    </RadioGroup.Option>
+                                );
+                            })}
                         </div>
-                      </RadioGroup>
+                        </RadioGroup>
                     </div>
       
                     {/* Sizes */}
@@ -160,7 +178,7 @@ export default function PorductDetails() {
                       <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                         <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
                         <div className="grid grid-cols-5 gap-4">
-                          {product.sizes.map((size) => (
+                          {sizeObjects.map((size : any) => (
                             <RadioGroup.Option
                               key={size.name}
                               value={size}

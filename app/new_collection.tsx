@@ -1,12 +1,24 @@
 import Card from "@/components/card";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
+import { storefront } from "@/utils/shopify/storefront";
 import Link from "next/link";
 
 
 
 
-export default function NewCollection() {
+export default async function NewCollection() {
+
+    let items = []
+    try {
+        const products = await storefront({query})
+        items = products.body.data.products.edges
+    }
+    catch(error) {
+        console.log('error', error)
+    }
+
+
     return (
         <section className="xl:h-[1100px] mb-28 xl:mb-0">
             <div className="container pt-10 md:pt-36">
@@ -20,16 +32,16 @@ export default function NewCollection() {
                 </Typography>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                    {items.map((card: any) => ( 
-                        <Card 
-                            className="box-shadow-2xl mb-4 md:mb-0"
-                            title={card.title}
-                            text={card.text}
-                            image={card.image}
-                            price={card.price}
-                            kleuren={card.kleuren}
-                        />    
-                    
+                    {items.map((card: any) => (
+                            <Card 
+                                className="box-shadow-2xl mb-4 md:mb-0"
+                                title={card?.node?.title || ''}
+                                text={card?.node?.variants?.edges[0]?.node?.selectedOptions?.find((option : any) => option?.name === "Style")?.value || 'Body Fit'}
+                                image={card?.node?.images?.edges[0]?.node?.url || ''}
+                                price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
+                                kleuren={card?.node?.variants?.edges?.length || ''}
+                                handle={card?.node?.handle || ''}
+                            />    
                     ))}
                     
                 </div>
@@ -37,6 +49,45 @@ export default function NewCollection() {
         </section>
     )
 }
+
+
+
+const query = `
+query Products {
+    products(first: 3) {
+      edges {
+        node {
+          title
+          handle
+          priceRange {
+            minVariantPrice {
+              amount
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+          variants(first: 3) {  
+            edges {
+              node {
+                title
+                selectedOptions {
+                  name 
+                  value 
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
 
 
 

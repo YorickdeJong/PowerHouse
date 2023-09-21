@@ -15,6 +15,7 @@ export default function IndexPage() {
   return (
     <section className="">
       <Hero />
+      {/* @ts-expect-error Server Component */}
       <NewCollection />
       <Banner />
       {/* @ts-expect-error Server Component */}

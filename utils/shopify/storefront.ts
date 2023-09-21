@@ -2,7 +2,6 @@ import gql from "graphql-tag";
 
 export async function storefront({ query, variables } : any) {
 
-    console.log('query', query)
     const endpoint = process.env.SHOPIFY_STORE_DOMAIN || '';
     const key = process.env.SHOPIFY_STORE_FRONT_ACCESS_TOKEN || ''; 
 
