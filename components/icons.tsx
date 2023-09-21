@@ -94,6 +94,15 @@ export const Icons = {
       height={10}
     />
   ),
+  filter: (props : any) => (
+    <Image
+      {...props}
+      src={'/assets/icons/mi_filter.svg'}
+      alt="logo"
+      width={25}
+      height={10}
+    />
+  ),
   menu: AlignRight,
   loader: Loader2,
   x: X,

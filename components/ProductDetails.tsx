@@ -4,6 +4,7 @@ import { RadioGroup } from '@headlessui/react'
 import { useState } from 'react'
 import { Typography } from './ui/typography'
 import { Icons } from './icons'
+import Reviews from './Reviews'
 
 const reviews = { href: '#', average: 4, totalCount: 117 }
 function classNames(...classes : any) {
@@ -122,7 +123,7 @@ export default function PorductDetails() {
                             <RadioGroup.Option
                               key={color.name}
                               value={color}
-                              className={({ active, checked }) =>
+                              className={({ active, checked }: any) =>
                                 classNames(
                                   color.selectedClass,
                                   active && checked ? 'ring ring-offset-1' : '',
@@ -164,7 +165,7 @@ export default function PorductDetails() {
                               key={size.name}
                               value={size}
                               disabled={!size.inStock}
-                              className={({ active }) =>
+                              className={({ active }: any) =>
                                 classNames(
                                   size.inStock
                                     ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
@@ -174,7 +175,7 @@ export default function PorductDetails() {
                                 )
                               }
                             >
-                              {({ active, checked }) => (
+                              {({ active, checked }: any) => (
                                 <>
                                   <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
                                   {size.inStock ? (
@@ -252,6 +253,13 @@ export default function PorductDetails() {
                   <hr className='mt-4 border-none bg-dark/10 h-[1px]'/>
                 </div>
       
+                {/* Reviews */}
+                <div className="mx-0 md:hidden">
+                        <Typography variant = 'title' className="text-dark mt-12 lg:text-2xl">Klant Beoordelingen</Typography>   
+                        <Reviews />
+                        <hr className='mt-8 border-none bg-dark/10 h-[1px]'/>
+                </div>
+
                 {/* Description */}
                 <div className="py-10  lg:col-start-1 lg:pb-16 lg:pr-8 lg:pt-6">
                   {/* Description and details */}

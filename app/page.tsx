@@ -17,6 +17,7 @@ export default function IndexPage() {
       <Hero />
       <NewCollection />
       <Banner />
+      {/* @ts-expect-error Server Component */}
       <Seamless />
     </section>
   );

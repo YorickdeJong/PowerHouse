@@ -39,12 +39,12 @@ export default function ZoomImage({items, images}: any) {
     };
   
     return (
-        <div className="flex flex-row">
-                <div className="grid grid-cols-1 mr-10 h-[500px]">
+        <div className="flex lg:flex-row flex-col">
+                <div className="grid grid-cols-4 lg:grid-cols-1 lg:mr-10 gap-3 h-[0px] lg:h-[500px]">
                         {images.map((image: any) => {
                             if (image !== selectedImage) {
                                 return (
-                                    <div className="h-24 w-24 overflow-hidden rounded-xl">
+                                    <div className="lg:h-24 lg:w-24 overflow-hidden rounded-xl">
                                             <Image 
                                                 onClick={() => setSelectedImage(image)}
                                                 src={image}
@@ -71,11 +71,33 @@ export default function ZoomImage({items, images}: any) {
                     />
                 </div>
 
-                <div className="mx-0">
+                <div className="grid grid-cols-4 w-[450px] lg:mr-10 mt-6 gap-3 lg:h-[0px]">
+                        {images.map((image: any) => {
+                            if (image !== selectedImage) {
+                                return (
+                                    <div className=" lg:h-0 lg:w-0 overflow-hidden rounded-xl">
+                                            <Image 
+                                                onClick={() => setSelectedImage(image)}
+                                                src={image}
+                                                alt= 'sub image'
+                                                width={100}
+                                                height={100}
+                                                className="hover:scale-110 object-cover"
+                                            />
+                                    </div>
+                                )
+                            }
+                        })}
+                </div>
+
+                <div className="mx-0 hidden md:block">
                         <Typography variant = 'title' className="text-dark mt-12 lg:text-2xl">Klant Beoordelingen</Typography>   
                         <Reviews />
                 </div>
             </div>
+
+            
+
         </div>
       );
     }

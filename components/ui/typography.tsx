@@ -12,8 +12,8 @@ const typographyVariants = cva('', {
     variant: {
       special:'text-base md:text-lg text-muted leading-relaxed md:leading-9',
       default: '',
-      heading: 'text-3xl md:text-5xl font-bold lg:text-[55px] uppercase lg:leading-[69px]',
-      title: 'text-4xl md:text-5xl lg:text-[55px] font-bold uppercase leading-[48px] lg:leading-[68px]',
+      heading: 'text-2xl md:text-3xl font-bold uppercase xl:leading-[69px]',
+      title: 'text-xl md:text-2xl font-bold uppercase leading-[30px] lg:leading-[68px]',
       muted: 'text-base md:text-lg text-muted leading-relaxed md:leading-9',
       paragraph: ''
     },

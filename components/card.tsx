@@ -91,7 +91,7 @@ export default function Card({
                   }
                 )}
               >
-                {price}
+                €{price}
               </p>
             </div>
             <p className="leading-relaxed text-muted">{text}</p>

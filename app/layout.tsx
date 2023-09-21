@@ -13,6 +13,7 @@ import SiteHeader from '@/components/site-header';
 
 import '@/styles/globals.css'; //import global css here --> styles/global.css
 import ShoppingCart from '@/components/shoppingCart';
+import { storefront } from '@/utils/shopify/storefront';
 
 
 export const dynamic = 'force-dynamic';
@@ -29,8 +30,6 @@ export const metadata: Metadata = {
   ],
   icons: {
     icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png',
   },
 };
 
@@ -38,7 +37,7 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
-export default function RootLayout({ children }: RootLayoutProps) {
+export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
       <html lang="en" suppressHydrationWarning>

@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 
 import { cn } from '@/lib/utils';
+import { useMediaQuery } from '@/hook/media-query';
 
 interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
   pageTitle: string;
@@ -15,9 +16,14 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   const slug = path?.replaceAll('-', ' ')
   const slugSpace = slug?.split('/').filter(item => item.trim() !== '');
   let accumulatedPath = '';
-  
+  const phone = useMediaQuery('(max-width: 1000px)');
 
   console.log(slugSpace)
+
+  if (phone){
+    return null
+  }
+
   return (
     <div
       className={cn(

@@ -16,15 +16,13 @@ export default function ServicesPage() {
 
 
     return (
-      <section className='mt-16 mx-auto ml-10 pb-40'>
+      <section className='mt-16 mx-auto md:ml-10 pb-40'>
         <div className="container">
-            <div className="flex flex-row">
-                <div>
+            <div className="flex xl:flex-row flex-col">
+               <div>
                     <ZoomImage images={images} items={items}/>
-                    
-
                </div>
-               <div className="ml-28">
+               <div className="lg:ml-28">
                     <Breadcrumb pageTitle = 'Shop' />
                     <PorductDetails />
                 </div>
@@ -38,7 +36,7 @@ export default function ServicesPage() {
                     Bekijk Vergelijkbare Producten
                 </Typography>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
                     {cards.map((card: any) => ( 
                         <Card 
                             className="box-shadow-2xl mb-4 md:mb-0"

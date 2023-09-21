@@ -25,15 +25,21 @@ export default function Hero({ className, ...props }: HeroProps) {
   return (
     <section
       ref={target}
-      className={cn('relative md:h-[700px] container', className, {})}
+      className={cn('relative  container', className, {})}
     >
-        <div className='grid grid-cols-1 lg:grid-cols-2 gap-16'>
-          <div className="space-y-5 isolate pt-36">
+      <div className='w-[300px] sm:w-[0px] '>
+          <Images.homepage 
+            className='mt-20 md:mt-0  object-cover object-top'
+          />
+        </div>
+
+        <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
+          <div className="space-y-5 isolate pt-16 lg:pt-36">
               <div className=" ">
-                <Typography variant = 'heading' className='text-secondary leading-10 lg:text-5xl' level={1}>
+                <Typography variant = 'heading' className='text-secondary leading-10 xl:text-5xl' level={1}>
                   BOOST JOUW WORKOUT MET ZELFVERTROUWEN EN STIJL
                 </Typography>
-                  <Typography variant = 'muted' className="lg:text-md max-w-[500px] mt-6 text-dark/70 lg:leading-[35px]">
+                  <Typography variant = 'muted' className="lg:text-md max-w-[400px] xl:max-w-[500px] mt-6 text-dark/70 lg:leading-[35px]">
                   GoGym is speciaal ontworpen om je te laten schitteren tijdens je workouts. Elk kledingstuk is niet alleen stijlvol is, maar ook bestand tegen squats, vlekken 
                 </Typography>
 
@@ -46,9 +52,10 @@ export default function Hero({ className, ...props }: HeroProps) {
                 </Button>
           </div>
         </div>
-        <div className='w-[700px]'>
+
+        <div className='w-[0px] sm:w-[400px] xl:w-[700px]'>
           <Images.homepage 
-            className='mt-28  ml-[-80px] object-cover object-top'
+            className='mt-0 sm:mt-10 md:mt-28  xl:ml-[-80px] object-cover object-top'
           />
         </div>
       </div>

@@ -8,8 +8,8 @@ import Link from "next/link";
 
 export default function NewCollection() {
     return (
-        <section className="h-[1100px]">
-            <div className="container pt-32">
+        <section className="xl:h-[1100px] mb-28 xl:mb-0">
+            <div className="container pt-10 md:pt-36">
                 <Link href={'/shop'} >
                     <Button variant = 'outline' className="rounded-full py-2 md:text-md">
                             Bekijk Alles
@@ -19,7 +19,7 @@ export default function NewCollection() {
                     Nieuwe Collectie
                 </Typography>
 
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
                     {items.map((card: any) => ( 
                         <Card 
                             className="box-shadow-2xl mb-4 md:mb-0"

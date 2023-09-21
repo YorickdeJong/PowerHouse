@@ -12,22 +12,25 @@ export default function ServicesPage() {
     <section className='bg-white pb-40' >
       <div className="container">
         
-        <div className='flex flex-row'>
-          <div className="fixed ">
+        <div className='flex md:flex-row flex-col'>
+          <div className="">
             <Filter />
           </div>
-          <div className='ml-[400px] mt-14'>
+          <div className='md:ml-[400px] mt-2 md:mt-12'>
             <Breadcrumb pageTitle = 'Shop' />
-            <div className="col-span-3 grid grid-cols-2 gap-8 ">
-              {items.map((card: any) => ( 
-                  <Card 
-                      className="box-shadow-2xl mb-4 md:mb-0 mt-12"
-                      title={card.title}
-                      text={card.text}
-                      image={card.image}
-                      price={card.price}
-                      kleuren={card.kleuren}
-                  />    
+            <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-8 mt-10 md:mt-2">
+              {items.map((card: any, index: any) => ( 
+                <>
+                  {index !==0 && <hr className="my-2 mb-4 border-none bg-dark/10 h-[1px] sm:hidden"/>}
+                    <Card 
+                        className="box-shadow-2xl mb-4 md:mb-0 md:mt-12"
+                        title={card.title}
+                        text={card.text}
+                        image={card.image}
+                        price={card.price}
+                        kleuren={card.kleuren}
+                    />    
+                </>
               ))}
             </div>
           </div>
