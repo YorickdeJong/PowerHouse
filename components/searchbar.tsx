@@ -1,51 +1,126 @@
-'use client';
 
-import { useState } from 'react';
-import { useRouter } from 'next/navigation';
-
+'use client'
+import { useEffect, useRef, useState } from 'react'
+import { debounce } from 'lodash'
+import axios from 'axios';
+import Link from 'next/link';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faSearch,
+  } from "@fortawesome/free-solid-svg-icons";
 import { cn } from '@/lib/utils';
-import { Icons } from '@/components/icons';
+import { storefront } from '@/utils/shopify/storefront';
 
-import { Button } from './ui/button';
-import { Typography } from './ui/typography';
+interface SearchResult {
+    node: {
+        title: string;
+        handle: string;
+    }
+    // other fields you expect, like slug
+  }
 
 export default function SearchBar({ className }: any) {
-  const { push } = useRouter();
-  const [inputValue, setInputValue] = useState(''); // State to keep track of input value
+  const [query, setQuery] = useState('')
+  const searchBarRef = useRef<HTMLDivElement | null>(null);
+  const [results, setResults] = useState<SearchResult[]>([]);
+  const [isLoading, setIsLoading] = useState(false)
 
-  // Function to handle input change
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setInputValue(e.target.value);
-  };
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      // Step 3: Check if the click was outside the search bar container
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target as Node)) {
+        setResults([]); // Close the search bar by clearing the results
+      }
+    }
 
-  // Function to handle button click
-  const handleSearch = () => {
-    if (inputValue.trim() === '') {
-      alert('Voer aub tekst in'); // Show an alert if the input is empty
+    // Step 2: Add an event listener
+    document.addEventListener("mousedown", handleClickOutside);
+
+    // Step 4: Clean up the event listener
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
+
+  const fetchResults = debounce(async (query) => {
+    setIsLoading(true)
+    console.log('query', query)
+    try {
+      const products = await storefront({query: productsQuery, variables: {title: query}})
+      console.log('products', products.body.data.products.edges)
+
+      const data = products.body.data.products.edges
+      setResults(data)
+    } 
+    catch (error) {
+      console.error("There was an error fetching data", error)
+    }
+
+    setIsLoading(false)
+  }, 300)
+
+  const handleSearch = (e: any) => {
+    const newQuery = e.target.value;
+    setQuery(newQuery);
+  
+    if (newQuery.trim() === "") {
+      setResults([]); // Clear the results if query is empty
     } else {
-      push('/aanbod'); // Navigate to /aanbod if the input is filled
+      fetchResults(newQuery);
     }
   };
 
   return (
-    <div
-      className={cn(
-        'bg-muted/10 min-w-[350px] max-w-[550px] h-[40px] rounded-full flex-row flex items-center justify-between',
-        className
-      )}
-    >
-      <div className="md:ml-4 mx-2 md:mx-0">
-        <Icons.search />
-      </div>
-      <div className="">
-        <input
-          className="md:min-w-[280px] md:max-w-[550px] h-[30px]  rounded-[12px] lg:text-sm md:text-lg"
-          placeholder="Zoek op locatie..."
-          style={{ color: '#B0ADAD' }}
-          value={inputValue}
-          onChange={handleInputChange} // Update state on input change
-        />
-      </div>
+    <div className='mt-0' ref={searchBarRef}>
+            <div
+                className={cn(
+                    'bg-muted/10 min-w-[350px] max-w-[550px] h-[40px] rounded-full flex-row flex items-center justify-between',
+                    className
+                )}
+                >
+                <FontAwesomeIcon
+                    icon={faSearch}
+                    style={{fontSize: 15}}
+                    className='text-primary mx-4'
+                />
+                <input 
+                    type="text" 
+                    className='w-full text-dark/60'
+                    placeholder="Zoek artikelen..." 
+                    value={query}
+                    onChange={handleSearch}
+                />
+
+        </div>
+        
+        {results[0]?.node && <ul className=' absolute mt-2 bg-neutral-100 p-6 min-w-[350px] max-w-[550px] rounded-[10px] shadow-lg'>
+            {results.slice(0, 5).map((result, index) => (
+                <>
+                <li key={index} className='py-2 text-dark/60 hover:text-dark'>
+                    <Link href={`/shop/${result.node.handle}`}>
+                        {result.node.title}
+                    </Link>
+                </li>
+                <hr className="my-2 mb-4 border-none bg-dark/30 h-[1px] "/>
+                </>
+            ))}
+        </ul>
+        }
     </div>
-  );
+  )
 }
+
+
+
+const productsQuery = `
+query SearchProducts($title: String!) {
+    products(first: 5, query: $title) {
+      edges {
+        node {
+          title
+          handle     
+        }
+      }
+    }
+  }
+`
