@@ -29,6 +29,7 @@
     "fortawesome": "^0.0.1-security",
     "framer-motion": "^10.15.1",
     "graphql-tag": "^2.12.6",
+    "lodash": "^4.17.21",
     "lucide-react": "0.263.1",
     "next": "^13.4.13",
     "next-redux-wrapper": "^8.1.0",

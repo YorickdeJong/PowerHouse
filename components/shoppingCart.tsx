@@ -6,6 +6,7 @@ import Image from 'next/image'
 import Typography from './ui/typography'
 import { storefront } from '@/utils/shopify/storefront'
 import Link from 'next/link'
+import { set } from 'lodash'
 
 const products = [
   {
@@ -129,6 +130,13 @@ export default function ShoppingCart() {
     const cart = storedCart ? JSON.parse(storedCart) : [];
     setCartItems(cart);
 
+    // Populate checkoutItems based on cartItems
+    const checkoutLineItems = cart.map((item: CartItemsProps) => ({
+      variantId: item.item.id,
+      quantity: item.quantity
+    }));
+
+    setCartItems(checkoutLineItems);
  
     function handleHashChange() {
       if (window.location.hash === '#cart-aside') {
