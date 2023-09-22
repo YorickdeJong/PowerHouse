@@ -33,19 +33,64 @@ const products = [
 
 
 interface CartItemsProps {
-  item: any[];
+  item: {
+    id?: string;
+    title?: string;
+    images?: {
+      edges?: Array<{
+        node?: {
+          url?: string;
+          altText?: string;
+        };
+      }>;
+    };
+    priceRange?: {
+      minVariantPrice?: {
+        amount?: string;
+      };
+    };
+  };
   quantity: number;
-  selectedColor: {};
-  selectedSize: {};
-} 
+  selectedColor: {
+    name?: string;
+    value?: string;
+  };
+  selectedSize: {
+    name?: string;
+    value?: string;
+  };
+}
+
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(true)
   const [cartItems, setCartItems] = useState<CartItemsProps[]>([{
-    item: [],
+    item: {
+      id: '',
+      title: '',
+      images: {
+        edges: [{
+          node: {
+            url: '',
+            altText: ''
+          }
+        }]
+      },
+      priceRange: {
+        minVariantPrice: {
+          amount: ''
+        }
+      }
+    },
     quantity: 0,
-    selectedColor: {},
-    selectedSize: {}
+    selectedColor: {
+      name: '',
+      value: ''
+    },
+    selectedSize: {
+      name: '',
+      value: ''
+    }
   }]);
 
   function close() {
@@ -154,8 +199,8 @@ export default function ShoppingCart() {
                                     <Image
                                       width={600}
                                       height={600}
-                                      src={product?.item?.images?.edges[0]?.node?.url}
-                                      alt={product?.item?.images?.edges[0]?.node?.altText}
+                                      src={product?.item?.images?.edges?.[0]?.node?.url ?? ''}
+                                      alt={product?.item?.images?.edges?.[0]?.node?.altText ?? ''}
                                       className="h-full w-full object-cover object-center "
                                     />
                                   </div>
@@ -179,7 +224,7 @@ export default function ShoppingCart() {
                                       <div className="flex">
                                         <button
                                           type="button"
-                                          onClick = {() => removeCartItem(product.item.id)}
+                                          onClick = {() => removeCartItem(product.item.id ?? '')}
                                           className="font-medium text-secondary hover:text-indigo-500"
                                         >
                                           Remove
