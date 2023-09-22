@@ -5,6 +5,7 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Typography from './ui/typography'
 import { storefront } from '@/utils/shopify/storefront'
+import Link from 'next/link'
 
 const products = [
   {
@@ -61,9 +62,33 @@ interface CartItemsProps {
   };
 }
 
+interface CheckoutItemsProps {
+  input: {
+    lineItems: [
+      {
+      variantId: string;
+      quantity: number;
+    }
+  ]
+  }
+}
+
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(true)
+
+  const [checkoutItems, setCheckoutItems] = useState<CheckoutItemsProps>({
+    input: {
+      lineItems: [
+        {
+        variantId: '',
+        quantity: 0,
+      }
+      ]
+    }
+  });
+  
+  
   const [cartItems, setCartItems] = useState<CartItemsProps[]>([{
     item: {
       id: '',
@@ -140,8 +165,11 @@ export default function ShoppingCart() {
     )
   }
 
-  console.log('cartItems', cartItems)
 
+  function checkoutQuery() {
+    
+  }
+  
   return (
   <Transition.Root show={open} as={Fragment}>
         <Dialog as="div" className="relative z-10" onClose={close}>
@@ -245,13 +273,15 @@ export default function ShoppingCart() {
                           <p>$262.00</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                        <div className="mt-6">
-                          <a
+                        <div className="mt-6"
+                        onClick = {() => checkoutQuery()}
+                        >
+                          <Link
                             href="#"
                             className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"
                           >
                             Checkout
-                          </a>
+                          </Link>
                         </div>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
@@ -277,3 +307,18 @@ export default function ShoppingCart() {
       </Transition.Root>
   )
 }
+
+
+const checkOutQuery = `
+mutation checkoutCreate($input: CheckoutCreateInput!) {
+  checkoutCreate(input: $input) {
+    checkout {
+      id
+      webUrl
+    }
+    userErrors {
+      message
+    }
+  }
+}
+`;
