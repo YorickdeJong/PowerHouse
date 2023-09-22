@@ -106,6 +106,7 @@ query ProductByHandle($handle: String!) {
         variants(first: 30) {  
             edges {
                 node {
+                    id
                     title
                     selectedOptions {
                         name 
@@ -141,6 +142,7 @@ query Products {
           variants(first: 3) {  
             edges {
               node {
+                id
                 title
                 selectedOptions {
                   name 

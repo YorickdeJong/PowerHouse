@@ -79,7 +79,7 @@ export default function PorductDetails({item} : any) {
         inStock: true
     }));
 
-    const [selectedColor, setSelectedColor] = useState(colorObjects[0])
+    const [selectedColor, setSelectedColor] = useState(colorObjects[1])
     const [selectedSize, setSelectedSize] = useState(sizeObjects[0])
 
     return (

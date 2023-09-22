@@ -6,16 +6,28 @@ import Typography from "../ui/typography";
 function addToCart(item: any, selectedColor: any, selectedSize: any, quantity: any) {
     const cartData = localStorage.getItem('cart');
     let cart = cartData ? JSON.parse(cartData) : [];
-    console.log('cart', cart)
-    console.log('item', item)
 
-    const existingItem = cart.find((object: any) => object.item.id === item.id);
+    // Find the variant based on the selected color and size
+    const selectedVariant = item.variants.edges.find((variant: any) => {
+        const colorOption = variant.node.selectedOptions.find((option: any) => option.name === "Color" && option.value.toLowerCase() === selectedColor.name);
+        const sizeOption = variant.node.selectedOptions.find((option: any) => option.name === "Size" && option.value.toLowerCase() === selectedSize.name);
+        return colorOption && sizeOption;
+    });
 
+    if (!selectedVariant) {
+        console.error("Variant not found for selected color and size.");
+        return;
+    }
+
+    const variantId = selectedVariant.node.id;
+
+    const existingItem = cart.find((object: any) => object.variantId === variantId && 
+    object.selectedColor.name === selectedColor.name && object.selectedSize.name === selectedSize.name);
 
     if (existingItem) {
         existingItem.quantity += quantity;
     } else {
-        cart.push({ item, quantity, selectedColor, selectedSize });
+        cart.push({ item, quantity, selectedColor, selectedSize, variantId });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));

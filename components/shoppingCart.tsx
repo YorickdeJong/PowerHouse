@@ -52,6 +52,7 @@ interface CartItemsProps {
       };
     };
   };
+  variantId?: string;
   quantity: number;
   selectedColor: {
     name?: string;
@@ -131,14 +132,24 @@ export default function ShoppingCart() {
     console.log('cart', cart)
     setCartItems(cart);
 
-    // Populate checkoutItems based on cartItems
-    const checkoutLineItems = cart.map((item: CartItemsProps) => ({
-      variantId: item.item.id,
-      quantity: item.quantity
-    }));
-
-    setCheckoutItems(checkoutLineItems);
  
+    // Populate checkoutItems based on cartItems
+    const checkoutLineItems = cart.map((item: CartItemsProps) => {
+
+      return ({
+          variantId:  item.variantId, 
+          quantity: item.quantity
+      })
+    })
+
+    console.log('checkoutLineItems', checkoutLineItems)
+    
+    setCheckoutItems({
+        input: {
+            lineItems: checkoutLineItems
+        }
+    });
+  
     function handleHashChange() {
       if (window.location.hash === '#cart-aside') {
         setOpen(true);
@@ -175,8 +186,20 @@ export default function ShoppingCart() {
   }
 
 
-  function checkoutQuery() {
-    
+  async function checkoutQuery() {
+    console.log('checkoutItems', checkoutItems)
+      const response = await storefront({query: checkOutQuery, variables: checkoutItems});
+      console.log('response', response)
+      // Check for errors in the response
+      if (response.body.data.checkoutCreate.userErrors.length === 0) {
+          const checkoutURL = response.body.data.checkoutCreate.checkout.webUrl;
+          
+          // Redirect the user to the checkout page
+          window.location.href = checkoutURL;
+      } else {
+          // Handle errors (e.g., display an error message to the user)
+          console.error("Checkout creation errors:", response.body.data.checkoutCreate.userErrors);
+      }
   }
   
   return (
@@ -231,7 +254,7 @@ export default function ShoppingCart() {
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
                               {cartItems.map((product) => (
-                                <li key={product.item?.id} className="flex py-6">
+                                <li key={product.variantId} className="flex py-6">
                                   <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                     <Image
                                       width={600}
@@ -248,7 +271,7 @@ export default function ShoppingCart() {
                                         <h3>
                                           {product?.item?.title}
                                         </h3>
-                                        <p className="ml-4">€ {product?.item?.priceRange?.minVariantPrice?.amount}</p>
+                                        <p className="ml-4">€ {((Number(product?.item?.priceRange?.minVariantPrice?.amount) || 0) * (product?.quantity ?? 0)).toFixed(2)}</p>
                                       </div>
                                       <div className='flex flex-row mt-1'>
                                         <p className=" text-sm text-gray-500">{product?.selectedColor?.name}</p>
@@ -282,16 +305,11 @@ export default function ShoppingCart() {
                           <p>$262.00</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                        <div className="mt-6"
-                        onClick = {() => checkoutQuery()}
+                        <button className="mt-6 flex items-center justify-center w-full rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"
+                        onClick = {async () => await checkoutQuery()}
                         >
-                          <Link
-                            href="#"
-                            className="flex items-center justify-center rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"
-                          >
                             Checkout
-                          </Link>
-                        </div>
+                        </button>
                         <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                           <p>
                             or
