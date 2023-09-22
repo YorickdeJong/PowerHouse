@@ -128,6 +128,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     const cart = storedCart ? JSON.parse(storedCart) : [];
+    console.log('cart', cart)
     setCartItems(cart);
 
     // Populate checkoutItems based on cartItems
@@ -136,7 +137,7 @@ export default function ShoppingCart() {
       quantity: item.quantity
     }));
 
-    setCartItems(checkoutLineItems);
+    setCheckoutItems(checkoutLineItems);
  
     function handleHashChange() {
       if (window.location.hash === '#cart-aside') {
