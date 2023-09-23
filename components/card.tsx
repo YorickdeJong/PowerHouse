@@ -84,7 +84,7 @@ export default function Card({
                   }
                 )}
               >
-                €{price}
+                €{Number(price).toFixed(2)}
               </p>
             </div>
             <p className="leading-relaxed text-muted">{text}</p>

@@ -4,9 +4,7 @@ export async function storefront({ query, variables } : any) {
     const endpoint = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN || '';
     const key = process.env.NEXT_PUBLIC_SHOPIFY_STORE_FRONT_ACCESS_TOKEN || ''; 
 
-    console.log('query', query)
-    console.log('variables', variables)
-    
+
     try {
       const result = await fetch(endpoint, {
         method: 'POST',

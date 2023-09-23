@@ -62,6 +62,10 @@ interface CartItemsProps {
     name?: string;
     value?: string;
   };
+  image: {
+    src?: string;
+    altText?: string;
+  }
 }
 
 interface CheckoutItemsProps {
@@ -117,7 +121,11 @@ export default function ShoppingCart() {
     selectedSize: {
       name: '',
       value: ''
-    }
+    },
+    image: {
+      src: '',
+      altText: ''
+    },
   }]);
 
   function close() {
@@ -174,7 +182,7 @@ export default function ShoppingCart() {
   function removeCartItem(id: string) {
     const storedCart = localStorage.getItem('cart');
     const cart = storedCart ? JSON.parse(storedCart) : [];
-    const newCart = cart.filter((item: any) => item.item.id !== id);
+    const newCart = cart.filter((item: any) => item.variantId !== id);
     localStorage.setItem('cart', JSON.stringify(newCart));
     setCartItems(newCart);
   }
@@ -259,8 +267,8 @@ export default function ShoppingCart() {
                                     <Image
                                       width={600}
                                       height={600}
-                                      src={product?.item?.images?.edges?.[0]?.node?.url ?? ''}
-                                      alt={product?.item?.images?.edges?.[0]?.node?.altText ?? ''}
+                                      src={product?.image?.src ?? ''}
+                                      alt={product?.image?.altText ?? ''}
                                       className="h-full w-full object-cover object-center "
                                     />
                                   </div>
@@ -281,11 +289,11 @@ export default function ShoppingCart() {
                                     <div className="flex flex-1 mt-6 justify-between text-sm">
                                       <p className="text-gray-500">Qty {product?.quantity}</p>
 
-                                      <div className="flex">
+                                      <div className="flex hover:primary/20">
                                         <button
                                           type="button"
-                                          onClick = {() => removeCartItem(product.item.id ?? '')}
-                                          className="font-medium text-secondary hover:text-indigo-500"
+                                          onClick = {() => removeCartItem(product.variantId ?? '')}
+                                          className="font-medium text-secondary "
                                         >
                                           Remove
                                         </button>

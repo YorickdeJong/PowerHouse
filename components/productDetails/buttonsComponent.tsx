@@ -20,14 +20,16 @@ function addToCart(item: any, selectedColor: any, selectedSize: any, quantity: a
     }
 
     const variantId = selectedVariant.node.id;
+    const image = selectedVariant.node.image.src;
 
+    
     const existingItem = cart.find((object: any) => object.variantId === variantId && 
     object.selectedColor.name === selectedColor.name && object.selectedSize.name === selectedSize.name);
 
     if (existingItem) {
         existingItem.quantity += quantity;
     } else {
-        cart.push({ item, quantity, selectedColor, selectedSize, variantId });
+        cart.push({ item, quantity, selectedColor, selectedSize, variantId, image });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));

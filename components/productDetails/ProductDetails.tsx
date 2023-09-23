@@ -9,6 +9,7 @@ import Colors from './Colors'
 import IconsComponent from './Icons'
 import ButtonsComponents from './buttonsComponent'
 import DescriptionComponent from './Description'
+import ColorsComponent from './Colors'
 
 
 const product = {
@@ -60,24 +61,27 @@ const product = {
       'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
   }
 
+  
 export default function PorductDetails({item} : any) {
 
     const selectedOptions = item.variants.edges.map((variantEdge: any) => variantEdge.node.selectedOptions);
     const uniqueColors = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Color").map((option : any) => option.value.toLowerCase()))];
     const uniqueSizes = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Size").map((option : any) => option.value.toLowerCase()))];
-    
-    
-    const colorObjects = uniqueColors.map(col => ({
+
+    const colorObjectsFiltered = uniqueColors.map(col => ({
         name: col,
         class: `bg-${col}`,  // or any transformation you want
         selectedClass: `ring-${col}`  // or any transformation you want
     }));
 
-
-    const sizeObjects = uniqueSizes.map(size => ({
+    const [colorObjects, setColorObjects] = useState(colorObjectsFiltered); 
+      
+    const sizeObjectsFiltered = uniqueSizes.map(size => ({
         name: size,
         inStock: true
     }));
+
+    const [sizeObjects, setSizeObjects] = useState(sizeObjectsFiltered); 
 
     const [selectedColor, setSelectedColor] = useState(colorObjects[1])
     const [selectedSize, setSelectedSize] = useState(sizeObjects[0])
@@ -100,7 +104,7 @@ export default function PorductDetails({item} : any) {
       
                   {/* Price */}
 
-                  <p className="text-3xl tracking-tight text-gray-900 mt-5 font-bold">€ {item.priceRange.minVariantPrice.amount}</p>
+                  <p className="text-3xl tracking-tight text-gray-900 mt-5 font-bold">€ {Number(item.priceRange.minVariantPrice.amount).toFixed(2)}</p>
                   <div className='flex flex-row my-6'>
                     <Icons.view />
                     <Typography variant='muted' className='text-dark/80 lg:text-sm ml-2'><span className='font-bold'>{product.viewAmount}</span> mensen hebben dit product bekeken</Typography>
@@ -109,7 +113,7 @@ export default function PorductDetails({item} : any) {
 
                   <form className="mt-8">
                   {/* Colors */}
-                  <Colors 
+                  <ColorsComponent 
                     selectedColor={selectedColor} 
                     setSelectedColor={setSelectedColor} 
                     colorObjects={colorObjects}
@@ -117,9 +121,9 @@ export default function PorductDetails({item} : any) {
 
                     {/* Sizes */}
                     <Sizes 
-                      sizeObjects={sizeObjects} 
                       selectedSize={selectedSize} 
                       setSelectedSize={setSelectedSize} 
+                      sizeObjects={sizeObjects} 
                       />
       
                     {/* ADD TO BAG BUTTON */}

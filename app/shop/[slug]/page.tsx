@@ -112,6 +112,10 @@ query ProductByHandle($handle: String!) {
                         name 
                         value 
                     }
+                    image {
+                        src
+                        altText
+                    }
                 }
             }
         }

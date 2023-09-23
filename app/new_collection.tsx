@@ -31,7 +31,7 @@ export default async function NewCollection() {
                     Nieuwe Collectie
                 </Typography>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mt-12">
                     {items.map((card: any) => (
                             <Card 
                                 className="box-shadow-2xl mb-4 md:mb-0"
@@ -54,7 +54,7 @@ export default async function NewCollection() {
 
 const query = `
 query Products {
-    products(first: 3) {
+    products(first: 4) {
       edges {
         node {
           title
