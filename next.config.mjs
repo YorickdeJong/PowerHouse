@@ -1,10 +1,39 @@
+import withFonts from "next-fonts";
+
+
+
+const fonts = withFonts({webpack(config, options) {
+  config.node = {
+    fs: 'empty',
+  };
+  config.module.rules.push({
+    test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+    use: [
+      options.defaultLoaders.babel,
+      {
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+        },
+      },
+      {
+        loader: 'file-loader',
+      },
+    ],
+  })
+  return config;
+}
+})
+
+
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  env:{
+    SHOPIFY_STOREFRONT_ACCESSTOKEN: process.env.NEXT_PUBLIC_SHOPIFY_STORE_FRONT_ACCESS_TOKEN,
+    SHOPIFY_STORE_DROMAIN: process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN,
+  },
   images: {
-    env:{
-      SHOPIFY_STOREFRONT_ACCESSTOKEN: process.env.SHOPIFY_STOREFRONT_ACCESSTOKEN,
-      SHOPIFY_STORE_DROMAIN: process.env.SHOPIFY_STORE_DROMAIN,
-    },
     domains: ['cdn.sanity.io', 'tailwindui.com', 'cdn.shopify.com'],
     remotePatterns: [
       {
@@ -17,6 +46,7 @@ const nextConfig = {
       },
     ],
   },
+  fonts
 };
 
 export default nextConfig;

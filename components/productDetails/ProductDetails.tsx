@@ -68,23 +68,15 @@ export default function PorductDetails({item} : any) {
     const uniqueColors = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Color").map((option : any) => option.value.toLowerCase()))];
     const uniqueSizes = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Size").map((option : any) => option.value.toLowerCase()))];
 
-    const colorObjectsFiltered = uniqueColors.map(col => ({
-        name: col,
-        class: `bg-${col}`,  // or any transformation you want
-        selectedClass: `ring-${col}`  // or any transformation you want
-    }));
-
-    const [colorObjects, setColorObjects] = useState(colorObjectsFiltered); 
       
     const sizeObjectsFiltered = uniqueSizes.map(size => ({
         name: size,
         inStock: true
     }));
 
-    const [sizeObjects, setSizeObjects] = useState(sizeObjectsFiltered); 
 
-    const [selectedColor, setSelectedColor] = useState(colorObjects[1])
-    const [selectedSize, setSelectedSize] = useState(sizeObjects[0])
+    const [selectedColor, setSelectedColor] = useState(uniqueColors[1])
+    const [selectedSize, setSelectedSize] = useState(sizeObjectsFiltered[0])
 
     return (
             <div className="max-w-sm pb-16 pt-10 lg:max-w-md  lg:pb-24 lg:pt-4">
@@ -116,14 +108,14 @@ export default function PorductDetails({item} : any) {
                   <ColorsComponent 
                     selectedColor={selectedColor} 
                     setSelectedColor={setSelectedColor} 
-                    colorObjects={colorObjects}
+                    colorObjects={uniqueColors}
                   />
 
                     {/* Sizes */}
                     <Sizes 
                       selectedSize={selectedSize} 
                       setSelectedSize={setSelectedSize} 
-                      sizeObjects={sizeObjects} 
+                      sizeObjects={sizeObjectsFiltered} 
                       />
       
                     {/* ADD TO BAG BUTTON */}

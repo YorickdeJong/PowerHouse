@@ -71,7 +71,7 @@ export default function ZoomImage({images}: any) {
                     />
                 </div>
 
-                <div className="grid grid-cols-4 w-[450px] lg:mr-10 mt-6 gap-3 lg:h-[0px]">
+                <div className="grid grid-cols-4 max-w-[450px] lg:mr-10 mt-6 gap-3 lg:h-[0px]">
                         {images.map((image: any) => {
                             if (image.node.url !== selectedImage) {
                                 return (

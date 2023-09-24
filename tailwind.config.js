@@ -61,9 +61,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['Inter', ...fontFamily.sans],
-        mono: ['var(--font-mono)', ...fontFamily.mono],
-        // trap: ['Trap', ...fontFamily.sans],
+        // sans: ['Inter', ...fontFamily.sans],
+        // mono: ['var(--font-mono)', ...fontFamily.mono],
+        SpaceGrotesk: ['SpaceGrotesk', ...fontFamily.sans],
 
       },
       keyframes: {

@@ -4,6 +4,7 @@ import NewCollection from './new_collection';
 import Banner from './banner';
 import Seamless from './seamless_collection';
 import NewArrivals from './NewArrivals';
+import Hero2 from './hero2';
 
 //Define your components in the Page.tsx
 // The /app/ route is your home page
@@ -15,14 +16,18 @@ import NewArrivals from './NewArrivals';
 export default function IndexPage() {
   return (
     <section className="">
-      <Hero />
+      <Hero2 />
       {/* @ts-expect-error Server Component */}
       <NewCollection />
-      <NewArrivals />
-      <Banner />
+      <Hero />
+      {/* <Banner /> */}
       {/* @ts-expect-error Server Component */}
       <Seamless />
-      
+
+      <NewArrivals />
+
+      {/* @ts-expect-error Server Component */}
+      <Seamless className="lg:mb-20"/>
     </section>
   );
 }

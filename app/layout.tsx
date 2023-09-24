@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 import { Toaster } from 'react-hot-toast';
 
 import { siteConfig } from '@/config/site';
-import { fontSans } from '@/lib/fonts';
+import { spaceGrotesk } from '@/lib/fonts';
 import { cn } from '@/lib/utils';
 import Footer from '@/components/footer';
 import GoToTop from '@/components/goto-top';
@@ -13,7 +13,7 @@ import SiteHeader from '@/components/site-header';
 
 import '@/styles/globals.css'; //import global css here --> styles/global.css
 import ShoppingCart from '@/components/shoppingCart';
-import { storefront } from '@/utils/shopify/storefront';
+
 
 
 export const dynamic = 'force-dynamic';
@@ -44,12 +44,12 @@ export default async function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            'min-h-screen bg-white font-trap antialiased',
-            fontSans.variable
+            'min-h-screen bg-white antialiased',
+            spaceGrotesk.className
           )}
         >
               <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                <div className="relative flex min-h-screen flex-col">
+                <div className="relative flex min-h-screen  flex-col">
                   <SiteHeader />
                   <ShoppingCart />
                   <div className="flex-1">

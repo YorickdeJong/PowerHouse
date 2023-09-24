@@ -39,7 +39,7 @@ export default async function ServicesPage() {
                         text={card?.node?.variants?.edges[0]?.node?.selectedOptions?.find((option : any) => option?.name === "Style")?.value || 'Body Fit'}
                         image={card?.node?.images?.edges[0]?.node?.url || ''}
                         price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
-                        kleuren={card?.node?.variants?.edges?.length || ''}
+                        kleuren={card?.node?.variants?.edges || ''}
                         handle={card?.node?.handle || ''}
                     />    
                 </>

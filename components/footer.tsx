@@ -10,7 +10,7 @@ interface FooterProps extends HTMLAttributes<HTMLDivElement> {}
 
 export default function Footer({ className, ...props }: FooterProps) {
   return (
-    <div className={cn('pt-14 bg-tertairy/100', className, {})} {...props}>
+    <div className={cn('pt-14 bg-tertairy', className, {})} {...props}>
       <div className="mx-5 items-center justify-between border-y border-y-neutral/20 py-6 md:flex">
         <Brand />
         <div className="flex items-end justify-between">

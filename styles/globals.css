@@ -3,6 +3,14 @@
 @tailwind utilities;
 @import url(./style.css);
 
+@font-face {
+  font-family: 'SpaceGrotesk';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('/SpaceGrotesk-Mediu,.ttf') format('ttf');
+}
+
 @layer base {
   :root {
     --background: 227 95% 5%;
@@ -81,16 +89,9 @@
     scroll-behavior: smooth !important;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-white text-foreground;
     font-feature-settings: 'rlig' 1, 'calt' 1;
   }
 }
 
 
-/* @font-face {
-  font-family: 'Inter';
-  font-style: normal;
-  font-weight: 400;
-  font-display: swap;
-  src: url('/Trap-Regular.ttf') format('ttf');
-} */

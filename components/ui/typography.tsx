@@ -1,6 +1,8 @@
 import React, { forwardRef } from 'react';
 import { cva, type VariantProps } from 'class-variance-authority';
 import { cn } from '@/lib/utils';
+import {inter} from '@/lib/fonts';
+
 
 const typographyVariants = cva('', {
   variants: {
@@ -11,10 +13,10 @@ const typographyVariants = cva('', {
     },
     variant: {
       special:'text-base md:text-lg text-muted leading-relaxed md:leading-9',
-      default: '',
-      heading: 'text-2xl md:text-3xl font-bold uppercase xl:leading-[69px]',
-      title: 'text-xl md:text-2xl font-bold uppercase leading-[30px] lg:leading-[68px]',
-      muted: 'text-base md:text-lg text-muted leading-relaxed md:leading-9',
+      default: '${inter.className}',
+      heading: 'font-spaceGrotesk text-2xl md:text-3xl font-bold uppercase xl:leading-[69px]',
+      title: 'font-spaceGrotesk text-xl md:text-2xl font-bold uppercase leading-[30px] lg:leading-[68px]',
+      muted: `text-base md:text-lg text-muted leading-relaxed md:leading-9 ${inter.className}`,
       paragraph: ''
     },
     size: {

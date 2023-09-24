@@ -54,18 +54,13 @@ interface CartItemsProps {
   };
   variantId?: string;
   quantity: number;
-  selectedColor: {
-    name?: string;
-    value?: string;
-  };
+  selectedColor: string,
   selectedSize: {
     name?: string;
     value?: string;
   };
-  image: {
-    src?: string;
-    altText?: string;
-  }
+  image: string,
+  alt: string
 }
 
 interface CheckoutItemsProps {
@@ -82,6 +77,7 @@ interface CheckoutItemsProps {
 
 export default function ShoppingCart() {
   const [open, setOpen] = useState(true)
+  const [totalPrice, setTotalPrice] = useState(0)
 
   const [checkoutItems, setCheckoutItems] = useState<CheckoutItemsProps>({
     input: {
@@ -114,18 +110,13 @@ export default function ShoppingCart() {
       }
     },
     quantity: 0,
-    selectedColor: {
-      name: '',
-      value: ''
-    },
+    selectedColor: '',
     selectedSize: {
       name: '',
       value: ''
     },
-    image: {
-      src: '',
-      altText: ''
-    },
+    image: '',
+    alt: ''
   }]);
 
   function close() {
@@ -138,6 +129,11 @@ export default function ShoppingCart() {
     const storedCart = localStorage.getItem('cart');
     const cart = storedCart ? JSON.parse(storedCart) : [];
     console.log('cart', cart)
+    const totalPrice = cart.reduce((acc: number, item: any) => {
+      return acc + (Number(item.item.priceRange.minVariantPrice.amount) * item.quantity);
+    }, 0);
+    setTotalPrice(totalPrice);
+
     setCartItems(cart);
 
  
@@ -267,8 +263,8 @@ export default function ShoppingCart() {
                                     <Image
                                       width={600}
                                       height={600}
-                                      src={product?.image?.src ?? ''}
-                                      alt={product?.image?.altText ?? ''}
+                                      src={product?.image ?? ''}
+                                      alt={product?.alt ?? ''}
                                       className="h-full w-full object-cover object-center "
                                     />
                                   </div>
@@ -282,7 +278,7 @@ export default function ShoppingCart() {
                                         <p className="ml-4">€ {((Number(product?.item?.priceRange?.minVariantPrice?.amount) || 0) * (product?.quantity ?? 0)).toFixed(2)}</p>
                                       </div>
                                       <div className='flex flex-row mt-1'>
-                                        <p className=" text-sm text-gray-500">{product?.selectedColor?.name}</p>
+                                        <p className=" text-sm text-gray-500">{product?.selectedColor}</p>
                                         <p className=" text-sm text-gray-500 ml-4">Maat: {product?.selectedSize?.name?.toUpperCase()}</p>
                                       </div>
                                     </div>
@@ -295,7 +291,7 @@ export default function ShoppingCart() {
                                           onClick = {() => removeCartItem(product.variantId ?? '')}
                                           className="font-medium text-secondary "
                                         >
-                                          Remove
+                                          Verwijder
                                         </button>
                                       </div>
                                     </div>
@@ -309,8 +305,8 @@ export default function ShoppingCart() {
                       </div>
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
-                          <p>Subtotal</p>
-                          <p>$262.00</p>
+                          <p>Subtotaal</p>
+                          <p>€ {totalPrice}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                         <button className="mt-6 flex items-center justify-center w-full rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"

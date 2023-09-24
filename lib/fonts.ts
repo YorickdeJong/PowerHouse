@@ -1,13 +1,17 @@
-import { Fira_Mono as FontMono, Poppins as FontSans } from 'next/font/google';
+import { Space_Grotesk, Inter } from 'next/font/google';
 
-export const fontSans = FontSans({
-  subsets: ['latin'],
-  weight: ['400', '500', '700'],
-  variable: '--font-sans',
-});
 
-export const fontMono = FontMono({
+export const spaceGrotesk = Space_Grotesk({
   subsets: ['latin'],
   variable: '--font-mono',
   weight: ['400', '500', '700'],
 });
+
+
+
+export const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-mono',
+  weight: ['400', '500', '700'],
+});
+

@@ -9,13 +9,16 @@ import { cn } from '@/lib/utils';
 import { Icons } from './icons';
 import Motion from './motion';
 import { Typography } from './ui/typography';
+import { inter } from '@/lib/fonts';
+import ColorsComponent from './productDetails/Colors';
+import SizesComponent from './productDetails/Sizes';
 
 interface CardProps extends HTMLAttributes<HTMLDivElement> {
   text: any;
   image?: string;
   title: string | '';
   price: string | '';
-  kleuren?: string;
+  kleuren: [];
   hoverText?: string;
   handle: string | '';
   houseCard?: boolean;
@@ -34,8 +37,42 @@ export default function Card({
   ...props
 }: CardProps) {
 
+    
+    
+    const colors = kleuren.map((item: any) => {
+        const selectedOptions = item.node.selectedOptions;
 
-  const linkHref = {
+        
+        const filteredOptions = selectedOptions.filter((option: any) => option.name === "Color");
+
+        return filteredOptions.map((option: any) => option.value); // Keep only the color values
+      })
+      .flat(); // Flatten the array
+    
+    const uniqueColors = colors.filter((value, index, self) => self.indexOf(value) === index); // Keep only unique values
+
+    const sizes = kleuren.map((item: any) => {
+        const selectedOptions = item.node.selectedOptions;
+
+        
+        const filteredOptions = selectedOptions.filter((option: any) => option.name === "Size");
+
+        return filteredOptions.map((option: any) => option.value); // Keep only the color values
+      })
+      .flat(); // 
+
+    const uniqueSizes = sizes.filter((value, index, self) => self.indexOf(value) === index); // Keep only unique values
+      
+    const sizeObjectsFiltered = uniqueSizes.map(size => ({
+        name: size,
+        inStock: true
+    }));
+
+    console.log('uniqueColors', uniqueColors)
+    console.log('uniqueSizes', uniqueSizes)
+
+
+  const linkHref = {    
     pathname: `/shop/${handle|| ''}`,
   };
   
@@ -44,7 +81,7 @@ export default function Card({
       <Link href={linkHref}>
         <div
           className={cn(
-            'block space-y-3 overflow-hidden hover:scale-105 bg-white ',
+            'block space-y-3 overflow-hidden hover:scale-105 bg-white group',
             className,
             {
               'group/image  cursor-pointer': image,
@@ -52,12 +89,12 @@ export default function Card({
             }
           )}
         >
-        <div className="rounded-2xl overflow-hidden">
+        <div className="overflow-hidden group ">
           <Image
             src={image!}
             alt={''}
             className={cn(
-              '-mb-7 w-full h-[600px]   object-cover object-top',
+              '-mb-7 w-full h-[600px]   object-cover object-top hover:opacity-70',
             )}
             width={1000}
             height={600}
@@ -67,7 +104,7 @@ export default function Card({
             <div className="flex items-center gap-4">
               <p
                 className={cn(
-                  'grow text-lg font-bold uppercase md:text-lg text-black ',
+                  'grow text-lg font-bold uppercase md:text-lg text-black group-hover:hidden',
                   {
                     'md:text-lg mb-3': houseCard,
                   }
@@ -78,7 +115,7 @@ export default function Card({
 
               <p
                 className={cn(
-                  ' grow text-lg font-bold uppercase md:text-lg text-black ',
+                  ' grow text-lg font-bold uppercase md:text-lg text-black group-hover:hidden',
                   {
                     'md:text-lg mb-3': houseCard,
                   }
@@ -87,8 +124,27 @@ export default function Card({
                 €{Number(price).toFixed(2)}
               </p>
             </div>
-            <p className="leading-relaxed text-muted">{text}</p>
-            <p className="leading-relaxed text-muted">{kleuren} kleuren</p>
+            <p className={`leading-relaxed text-muted group-hover:hidden ${inter.className}`}>{text}</p>
+            <p className={`leading-relaxed text-muted group-hover:hidden  ${inter.className}`}>{uniqueColors?.length ?? ''} kleuren</p>
+
+            <div className='hidden group-hover:block'>
+                <ColorsComponent 
+                selectedColor={''} 
+                setSelectedColor={''} 
+                colorObjects={uniqueColors}
+                card
+                />
+            </div>
+            
+            <div className='hidden group-hover:block'>
+                <SizesComponent  
+                selectedSize={''} 
+                setSelectedSize={''} 
+                sizeObjects={sizeObjectsFiltered}
+                card
+                />
+            </div>
+
           </div>
         </div>
       </Link>

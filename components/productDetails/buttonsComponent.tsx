@@ -3,13 +3,13 @@ import Typography from "../ui/typography";
 
 
 
-function addToCart(item: any, selectedColor: any, selectedSize: any, quantity: any) {
+function addToCart(item: any, selectedColor: string, selectedSize: any, quantity: any) {
     const cartData = localStorage.getItem('cart');
     let cart = cartData ? JSON.parse(cartData) : [];
 
     // Find the variant based on the selected color and size
     const selectedVariant = item.variants.edges.find((variant: any) => {
-        const colorOption = variant.node.selectedOptions.find((option: any) => option.name === "Color" && option.value.toLowerCase() === selectedColor.name);
+        const colorOption = variant.node.selectedOptions.find((option: any) => option.name === "Color" && option.value.toLowerCase() === selectedColor);
         const sizeOption = variant.node.selectedOptions.find((option: any) => option.name === "Size" && option.value.toLowerCase() === selectedSize.name);
         return colorOption && sizeOption;
     });
@@ -19,17 +19,18 @@ function addToCart(item: any, selectedColor: any, selectedSize: any, quantity: a
         return;
     }
 
+    console.log('selectedVariant', selectedVariant)
     const variantId = selectedVariant.node.id;
     const image = selectedVariant.node.image.src;
+    const alt = selectedVariant.node.image.altText;
 
-    
     const existingItem = cart.find((object: any) => object.variantId === variantId && 
-    object.selectedColor.name === selectedColor.name && object.selectedSize.name === selectedSize.name);
+    object.selectedColor.name === selectedColor && object.selectedSize.name === selectedSize.name);
 
     if (existingItem) {
         existingItem.quantity += quantity;
     } else {
-        cart.push({ item, quantity, selectedColor, selectedSize, variantId, image });
+        cart.push({ item, quantity, selectedColor, selectedSize, variantId, image, alt });
     }
 
     localStorage.setItem('cart', JSON.stringify(cart));

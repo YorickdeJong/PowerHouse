@@ -46,7 +46,7 @@ export default async function ServicesPage({params} : any) {
                     <ZoomImage images={item?.images?.edges} />
                </div>
                <div className="lg:ml-28">
-                    <Breadcrumb pageTitle = 'Shop' />
+                    <Breadcrumb pageTitle = 'Shop' className='hidden md:inline-flex' />
                     <PorductDetails item = {item}/>
                 </div>
             </div>
@@ -67,7 +67,7 @@ export default async function ServicesPage({params} : any) {
                             text={card?.node?.variants?.edges[0]?.node?.selectedOptions?.find((option : any) => option?.name === "Style")?.value || 'Body Fit'}
                             image={card?.node?.images?.edges[0]?.node?.url || ''}
                             price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
-                            kleuren={card?.node?.variants?.edges?.length || ''}
+                            kleuren={card?.node?.variants?.edges || ''}
                             handle={card?.node?.handle || ''}
                         />    
                     
@@ -112,7 +112,7 @@ query ProductByHandle($handle: String!) {
                         name 
                         value 
                     }
-                    image {
+                                        image {
                         src
                         altText
                     }

@@ -1,5 +1,6 @@
 
 'use client'
+import { cn } from "@/lib/utils";
 import { RadioGroup } from "@headlessui/react";
 
 
@@ -8,19 +9,23 @@ function classNames(...classes : any) {
 }
 
 
-export default function Sizes({sizeObjects, selectedSize, setSelectedSize} : any){
+export default function Sizes({sizeObjects, selectedSize, setSelectedSize, card} : any){
     return (
-    <div className="mt-10">
+    <div className={cn("mt-10", {
+        'mt-2' : card
+    })}>
         <div className="flex items-center justify-between">
-        <h3 className="text-sm font-medium text-gray-900">Maat</h3>
-        <a href="#" className="text-sm font-medium text-secondary hover:text-tertairy">
+        {!card && <h3 className="text-sm font-medium text-gray-900">Maat</h3>}
+        {!card && <a href="#" className="text-sm font-medium text-secondary hover:text-tertairy">
             Hulp bij maatkeuze
-        </a>
+        </a>}
         </div>
 
         <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
         <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
-        <div className="grid grid-cols-5 gap-4">
+        <div className={cn("grid grid-cols-5 gap-4", {
+                'h-[40px]' : card
+        })}>
             {sizeObjects.map((size : any) => (
             <RadioGroup.Option
                 key={size.name}
@@ -32,7 +37,8 @@ export default function Sizes({sizeObjects, selectedSize, setSelectedSize} : any
                     ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
                     : 'cursor-not-allowed bg-gray-50 text-gray-200',
                     active ? 'ring-2 ring-primary' : '',
-                    'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6'
+                    'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6',
+                    card ? 'py-0 sm:py-0' : ''
                 )
                 }
             >

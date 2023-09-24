@@ -16,18 +16,13 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   const slug = path?.replaceAll('-', ' ')
   const slugSpace = slug?.split('/').filter(item => item.trim() !== '');
   let accumulatedPath = '';
-  const phone = useMediaQuery('(max-width: 1000px)');
 
   console.log(slugSpace)
-
-  if (phone){
-    return null
-  }
 
   return (
     <div
       className={cn(
-        'inline-flex items-center gap-[15px] text-sm font-medium text-slate-800',
+        'inline-flex items-center gap-[15px] text-sm font-medium text-slate-400',
         className,
         {}
       )}
@@ -45,13 +40,13 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
           if (index < slugSpace.length - 1){
             return (
               <>
-              /{' '}<Link href={accumulatedPath} className={`capitalize text-zinc-${500 + 200 * (index + 1)}`}> {slug} </Link>{' '}
+              {' '}/{' '}<Link href={accumulatedPath} className={`capitalize text-zinc-${500 - 200 * (index + 1)}`}> {slug} </Link>{' '}
               </>
             )
           }
           return (
             <>
-              /{' '}<div className="capitalize text-zinc-500"> {slug} </div>{' '}
+              {' '}/{' '}<div className="capitalize text-zinc-500"> {slug} </div>{' '}
             </>
           )
             })}

@@ -29,14 +29,14 @@ export default function Hero({ className, ...props }: HeroProps) {
     >
       <div className='w-[300px] sm:w-[0px] '>
           <Images.homepage 
-            className='mt-20 md:mt-0  object-cover object-top'
+            className=' md:mt-0  object-cover object-top'
           />
         </div>
 
         <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
-          <div className="space-y-5 isolate pt-16 lg:pt-36">
+          <div className="space-y-5 isolate pt-12 lg:pt-12">
               <div className=" ">
-                <Typography variant = 'heading' className='text-secondary leading-10 xl:text-5xl' level={1}>
+                <Typography variant = 'heading' className='text-secondary leading-10 xl:text-5xl font-medium' level={2}>
                   BOOST JOUW WORKOUT MET ZELFVERTROUWEN EN STIJL
                 </Typography>
                   <Typography variant = 'muted' className="lg:text-md max-w-[400px] xl:max-w-[500px] mt-6 text-dark/70 lg:leading-[35px]">
@@ -55,7 +55,7 @@ export default function Hero({ className, ...props }: HeroProps) {
 
         <div className='w-[0px] sm:w-[400px] xl:w-[700px]'>
           <Images.homepage 
-            className='mt-0 sm:mt-10 md:mt-28  xl:ml-[-80px] object-cover object-top'
+            className='mt-0 sm:mt-10 md:mt-12  xl:ml-[-80px] object-cover object-top'
           />
         </div>
       </div>
