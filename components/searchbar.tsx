@@ -74,7 +74,7 @@ export default function SearchBar({ className }: any) {
     <div className='mt-0' ref={searchBarRef}>
             <div
                 className={cn(
-                    'bg-muted/10 min-w-[350px] max-w-[550px] h-[40px] rounded-full flex-row flex items-center justify-between',
+                    'border-[2px] border-gray-400 min-w-[350px] max-w-[550px] h-[40px] rounded-full flex-row flex items-center justify-between',
                     className
                 )}
                 >
@@ -85,7 +85,7 @@ export default function SearchBar({ className }: any) {
                 />
                 <input 
                     type="text" 
-                    className='w-full text-dark/60'
+                    className='w-full text-dark'
                     placeholder="Zoek artikelen..." 
                     value={query}
                     onChange={handleSearch}

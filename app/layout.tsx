@@ -13,7 +13,8 @@ import SiteHeader from '@/components/site-header';
 
 import '@/styles/globals.css'; //import global css here --> styles/global.css
 import ShoppingCart from '@/components/shoppingCart';
-
+// import { ApolloProvider } from '@apollo/client';
+// import apolloClient from '@/utils/shopify/apolloClient';
 
 
 export const dynamic = 'force-dynamic';
@@ -37,6 +38,7 @@ interface RootLayoutProps {
   children: React.ReactNode;
 }
 
+
 export default async function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
@@ -48,19 +50,21 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             spaceGrotesk.className
           )}
         >
-              <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-                <div className="relative flex min-h-screen  flex-col">
-                  <SiteHeader />
-                  <ShoppingCart />
-                  <div className="flex-1">
-                    <TransitionProvider>{children}</TransitionProvider>
+            {/* <ApolloProvider client={apolloClient}> */}
+                <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+                  <div className="relative flex min-h-screen  flex-col">
+                    <SiteHeader />
+                    <ShoppingCart />
+                    <div className="flex-1">
+                      <TransitionProvider>{children}</TransitionProvider>
+                    </div>
+                    <Footer />
                   </div>
-                  <Footer />
-                </div>
-                {/* <TailwindIndicator /> */}
-                <Toaster position="top-right" />
-                <GoToTop />
-              </ThemeProvider>
+                  {/* <TailwindIndicator /> */}
+                  <Toaster position="top-right" />
+                  <GoToTop />
+                </ThemeProvider>
+            {/* </ApolloProvider> */}
         </body>
       </html>
     </>

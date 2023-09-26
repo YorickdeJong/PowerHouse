@@ -52,12 +52,14 @@ export default async function ServicesPage({params} : any) {
             </div>
 
             <div className="mt-22">
-                <Button variant = 'outline' className="rounded-full py-2 md:text-md">
-                    Bekijk Alles
-                </Button>
-                <Typography variant = 'title' className="text-tertairy mt-4 lg:text-3xl">
-                    Bekijk Vergelijkbare Producten
-                </Typography>
+                <div className="flex flex-row justify-between">
+                    <Typography variant = 'title' className="text-tertairy  lg:text-3xl">
+                        Bekijk Vergelijkbare Producten
+                    </Typography>
+                    <Button variant = 'outline' className="rounded-full py-2 md:text-md">
+                        Bekijk Alles
+                    </Button>
+                </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
                     {recommendedProducts.map((card: any) => ( 

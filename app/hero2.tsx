@@ -34,6 +34,7 @@ export default function Hero2({ className, ...props }: HeroProps) {
           layout='fill'
           objectFit='cover'
           className='group-hover:opacity-70'
+          quality={100}
         />
         <Typography 
           variant='title' 
@@ -54,15 +55,16 @@ export default function Hero2({ className, ...props }: HeroProps) {
             layout='fill'
             className='hover:opacity-70'
             objectFit='cover'
+            quality={100}
           />
           <Typography 
               variant='title' 
-              className='absolute ml-8 mt-4 opacity-0 text-primary group-hover:opacity-100 transition-opacity duration-300'
+              className='absolute ml-8 mt-4 opacity-0 text-[#73A3B4] group-hover:opacity-100 transition-opacity duration-300'
             >
             Bekijk Sportbroeken
           </Typography>
         </Link>
-        <div className='p-4 h-[100px] md:h-[150px] mt-4 md: mt-0'>
+        <div className='p-2 h-[100px] md:h-[150px] mt-4 md:mt-1'>
           <Typography variant='heading' className='text-primary mb-0'>
           Ontdek Je Ultieme Workout   Look
           </Typography>

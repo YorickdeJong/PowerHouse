@@ -39,15 +39,15 @@ export const Images =  {
         quality={100}
       />
     ),
-    homepageHero: (props: any) => (
-      <Image
-        {...props}
-        src={`/assets/images/legging_3.png`} //add image path here
-        alt="women 2"
-        width={1000}
-        height={700}
-        quality={100}
-      />
-    ),
+homepageHero: (props: any) => (
+  <Image
+    {...props}
+    src={`/assets/images/legging_3.png`} //add image path here
+    alt="women 2"
+    width={1000}
+    height={700}
+    quality={100}
+  />
+),
 
 };

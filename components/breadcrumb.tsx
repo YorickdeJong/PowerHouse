@@ -12,7 +12,8 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
-  const path = usePathname();
+  let path = usePathname() || '';
+  path = path.includes('orders') ? '/account/orders/order' : path;
   const slug = path?.replaceAll('-', ' ')
   const slugSpace = slug?.split('/').filter(item => item.trim() !== '');
   let accumulatedPath = '';
@@ -37,6 +38,10 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
         <>
         {slugSpace.map((slug : string, index: number) => {
           accumulatedPath += `/${slug}`;
+          if (slug === 'account') {
+            return
+          }
+          
           if (index < slugSpace.length - 1){
             return (
               <>
@@ -44,6 +49,8 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
               </>
             )
           }
+
+
           return (
             <>
               {' '}/{' '}<div className="capitalize text-zinc-500"> {slug} </div>{' '}

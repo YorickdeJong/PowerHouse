@@ -33,19 +33,19 @@ export const Icons = {
   person: (props : any) => (
     <Image
       {...props}
-      src={'/assets/icons/ic_outline-person.svg'}
+      src={'/assets/icons/login.svg'}
       alt="logo"
 
-      width={28}
+      width={24}
       height={30}
     />
   ),
   basket: (props : any) => (
     <Image
       {...props}
-      src={'/assets/icons/mdi_basket-outline.svg'}
+      src={'/assets/icons/cart.svg'}
       alt="logo"
-      width={25}
+      width={21}
       height={100}
     />
   ),

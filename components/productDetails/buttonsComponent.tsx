@@ -25,7 +25,7 @@ function addToCart(item: any, selectedColor: string, selectedSize: any, quantity
     const alt = selectedVariant.node.image.altText;
 
     const existingItem = cart.find((object: any) => object.variantId === variantId && 
-    object.selectedColor.name === selectedColor && object.selectedSize.name === selectedSize.name);
+    object.selectedColor === selectedColor && object.selectedSize.name === selectedSize.name);
 
     if (existingItem) {
         existingItem.quantity += quantity;

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
@@ -11,12 +11,17 @@ import Brand from './brand';
 import { Icons } from './icons';
 import SearchBar from './searchbar';
 import { useMediaQuery } from '@/hook/media-query';
+import Typography from './ui/typography';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [cartAsideVisible, setCartAsideVisible] = useState(false);
   const path = usePathname();
   const { push } = useRouter();
   const phone = useMediaQuery('(max-width: 768px)');
+  const [cartItems, setCartItems] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 
   const openCartAside = () => {
     if (window.location.href.includes('#cart-aside')) {
@@ -25,10 +30,36 @@ export default function Navbar() {
       window.location.href = window.location.href + '#cart-aside';
   };
 
+  // Check for cart aside is open
+  useEffect(() => {
+    const handleHashChange = () => {
+      setCartAsideVisible(window.location.href.includes('#cart-aside'));
+    };
+
+    // Initial check
+    handleHashChange();
+
+    // Listen for hash changes
+    window.addEventListener('hashchange', handleHashChange);
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('hashchange', handleHashChange);
+    };
+  }, []);
+
+  // Update cart items
+  useEffect(() => {
+    const items = JSON.parse(localStorage.getItem('cart') || '[]')
+    setCartItems(items.length)
+    const accesToken = sessionStorage.getItem('accessToken');
+    setIsLoggedIn(Boolean(accesToken));
+  }, [cartAsideVisible])
+
   return (
     <section
-      className={cn('border-b border-gray-300 ', {
-        'bg-white top-0  inset-x-0 z-40 ': (path === '/' || path?.startsWith('/technologie/')),
+      className={cn('border-b border-gray-300 bg-white', {
+        'top-0  inset-x-0 z-40 ': (path === '/' || path?.startsWith('/technologie/')),
       })}
     >
       <nav className="container  flex items-center justify-between px-5 py-5">
@@ -51,12 +82,16 @@ export default function Navbar() {
       
         <div className='flex flex-row gap-12'>
           {!phone && <SearchBar />}
-          <div className='mt-[7px]'>
+          <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[7px]'>
             <Icons.person 
-            className='hover:opacity-60 cursor-pointer opacity-100'
+            className='hover:opacity-60 cursor-pointer opacity-100 '
             />
-          </div>
-          <div className='mt-[9px] '>
+          </Link>
+
+          <div className='mt-[-4px] flex flex-row'>
+            <Typography variant='muted' className='text-whitgray-200 text-sm lg:text-[12px] top-[25px] mr-2 font-bold pt-[6px]'>
+              {cartItems}
+            </Typography>
             <Icons.basket 
               onClick={() => openCartAside()}
               className='hover:opacity-60 cursor-pointer opacity-100'
@@ -82,7 +117,7 @@ const NavContent = ({currentPath} : {currentPath: string}) => {
             '': _.href === '/' ? path === '/' : path?.includes(_.href),
           })}
           >
-            <h3 className={`capitalize text-md ${currentPath === _.href ? 'text-primary/70 font-bold' : 'text-dark'} hover:font-bold`}>
+            <h3 className={`capitalize text-md ${currentPath === _.href ? 'text-gray-500 font-bold' : 'text-gray-700'} hover:font-bold`}>
               <Link href={_.href}>{_.title}</Link>
             </h3>
           </li>

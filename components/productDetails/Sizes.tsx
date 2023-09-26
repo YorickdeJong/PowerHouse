@@ -37,8 +37,8 @@ export default function Sizes({sizeObjects, selectedSize, setSelectedSize, card}
                     ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
                     : 'cursor-not-allowed bg-gray-50 text-gray-200',
                     active ? 'ring-2 ring-primary' : '',
-                    'group relative flex items-center justify-center rounded-md border py-3 px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 sm:py-6',
-                    card ? 'py-0 sm:py-0' : ''
+                    'group relative flex items-center justify-center rounded-md border px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 ',
+                    card ? 'py-0 sm:py-0' : 'sm:py-6  py-3'
                 )
                 }
             >

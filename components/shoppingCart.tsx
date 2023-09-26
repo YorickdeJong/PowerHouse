@@ -306,7 +306,7 @@ export default function ShoppingCart() {
                       <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotaal</p>
-                          <p>€ {totalPrice}</p>
+                          <p>€ {totalPrice.toFixed(2)}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                         <button className="mt-6 flex items-center justify-center w-full rounded-md border border-transparent bg-primary px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-primary/80"

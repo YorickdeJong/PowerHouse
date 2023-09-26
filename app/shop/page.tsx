@@ -1,6 +1,6 @@
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
-import Filter from '../../components/Filter';
+import Filter from '../../components/Filter/Filter';
 import Card from '@/components/card';
 import Breadcrumb from '@/components/breadcrumb';
 import { storefront } from '@/utils/shopify/storefront';
@@ -19,16 +19,18 @@ export default async function ServicesPage() {
       console.log('error', error)
   }
 
+
   return (
     <section className='bg-white pb-40' >
       <div className="container">
         
         <div className='flex md:flex-row flex-col'>
           <div className="">
-            <Filter />
+            <Filter/>
           </div>
           <div className='md:ml-[400px] mt-2 md:mt-12'>
             <Breadcrumb pageTitle = 'Shop' />
+
             <div className="md:col-span-3 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-1 xl:grid-cols-2 gap-8 mt-10 md:mt-2">
               {items.map((card: any, index: any) => ( 
                 <>

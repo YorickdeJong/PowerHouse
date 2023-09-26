@@ -20,16 +20,16 @@ module.exports = {
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         primary: {
-          DEFAULT: '#73A3B4',
-          foreground: '#73A3B4-foreground',
+          DEFAULT: '#1f2937',//'#73A3B4',
+          foreground: '#1f2937', //'#73A3B4-foreground',
         },
         secondary: {
-          DEFAULT: '#4E7583',
-          foreground: '#4E7583',
+          DEFAULT: '#111827', //'#4E7583',
+          foreground: '#111827', //'#4E7583',
         },
         tertairy: {
-          DEFAULT: '#6786A3',
-          foreground: '#6786A3',
+          DEFAULT: '#030712',// '#6786A3',
+          foreground: '#030712' //'#6786A3',
         },
         neutral: {
           DEFAULT: 'hsl(var(--neutral))',
