@@ -89,12 +89,12 @@ export default function Navbar() {
           </Link>
 
           <div className='mt-[-4px] flex flex-row'>
-            <Typography variant='muted' className='text-whitgray-200 text-sm lg:text-[12px] top-[25px] mr-2 font-bold pt-[6px]'>
+            <Typography variant='muted' className='text-gray-600 text-sm lg:text-[12px] top-[25px] mr-1 font-bold pt-[14px] lg:pt-[8px]'>
               {cartItems}
             </Typography>
             <Icons.basket 
               onClick={() => openCartAside()}
-              className='hover:opacity-60 cursor-pointer opacity-100'
+              className='hover:opacity-60 cursor-pointer opacity-100 pt-2 lg:pt-0 mr-3'
             />
           </div>
         </div>
@@ -141,7 +141,7 @@ const NavContentMob = ({ setIsMenuOpen, currentPath }: { setIsMenuOpen: Function
           {siteConfig.nav.map((_) => (
             <li onClick={() => setIsMenuOpen(false)} key={_.title}>
               <h3 className={`capitalize  py-4 ${
-                currentPath === _.href ? 'text-secondary' : 'text-white'
+                currentPath === _.href ? 'text-gray-500 font-bold' : 'text-white'
               }`}>
                 <Link onClick={() => setIsMenuOpen(false)} href={_.href} className='hover:text-primary/50'>{_.title}</Link>
               </h3>

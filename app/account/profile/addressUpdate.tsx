@@ -153,48 +153,51 @@ export function UserAddresses({user, token} : any) {
 
     return (
       <div className="mt-16">
-        <div className='flex flex-row justify-between'>
-            <FaUser className='text-dark mt-6 ml-4' />
-            <Typography variant={'title'} className='text-dark/90'>Adress Gegevens</Typography>
-            <button onClick = {() => handleButtonPress()} className="px-4 mt-3 h-[40px] inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100">
-              <i className="mr-1 fa fa-plus"></i> Wijzig gegevens
-            </button>
+        <div className='flex lg:flex-row flex-col gap-2 lg:justify-between'>
+          <FaUser className='text-dark mt-6 ml-4' />
+          <Typography variant={'title'} className='text-dark/90'>Adresgegevens</Typography>
+         
+          {!isEditing ? <button onClick = {() => handleButtonPress()} className="px-4 lg:mt-3 mb-4 lg:mb-0 h-[40px] inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100">
+            <i className="mr-1 fa fa-plus"></i> Wijzig gegevens
+          </button>
+          : <div></div>
+          } 
         </div>
-        {isEditing ? (
-          <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
-              <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>Adres:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="address1" className={`ml-4 text-dark/60 border-b`} value={formData.address1} onChange={handleInputChange} />
-              </label>
-              <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>Stad:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="city" className={`ml-4 text-dark/60 border-b`} value={formData.city} onChange={handleInputChange} />
-              </label>
-              <label className={`text-dark flex flex-row`}> 
-                <span className='min-width-[150px] block'>Provincie:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="province" className={`ml-4 text-dark/60 border-b`} value={formData.province} onChange={handleInputChange} />
-              </label>
-              <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>Land:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="country" className={`ml-4 text-dark/60 border-b`} value={formData.country} onChange={handleInputChange} />
-              </label>
-              <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>PostCode:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="zip" className={`ml-4 text-dark/60 border-b`} value={formData.zip} onChange={handleInputChange} />
-              </label>
-              <button type="submit" className='w-1/2 bg-primary text-white py-2 rounded-xl mt-4'>Save</button>
-            </form> 
-          ) : (
-        <div className="border-2 rounded-xl p-8 border-dark/60 mb-4">
-          <div>
-            <Typography variant='muted' className='text-dark/80'>Adres: {formData?.address1}</Typography>
-            <Typography variant='muted' className='text-dark/80'>Stad: {formData?.city}</Typography>
-            <Typography variant='muted' className='text-dark/80'>Provincie: {formData?.province}</Typography>
-            <Typography variant='muted' className='text-dark/80'>Land: {formData?.country}</Typography>
-            <Typography variant='muted' className='text-dark/80'>PostCode: {formData?.zip}</Typography>
-          </div>
+        <div className={`${inter.className} border-2 rounded-xl p-8 text-dark border-dark/60 mb-4 `}>
+            {isEditing ? (
+              <form onSubmit={handleSubmit} className='flex flex-col gap-2 overflow-hidden'>
+                  <label className={`text-dark flex flex-row`}>
+                    <span className='w-[150px] block'>Adres:</span> {/* Adjust the min-width as per your design needs */}
+                    <input type="text" name="address1" className={`ml-4 text-dark/60 border-b text-sm lg:text-md mb-4 lg:mb-0`} value={formData.address1} onChange={handleInputChange} />
+                  </label>
+                  <label className={`text-dark flex flex-row`}>
+                    <span className='w-[150px] block'>Stad:</span> {/* Adjust the min-width as per your design needs */}
+                    <input type="text" name="city" className={`ml-4 text-dark/60 border-b text-sm lg:text-md mb-4 lg:mb-0`} value={formData.city} onChange={handleInputChange} />
+                  </label>
+                  <label className={`text-dark flex flex-row`}> 
+                    <span className='w-[150px] block'>Provincie:</span> {/* Adjust the min-width as per your design needs */}
+                    <input type="text" name="province" className={`ml-4 text-dark/60 border-b text-sm lg:text-md mb-4 lg:mb-0`} value={formData.province} onChange={handleInputChange} />
+                  </label>
+                  <label className={`text-dark flex flex-row`}>
+                    <span className='w-[150px] block'>Land:</span> {/* Adjust the min-width as per your design needs */}
+                    <input type="text" name="country" className={`ml-4 text-dark/60 border-b w-[150px] text-sm lg:text-md mb-4 lg:mb-0`} value={formData.country} onChange={handleInputChange} />
+                  </label>
+                  <label className={`text-dark flex flex-row`}>
+                    <span className='w-[150px] block'>PostCode:</span> {/* Adjust the min-width as per your design needs */}
+                    <input type="text" name="zip" className={`ml-4 text-dark/60 border-b text-sm lg:text-md mb-4 lg:mb-0`} value={formData.zip} onChange={handleInputChange} />
+                  </label>
+                  <button type="submit" className='w-1/2 bg-primary text-white py-2 rounded-xl mt-4'>Save</button>
+                </form> 
+              ) : (
+              <div>
+                <Typography variant='muted' className='text-dark/80 mb-2'>Adres: {formData?.address1}</Typography>
+                <Typography variant='muted' className='text-dark/80 mb-2'>Stad: {formData?.city}</Typography>
+                <Typography variant='muted' className='text-dark/80 mb-2'>Provincie: {formData?.province}</Typography>
+                <Typography variant='muted' className='text-dark/80 mb-2'>Land: {formData?.country}</Typography>
+                <Typography variant='muted' className='text-dark/80 mb-2'>PostCode: {formData?.zip}</Typography>
+              </div>
+              )}
         </div>
-          )}
       </div>
     )
   }

@@ -99,10 +99,10 @@ export default function Account() {
  
 
 
-export function Banner({user} : any){
+function Banner({user} : any){
   return (
-    <div className = 'bg-gray-500 h-[220px] rounded-xl  mt-[70px] mx-8 p-6 pl-8'>
-        <div className='grid grid-cols-1 md:grid-cols-2 justify-center items-center'>
+    <div className = 'bg-gray-500 h-[300px] lg:h-[240px] rounded-xl  mt-[70px] mx-0 lg:mx-8 p-6 pl-8'>
+        <div className='grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-0 justify-center items-center'>
           <div className=' '>
               <Typography variant='title' className='text-white'>Welkom {user?.firstName}</Typography>
               <Typography variant='muted' className='text-white'>hier vind je al je relevante informatie</Typography>

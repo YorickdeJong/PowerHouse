@@ -93,11 +93,11 @@ export function UserDetails({user, token}: any) {
   
     return (
       <div>
-        <div className='flex flex-row justify-between'>
+        <div className='flex lg:flex-row flex-col gap-2 lg:justify-between'>
           <FaUser className='text-dark mt-6 ml-4' />
           <Typography variant={'title'} className='text-dark/90'>Persoonlijke Informatie</Typography>
          
-          {!isEditing ? <button onClick = {() => handleButtonPress()} className="px-4 mt-3 h-[40px] inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100">
+          {!isEditing ? <button onClick = {() => handleButtonPress()} className="px-4 lg:mt-3 mb-4 lg:mb-0 h-[40px] inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100">
             <i className="mr-1 fa fa-plus"></i> Wijzig gegevens
           </button>
           : <div></div>
@@ -106,31 +106,31 @@ export function UserDetails({user, token}: any) {
         </div>
         <div className={`${inter.className} border-2 rounded-xl p-8 text-dark border-dark/60 mb-4 `}>
           {isEditing ? (
-          <form onSubmit={handleSubmit} className='flex flex-col gap-2'>
+          <form onSubmit={handleSubmit} className='flex flex-col gap-2 overflow-hidden'>
               <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>First Name:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="firstName" className={`ml-4 text-dark/60 border-b`} value={formData.firstName} onChange={handleInputChange} />
+                <span className='inline-block'>First Name:</span> {/* Adjust the min-width as per your design needs */}
+                <input type="text" name="firstName" className={`ml-4 text-dark/60 border-b w-[150px] text-sm lg:text-md mb-4 lg:mb-0`} value={formData.firstName} onChange={handleInputChange} />
               </label>
               <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>Last Name:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="text" name="lastName" className={`ml-4 text-dark/60 border-b`} value={formData.lastName} onChange={handleInputChange} />
+                <span className='w-[100px]] block'>Last Name:</span> {/* Adjust the min-width as per your design needs */}
+                <input type="text" name="lastName" className={`ml-4 text-dark/60 border-b w-[150px] text-sm lg:text-md mb-4 lg:mb-0`} value={formData.lastName} onChange={handleInputChange} />
               </label>
               <label className={`text-dark flex flex-row`}> 
-                <span className='min-width-[150px] block'>Email:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="email" name="email" className={`ml-4 text-dark/60 border-b`} value={formData.email} onChange={handleInputChange} />
+                <span className='w-[50px] block'>Email:</span> {/* Adjust the min-width as per your design needs */}
+                <input type="email" name="email" className={`ml-4 text-dark/60 border-b w-[200px] text-sm lg:text-md mb-4 lg:mb-0`} value={formData.email} onChange={handleInputChange} />
               </label>
               <label className={`text-dark flex flex-row`}>
-                <span className='min-width-[150px] block'>Telefoonnummer:</span> {/* Adjust the min-width as per your design needs */}
-                <input type="tel" name="phone" className={`ml-4 text-dark/60 border-b`} value={formData.phone} onChange={handleInputChange} />
+                <span className='w-[100px] block'>Telefoonnummer:</span> {/* Adjust the min-width as per your design needs */}
+                <input type="tel" name="phone" className={`ml-10 text-dark/60 border-b w-[150px] text-sm lg:text-md mb-4 lg:mb-0`} value={formData.phone} onChange={handleInputChange} />
               </label>
               <button type="submit" className='w-1/2 bg-primary text-white py-2 rounded-xl mt-4'>Save</button>
             </form> 
           ) : (
           <div>
-            <Typography variant='muted' className='text-dark/80'>Name: {user?.firstName} {user?.lastName}</Typography>
-            <Typography variant='muted' className='text-dark/80'>Email: {user?.email}</Typography>
-            <Typography variant='muted' className='text-dark/80'>Telefoonnummer: {user?.phone}</Typography>
-            <Typography variant='muted' className='text-dark/80'>Geboorte Datum: {user?.email}</Typography>
+            <Typography variant='muted' className='text-dark/80 mb-2'>Name: {user?.firstName} {user?.lastName}</Typography>
+            <Typography variant='muted' className='text-dark/80 mb-2'>Email: {user?.email}</Typography>
+            <Typography variant='muted' className='text-dark/80 mb-2'>Telefoon nummer: {user?.phone}</Typography>
+            <Typography variant='muted' className='text-dark/80 mb-2'>Geboorte Datum: {user?.email}</Typography>
           </div>
           )}
   

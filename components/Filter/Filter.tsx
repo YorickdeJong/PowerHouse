@@ -33,7 +33,11 @@ export default function Filter() {
     const [paddingTop, setPaddingTop] = useState('pt-12');
     const phone = useMediaQuery('(max-width: 768px)');
     const [isFilterVisible, setIsFilterVisible] = useState(false);
-    const [selectedColor, setSelectedColor] = useState(colors[0].name)
+    const [selectedColor, setSelectedColor] = useState({
+        name: '',
+        class: '',
+        selectedClass: ''
+    })
     const [selectedPriceRange, setSelectedPriceRange] = useState<any[]>([]);
     // State to hold the selected minimum and maximum prices
     const [selectedPrice, setSelectedPrice] = useState([0, 150]); // Initial min and max prices
@@ -41,7 +45,7 @@ export default function Filter() {
     const [selectedFit, setSelectedFit] = useState<any[]>([]);
   
 
-
+    console.log('color', selectedColor)
     const slideIn = {
         hidden: { x: '100%', opacity: 0 },
         visible: { x: '0%', opacity: 1 },
@@ -69,6 +73,8 @@ export default function Filter() {
       };
     }, []);
 
+
+    console.log('selectedcolor', selectedColor.name)
     return (
         <>
             { phone && (
@@ -111,11 +117,11 @@ export default function Filter() {
                         selectedFit={selectedFit}
                         setSelectedFit={setSelectedFit}
                     />
-                <Button className="mt-[-40px] h-[40px] text-white text-lg">
-                    <Link href={`/shop?color=${selectedColor}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.join(',')}`}>
+                    <Link href={`/shop?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.join(',')}`}
+                    className="mt-2 lg:mt-[-40px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
+                    >
                         Zoek
                     </Link>
-                </Button>
                 </div>
             </motion.div>
         }

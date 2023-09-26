@@ -9,7 +9,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
   return (
     <Suspense>
       <div className="w">
-        <div className="mx-8 sm:mx-auto">
+        <div className="sm:mx-auto">
         <ApolloProvider client={apolloClient}>
           <Suspense>{children}</Suspense>
         </ApolloProvider>

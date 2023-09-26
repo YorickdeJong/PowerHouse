@@ -4,20 +4,45 @@ import Filter from '../../components/Filter/Filter';
 import Card from '@/components/card';
 import Breadcrumb from '@/components/breadcrumb';
 import { storefront } from '@/utils/shopify/storefront';
+import { useMediaQuery } from '@/hook/media-query';
 
 // container prop defines max width of your container
 // Typography is a component that defines the font size and weight
 
-export default async function ServicesPage() {
+export default async function ServicesPage({params, searchParams, children} : any) {
+  
+  const {color, min, max, fit} = searchParams;
 
-  let items = []
+  console.log('params', searchParams);
+  
+  let items = [];
+  let products;
+  const colorCorrect = color.toLowerCase()
+  console.log('colorCorrect', colorCorrect);
   try {
-      const products = await storefront({query})
-      items = products.body.data.products.edges
+    products = await storefront({
+      query: FILTER_PRODUCTS_QUERY,
+      variables: { min: parseFloat(min), max: parseFloat(max), color: JSON.stringify(colorCorrect) } // Convert to Float and Correct Variable Names
+    });
+  
+    console.log('products 222', products?.body?.data?.collection?.products?.edges[0]?.node.priceRange);
+  
+    if (products.body && products.body.data && products.body.data.collection) {
+      items = products.body.data.collection?.products?.edges;
+    } else {
+      products = await storefront({
+        query: query
+      });
+      items = products.body.data.products.edges;
+      console.error('Products not available');
+    }
+  } catch (error) {
+    console.log('error', error);
+    console.log('products 222', products?.body?.errors);
   }
-  catch(error) {
-      console.log('error', error)
-  }
+
+  console.log('products 222', products?.body?.data?.collection?.products?.edges[0]?.node.priceRange) 
+
 
 
   return (
@@ -55,6 +80,53 @@ export default async function ServicesPage() {
 }
 
 
+const FILTER_PRODUCTS_QUERY = `
+query FilterProducts($min: Float, $max: Float) {
+  collection(handle: "filterable-collection") {
+    handle
+    products(first: 10, filters: [{ price: { min: $min, max: $max } }, {
+      variantOption: {
+          name: "color",
+          value: "black"
+      }
+    }
+  ]) {
+      edges {
+        node {
+          title
+          handle
+          priceRange {
+            minVariantPrice {
+              amount
+              currencyCode
+            }
+          }
+          variants(first: 40) {
+            edges {
+              node {
+                selectedOptions {
+                  name
+                  value
+                }
+              }
+            }
+          }
+          images(first: 1) {
+            edges {
+              node {
+                url
+                altText
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+`;
+
+
 const query = `
 query Products {
     products(first: 6) {
@@ -75,7 +147,7 @@ query Products {
               }
             }
           }
-          variants(first: 3) {  
+          variants(first: 40) {  
             edges {
               node {
                 title

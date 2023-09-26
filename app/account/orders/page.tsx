@@ -48,7 +48,7 @@ const ORDER_ITEM_FRAGMENT = gql`
   }
 `;
 
-export const CUSTOMER_FRAGMENT = gql`
+const CUSTOMER_FRAGMENT = gql`
   fragment CustomerOrders on Customer {
     numberOfOrders
     orders(
@@ -74,7 +74,7 @@ export const CUSTOMER_FRAGMENT = gql`
 `;
 
 // NOTE: https://shopify.dev/docs/api/storefront/latest/queries/customer
-export const CUSTOMER_ORDERS_QUERY = gql`
+const CUSTOMER_ORDERS_QUERY = gql`
   ${CUSTOMER_FRAGMENT}
   query CustomerOrders(
     $country: CountryCode
@@ -90,6 +90,8 @@ export const CUSTOMER_ORDERS_QUERY = gql`
     }
   }
 `;
+
+
 
 export default function Orders({params} : any) {
   const router = useRouter(); // Initializing the useRouter hook
@@ -130,7 +132,7 @@ export default function Orders({params} : any) {
   return (
     <>
     <AccountHeader slug={path}/>
-     <section className="min-h-full">
+     <section className="min-h-full mx-8 sm:mx-auto">
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <CustomerOrders orders={orders} />

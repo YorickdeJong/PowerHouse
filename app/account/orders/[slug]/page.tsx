@@ -163,7 +163,7 @@ export default function OrderItem({params} : any)  {
   return (
     <>
     <AccountHeader slug={path}/>
-     <section className="min-h-full">
+     <section className="min-h-full mx-8 md:mx-0">
         <main>
           <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
             <Breadcrumb pageTitle='/orders' />   
@@ -183,7 +183,7 @@ const CustomerOrders = ({ order }: any) => {
   const fullfilmentColor = getStatusColor(order?.fulfillmentStatus)
   return (
     <div>
-      <Typography variant='title' className='text-dark/80'>Bestelnummer: {order.orderNumber}</Typography>
+      <Typography variant='title' className='text-dark/80 my-4 lg:my-0'>Bestelnummer: {order.orderNumber}</Typography>
       {order?.lineItems?.nodes?.map((node: any) => (
         <div className='mb-8 group border-2 rounded-xl p-6 border-dark/60 hover:bg-dark/10' key={node?.variant?.id}>
           <Link href={`/shop/${node?.variant?.product.handle}`} className='flex flex-row'>
