@@ -17,17 +17,15 @@ export default async function ServicesPage({params, searchParams, children} : an
   
   let items = [];
   let products;
-  const colorCorrect = color.toLowerCase()
-  console.log('colorCorrect', colorCorrect);
   try {
     products = await storefront({
       query: FILTER_PRODUCTS_QUERY,
-      variables: { min: parseFloat(min), max: parseFloat(max), color: JSON.stringify(colorCorrect) } // Convert to Float and Correct Variable Names
+      variables: { min: parseFloat(min), max: parseFloat(max) } // Convert to Float and Correct Variable Names
     });
   
     console.log('products 222', products?.body?.data?.collection?.products?.edges[0]?.node.priceRange);
   
-    if (products.body && products.body.data && products.body.data.collection) {
+    if (products.body && products.body.data && products?.body?.data?.collection?.products?.edges[0]?.node.priceRange) {
       items = products.body.data.collection?.products?.edges;
     } else {
       products = await storefront({
