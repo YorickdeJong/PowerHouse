@@ -39,7 +39,7 @@ export default async function ServicesPage({params, searchParams, children} : an
     console.log('products 222', products?.body?.errors);
   }
 
-  console.log('products 222', products?.body?.data?.collection?.products?.edges[0]?.node.priceRange) 
+  console.log('products 222', items) 
 
 
 

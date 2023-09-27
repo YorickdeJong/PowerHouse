@@ -66,3 +66,20 @@
   background: white url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M20.285 2l-11.285 11.567-5.286-5.011-3.714 3.716 9 8.728 15-15.285z'/%3E%3C/svg%3E") center/16px no-repeat;
 }
 
+/* For Webkit browsers like Chrome/Safari */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background-color: #3f3f3f;
+}
+
+/* For Firefox */
+.custom-scrollbar {
+  scrollbar-color: #c1c1c1 #f5f5f5;
+}

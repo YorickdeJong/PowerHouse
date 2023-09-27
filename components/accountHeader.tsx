@@ -73,30 +73,9 @@ export default function AccountHeader({slug} : any) {
                   </div>
                   <div className="hidden md:block">
                     <div className="ml-4 flex items-center md:ml-6">
-                      <button
-                        type="button"
-                        className="relative rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="absolute -inset-1.5" />
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
 
                       {/* Profile dropdown */}
                       <Menu as="div" className="relative ml-3">
-                        <div>
-                          <Menu.Button className="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                            <span className="absolute -inset-1.5" />
-                            <span className="sr-only">Open user menu</span>
-                            <Image
-                            className="h-8 w-8 rounded-full" 
-                            src={'/assets/images/legging_1.png'} 
-                            alt="" 
-                            width={32} 
-                            height={32}
-                            />
-                          </Menu.Button>
-                        </div>
                         <Transition
                           as={Fragment}
                           enter="transition ease-out duration-100"

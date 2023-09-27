@@ -1,5 +1,5 @@
 import PorductDetails from "@/components/productDetails/ProductDetails";
-import Reviews from "@/components/Reviews";
+import Reviews from "@/components/reviews/Reviews";
 import ZoomImage from "@/components/ZoomImage";
 import Breadcrumb from "@/components/breadcrumb";
 import Card from "@/components/card";
@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import Image from "next/image";
 import gql from "graphql-tag";
 import { storefront } from "@/utils/shopify/storefront";
+import Link from "next/link";
 
 
 export default async function ServicesPage({params} : any) {
@@ -21,6 +22,7 @@ export default async function ServicesPage({params} : any) {
             variables: { handle: handle }
         });
         item = products.body.data.product;
+        console.log('products 222', item) 
     } 
     catch (error) {
         console.log('error', error);
@@ -38,6 +40,8 @@ export default async function ServicesPage({params} : any) {
         console.log('error', error);
     }
 
+
+
     return (
       <section className='mt-16 mx-auto md:ml-10 pb-40'>
         <div className="container">
@@ -47,7 +51,7 @@ export default async function ServicesPage({params} : any) {
                </div>
                <div className="lg:ml-28">
                     <Breadcrumb pageTitle = 'Shop' className='hidden md:inline-flex' />
-                    <PorductDetails item = {item}/>
+                    <PorductDetails item = {item} productId = {item.id}/>
                 </div>
             </div>
 
@@ -56,9 +60,11 @@ export default async function ServicesPage({params} : any) {
                     <Typography variant = 'title' className="text-tertairy  lg:text-3xl">
                         Bekijk Vergelijkbare Producten
                     </Typography>
-                    <Button variant = 'outline' className="rounded-full py-2 md:text-md">
-                        Bekijk Alles
-                    </Button>
+                    <Link href='/shop'>
+                        <Button variant = 'outline' className="rounded-full py-2 md:text-md">
+                            Bekijk Alles
+                        </Button>
+                    </Link>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
@@ -145,7 +151,7 @@ query Products {
               }
             }
           }
-          variants(first: 3) {  
+          variants(first: 30) {  
             edges {
               node {
                 id

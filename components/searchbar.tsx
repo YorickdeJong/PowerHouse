@@ -80,8 +80,7 @@ export default function SearchBar({ className }: any) {
                 >
                 <FontAwesomeIcon
                     icon={faSearch}
-                    style={{fontSize: 15}}
-                    className='text-primary mx-4'
+                    className='text-primary mx-3 h-4 w-4'
                 />
                 <input 
                     type="text" 

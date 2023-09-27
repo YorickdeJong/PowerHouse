@@ -2,10 +2,10 @@
 import Image from "next/image";
 import { useState } from "react";
 import Typography from "./ui/typography";
-import Reviews from "./Reviews";
-
-
-
+import Reviews from "./reviews/Reviews";
+import dynamic from "next/dynamic";
+import { jsx, Box, AspectRatio } from 'theme-ui'
+import ImageCarousel from "./LazyImageCarousel";
 
 
 
@@ -14,30 +14,13 @@ export default function ZoomImage({images}: any) {
     const [showPreview, setShowPreview] = useState(false);
     const [selectedImage, setSelectedImage] = useState(images[0]?.node?.url);
 
-
-    const handleMouseMove = (e: any) => {
-      setShowPreview(true);
-      const preview = document.querySelector(".zoom-preview") as HTMLElement;
-      if (preview) {
-        const x = 1000 / 300; // Image width / Preview div width
-        const y = 600 / 300; // Image height / Preview div height
-        const posX = e.nativeEvent.offsetX;
-        const posY = e.nativeEvent.offsetY;
-  
-        preview.style.backgroundImage = `url(${images[0].node.url!})`;
-        preview.style.backgroundSize = `${1000}px ${600}px`;
-        preview.style.backgroundPosition = `-${posX * x}px -${posY * y}px`;
-      }
-    };
-  
-    const handleMouseOut = () => {
-      setShowPreview(false);
-      const preview = document.querySelector(".zoom-preview") as HTMLElement;
-      if (preview) {
-        preview.style.backgroundImage = "none";
-      }
-    };
-  
+    const imageProp = {
+        src: selectedImage,
+        alt: 'sub image'
+    }
+    const imageProps = {
+        className:"rounded-2xl overflow-hidden w-[450px] h-[700px]"
+    }
     return (
         <div className="flex lg:flex-row flex-col">
                 <div className="grid grid-cols-4 lg:grid-cols-1 lg:mr-10 gap-3 h-[0px] lg:h-[500px]">
@@ -59,15 +42,15 @@ export default function ZoomImage({images}: any) {
                         })}
                 </div>
             <div>
-                <div className="rounded-2xl overflow-hidden">
-                    <Image
-                    src={selectedImage}
-                    alt={''}
-                    onMouseMove={handleMouseMove}
-                    onMouseOut={handleMouseOut}
-                    className="-mb-7 w-[450px] h-[700px] hover:scale-150 rounded-2xl object-cover object-top"
-                    width={1000}
-                    height={600}
+                <div className="rounded-2xl overflow-hidden w-[500px] h-[650px]">
+                    <ImageCarousel
+                        priority
+                        width={550}
+                        height={700}
+                        alt={'images'}
+                        images={[imageProp]}
+                        showZoom={true}
+                        currentSlide={selectedImage}
                     />
                 </div>
 
