@@ -72,7 +72,7 @@ export default function Card({
 
 
   const linkHref = {    
-    pathname: `/shop/${collections || ''}/${handle || ''}`,
+    pathname: `/shop/${collections || 'filterable-collection'}/${handle || ''}`,
   };
   
   return (

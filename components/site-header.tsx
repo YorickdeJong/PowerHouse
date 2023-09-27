@@ -53,6 +53,8 @@ export default function Navbar() {
       setCartAsideVisible(window.location.href.includes('#cart-aside'));
     };
 
+    fetchCollections().then((data) => setCollections(data));
+    
     // Initial check
     handleHashChange();
 
@@ -64,11 +66,6 @@ export default function Navbar() {
       window.removeEventListener('hashchange', handleHashChange);
     };
   }, []);
-
-
-  // useEffect(() => {
-  //   fetchCollections().then((data) => setCollections(data));
-  // }, []);
 
   // Update cart items
   useEffect(() => {
