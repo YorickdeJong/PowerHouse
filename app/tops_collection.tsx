@@ -7,11 +7,11 @@ import gql from "graphql-tag";
 import { cn } from "@/lib/utils";
 
 
-export default async function Seamless({className} : any) {
+export default async function Tops({className} : any) {
     let items = []
     try {
-        const products = await storefront({query})
-        items = products.body.data.products.edges
+        const products = await storefront({query: TOPS_QUERY})
+        items = products.body.data.collection.products.edges
     }
     catch(error) {
         console.log('error', error)
@@ -23,9 +23,9 @@ export default async function Seamless({className} : any) {
             <div className="container pt-12">
                 <div className="flex flex-row justify-between">
                     <Typography variant = 'title' className="text-tertairy mt-4 lg:text-3xl">
-                        GOGYM SEAMLESS COLLECTIE
+                        GOGYM Tops
                     </Typography>
-                    <Link href={'/shop'} >
+                    <Link href={'/shop/tops'} >
                         <Button variant = 'outline' className="rounded-full mt-4 py-2 md:text-md">
                                 Bekijk Alles
                         </Button>
@@ -42,6 +42,7 @@ export default async function Seamless({className} : any) {
                                 price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
                                 kleuren={card?.node?.variants?.edges || ''}
                                 handle={card?.node?.handle || ''}
+                                collections={card?.node?.collections?.edges[0]?.node?.handle || ''}
                             />    
                     ))}
                     
@@ -52,43 +53,49 @@ export default async function Seamless({className} : any) {
     )
 }
 
-
-
-
-
-const query = `
-query Products {
-    products(first: 3) {
-      edges {
-        node {
-          title
-          handle
-          priceRange {
-            minVariantPrice {
-              amount
-            }
-          }
-          images(first: 1) {
-            edges {
-              node {
-                url
-                altText
+const TOPS_QUERY = `
+query AllProducts {
+    collection(handle: "tops") {
+      products(first: 3) {
+        edges {
+            node {
+              title
+              handle
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
               }
-            }
-          }
-          variants(first: 40) {  
-            edges {
-              node {
-                title
-                selectedOptions {
-                  name 
-                  value 
+              images(first: 1) {
+                edges {
+                  node {
+                    url
+                    altText
+                  }
+                }
+              }
+              variants(first: 40) {  
+                edges {
+                  node {
+                    title
+                    selectedOptions {
+                      name 
+                      value 
+                    }
+                  }
+                }
+              }
+              collections(first: 1) { 
+                edges {
+                  node {
+                    title
+                    handle
+                  }
                 }
               }
             }
-          }
         }
       }
     }
-  }
+}
 `

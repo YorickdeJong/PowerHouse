@@ -27,7 +27,7 @@ export default function Hero2({ className, ...props }: HeroProps) {
     <section className='relative container mt-12 grid grid-cols-1 md:grid-cols-2 gap-4'>
       
       {/* First Image */}
-      <Link href='/shop' className='relative group  h-[350px] md:h-[700px] '>
+      <Link href='/shop/tops' className='relative group  h-[350px] md:h-[700px] '>
         <Image
           src='/assets/images/legging_1.png' // Replace with the path to your first image
           alt='First Image'
@@ -48,7 +48,7 @@ export default function Hero2({ className, ...props }: HeroProps) {
       
       {/* Second Image with Text Below */}
       <div className='flex flex-col'>
-        <Link href='/shop'  className='relative h-[350px] md:h-[550px] overflow-hidden group  '>
+        <Link href='/shop/pants'  className='relative h-[350px] md:h-[550px] overflow-hidden group  '>
           <Image
             src='/assets/images/legging_2.png' // Replace with the path to your second image
             alt='Second Image'

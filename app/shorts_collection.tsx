@@ -1,19 +1,17 @@
 import Card from "@/components/card";
 import { Button } from "@/components/ui/button";
 import { Typography } from "@/components/ui/typography";
-import { storefront } from "@/utils/shopify/storefront";
 import Link from "next/link";
+import { storefront } from "@/utils/shopify/storefront";
+import gql from "graphql-tag";
+import { cn } from "@/lib/utils";
 
 
-
-
-export default async function NewCollection() {
-
+export default async function Shorts({className} : any) {
     let items = []
     try {
-        const products = await storefront({query})
-        // console.log('products', products.body.data.products.edges[0].node.variants.edges)
-        items = products.body.data.products.edges
+        const products = await storefront({query: SHORTS_QUERY})
+        items = products.body.data.collection.products.edges
     }
     catch(error) {
         console.log('error', error)
@@ -21,14 +19,13 @@ export default async function NewCollection() {
 
 
     return (
-        <section className="xl:h-[860px] mb-20 md:mb-28 xl:mb-0 mt-12 ">
-            <div className="container pt-10 md:pt-0">
-            <hr className="my-2 mb-4 border-none bg-dark/20 h-[1px] container"/>
-            <div className="flex flex-row justify-between">
+        <section className={cn("bg-white lg:mb-0 lg:h-[850px]", className)}>
+            <div className="container pt-12">
+                <div className="flex flex-row justify-between">
                     <Typography variant = 'title' className="text-tertairy mt-4 lg:text-3xl">
-                        Nieuwe Collectie
+                        GOGYM Shorts
                     </Typography>
-                    <Link href={'/shop'} >
+                    <Link href={'/shop/shorts'} >
                         <Button variant = 'outline' className="rounded-full mt-4 py-2 md:text-md">
                                 Bekijk Alles
                         </Button>
@@ -36,7 +33,7 @@ export default async function NewCollection() {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
-                    {items.slice(5,8).map((card: any) => (
+                    {items.map((card: any) => (
                             <Card 
                                 className="box-shadow-2xl mb-4 md:mb-0"
                                 title={card?.node?.title || ''}
@@ -50,16 +47,65 @@ export default async function NewCollection() {
                     ))}
                     
                 </div>
+
             </div>
         </section>
     )
 }
 
+const SHORTS_QUERY = `
+query AllProducts {
+    collection(handle: "shorts") {
+      products(first: 3) {
+        edges {
+            node {
+              title
+              handle
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
+              }
+              images(first: 1) {
+                edges {
+                  node {
+                    url
+                    altText
+                  }
+                }
+              }
+              variants(first: 40) {  
+                edges {
+                  node {
+                    title
+                    selectedOptions {
+                      name 
+                      value 
+                    }
+                  }
+                }
+              }
+              collections(first: 1) { 
+                edges {
+                  node {
+                    title
+                    handle
+                  }
+                }
+              }
+            }
+        }
+      }
+    }
+}
+`
 
 
-const query = `
-query Products {
-    products(first: 10) {
+const FILTER_PRODUCTS_QUERY = `
+query AllProducts {
+  collection(handle: "tops") {
+    handle
+     products(first: 6) {
       edges {
         node {
           title
@@ -77,22 +123,14 @@ query Products {
               }
             }
           }
-          variants(first: 40) {
+          variants(first: 40) {  
             edges {
               node {
                 title
                 selectedOptions {
-                  name
-                  value
+                  name 
+                  value 
                 }
-              }
-            }
-          }
-          collections(first: 1) { 
-            edges {
-              node {
-                title
-                handle
               }
             }
           }
@@ -100,5 +138,4 @@ query Products {
       }
     }
   }
-  `
-
+`

@@ -29,7 +29,7 @@ const fits = [
 ]
 
 
-export default function Filter() {
+export default function Filter({categories}: any) {
     const [paddingTop, setPaddingTop] = useState('pt-12');
     const phone = useMediaQuery('(max-width: 768px)');
     const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -98,7 +98,6 @@ export default function Filter() {
             className={`md:fixed w-[250px] mb-20 ${paddingTop} 
                 transform transition-transform duration-150 ease-in-out bg-white
                 ${isFilterVisible && phone ? 'translate-x-0' : 'translate-x-full'}`}>
-                <Typography variant = 'title' className="lg:text-2xl text-black/90" >Kleren / Tops</Typography>
 
                 <div className="grid grid-cols-1 gap-8 md:gap-20 mt-8">
                     <MoneyRange 
@@ -117,7 +116,7 @@ export default function Filter() {
                         selectedFit={selectedFit}
                         setSelectedFit={setSelectedFit}
                     />
-                    <Link href={`/shop?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.join(',')}`}
+                    <Link href={`/shop${categories}?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.join(',')}`}
                     className="mt-2 lg:mt-[-40px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
                     >
                         Zoek

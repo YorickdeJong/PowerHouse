@@ -1,10 +1,10 @@
 import dynamic from 'next/dynamic';
 import Hero from './hero';
 import NewCollection from './new_collection';
-import Banner from './banner';
-import Seamless from './seamless_collection';
 import NewArrivals from './NewArrivals';
 import Hero2 from './hero2';
+import Tops from './tops_collection';
+import Shorts from './shorts_collection';
 
 //Define your components in the Page.tsx
 // The /app/ route is your home page
@@ -22,12 +22,12 @@ export default function IndexPage() {
       <Hero />
       {/* <Banner /> */}
       {/* @ts-expect-error Server Component */}
-      <Seamless />
+      <Tops />
 
       <NewArrivals />
 
       {/* @ts-expect-error Server Component */}
-      <Seamless className="lg:mb-20"/>
+      <Shorts className="lg:mb-20"/>
     </section>
   );
 }

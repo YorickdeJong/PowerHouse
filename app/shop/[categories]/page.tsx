@@ -1,6 +1,6 @@
 import { Typography } from '@/components/ui/typography';
 import Caption from '@/components/caption';
-import Filter from '../../components/Filter/Filter';
+import Filter from '../../../components/Filter/Filter';
 import Card from '@/components/card';
 import Breadcrumb from '@/components/breadcrumb';
 import { storefront } from '@/utils/shopify/storefront';
@@ -11,32 +11,29 @@ import { useMediaQuery } from '@/hook/media-query';
 
 export default async function ServicesPage({params, searchParams, children} : any) {
   
+  console.log('params', params.categories)
   const {color, min, max, fit} = searchParams;
-
-  console.log('params', searchParams);
-  
   let items = [];
   let products;
   try {
-    products = await storefront({
-      query: FILTER_PRODUCTS_QUERY,
-      variables: { min: parseFloat(min), max: parseFloat(max) } // Convert to Float and Correct Variable Names
-    });
-  
-  
-    if (products.body && products.body.data && products?.body?.data?.collection?.products?.edges[0]?.node.priceRange) {
-      items = products.body.data.collection?.products?.edges;
-    } else {
-      products = await storefront({
-        query: query
-      });
-      items = products.body.data.products.edges;
-      console.error('Products not available');
+
+    if (!min && !max) {
+        products = await storefront({query: TOPS_QUERY, variables: { handle: params.categories }});
     }
+    else {
+        products = await storefront({
+          query: FILTER_PRODUCTS_QUERY,
+          variables: { min: parseFloat(min), max: parseFloat(max), handle: params.categories } // Convert to Float and Correct Variable Names
+        });
+    }
+  
+    items = products.body.data.collection?.products?.edges;
   } catch (error) {
     console.log('error', error);
-    console.log('products 222', products?.body?.errors);
   }
+
+
+
 
   return (
     <section className='bg-white pb-40' >
@@ -44,7 +41,7 @@ export default async function ServicesPage({params, searchParams, children} : an
         
         <div className='flex md:flex-row flex-col'>
           <div className="">
-            <Filter categories=''/>
+            <Filter categories={`/${params.categories}`}/>
           </div>
           <div className='md:ml-[400px] mt-2 md:mt-12'>
             <Breadcrumb pageTitle = 'Shop' />
@@ -61,7 +58,7 @@ export default async function ServicesPage({params, searchParams, children} : an
                         price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
                         kleuren={card?.node?.variants?.edges || ''}
                         handle={card?.node?.handle || ''}
-                        collections = {card?.node?.collections?.edges[0]?.node?.handle || ''}
+                        collections={card?.node?.collections?.edges[0]?.node?.handle || ''}
                     />    
                 </>
               ))}
@@ -73,10 +70,57 @@ export default async function ServicesPage({params, searchParams, children} : an
   );
 }
 
+const TOPS_QUERY = `
+query AllProducts($handle: String) {
+    collection(handle: $handle) {
+      products(first: 30) {
+        edges {
+            node {
+              title
+              handle
+              priceRange {
+                minVariantPrice {
+                  amount
+                }
+              }
+              images(first: 1) {
+                edges {
+                  node {
+                    url
+                    altText
+                  }
+                }
+              }
+              variants(first: 40) {  
+                edges {
+                  node {
+                    title
+                    selectedOptions {
+                      name 
+                      value 
+                    }
+                  }
+                }
+              }
+              collections(first: 1) { 
+                edges {
+                  node {
+                    title
+                    handle
+                  }
+                }
+              }
+            }
+        }
+      }
+    }
+}
+`
+
 
 const FILTER_PRODUCTS_QUERY = `
-query FilterProducts($min: Float, $max: Float) {
-  collection(handle: "filterable-collection") {
+query FilterProducts($min: Float, $max: Float, $handle: String) {
+  collection(handle: $handle) {
     handle
     products(first: 10, filters: [{ price: { min: $min, max: $max } }, {
       variantOption: {
@@ -119,49 +163,3 @@ query FilterProducts($min: Float, $max: Float) {
   }
 }
 `;
-
-
-const query = `
-query Products {
-  products(first: 30) {
-    edges {
-      node {
-        title
-        handle
-        priceRange {
-          minVariantPrice {
-            amount
-          }
-        }
-        images(first: 1) {
-          edges {
-            node {
-              url
-              altText
-            }
-          }
-        }
-        variants(first: 40) {  
-          edges {
-            node {
-              title
-              selectedOptions {
-                name 
-                value 
-              }
-            }
-          }
-        }
-        collections(first: 1) { 
-          edges {
-            node {
-              title
-              handle
-            }
-          }
-        }
-      }
-    }
-  }
-}
-`

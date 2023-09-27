@@ -12,15 +12,32 @@ import { Icons } from './icons';
 import SearchBar from './searchbar';
 import { useMediaQuery } from '@/hook/media-query';
 import Typography from './ui/typography';
+import { storefront } from '@/utils/shopify/storefront';
+
+
+
+async function fetchCollections() {
+  try {
+    const response = await storefront({
+      query: COLLECTIONS_QUERY,
+    });
+    const collections = response.body.data.collections.edges.map((edge: any) => edge.node);
+    return collections || [];
+  } catch (error) {
+    console.log('error', error);
+    return [];
+  }
+}
+
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [cartAsideVisible, setCartAsideVisible] = useState(false);
   const path = usePathname();
-  const { push } = useRouter();
   const phone = useMediaQuery('(max-width: 768px)');
   const [cartItems, setCartItems] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [collections, setCollections] = useState([]);
 
 
   const openCartAside = () => {
@@ -33,8 +50,10 @@ export default function Navbar() {
   // Check for cart aside is open
   useEffect(() => {
     const handleHashChange = () => {
-      setCartAsideVisible(window.location.href.includes('#cart-aside'));
+      fetchCollections().then(setCollections);
     };
+    
+    fetchCollections().then((data) => setCollections(data));
 
     // Initial check
     handleHashChange();
@@ -48,10 +67,12 @@ export default function Navbar() {
     };
   }, []);
 
+
   // Update cart items
   useEffect(() => {
     const items = JSON.parse(localStorage.getItem('cart') || '[]')
     setCartItems(items.length)
+
     const accesToken = sessionStorage.getItem('accessToken');
     setIsLoggedIn(Boolean(accesToken));
   }, [cartAsideVisible])
@@ -64,7 +85,7 @@ export default function Navbar() {
     >
       <nav className="container  flex items-center justify-between px-5 py-5">
 
-        <NavContent currentPath={path || ''}/>
+        <NavContent collections={collections} currentPath={path || ''}/>
         
         {!isMenuOpen ? (
           <Icons.menu
@@ -100,35 +121,57 @@ export default function Navbar() {
         </div>
       </nav>
 
-      {isMenuOpen && <NavContentMob setIsMenuOpen={setIsMenuOpen} currentPath={path || ''} />}
+      {isMenuOpen && <NavContentMob collections={collections} setIsMenuOpen={setIsMenuOpen} currentPath={path || ''} />}
     </section>
   );
 }
 
-const NavContent = ({currentPath} : {currentPath: string}) => {
+const NavContent = ({ currentPath, collections }: { currentPath: string; collections: any }) => {
+  const [shopOpen, setShopOpen] = useState(false);
   const path = usePathname();
   return (
     <>
       <ul className="ml-4 flex items-center gap-12 max-lg:hidden">
         {siteConfig.nav.map((_) => (
-          <li
-          key={_.title}
-          className={cn('', {
-            '': _.href === '/' ? path === '/' : path?.includes(_.href),
-          })}
-          >
-            <h3 className={`capitalize text-md ${currentPath === _.href ? 'text-gray-500 font-bold' : 'text-gray-700'} hover:font-bold`}>
-              <Link href={_.href}>{_.title}</Link>
-            </h3>
+          <li key={_.title} className={cn('relative', { 'text-gray-500': path?.includes(_.href) })}>
+            <div
+              onMouseEnter={() => _.href === '/shop' && setShopOpen(true)}
+              onMouseLeave={() => _.href === '/shop' && setShopOpen(false)}
+            >
+              <h3 className={`capitalize text-md ${currentPath === _.href && !_.href.includes('/shop') ? 'font-bold' : 'text-gray-700'} ${!_.href.includes('/shop') && 'hover:font-bold'}`}>
+                <Link href={_.href}>
+                  <div>
+                    {_.title} <span>{_.href === '/shop' ? !shopOpen ? '›' : '⌄' : ''}</span>
+                  </div>
+                </Link>
+                {shopOpen && _.href === '/shop' && collections.length > 0 && (
+                  <div className='pt-2'>
+                    <div className='absolute bg-white border-[1px] border-gray-500 rounded-xl z-10 p-4 w-[200px]'>
+                      <ul className="dropdown-menu">
+                        {collections.map((collection: any) => (
+                          <>
+                            <li key={collection.id}>
+                              <Link href={`/shop/${collection.handle}`} className='text-dark/70 hover:font-bold'>
+                                {collection.title === 'filterable-collection' ? 'Alle Producten' : collection.handle}
+                              </Link>
+                            </li>
+                            <hr className="mb-4 mt-1 border-none bg-dark/30 h-[1px]" />
+                          </>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
+              </h3>
+            </div>
           </li>
         ))}
       </ul>
-
     </>
   );
 };
 
-const NavContentMob = ({ setIsMenuOpen, currentPath }: { setIsMenuOpen: Function, currentPath: string }) => {
+const NavContentMob = ({ setIsMenuOpen, currentPath, collections }: { setIsMenuOpen: Function, currentPath: string, collections: any }) => {
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -143,7 +186,20 @@ const NavContentMob = ({ setIsMenuOpen, currentPath }: { setIsMenuOpen: Function
               <h3 className={`capitalize  py-4 ${
                 currentPath === _.href ? 'text-gray-500 font-bold' : 'text-white'
               }`}>
-                <Link onClick={() => setIsMenuOpen(false)} href={_.href} className='hover:text-primary/50'>{_.title}</Link>
+                <Link onClick={() => setIsMenuOpen(false)} href={_.href} className='hover:text-primary/50'>
+                  {_.title}
+                  {_.href === '/shop' && collections.length > 0 && (
+                    <ul className="dropdown-menu">
+                      {collections.map((collection : any) => (
+                        <li key={collection.id}>
+                          <Link href={`/shop/${collection.handle}`}>
+                            {collection.title}
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}  
+                </Link>
               </h3>
             </li>
         ))}
@@ -152,3 +208,17 @@ const NavContentMob = ({ setIsMenuOpen, currentPath }: { setIsMenuOpen: Function
     </motion.div>
   );
 };
+
+
+const COLLECTIONS_QUERY = `
+query Collections {
+  collections(first: 30) {
+    edges {
+      node {
+        title
+        handle
+      }
+    }
+  }
+}
+`;

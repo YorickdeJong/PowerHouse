@@ -22,6 +22,7 @@ interface CardProps extends HTMLAttributes<HTMLDivElement> {
   hoverText?: string;
   handle: string | '';
   houseCard?: boolean;
+  collections?: string;
 }
 
 export default function Card({
@@ -34,6 +35,7 @@ export default function Card({
   price,
   hoverText,
   handle,
+  collections,
   ...props
 }: CardProps) {
 
@@ -68,12 +70,9 @@ export default function Card({
         inStock: true
     }));
 
-    console.log('uniqueColors', uniqueColors)
-    console.log('uniqueSizes', uniqueSizes)
-
 
   const linkHref = {    
-    pathname: `/shop/${handle|| ''}`,
+    pathname: `/shop/${collections || ''}/${handle || ''}`,
   };
   
   return (

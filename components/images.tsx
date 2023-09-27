@@ -5,7 +5,7 @@ export const Images =  {
     logo: (props: any) => (
       <Image
         {...props}
-        src={`/assets/images/logo.png`} //add image path here
+        src={`/gogymlogo.svg`} //add image path here
         alt="logo"
         width={80}
         height={300}
