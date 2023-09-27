@@ -78,11 +78,11 @@ export default function Navbar() {
 
   return (
     <section
-      className={cn('border-b border-gray-300 bg-white', {
+      className={cn('border-b border-gray-300 bg-white h-[75px]', {
         'top-0  inset-x-0 z-40 ': (path === '/' || path?.startsWith('/technologie/')),
       })}
     >
-      <nav className="container  flex items-center justify-between px-5 py-5">
+      <nav className="container  flex items-center justify-between px-5 py-4">
 
         <NavContent collections={collections} currentPath={path || ''}/>
         
