@@ -96,7 +96,7 @@ export default function SearchBar({ className }: any) {
             {results.slice(0, 5).map((result, index) => (
                 <>
                 <li key={index} className='py-2 text-dark/60 hover:text-dark'>
-                    <Link href={`/shop/${result.node.handle}`}>
+                    <Link href={`/shop/filterable-collection/${result.node.handle}`}>
                         {result.node.title}
                     </Link>
                 </li>

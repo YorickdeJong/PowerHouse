@@ -113,6 +113,14 @@ query FilterProducts($min: Float, $max: Float) {
               }
             }
           }
+          collections(first: 1) { 
+            edges {
+              node {
+                title
+                handle
+              }
+            }
+          }
         }
       }
     }

@@ -77,6 +77,7 @@ export default async function ServicesPage({params} : any) {
                             price={card?.node?.priceRange?.minVariantPrice?.amount || ''}
                             kleuren={card?.node?.variants?.edges || ''}
                             handle={card?.node?.handle || ''}
+                            collections = {card?.node?.collections?.edges[0]?.node?.handle || ''}
                         />    
                     
                     ))}
@@ -127,6 +128,14 @@ query ProductByHandle($handle: String!) {
                 }
             }
         }
+        collections(first: 1) { 
+          edges {
+            node {
+              title
+              handle
+            }
+          }
+        }
     }  
 }
 `
@@ -160,6 +169,14 @@ query Products {
                   name 
                   value 
                 }
+              }
+            }
+          }
+          collections(first: 1) { 
+            edges {
+              node {
+                title
+                handle
               }
             }
           }
