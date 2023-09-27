@@ -24,7 +24,7 @@ export default function SiteBanner() {
             <div
                 className="flex space-x-4 marquee"
                 style={{
-                animation: `marquee 10s linear infinite`,
+                animation: `marquee 15s linear infinite`,
                 whiteSpace: 'nowrap',
                 }}
             >
