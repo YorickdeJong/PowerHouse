@@ -13,6 +13,7 @@ import SiteHeader from '@/components/site-header';
 
 import '@/styles/globals.css'; //import global css here --> styles/global.css
 import ShoppingCart from '@/components/shoppingCart';
+import SiteBanner from '@/components/site-banner';
 // import { ApolloProvider } from '@apollo/client';
 // import apolloClient from '@/utils/shopify/apolloClient';
 
@@ -53,6 +54,7 @@ export default async function RootLayout({ children }: RootLayoutProps) {
             {/* <ApolloProvider client={apolloClient}> */}
                 <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
                   <div className="relative flex min-h-screen  flex-col">
+                    <SiteBanner />
                     <SiteHeader />
                     <ShoppingCart />
                     <div className="flex-1">

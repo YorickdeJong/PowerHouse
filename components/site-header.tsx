@@ -171,6 +171,7 @@ const NavContent = ({ currentPath, collections }: { currentPath: string; collect
 };
 
 const NavContentMob = ({ setIsMenuOpen, currentPath, collections }: { setIsMenuOpen: Function, currentPath: string, collections: any }) => {
+  const [shopOpen, setShopOpen] = useState(false);
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -182,24 +183,36 @@ const NavContentMob = ({ setIsMenuOpen, currentPath, collections }: { setIsMenuO
         <div className='mt-4'>
           {siteConfig.nav.map((_) => (
             <li onClick={() => setIsMenuOpen(false)} key={_.title}>
-              <h3 className={`capitalize  py-4 ${
-                currentPath === _.href ? 'text-gray-500 font-bold' : 'text-white'
-              }`}>
-                <Link onClick={() => setIsMenuOpen(false)} href={_.href} className='hover:text-primary/50'>
-                  {_.title}
-                  {_.href === '/shop' && collections.length > 0 && (
-                    <ul className="dropdown-menu">
-                      {collections.map((collection : any) => (
-                        <li key={collection.id}>
-                          <Link href={`/shop/${collection.handle}`}>
-                            {collection.title}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  )}  
+             <div
+              onMouseEnter={() => _.href === '/shop' && setShopOpen(true)}
+              onMouseLeave={() => _.href === '/shop' && setShopOpen(false)}
+            >
+              <h3 className={`capitalize text-md ${currentPath === _.href && !_.href.includes('/shop') ? 'font-bold' : 'text-gray-500'} ${!_.href.includes('/shop') && 'hover:font-bold'}`}>
+                <Link href={_.href}>
+                  <div>
+                    {_.title} <span>{_.href === '/shop' ? !shopOpen ? '›' : '⌄' : ''}</span>
+                  </div>
                 </Link>
+                {shopOpen && _.href === '/shop' && collections.length > 0 && (
+                  <div className='pt-2'>
+                    <div className='absolute bg-white border-[1px] border-gray-500 rounded-xl z-10 p-4 w-[200px]'>
+                      <ul className="dropdown-menu">
+                        {collections.map((collection: any) => (
+                          <>
+                            <li key={collection.id}>
+                              <Link href={`/shop/${collection.handle}`} className='text-dark/70 hover:font-bold'>
+                                {collection.title === 'filterable-collection' ? 'Alle Producten' : collection.handle}
+                              </Link>
+                            </li>
+                            <hr className="mb-4 mt-1 border-none bg-dark/30 h-[1px]" />
+                          </>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                )}
               </h3>
+            </div>
             </li>
         ))}
         </div>

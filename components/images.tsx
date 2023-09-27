@@ -7,7 +7,7 @@ export const Images =  {
         {...props}
         src={`/gogymlogo.svg`} //add image path here
         alt="logo"
-        width={80}
+        width={40}
         height={300}
       />
     ),
