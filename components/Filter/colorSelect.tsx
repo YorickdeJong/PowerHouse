@@ -13,7 +13,6 @@ export default function ColorSelect({ colors, selectedColor, setSelectedColor }:
     return (
         <div>
         <Typography variant = 'title' className="lg:text-xl text-dark/80 font-bold"> Selecteer Kleur</Typography>
-        <hr className="mt-2 border-none bg-muted h-[1px]"/>
 
         <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-8">
             <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>

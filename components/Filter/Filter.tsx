@@ -10,6 +10,7 @@ import MoneyRange from "./moneyRange";
 import ColorSelect from "./colorSelect";
 import FitSelect from "./fitSelect";
 import Link from "next/link";
+import CategoryFilter from "./categoryFilter";
 
 
 const colors = [
@@ -38,7 +39,8 @@ export default function Filter({categories}: any) {
         class: '',
         selectedClass: ''
     })
-    const [selectedPriceRange, setSelectedPriceRange] = useState<any[]>([]);
+    const [selectedCollection, setSelectedCollection] = useState();
+    const [showFilter, setShowFilter] = useState(false);
     // State to hold the selected minimum and maximum prices
     const [selectedPrice, setSelectedPrice] = useState([0, 150]); // Initial min and max prices
 
@@ -90,6 +92,7 @@ export default function Filter({categories}: any) {
         
             { (isFilterVisible || !phone) &&  
 
+
          <motion.div
           initial="hidden"
           animate="visible"
@@ -98,11 +101,15 @@ export default function Filter({categories}: any) {
             className={`md:fixed w-[250px] mb-20 ${paddingTop} 
                 transform transition-transform duration-150 ease-in-out bg-white
                 ${isFilterVisible && phone ? 'translate-x-0' : 'translate-x-full'}`}>
+                <div className="flex flex-row justify-between">
+                    <Typography variant='title' className="text-dark">Filters</Typography>
+                    
+                </div>
+                <div className="grid grid-cols-1 gap-8 md:gap-12 mt-2">
 
-                <div className="grid grid-cols-1 gap-8 md:gap-20 mt-8">
-                    <MoneyRange 
-                        selectedPrice={selectedPrice}
-                        setSelectedPrice={setSelectedPrice}
+                    <CategoryFilter
+                        selectedCollection={selectedCollection}
+                        setSelectedCollection={setSelectedCollection}
                     />
 
                     <ColorSelect 
@@ -116,8 +123,14 @@ export default function Filter({categories}: any) {
                         selectedFit={selectedFit}
                         setSelectedFit={setSelectedFit}
                     />
+
+                    <MoneyRange 
+                        selectedPrice={selectedPrice}
+                        setSelectedPrice={setSelectedPrice}
+                    />
+
                     <Link href={`/shop${categories}?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.join(',')}`}
-                    className="mt-2 lg:mt-[-40px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
+                    className="mt-2 lg:mt-[-10px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
                     >
                         Zoek
                     </Link>

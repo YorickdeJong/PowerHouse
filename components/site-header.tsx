@@ -1,11 +1,15 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
 import { siteConfig } from '@/config/site';
 import { cn } from '@/lib/utils';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faSearch,
+  } from "@fortawesome/free-solid-svg-icons";
 
 import Brand from './brand';
 import { Icons } from './icons';
@@ -13,6 +17,7 @@ import SearchBar from './searchbar';
 import { useMediaQuery } from '@/hook/media-query';
 import Typography from './ui/typography';
 import { storefront } from '@/utils/shopify/storefront';
+import { Search } from 'lucide-react';
 
 
 
@@ -38,7 +43,8 @@ export default function Navbar() {
   const [cartItems, setCartItems] = useState(0);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [collections, setCollections] = useState([]);
-
+  const [isSearchBarOpen, setIsSearchBarOpen] = useState(false);
+  const searchBarRef = useRef<HTMLDivElement | null>(null);
 
   const openCartAside = () => {
     if (window.location.href.includes('#cart-aside')) {
@@ -53,19 +59,28 @@ export default function Navbar() {
       setCartAsideVisible(window.location.href.includes('#cart-aside'));
     };
 
+    const handleClickOutside = (event : any) => {
+      if (searchBarRef.current && !searchBarRef.current.contains(event.target)) {
+        setIsSearchBarOpen(false); // Close the search bar if clicked outside
+      }
+    };
+
+    
     fetchCollections().then((data) => setCollections(data));
     
     // Initial check
     handleHashChange();
-
+    
     // Listen for hash changes
     window.addEventListener('hashchange', handleHashChange);
+    document.addEventListener('click', handleClickOutside);
 
     // Cleanup
     return () => {
       window.removeEventListener('hashchange', handleHashChange);
+      document.removeEventListener('click', handleClickOutside);
     };
-  }, []);
+  }, [isSearchBarOpen]);
 
   // Update cart items
   useEffect(() => {
@@ -100,7 +115,20 @@ export default function Navbar() {
         )}{' '}
       
         <div className='flex flex-row gap-12'>
-          {!phone && <SearchBar />}
+          {!phone && isSearchBarOpen ? 
+            (
+              <div ref={searchBarRef}>
+                <SearchBar />
+              </div>            
+            ) :
+            (<FontAwesomeIcon
+                onClick = {() => setIsSearchBarOpen(true)}
+                icon={faSearch}
+                className='text-primary mx-3 mt-2 h-6 w-6 opacity-65 hover:opacity-100 cursor-pointer'
+              />
+            )}
+
+
           <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[7px]'>
             <Icons.person 
             className='hover:opacity-60 cursor-pointer opacity-100 '
@@ -200,7 +228,7 @@ const NavContentMob = ({ setIsMenuOpen, currentPath, collections }: { setIsMenuO
                           <>
                             <li key={collection.id}>
                               <Link href={`/shop/${collection.handle}`} className='text-dark/70 hover:font-bold'>
-                                {collection.title === 'filterable-collection' ? 'Alle Producten' : collection.handle}
+                                {collection.handle === 'filterable-collection' ? 'Alle Producten' : collection.handle}
                               </Link>
                             </li>
                             <hr className="mb-4 mt-1 border-none bg-dark/30 h-[1px]" />

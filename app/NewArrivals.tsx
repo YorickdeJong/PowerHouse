@@ -30,7 +30,7 @@ export default function NewArrivals() {
                         <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                             <Link href={'/shop'} className="h-64 w-44 overflow-hidden rounded-lg sm:opacity-0 lg:opacity-100 ">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-01.jpg"
+                                src="/assets/images/legging_3.png"
                                 width={1000}
                                 height={600}
                                 alt=""

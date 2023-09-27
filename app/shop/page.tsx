@@ -5,12 +5,12 @@ import Card from '@/components/card';
 import Breadcrumb from '@/components/breadcrumb';
 import { storefront } from '@/utils/shopify/storefront';
 import { useMediaQuery } from '@/hook/media-query';
+import { useState } from 'react';
 
 // container prop defines max width of your container
 // Typography is a component that defines the font size and weight
 
 export default async function ServicesPage({params, searchParams, children} : any) {
-  
   const {color, min, max, fit} = searchParams;
 
   console.log('params', searchParams);
