@@ -19,7 +19,6 @@ function addToCart(item: any, selectedColor: string, selectedSize: any, quantity
         return;
     }
 
-    console.log('selectedVariant', selectedVariant)
     const variantId = selectedVariant.node.id;
     const image = selectedVariant.node.image.src;
     const alt = selectedVariant.node.image.altText;

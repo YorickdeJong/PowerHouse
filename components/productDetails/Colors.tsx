@@ -8,12 +8,6 @@ function classNames(...classes : any) {
     return classes.filter(Boolean).join(' ')
 }
 
-const colors = [
-    { name: 'White', color: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', color: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', color: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ]
-
 export default function ColorsComponent({selectedColor, setSelectedColor, colorObjects, card} : any) {
 
 

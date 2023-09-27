@@ -50,10 +50,8 @@ export default function Navbar() {
   // Check for cart aside is open
   useEffect(() => {
     const handleHashChange = () => {
-      fetchCollections().then(setCollections);
+      setCartAsideVisible(window.location.href.includes('#cart-aside'));
     };
-    
-    fetchCollections().then((data) => setCollections(data));
 
     // Initial check
     handleHashChange();
@@ -67,6 +65,10 @@ export default function Navbar() {
     };
   }, []);
 
+
+  // useEffect(() => {
+  //   fetchCollections().then((data) => setCollections(data));
+  // }, []);
 
   // Update cart items
   useEffect(() => {
