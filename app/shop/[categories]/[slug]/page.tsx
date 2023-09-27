@@ -37,7 +37,7 @@ export default async function ServicesPage({params} : any) {
         recommendedProducts = products.body.data.products.edges;
     } 
     catch (error) {
-        console.log('error', error);
+        console.log('errors', error);
     }
 
 
