@@ -22,6 +22,11 @@ export default function Hero2({ className, ...props }: HeroProps) {
     outputRange: [0, 100],
   });
 
+  const transition={
+    delay: 0.5,
+    duration: 0.8,
+    type: 'tween',
+  }
 
   return (
     <section className='relative container mt-12 grid grid-cols-1 md:grid-cols-2 gap-4'>
@@ -57,20 +62,26 @@ export default function Hero2({ className, ...props }: HeroProps) {
             objectFit='cover'
             quality={100}
           />
+
           <Typography 
               variant='title' 
               className='absolute ml-8 mt-4 opacity-0 text-[#73A3B4] group-hover:opacity-100 transition-opacity duration-300'
             >
             Bekijk Sportbroeken
           </Typography>
+
         </Link>
         <div className='p-2 h-[100px] md:h-[150px] mt-4 md:mt-1'>
+        <Motion initial= 'hidden' transition={transition}>
           <Typography variant='heading' className='text-primary mb-0'>
           Ontdek Je Ultieme Workout   Look
           </Typography>
+        </Motion>
+        <Motion initial= 'hidden' transition={transition} >
           <p className='text-gray-700 leading-7'>
             Boost Je Workout Met GoGym. Ontdek een wereld waar mode en fitness samenkomen om je de ultieme workout ervaring te bieden!
           </p>
+        </Motion>
         </div>
       </div>
       
