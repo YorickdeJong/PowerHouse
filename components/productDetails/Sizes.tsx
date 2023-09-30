@@ -26,7 +26,7 @@ export default function Sizes({sizeObjects, selectedSize, setSelectedSize, card}
         <div className={cn("grid grid-cols-5 gap-4", {
                 'h-[40px]' : card
         })}>
-            {sizeObjects.map((size : any) => (
+            {sizeObjects.slice(0,5).map((size : any) => (
             <RadioGroup.Option
                 key={size.name}
                 value={size}

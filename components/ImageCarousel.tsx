@@ -9,7 +9,7 @@ import UntilInteraction from './UntilInteraction'
 type props = import('./LazyImageCarousel').ImageCarouselProps
 
 const LazyCarousel = dynamic(() => import('./LazyImageCarousel'), {
-  loading: () => <Box sx={{ height: '100%',  bg: 'muted' }} />,
+  loading: () => <Box sx={{ height: '100%', bg: 'muted' }} />,
   ssr: false,
 })
 

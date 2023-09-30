@@ -30,7 +30,7 @@ export default function CategoryFilter({setSelectedCollection, selectedCollectio
              <Typography variant = 'title' className="lg:text-xl text-dark/80 font-bold"> Categorie</Typography>
             {collections.map((collection: any) => (
                 <div className="flex flex-row justify-between items-center mt-4" onClick = {() => setSelectedCollection(collection.title)}>
-                    <Typography variant = 'muted' className={`lg:text-sm text-dark/80 ${collection.title === selectedCollection ? 'text-dark font-bold' : ''} hover:text-gray-400`} >{collection.title}</Typography>
+                    <Typography variant = 'muted' className={`lg:text-sm text-dark/80 hover:cursor-pointer ${collection.title === selectedCollection ? 'text-dark font-bold' : ''} hover:text-gray-400`} >{collection.title}</Typography>
                 </div>
             ))}
         </div>

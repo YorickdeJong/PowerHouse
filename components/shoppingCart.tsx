@@ -5,34 +5,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import Image from 'next/image'
 import Typography from './ui/typography'
 import { storefront } from '@/utils/shopify/storefront'
-import Link from 'next/link'
-import { set } from 'lodash'
-
-const products = [
-  {
-    id: 1,
-    name: 'Throwback Hip Bag',
-    href: '#',
-    color: 'Salmon',
-    price: '$90.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg',
-    imageAlt: 'Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt.',
-  },
-  {
-    id: 2,
-    name: 'Medium Stuff Satchel',
-    href: '#',
-    color: 'Blue',
-    price: '$32.00',
-    quantity: 1,
-    imageSrc: 'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-02.jpg',
-    imageAlt:
-      'Front of satchel with blue canvas body, black straps and handle, drawstring top, and front zipper pouch.',
-  },
-  // More products...
-]
-
 
 interface CartItemsProps {
   item: {
@@ -128,7 +100,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     const storedCart = localStorage.getItem('cart');
     const cart = storedCart ? JSON.parse(storedCart) : [];
-    console.log('cart', cart)
+
     const totalPrice = cart.reduce((acc: number, item: any) => {
       return acc + (Number(item.item.priceRange.minVariantPrice.amount) * item.quantity);
     }, 0);
@@ -145,8 +117,6 @@ export default function ShoppingCart() {
           quantity: item.quantity
       })
     })
-
-    console.log('checkoutLineItems', checkoutLineItems)
     
     setCheckoutItems({
         input: {

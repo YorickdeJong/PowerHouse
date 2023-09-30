@@ -4,9 +4,9 @@ import Typography from "../ui/typography";
 
 
 
-export default function FitSelect({fits, selectedFit, setSelectedFit} : any) {
+export default function FitSelect({selectedFit, setSelectedFit} : any) {
     const handleFitChange = (fit : any) => {
-        setSelectedFit((prev: any ) => (prev.includes(fit) ? prev.filter((f : any) => f !== fit) : [...prev, fit]));
+        setSelectedFit(fit);
       };
 
     const sizeObjects = [
@@ -37,7 +37,7 @@ export default function FitSelect({fits, selectedFit, setSelectedFit} : any) {
         <Sizes 
             sizeObjects={sizeObjects}
             selectedSize={selectedFit}
-            setSelectedSize={setSelectedFit}
+            setSelectedSize={handleFitChange}
             card
         />
     </div>

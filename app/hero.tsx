@@ -25,7 +25,7 @@ export default function Hero({ className, ...props }: HeroProps) {
   return (
     <section
       ref={target}
-      className={cn('relative  container', className, {})}
+      className={cn('relative  container my-20 mt-16', className, {})}
     >
       <div className='w-[300px] sm:w-[0px] '>
           <Images.homepage 

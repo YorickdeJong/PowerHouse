@@ -7,7 +7,7 @@ function classNames(...classes : any) {
     return classes.filter(Boolean).join(' ')
 }
 
-export default function Reviews(){
+export default function ReviewsStars(){
     return(
         <div className="mt-6">
         <h3 className="sr-only">Reviews</h3>

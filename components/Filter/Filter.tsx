@@ -22,13 +22,6 @@ const colors = [
     { name: 'Black', class: 'bg-orange-400', selectedClass: 'ring-orange-400' },
 ]
 
-const fits = [
-    'Loose',
-    'Slim',
-    'Tight',
-    'Standaard'
-]
-
 
 export default function Filter({categories}: any) {
     const [paddingTop, setPaddingTop] = useState('pt-12');
@@ -40,11 +33,13 @@ export default function Filter({categories}: any) {
         selectedClass: ''
     })
     const [selectedCollection, setSelectedCollection] = useState();
-    const [showFilter, setShowFilter] = useState(false);
     // State to hold the selected minimum and maximum prices
     const [selectedPrice, setSelectedPrice] = useState([0, 150]); // Initial min and max prices
 
-    const [selectedFit, setSelectedFit] = useState<any[]>([]);
+    const [selectedFit, setSelectedFit] = useState<any>([{
+        name: '',
+        inStock: true
+    }]);
   
 
     console.log('color', selectedColor)
@@ -77,6 +72,9 @@ export default function Filter({categories}: any) {
 
 
     console.log('selectedcolor', selectedColor.name)
+    console.log('selectedprice', selectedPrice)
+    console.log('selectedfit', selectedFit)
+    console.log('selectedcollection', selectedCollection)
     return (
         <>
             { phone && (
@@ -119,7 +117,6 @@ export default function Filter({categories}: any) {
                     />
 
                     <FitSelect
-                        fits={fits}
                         selectedFit={selectedFit}
                         setSelectedFit={setSelectedFit}
                     />
@@ -129,7 +126,7 @@ export default function Filter({categories}: any) {
                         setSelectedPrice={setSelectedPrice}
                     />
 
-                    <Link href={`/shop${categories}?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.join(',')}`}
+                    <Link href={`/shop${categories}?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.name}&collection=${selectedCollection}`}
                     className="mt-2 lg:mt-[-10px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
                     >
                         Zoek

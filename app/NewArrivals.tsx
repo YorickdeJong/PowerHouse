@@ -7,7 +7,7 @@ export default function NewArrivals() {
     return (
         <>
         <hr className="h-[1px] border-none bg-dark/20 mt-8 max-w-[1200px] mx-auto md:mb-12" />
-        <div className="relative overflow-hidden bg-white mb-12 max-w-[1200px] mx-auto px-8 md:px-0">
+        <div className="relative overflow-hidden bg-white  max-w-[1200px] mx-auto px-8 md:px-0 my-20">
             <div className="pb-80 pt-16 sm:pb-40 sm:pt-24 lg:pb-48 lg:pt-40">
             <div className="relative  max-w-7xl sm:static">
                 <div className="sm:max-w-lg">
@@ -39,7 +39,7 @@ export default function NewArrivals() {
                             </Link>
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-02.jpg"
+                                src="/assets/images/gallary/left-bottom-1.jpg"
                                 alt=""
                                 width={1000}
                                 height={600}
@@ -50,7 +50,7 @@ export default function NewArrivals() {
                         <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-03.jpg"
+                                src="/assets/images/gallary/top-mid.jpg"
                                 alt=""
                                 width={1000}
                                 height={600}
@@ -59,7 +59,7 @@ export default function NewArrivals() {
                             </div>
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-04.jpg"
+                                src="/assets/images/gallary/mid-mid.jpg"
                                 alt=""
                                 width={1000}
                                 height={600}
@@ -68,7 +68,7 @@ export default function NewArrivals() {
                             </div>
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-05.jpg"
+                                src="/assets/images/gallary/mid-bottom.jpg"
                                 alt=""
                                 width={1000}
                                 height={600}
@@ -79,7 +79,7 @@ export default function NewArrivals() {
                         <div className="grid flex-shrink-0 grid-cols-1 gap-y-6 lg:gap-y-8">
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-06.jpg"
+                                src="/assets/images/gallary/right-top.jpg"
                                 alt=""
                                 width={1000}
                                 height={600}
@@ -88,7 +88,7 @@ export default function NewArrivals() {
                             </div>
                             <div className="h-64 w-44 overflow-hidden rounded-lg">
                             <Image
-                                src="https://tailwindui.com/img/ecommerce-images/home-page-03-hero-image-tile-07.jpg"
+                                src="/assets/images/gallary/right-bottom.jpg"
                                 alt=""
                                 width={1000}
                                 height={600}
@@ -101,8 +101,8 @@ export default function NewArrivals() {
                     </div>
     
                     <Link
-                    href="#"
-                    className="inline-block rounded-md border border-transparent bg-primary px-8 py-3 text-center font-medium text-white hover:bg-indigo-700"
+                    href="/shop"
+                    className="inline-block rounded-md border border-transparent bg-primary px-8 py-3 text-center font-medium text-white hover:bg-gray-500"
                     >
                     Shop Collection
                     </Link>

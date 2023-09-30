@@ -6,6 +6,5 @@ export const siteConfig = {
   nav: [
     { title: 'Home', href: '/' },
     { title: 'Shop', href: '/shop' },
-    { title: 'Over Ons', href: '/about' },
   ],
 };

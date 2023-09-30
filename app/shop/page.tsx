@@ -11,7 +11,7 @@ import { useState } from 'react';
 // Typography is a component that defines the font size and weight
 
 export default async function ServicesPage({params, searchParams, children} : any) {
-  const {color, min, max, fit} = searchParams;
+  const {color, min, max, fit, collection} = searchParams;
 
   console.log('params', searchParams);
   
@@ -20,7 +20,7 @@ export default async function ServicesPage({params, searchParams, children} : an
   try {
     products = await storefront({
       query: FILTER_PRODUCTS_QUERY,
-      variables: { min: parseFloat(min), max: parseFloat(max) } // Convert to Float and Correct Variable Names
+      variables: { min: parseFloat(min), max: parseFloat(max), collection: collection} // Convert to Float and Correct Variable Names
     });
   
   
@@ -75,15 +75,16 @@ export default async function ServicesPage({params, searchParams, children} : an
 
 
 const FILTER_PRODUCTS_QUERY = `
-query FilterProducts($min: Float, $max: Float) {
-  collection(handle: "filterable-collection") {
+query FilterProducts($min: Float, $max: Float, $collection: String) {
+  collection(handle: $collection) {
     handle
-    products(first: 10, filters: [{ price: { min: $min, max: $max } }, {
+    products(first: 10, filters: [
+      { price: { min: $min, max: $max } }, {
       variantOption: {
           name: "color",
           value: "black"
       }
-    }
+    },
   ]) {
       edges {
         node {

@@ -124,24 +124,24 @@ export default function Navbar() {
             (<FontAwesomeIcon
                 onClick = {() => setIsSearchBarOpen(true)}
                 icon={faSearch}
-                className='text-primary mx-3 mt-2 h-6 w-6 opacity-65 hover:opacity-100 cursor-pointer'
+                className='text-primary/70 mx-3 mt-3 h-5 w-5 opacity-65 hover:opacity-100 cursor-pointer'
               />
             )}
 
 
-          <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[7px]'>
+          <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[10px]'>
             <Icons.person 
             className='hover:opacity-60 cursor-pointer opacity-100 '
             />
           </Link>
 
-          <div className='mt-[-4px] flex flex-row'>
-            <Typography variant='muted' className='text-gray-600 text-sm lg:text-[12px] top-[25px] mr-1 font-bold pt-[14px] lg:pt-[8px]'>
+          <div className='mt-[-2px] flex flex-row'>
+            <Typography variant='muted' className='text-gray-600 text-[10px] lg:text-[10px] top-[23px] mr-1 font-bold pt-[14px] lg:pt-[8px]'>
               {cartItems}
             </Typography>
             <Icons.basket 
               onClick={() => openCartAside()}
-              className='hover:opacity-60 cursor-pointer opacity-100 pt-2 lg:pt-0 mr-3'
+              className='hover:opacity-60 cursor-pointer opacity-100 pt-2 lg:pt-0 mr-3' 
             />
           </div>
         </div>
@@ -171,7 +171,7 @@ const NavContent = ({ currentPath, collections }: { currentPath: string; collect
                   </div>
                 </Link>
                 {shopOpen && _.href === '/shop' && collections.length > 0 && (
-                  <div className='pt-2'>
+                  <div className='pt-0'>
                     <div className='absolute bg-white border-[1px] border-gray-500 rounded-xl z-10 p-4 w-[200px]'>
                       <ul className="dropdown-menu">
                         {collections.map((collection: any) => (

@@ -60,6 +60,5 @@ interface ColorMapping {
     'teal': '#008080',
     'dark-teal': '#003333',
 };
-
   
   export default colorMapping;

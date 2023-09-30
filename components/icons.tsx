@@ -36,7 +36,7 @@ export const Icons = {
       src={'/assets/icons/login.svg'}
       alt="logo"
 
-      width={24}
+      width={22}
       height={30}
     />
   ),
@@ -45,7 +45,7 @@ export const Icons = {
       {...props}
       src={'/assets/icons/cart.svg'}
       alt="logo"
-      width={21}
+      width={18}
       height={100}
     />
   ),

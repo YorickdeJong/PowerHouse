@@ -29,7 +29,7 @@ export default function Hero2({ className, ...props }: HeroProps) {
       {/* First Image */}
       <Link href='/shop/tops' className='relative group  h-[350px] md:h-[700px] '>
         <Image
-          src='/assets/images/legging_1.png' // Replace with the path to your first image
+          src='/assets/images/frontpage-left.jpg' // Replace with the path to your first image
           alt='First Image'
           layout='fill'
           objectFit='cover'
@@ -50,7 +50,7 @@ export default function Hero2({ className, ...props }: HeroProps) {
       <div className='flex flex-col'>
         <Link href='/shop/pants'  className='relative h-[350px] md:h-[550px] overflow-hidden group  '>
           <Image
-            src='/assets/images/legging_2.png' // Replace with the path to your second image
+            src='/assets/images/frontpage-right.jpg' // Replace with the path to your second image
             alt='Second Image'
             layout='fill'
             className='hover:opacity-70'
