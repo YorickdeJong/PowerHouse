@@ -17,7 +17,7 @@ export default function MoneyRange({selectedPrice, setSelectedPrice} : any) {
         <Range
             step={1}
             min={0}
-            max={150}
+            max={100}
             values={selectedPrice}
             onChange={(values) => setSelectedPrice(values)}
             renderTrack={({ props, children }) => (

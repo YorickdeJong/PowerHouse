@@ -177,7 +177,7 @@ const NavContent = ({ currentPath, collections }: { currentPath: string; collect
                         {collections.map((collection: any) => (
                           <>
                             <li key={collection.id}>
-                              <Link href={`/shop/${collection.handle}`} className='text-dark/70 hover:font-bold'>
+                              <Link href={`/shop/${collection.handle === 'filterable-collection' ? '' : collection.handle}`} className='text-dark/70 hover:font-bold'>
                                 {collection.title === 'filterable-collection' ? 'Alle Producten' : collection.handle}
                               </Link>
                             </li>
@@ -227,7 +227,7 @@ const NavContentMob = ({ setIsMenuOpen, currentPath, collections }: { setIsMenuO
                         {collections.map((collection: any) => (
                           <>
                             <li key={collection.id}>
-                              <Link href={`/shop/${collection.handle}`} className='text-dark/70 hover:font-bold'>
+                              <Link href={`/shop/${collection.handle === 'filterable-collection' ? '' : collection.handle}`} className='text-dark/70 hover:font-bold'>
                                 {collection.handle === 'filterable-collection' ? 'Alle Producten' : collection.handle}
                               </Link>
                             </li>

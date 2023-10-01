@@ -5,9 +5,52 @@ import Card from '@/components/card';
 import Breadcrumb from '@/components/breadcrumb';
 import { storefront } from '@/utils/shopify/storefront';
 import { useMediaQuery } from '@/hook/media-query';
+import { WEBSITE_HOST_URL } from '@/lib/constants';
+import { Metadata } from 'next';
 
 // container prop defines max width of your container
 // Typography is a component that defines the font size and weight
+
+type Params = {
+  params: {
+      slug: string
+  }
+}
+
+export async function generateMetadata({params}: Params): Promise<Metadata> {
+  const slug = params.slug
+
+  return {
+    title: `Ontdek Welke Dames Sport ${params.slug} Voor Jou Zijn - GoGym`,
+    description: `Ontdek diverse dames sport artikelen in onze winkel. ✓ Longsleeves ✓ Tops ✓ Sport BH's ✓ Sportbroeken ✓ Shorts  
+    Gratis verzending vanaf €30, gratis retourneren en kies zelf je bezorgmoment! `,
+    keywords: `Sport Artikelen, Vrouwen Sport Kleding, Dames ${params.slug}`,
+    alternates: {
+      canonical: `${WEBSITE_HOST_URL}/shop/${slug}`
+    },
+    openGraph: {
+      title: `Ontdek Welke Dames Sport ${params.slug} Voor Jou Zijn - GoGym`,
+      description: `Ontdek diverse dames sport artikelen in onze winkel. ✓ Longsleeves ✓ Tops ✓ Sport BH's ✓ Sportbroeken ✓ Shorts  
+      Gratis verzending vanaf €30, gratis retourneren en kies zelf je bezorgmoment! `,
+      url:  `${WEBSITE_HOST_URL}/shop/${slug}`,
+      locale: 'nl',
+      siteName:  `Ontdek diverse dames sport artikelen in onze winkel. ✓ Longsleeves ✓ Tops ✓ Sport BH's ✓ Sportbroeken ✓ Shorts  
+      Gratis verzending vanaf €30, gratis retourneren en kies zelf je bezorgmoment! `,
+      type: 'website',
+      images: [{
+        url: '/gogymlogo.svg'
+      }],
+    },
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: 'white' },
+      { media: '(prefers-color-scheme: dark)', color: 'black' },
+    ],
+    icons: {
+      icon: '/gogymlogo.svg',
+    },
+  }
+}
+
 
 export default async function ServicesPage({params, searchParams, children} : any) {
   
@@ -41,7 +84,7 @@ export default async function ServicesPage({params, searchParams, children} : an
         
         <div className='flex md:flex-row flex-col'>
           <div className="">
-            <Filter categories={`/${params.categories}`}/>
+            <Filter categories={`/${params.categories}`} collection/>
           </div>
           <div className='md:ml-[400px] mt-2 md:mt-12'>
             <Breadcrumb pageTitle = 'Shop' />

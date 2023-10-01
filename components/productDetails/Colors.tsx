@@ -11,7 +11,15 @@ function classNames(...classes : any) {
 export default function ColorsComponent({selectedColor, setSelectedColor, colorObjects, card} : any) {
 
 
+    console.log('COLORS', colorObjects)
+    const colors = colorObjects.map((color:any) => {
+        const colorLowerCase = color.toLowerCase()
+        return (
+            colorLowerCase
+        )
+    })
 
+    console.log('colors LOwer', colors)
     return (
         <div>
         {!card && <h3 className="text-sm font-medium text-gray-900">Color</h3>}
@@ -19,7 +27,7 @@ export default function ColorsComponent({selectedColor, setSelectedColor, colorO
             <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
             <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
             <div className="flex items-center space-x-3">
-                {colorObjects.map((color: string) => {
+                {colors.map((color: string) => {
                     const bgColorHex = colorMapping[color];
                     return (
                         <RadioGroup.Option

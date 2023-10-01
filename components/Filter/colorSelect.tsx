@@ -14,7 +14,7 @@ export default function ColorSelect({ colors, selectedColor, setSelectedColor }:
         <div>
         <Typography variant = 'title' className="lg:text-xl text-dark/80 font-bold"> Selecteer Kleur</Typography>
 
-        <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-8">
+        <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
             <RadioGroup.Label className="sr-only">Choose a color</RadioGroup.Label>
             <div className="flex items-center space-x-3">
             {colors.map((color : any) => (
@@ -37,7 +37,7 @@ export default function ColorSelect({ colors, selectedColor, setSelectedColor }:
                     aria-hidden="true"
                     className={classNames(
                     color.class,
-                    'h-8 w-8 rounded-full border border-black border-opacity-10'
+                    'h-6 w-6 rounded-full border border-black border-opacity-10'
                     )}
                 />
                 </RadioGroup.Option>

@@ -10,6 +10,53 @@ import Image from "next/image";
 import gql from "graphql-tag";
 import { storefront } from "@/utils/shopify/storefront";
 import Link from "next/link";
+import { Metadata } from "next";
+import { WEBSITE_HOST_URL } from "@/lib/constants";
+
+type Params = {
+  params: {
+      slug: string
+  }
+}
+
+export async function generateMetadata({params}: Params): Promise<Metadata> {
+  let slug = params.slug
+  slug = slug?.replaceAll('-', ' ')
+
+  const products = await storefront({
+    query: productQuery,
+    variables: { handle: params.slug }
+  });
+
+  const item = products.body.data.product.description;
+
+  return {
+    title: `${slug} Voor Jou - GoGym`,
+    description: `${item}`,
+    keywords: `Sport Artikelen, Vrouwen Sport Kleding, Dames ${slug}`,
+    alternates: {
+      canonical: `${WEBSITE_HOST_URL}/shop/${slug}`
+    },
+    openGraph: {
+      title: `${slug} Voor Jou - GoGym`,
+      description: `${item}`,
+      url:  `${WEBSITE_HOST_URL}/shop/${slug}`,
+      locale: 'nl',
+      siteName:  `${item}`,
+      type: 'website',
+      images: [{
+        url: '/gogymlogo.svg'
+      }],
+    },
+    themeColor: [
+      { media: '(prefers-color-scheme: light)', color: 'white' },
+      { media: '(prefers-color-scheme: dark)', color: 'black' },
+    ],
+    icons: {
+      icon: '/gogymlogo.svg',
+    },
+  }
+}
 
 
 export default async function ServicesPage({params} : any) {

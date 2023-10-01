@@ -14,16 +14,17 @@ import CategoryFilter from "./categoryFilter";
 
 
 const colors = [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-200' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-    { name: 'Black', class: 'bg-green-600', selectedClass: 'ring-green-600' },
-    { name: 'Black', class: 'bg-red-500', selectedClass: 'ring-red-500' },
-    { name: 'Black', class: 'bg-orange-400', selectedClass: 'ring-orange-400' },
+    { name: 'white', class: 'bg-white', selectedClass: 'ring-gray-200' },
+    { name: 'gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
+    { name: 'black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
+    { name: 'red', class: 'bg-red-500', selectedClass: 'ring-red-500' },
+    { name: 'orange', class: 'bg-orange-400', selectedClass: 'ring-orange-400' },
+    { name: 'blue', class: 'bg-blue-400', selectedClass: 'ring-blue-400' },
+    { name: 'green', class: 'bg-green-600', selectedClass: 'ring-green-600' },
 ]
 
 
-export default function Filter({categories}: any) {
+export default function Filter({categories, collection}: any) {
     const [paddingTop, setPaddingTop] = useState('pt-12');
     const phone = useMediaQuery('(max-width: 768px)');
     const [isFilterVisible, setIsFilterVisible] = useState(false);
@@ -34,7 +35,7 @@ export default function Filter({categories}: any) {
     })
     const [selectedCollection, setSelectedCollection] = useState();
     // State to hold the selected minimum and maximum prices
-    const [selectedPrice, setSelectedPrice] = useState([0, 150]); // Initial min and max prices
+    const [selectedPrice, setSelectedPrice] = useState([0, 100]); // Initial min and max prices
 
     const [selectedFit, setSelectedFit] = useState<any>([{
         name: '',
@@ -73,8 +74,13 @@ export default function Filter({categories}: any) {
 
     console.log('selectedcolor', selectedColor.name)
     console.log('selectedprice', selectedPrice)
-    console.log('selectedfit', selectedFit)
+    console.log('selectedfit', selectedFit.name)
     console.log('selectedcollection', selectedCollection)
+
+    const link = !collection ? `/shop${categories}?color=${selectedColor?.name ? selectedColor.name : ''}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit?.name ? selectedFit.name : ''}&collection=${selectedCollection ? selectedCollection : 'filterable-collection'}` : 
+    `/shop${categories}?color=${selectedColor?.name ? selectedColor.name : ''}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit?.name ? selectedFit.name : ''}&collection=${categories}`
+    
+    
     return (
         <>
             { phone && (
@@ -105,10 +111,14 @@ export default function Filter({categories}: any) {
                 </div>
                 <div className="grid grid-cols-1 gap-8 md:gap-12 mt-2">
 
-                    <CategoryFilter
-                        selectedCollection={selectedCollection}
-                        setSelectedCollection={setSelectedCollection}
-                    />
+                    {!collection && 
+                        <CategoryFilter
+                            selectedCollection={selectedCollection}
+                            setSelectedCollection={setSelectedCollection}
+                        />
+                    }
+
+
 
                     <ColorSelect 
                         colors={colors}
@@ -126,7 +136,7 @@ export default function Filter({categories}: any) {
                         setSelectedPrice={setSelectedPrice}
                     />
 
-                    <Link href={`/shop${categories}?color=${selectedColor.name}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit.name}&collection=${selectedCollection}`}
+                    <Link href={link}
                     className="mt-2 lg:mt-[-10px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
                     >
                         Zoek

@@ -6,9 +6,40 @@ import Breadcrumb from '@/components/breadcrumb';
 import { storefront } from '@/utils/shopify/storefront';
 import { useMediaQuery } from '@/hook/media-query';
 import { useState } from 'react';
+import { Metadata } from 'next';
+import { WEBSITE_HOST_URL } from '@/lib/constants';
 
 // container prop defines max width of your container
 // Typography is a component that defines the font size and weight
+
+export const metadata: Metadata = {
+  title: 'Ontdek Welke Dames Sport Artikelen Voor Jou Zijn - GoGym',
+  description: `Ontdek diverse dames sport artikelen in onze winkel. ✓ Longsleeves ✓ Tops ✓ Sport BH's ✓ Sportbroeken ✓ Shorts  
+  Gratis verzending vanaf €30, gratis retourneren en kies zelf je bezorgmoment! `,
+  keywords: "Sport Artikelen, Vrouwen Sport Kleding, Longsleeves, Tops, Sport BH's, Sportbroeken, Shorts",
+  alternates: {
+    canonical: WEBSITE_HOST_URL
+  },
+  openGraph: {
+    title: 'Ontdek Welke Dames Sport Artikelen Voor Jou Zijn - GoGym',
+    description: `Ontdek diverse dames sport artikelen in onze winkel. ✓ Longsleeves ✓ Tops ✓ Sport BH's ✓ Sportbroeken ✓ Shorts  
+    Gratis verzending vanaf €30, gratis retourneren en kies zelf je bezorgmoment! `,
+    url: WEBSITE_HOST_URL,
+    locale: 'nl',
+    siteName: 'Ontdek Welke Dames Sport Artikelen Voor Jou Zijn - GoGym',
+    type: 'website',
+    images: [{
+      url: '/gogymlogo.svg'
+    }],
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: 'black' },
+  ],
+  icons: {
+    icon: '/gogymlogo.svg',
+  },
+};
 
 export default async function ServicesPage({params, searchParams, children} : any) {
   const {color, min, max, fit, collection} = searchParams;
@@ -20,13 +51,13 @@ export default async function ServicesPage({params, searchParams, children} : an
   try {
     products = await storefront({
       query: FILTER_PRODUCTS_QUERY,
-      variables: { min: parseFloat(min), max: parseFloat(max), collection: collection} // Convert to Float and Correct Variable Names
+      variables: { min: parseFloat(min), max: parseFloat(max), collection: collection || "filterable-collection", kleur: color || ""} // Convert to Float and Correct Variable Names
     });
-  
   
     if (products.body && products.body.data && products?.body?.data?.collection?.products?.edges[0]?.node.priceRange) {
       items = products.body.data.collection?.products?.edges;
-    } else {
+    } 
+    else {
       products = await storefront({
         query: query
       });
@@ -73,25 +104,24 @@ export default async function ServicesPage({params, searchParams, children} : an
   );
 }
 
-
 const FILTER_PRODUCTS_QUERY = `
-query FilterProducts($min: Float, $max: Float, $collection: String) {
+query FilterProducts($min: Float, $max: Float, $collection: String, $kleur: String!) {
   collection(handle: $collection) {
     handle
     products(first: 10, filters: [
-      { price: { min: $min, max: $max } }, {
-      variantOption: {
-          name: "color",
-          value: "black"
-      }
-    },
-  ]) {
+      { variantOption: { name: "color", value: $kleur } }
+      { price: { min: $min, max: $max } },
+    ]) {
       edges {
         node {
           title
           handle
           priceRange {
             minVariantPrice {
+              amount
+              currencyCode
+            }
+            maxVariantPrice {
               amount
               currencyCode
             }

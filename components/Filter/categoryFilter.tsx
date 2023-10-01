@@ -24,15 +24,20 @@ export default function CategoryFilter({setSelectedCollection, selectedCollectio
     useEffect(() => {
         fetchCollections().then((data) => setCollections(data));
     },[])
-
+    
     return (
         <div>
              <Typography variant = 'title' className="lg:text-xl text-dark/80 font-bold"> Categorie</Typography>
-            {collections.map((collection: any) => (
-                <div className="flex flex-row justify-between items-center mt-4" onClick = {() => setSelectedCollection(collection.title)}>
-                    <Typography variant = 'muted' className={`lg:text-sm text-dark/80 hover:cursor-pointer ${collection.title === selectedCollection ? 'text-dark font-bold' : ''} hover:text-gray-400`} >{collection.title}</Typography>
-                </div>
-            ))}
+            {collections.map((collection: any) => {
+              if (collection.title === 'filterable-collection') {
+                collection.title.replace('filterable-collection', 'Alle Producten')
+              }
+            return (
+                  <div className="flex flex-row justify-between items-center mt-4" onClick = {() => setSelectedCollection(collection.name)}>
+                      <Typography variant = 'muted' className={`lg:text-sm text-dark/80 hover:cursor-pointer ${collection.title === selectedCollection ? 'text-dark font-bold' : ''} hover:text-gray-400`} >{collection.title}</Typography>
+                  </div>
+                )}
+            )}
         </div>
     )
 }
