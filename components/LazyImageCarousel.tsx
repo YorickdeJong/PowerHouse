@@ -93,13 +93,13 @@ const ImageCarousel: FC<ImageCarouselProps> = ({
         </Slide>
       ))}
     </Slider>
-    {showZoom && (
+    {/* {showZoom && (
       <CustomDotGroup
         {...imageProps}
         onThumbnailClick={onThumbnailClick}
         images={images}
       />
-    )}
+    )} */}
   </CarouselProvider>
 )
 

@@ -15,10 +15,11 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   let path = usePathname() || '';
   path = path.includes('orders') ? '/account/orders/order' : path;
   const slug = path?.replaceAll('-', ' ')
-  const slugSpace = slug?.split('/').filter(item => item.trim() !== '');
+  let slugSpace = slug?.split('/').filter(item => item.trim() !== '');
+  console.log('SLUGS', slugSpace)
+  slugSpace = slugSpace.map((slug : string) => slug.includes('filterable collection') ? slug.replace('filterable collection', 'Alle Producten') : slug)
   let accumulatedPath = '';
 
-  console.log(slugSpace)
 
   return (
     <div
@@ -37,7 +38,12 @@ export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
       {slugSpace && (
         <>
         {slugSpace.map((slug : string, index: number) => {
-          accumulatedPath += `/${slug}`;
+          if (slug === 'Alle Producten'){
+            accumulatedPath += `/${'filterable-collection'}`;
+          }
+          else {
+            accumulatedPath += `/${slug}`;
+          }
           if (slug === 'account') {
             return
           }

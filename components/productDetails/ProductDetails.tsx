@@ -10,6 +10,7 @@ import IconsComponent from './Icons'
 import ButtonsComponents from './buttonsComponent'
 import DescriptionComponent from './Description'
 import ColorsComponent from './Colors'
+import ImagesComponent from './ImagesComponent'
 
 
 const product = {
@@ -29,7 +30,22 @@ export default function PorductDetails({item} : any) {
     const uniqueColors = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Color").map((option : any) => option.value.toLowerCase()))];
     const uniqueSizes = [...new Set(selectedOptions.flat().filter((option : any) => option.name === "Size").map((option : any) => option.value.toLowerCase()))];
 
-      
+    const imagesWithColor = item.variants.edges.map((variantEdge : any) => {
+      const image = variantEdge.node.image;
+      const color = variantEdge.node.selectedOptions.find((option: any) => option.name === "Color").value.toLowerCase();
+      return { ...image, color };
+  });
+
+  const uniqueImages = imagesWithColor.reduce((acc : any, current : any) => {
+    const x = acc.find((item : any) => item.src === current.src && item.color === current.color);
+    if (!x) {
+        return acc.concat([current]);
+    } else {
+        return acc;
+    }
+}, []);
+
+
     const sizeObjectsFiltered = uniqueSizes.map(size => ({
         name: size,
         inStock: true
@@ -38,7 +54,7 @@ export default function PorductDetails({item} : any) {
 
     const [selectedColor, setSelectedColor] = useState(uniqueColors[1])
     const [selectedSize, setSelectedSize] = useState(sizeObjectsFiltered[0])
-
+    const [selectedImages, setSelectedImages] = useState(uniqueImages.length > 0 ? uniqueImages[0] : null);
 
     return (
             <div className="max-w-sm pb-16 pt-10 lg:max-w-md  lg:pb-24 lg:pt-4">
@@ -48,16 +64,14 @@ export default function PorductDetails({item} : any) {
 
                 {/* Title + description */}
                   <Typography variant='title' className="text-2xl font-bold tracking-tight text-gray-900 sm:text-3xl" level={1}>{item.title}</Typography>
-                  <div className="space-y-6 mb-10">
+                  <div className="space-y-6 mb-8">
                       <p className="text-base text-gray-900 ">{item.description}</p>
                   </div>
 
-                    
-                  {/* Reviews */}
-                  <ReviewsStars />
+                  
       
                   {/* Price */}
-                  <p className="text-3xl tracking-tight text-gray-900 mt-5 font-bold">€ {Number(item.priceRange.minVariantPrice.amount).toFixed(2)}</p>
+                  <p className="text-3xl tracking-tight text-gray-900 mt-2 font-bold">€ {Number(item.priceRange.minVariantPrice.amount).toFixed(2)}</p>
                   <div className='flex flex-row my-6'>
                     <Icons.view />
                     <Typography variant='muted' className='text-dark/80 lg:text-sm ml-2'><span className='font-bold'>32</span> mensen hebben dit product bekeken</Typography>
@@ -66,11 +80,19 @@ export default function PorductDetails({item} : any) {
 
                   <form className="mt-8">
                   {/* Colors */}
-                  <ColorsComponent 
+                  {/* <ColorsComponent 
                     selectedColor={selectedColor} 
                     setSelectedColor={setSelectedColor} 
                     colorObjects={uniqueColors}
-                  />
+                  /> */}
+
+                  <ImagesComponent
+                      selectedImages={selectedImages}
+                      setSelectedImages={setSelectedImages}
+                      selectedColor={selectedColor}
+                      setSelectedColor={setSelectedColor}
+                      images={uniqueImages}
+                    />
 
                     {/* Sizes */}
                     <Sizes 

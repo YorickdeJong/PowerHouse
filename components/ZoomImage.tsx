@@ -11,7 +11,6 @@ import ImageCarousel from "./LazyImageCarousel";
 
 export default function ZoomImage({images}: any) {
 
-    const [showPreview, setShowPreview] = useState(false);
     const [selectedImage, setSelectedImage] = useState(images[0]?.node?.url);
 
     const imageProp = {
@@ -25,20 +24,23 @@ export default function ZoomImage({images}: any) {
         <div className="flex lg:flex-row flex-col">
                 <div className="grid grid-cols-4 lg:grid-cols-1 lg:mr-10 gap-3 h-[0px] lg:h-[500px]">
                         {images.map((image: any) => {
-                            if (image.node.url !== selectedImage) {
-                                return (
-                                    <div className="lg:h-24 lg:w-24 overflow-hidden rounded-xl">
-                                            <Image 
-                                                onClick={() => setSelectedImage(image.node.url)}
-                                                src={image.node.url}
-                                                alt= 'sub image'
-                                                width={100}
-                                                height={100}
-                                                className="hover:scale-110 object-cover"
-                                            />
-                                    </div>
-                                )
-                            }
+                            const isSelected = selectedImage === image.node.url;
+                            return (
+                                <div className="lg:h-24 lg:w-24 overflow-hidden rounded-2xl"
+                                style = {{cursor: 'pointer', padding: isSelected ? '2px' : '0px', borderWidth: isSelected ? '2px' : '0px', borderColor: 'gray'}}
+                                >
+
+
+                                        <Image 
+                                            onClick={() => setSelectedImage(image.node.url)}
+                                            src={image.node.url}
+                                            alt= 'sub image'
+                                            width={100}
+                                            height={100}
+                                            className="hover:scale-110 object-cover rounded-xl"
+                                        />
+                                </div>
+                            )
                         })}
                 </div>
             <div>
@@ -56,7 +58,7 @@ export default function ZoomImage({images}: any) {
 
                 <div className="grid grid-cols-4 max-w-[450px] lg:mr-10 mt-6 gap-3 lg:h-[0px]">
                         {images.map((image: any) => {
-                            if (image.node.url !== selectedImage) {
+
                                 return (
                                     <div className=" lg:h-0 lg:w-0 overflow-hidden rounded-xl">
                                             <Image 
@@ -69,7 +71,7 @@ export default function ZoomImage({images}: any) {
                                             />
                                     </div>
                                 )
-                            }
+                            
                         })}
                 </div>
 
