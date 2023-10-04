@@ -92,3 +92,56 @@
     transform: translateX(-120%);
   }
 }
+
+
+@keyframes expandContract {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1); /* Adjust this value to control the amount of expansion */
+  }
+}
+
+@keyframes moveUpDown {
+  0%, 100% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(-10px); /* Adjust this value to control the amount of upward movement */
+  }
+}
+
+@keyframes moveUpDown2 {
+  0%, 100% {
+    transform: translateY(8px);
+  }
+  50% {
+    transform: translateY(-8px); /* Adjust this value to control the amount of upward movement */
+  }
+}
+
+@keyframes moveUpDown3 {
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px); /* Adjust this value to control the amount of upward movement */
+  }
+}
+
+.hero-bg-animate {
+  animation: expandContract 5s infinite; /* 5s is the duration, adjust as needed */
+}
+
+.hero-image-animate {
+  animation: moveUpDown 4s infinite; /* 3s is the duration, adjust as needed */
+}
+
+.hero-ball-1 {
+  animation: moveUpDown2 4s infinite; /* 3s is the duration, adjust as needed */
+}
+
+.hero-ball-2 {
+  animation: moveUpDown3 4s infinite; /* 3s is the duration, adjust as needed */
+}

@@ -111,7 +111,7 @@ export default function HeroPage(){
                         alt='Image'
                         layout='fill'
                         objectFit='contain'
-                        className='group-hover:opacity-70'
+                        className='group-hover:opacity-70 hero-image-animate'
                         priority
                     />
                     <Typography 
@@ -126,7 +126,7 @@ export default function HeroPage(){
                             alt='Image'
                             layout='fill'
                             objectFit='contain'
-                            className='group-hover:opacity-70'
+                            className='group-hover:opacity-70 hero-ball-1'
                             priority
                         />
                     </div>
@@ -137,7 +137,7 @@ export default function HeroPage(){
                             alt='Image'
                             layout='fill'
                             objectFit='contain'
-                            className='group-hover:opacity-70'
+                            className='group-hover:opacity-70 hero-ball-2'
                             priority
                         />
                     </div>
