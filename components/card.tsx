@@ -9,7 +9,7 @@ import { cn } from '@/lib/utils';
 import { Icons } from './icons';
 import Motion from './motion';
 import { Typography } from './ui/typography';
-import { inter } from '@/lib/fonts';
+import { inter, openSans } from '@/lib/fonts';
 import ColorsComponent from './productDetails/Colors';
 import SizesComponent from './productDetails/Sizes';
 
@@ -103,7 +103,7 @@ export default function Card({
             <div className="flex items-center gap-4">
               <p
                 className={cn(
-                  'grow text-lg font-bold uppercase md:text-lg text-black group-hover:hidden',
+                  `grow text-lg font-medium ${inter.className} md:text-lg text-black group-hover:hidden`,
                   {
                     'md:text-lg mb-3': houseCard,
                   }
@@ -114,7 +114,7 @@ export default function Card({
 
               <p
                 className={cn(
-                  ' grow text-lg font-bold uppercase md:text-lg text-black group-hover:hidden',
+                  `grow text-lg font-bold uppercase md:text-lg text-black group-hover:hidden ${openSans.className}}`,
                   {
                     'md:text-lg mb-3': houseCard,
                   }
@@ -126,21 +126,21 @@ export default function Card({
             <p className={`leading-relaxed text-muted group-hover:hidden ${inter.className}`}>{text}</p>
             <p className={`leading-relaxed text-muted group-hover:hidden  ${inter.className}`}>{uniqueColors?.length ?? ''} kleuren</p>
 
-            <div className='hidden group-hover:block'>
+            {/* <div className='hidden group-hover:block'>
                 <ColorsComponent 
                 selectedColor={''} 
                 setSelectedColor={''} 
                 colorObjects={uniqueColors}
                 card
                 />
-            </div>
+            </div> */}
             
             <div className='hidden group-hover:block'>
                 <SizesComponent  
                 selectedSize={''} 
                 setSelectedSize={''} 
                 sizeObjects={sizeObjectsFiltered}
-                card
+                card={true}
                 />
             </div>
 

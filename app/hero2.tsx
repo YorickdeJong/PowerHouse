@@ -29,7 +29,7 @@ export default function Hero2({ className, ...props }: HeroProps) {
   }
 
   return (
-    <section className='relative container mt-12 grid grid-cols-1 md:grid-cols-2 gap-4'>
+    <section className='relative container py-12 grid grid-cols-1 md:grid-cols-2 gap-4'>
       
       {/* First Image */}
       <Link href='/shop/tops' className='relative group  h-[350px] md:h-[700px] '>

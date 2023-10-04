@@ -15,11 +15,8 @@ export default function SiteBanner() {
     }, []);
 
   return (
-    <section className="bg-gray-800 h-[70px] relative overflow-hidden">
+    <section className="bg-[#DB5D3C] h-[40px] relative overflow-hidden">
       <div className="container flex items-center justify-between h-full">
-        <div className="mt-[-24px]">
-          <Brand />
-        </div>
             <div className="absolute max-w-[1000px] mx-auto top-0 right-0 bottom-0 left-0 flex items-center overflow-hidden">
             <div
                 className="flex space-x-4 marquee"

@@ -93,11 +93,11 @@ export default function Navbar() {
 
   return (
     <section
-      className={cn('border-b border-gray-300 bg-white h-[75px]', {
+      className={cn('relative border-b border-[#EAEAEA] bg-white h-[75px] w-full', {
       })}
     >
-      <nav className="container  flex items-center justify-between px-5 py-4">
-
+      <nav className="container  flex items-center justify-between px-5 pt-5">
+        <Brand />
         <NavContent collections={collections} currentPath={path || ''}/>
         
         {!isMenuOpen ? (
@@ -114,34 +114,34 @@ export default function Navbar() {
           />
         )}{' '}
       
-        <div className='flex flex-row gap-12'>
-          {!phone && isSearchBarOpen ? 
+        <div className='flex flex-row gap-x-12'>
+          {isSearchBarOpen ?
             (
               <div ref={searchBarRef}>
-                <SearchBar />
+                <SearchBar className='hidden md:inline-flex'/>
               </div>            
-            ) :
-            (<FontAwesomeIcon
+            ) 
+             :
+            ( <Icons.search 
                 onClick = {() => setIsSearchBarOpen(true)}
-                icon={faSearch}
-                className='text-primary/70 mx-3 mt-3 h-5 w-5 opacity-65 hover:opacity-100 cursor-pointer'
+                className='text-[#121212]opacity-65 hover:opacity-100 cursor-pointer hidden md:inline-flex'
               />
             )}
 
 
-          <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[10px]'>
+          <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[-2px]'>
             <Icons.person 
-            className='hover:opacity-60 cursor-pointer opacity-100 '
+            className='hover:opacity-60 cursor-pointer  text-[#121212] '
             />
           </Link>
 
-          <div className='mt-[-2px] flex flex-row'>
-            <Typography variant='muted' className='text-gray-600 text-[10px] lg:text-[10px] top-[23px] mr-1 font-bold pt-[14px] lg:pt-[8px]'>
-              {cartItems}
+          <div className='relative  flex flex-row'>
+            <Typography variant='muted' className='text-[#121212] font-bold '>
+              <span className='absolute mt-[8px] md:mt-0 right-1 text-[12px]'>{cartItems}</span>
             </Typography>
             <Icons.basket 
               onClick={() => openCartAside()}
-              className='hover:opacity-60 cursor-pointer opacity-100 pt-2 lg:pt-0 mr-3' 
+              className='hover:opacity-60 text-[#121212] cursor-pointer mr-3' 
             />
           </div>
         </div>
@@ -164,31 +164,32 @@ const NavContent = ({ currentPath, collections }: { currentPath: string; collect
               onMouseEnter={() => _.href === '/shop' && setShopOpen(true)}
               onMouseLeave={() => _.href === '/shop' && setShopOpen(false)}
             >
-              <h3 className={`capitalize text-md ${currentPath === _.href && !_.href.includes('/shop') ? 'font-bold' : 'text-gray-700'} ${!_.href.includes('/shop') && 'hover:font-bold'}`}>
-                <Link href={_.href}>
-                  <div>
-                    {_.title} <span>{_.href === '/shop' ? !shopOpen ? '›' : '⌄' : ''}</span>
-                  </div>
-                </Link>
-                {shopOpen && _.href === '/shop' && collections.length > 0 && (
-                  <div className='pt-0'>
-                    <div className='absolute bg-white border-[1px] border-gray-500 rounded-xl z-10 p-4 w-[200px]'>
-                      <ul className="dropdown-menu">
-                        {collections.map((collection: any) => (
-                          <>
-                            <li key={collection.id}>
-                              <Link href={`/shop/${collection.handle === 'filterable-collection' ? '' : collection.handle}`} className='text-dark/70 hover:font-bold'>
-                                {collection.title === 'filterable-collection' ? 'Alle Producten' : collection.handle}
-                              </Link>
-                            </li>
-                            <hr className="mb-4 mt-1 border-none bg-dark/30 h-[1px]" />
-                          </>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                )}
-              </h3>
+                <div className='group'>
+                  <h3 className={`capitalize text-md ${currentPath === _.href && !_.href.includes('/shop') ? 'font-bold' : 'text-gray-700'} ${!_.href.includes('/shop') && 'hover:font-bold'}`}>
+                      <Link href={_.href} className='flex flex-row'>
+                        <div>
+                          {_.title} <span>{_.href === '/shop' ? <Icons.arrowDown className='h-4 inline'/> : ''}</span>
+                        </div>
+                      </Link>
+                      {shopOpen && _.href === '/shop' && collections.length > 0 && (
+                        <div className='absolute  z-10 pt-[26px]  w-[200px] '>
+                          <ul className="bg-white shadow">
+                            {collections.map((collection: any) => (
+                              <>
+                                <li key={collection.id} className='hover:bg-[#F5F5F5]'>
+                                  <div className='py-4'>
+                                    <Link href={`/shop/${collection.handle === 'filterable-collection' ? '' : collection.handle}`} className=' px-4 text-[#121212] hover:font-bold '>
+                                      {collection.title === 'filterable-collection' ? 'Alle Producten' : collection.handle}
+                                    </Link>
+                                  </div>
+                                </li>
+                              </>
+                            ))}
+                          </ul>
+                        </div>
+                      )}
+                  </h3>
+                </div>
             </div>
           </li>
         ))}
@@ -204,34 +205,35 @@ const NavContentMob = ({ setIsMenuOpen, currentPath, collections }: { setIsMenuO
       initial={{ opacity: 0, y: 50 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: 50 }}
-      className="z-[10] absolute top-0 inset-x-0 flex flex-col items-start gap-4 bg-primary p-5 shadow-xl lg:hidden"
+      className="z-[10] absolute top-0 inset-x-0 flex flex-col items-start gap-4 bg-white p-5 shadow-xl lg:hidden"
     >
       <ul>
         <div className='mt-4'>
           {siteConfig.nav.map((_) => (
-            <li onClick={() => setIsMenuOpen(false)} key={_.title}>
+            <li onClick={() => setIsMenuOpen(false)} key={_.title} className='my-4'>
              <div
               onMouseEnter={() => _.href === '/shop' && setShopOpen(true)}
               onMouseLeave={() => _.href === '/shop' && setShopOpen(false)}
             >
-              <h3 className={`capitalize text-md ${currentPath === _.href && !_.href.includes('/shop') ? 'font-bold' : 'text-gray-500'} ${!_.href.includes('/shop') && 'hover:font-bold'}`}>
+              <h3 className={`capitalize text-md ${currentPath === _.href && !_.href.includes('/shop') ? 'font-bold text-gray-900' : 'text-gray-600'} ${!_.href.includes('/shop') && 'hover:font-bold'}`}>
                 <Link href={_.href}>
-                  <div>
-                    {_.title} <span>{_.href === '/shop' ? !shopOpen ? '›' : '⌄' : ''}</span>
+                  <div className='flex flex-row'>
+                    {_.title} <span>{_.href === '/shop' ? <Icons.arrowDown className='h-4 mt-[6px]'/> : ''}</span>
                   </div>
                 </Link>
                 {shopOpen && _.href === '/shop' && collections.length > 0 && (
                   <div className='pt-2'>
-                    <div className='absolute bg-white border-[1px] border-gray-500 rounded-xl z-10 p-4 w-[200px]'>
+                    <div className='absolute bg-white ml-[-20px] z-10  px-6 w-full'>
+                    <hr className="mb-4 mt-1 border-none bg-dark/30 h-[1px] w-full"  />
                       <ul className="dropdown-menu">
                         {collections.map((collection: any) => (
                           <>
-                            <li key={collection.id}>
+                            <li key={collection.id} className='py-3'>
                               <Link href={`/shop/${collection.handle === 'filterable-collection' ? '' : collection.handle}`} className='text-dark/70 hover:font-bold'>
                                 {collection.handle === 'filterable-collection' ? 'Alle Producten' : collection.handle}
                               </Link>
                             </li>
-                            <hr className="mb-4 mt-1 border-none bg-dark/30 h-[1px]" />
+
                           </>
                         ))}
                       </ul>

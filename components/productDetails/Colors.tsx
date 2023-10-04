@@ -9,9 +9,6 @@ function classNames(...classes : any) {
 }
 
 export default function ColorsComponent({selectedColor, setSelectedColor, colorObjects, card} : any) {
-
-
-    console.log('COLORS', colorObjects)
     const colors = colorObjects.map((color:any) => {
         const colorLowerCase = color.toLowerCase()
         return (
@@ -19,7 +16,6 @@ export default function ColorsComponent({selectedColor, setSelectedColor, colorO
         )
     })
 
-    console.log('colors LOwer', colors)
     return (
         <div>
         {!card && <h3 className="text-sm font-medium text-gray-900">Color</h3>}

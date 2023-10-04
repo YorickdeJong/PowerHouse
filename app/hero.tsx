@@ -33,20 +33,20 @@ export default function Hero({ className, ...props }: HeroProps) {
   return (
     <section
       ref={target}
-      className={cn('relative  container my-20 mt-16', className, {})}
+      className={cn('relative container grid grid-cols-1 md:grid-cols-2 gap-4 py-12', className, {})}
     >
-      <div className='w-[300px] sm:w-[0px] '>
+        <div className='w-[300px] md:hidden mx-auto'>
           <Images.homepage 
             className=' md:mt-0  object-cover object-top'
           />
         </div>
 
-        <div className='grid grid-cols-1 md:grid-cols-2 gap-16'>
-          <div className="space-y-5 isolate pt-12 lg:pt-12">
+        <div className='grid grid-cols-1 gap-16 mt-8 md:mt-0justif-center items-center mx-auto'>
+          <div className="space-y-5 isolate ">
               <div className=" ">
               <Motion initial= 'hidden' asChild transition={transition}>
-                <Typography variant = 'heading' className='text-secondary leading-10 xl:text-5xl font-medium' level={2}>
-                  BOOST JOUW WORKOUT MET ZELFVERTROUWEN EN STIJL
+                <Typography variant = 'muted' className='text-secondary leading-10 text-3xl md:text-3xl lg:text-5xl font-medium' level={2}>
+                  Boost jouw workout met zelfvertrouwen en stijl
                 </Typography>
               </Motion>
                 <Motion initial= 'hidden' asChild transition={transition}>
@@ -65,13 +65,15 @@ export default function Hero({ className, ...props }: HeroProps) {
                 </Button>
           </div>
         </div>
-
-        <div className='w-[0px] sm:w-[400px] xl:w-[700px]'>
-          <Images.homepage 
-            className='mt-0 sm:mt-10 md:mt-12  xl:ml-[-80px] object-cover object-top'
-          />
-        </div>
       </div>
+
+      <div className='w-[0px] hidden md:block sm:w-[400px] xl:w-[500px]'>
+        <Images.homepage 
+          className='object-cover object-top'
+        />
+      </div>
+
+
     </section>
   );
 }

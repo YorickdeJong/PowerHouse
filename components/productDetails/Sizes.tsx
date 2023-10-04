@@ -24,7 +24,7 @@ export default function Sizes({sizeObjects, selectedSize, setSelectedSize, card}
         <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
         <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
         <div className={cn("grid grid-cols-5 gap-4", {
-                'h-[40px]' : card
+                'h-[30px]' : card
         })}>
             {sizeObjects.slice(0,5).map((size : any) => (
             <RadioGroup.Option

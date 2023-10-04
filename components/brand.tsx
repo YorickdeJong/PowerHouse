@@ -14,7 +14,7 @@ export default function Brand({
 }: HtmlHTMLAttributes<HTMLAnchorElement> & CompType) {
   return (
     <Link href={'/'} {...props} className={cn('ml-4', {}, className)}>
-      <Images.logo />
+      <Images.logoBlack />
     </Link>
   );
 }

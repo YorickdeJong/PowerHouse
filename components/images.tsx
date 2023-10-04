@@ -11,10 +11,19 @@ export const Images =  {
         height={300}
       />
     ),
+    logoBlack: (props: any) => (
+      <Image
+        {...props}
+        src={`/gogymlogo-black.svg`} //add image path here
+        alt="logo"
+        width={40}
+        height={300}
+      />
+    ),
     women_1: (props: any) => (
       <Image
         {...props}
-        src={`/assets/images/home_page_1.png`} //add image path here
+        src={`/assets/images/homepage-mid.png`} //add image path here
         alt="women 1"
         fill
         quality={100}
@@ -32,7 +41,7 @@ export const Images =  {
     homepage: (props: any) => (
       <Image
         {...props}
-        src={`/assets/images/homepage_image.png`} //add image path here
+        src={`/assets/images/hompageMid.png`} //add image path here
         alt="women 2"
         width={1000}
         height={700}

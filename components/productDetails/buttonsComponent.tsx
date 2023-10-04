@@ -6,7 +6,7 @@ import Typography from "../ui/typography";
 function addToCart(item: any, selectedColor: string, selectedSize: any, quantity: any) {
     const cartData = localStorage.getItem('cart');
     let cart = cartData ? JSON.parse(cartData) : [];
-
+    
     // Find the variant based on the selected color and size
     const selectedVariant = item.variants.edges.find((variant: any) => {
         const colorOption = variant.node.selectedOptions.find((option: any) => option.name === "Color" && option.value.toLowerCase() === selectedColor);

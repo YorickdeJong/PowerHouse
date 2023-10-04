@@ -1,12 +1,14 @@
 import dynamic from 'next/dynamic';
 import Hero from './hero';
-import NewCollection from './new_collection';
+import NewCollection from './collections';
 import NewArrivals from './NewArrivals';
 import Hero2 from './hero2';
 import Tops from './tops_collection';
 import Shorts from './shorts_collection';
 import { WEBSITE_HOST_URL } from '@/lib/constants';
 import { Metadata } from 'next';
+import HeroPage from './HeroPage';
+import NewsLetter from './newsLetter';
 
 
 export const metadata: Metadata = {
@@ -42,19 +44,15 @@ export const metadata: Metadata = {
 export default function IndexPage() {
   return (
     <section className="">
-      <Hero2 />
-
+      <HeroPage />
       {/* @ts-expect-error Server Component */}
       <NewCollection />
+      
+      <NewsLetter />      
+      
       <Hero />
-      {/* <Banner /> */}
-      {/* @ts-expect-error Server Component */}
-      <Tops />
+      {/* <Hero2 /> */}
 
-      <NewArrivals />
-
-      {/* @ts-expect-error Server Component */}
-      <Shorts className="lg:mb-20"/>
     </section>
   );
 }

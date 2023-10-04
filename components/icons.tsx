@@ -7,10 +7,12 @@ import {
   Linkedin,
   Loader2,
   LucideProps,
+  Mail,
   Moon,
   Phone,
   PhoneCall,
   SunMedium,
+  ChevronDown,
   Twitter,
   X,
 } from 'lucide-react';
@@ -21,6 +23,8 @@ export const Icons = {
   facebook: Facebook,
   twitter: Twitter,
   linkedin: Linkedin,
+  arrowDown: ChevronDown,
+  mail: Mail,
   logo: (props : any) => (
     <Image
       {...props}
@@ -33,28 +37,28 @@ export const Icons = {
   person: (props : any) => (
     <Image
       {...props}
-      src={'/assets/icons/login.svg'}
+      src={'/assets/icons/user.svg'}
       alt="logo"
 
-      width={22}
+      width={30}
       height={30}
     />
   ),
   basket: (props : any) => (
     <Image
       {...props}
-      src={'/assets/icons/cart.svg'}
+      src={'/assets/icons/bag.svg'}
       alt="logo"
-      width={18}
+      width={30}
       height={100}
     />
   ),
   search: (props : any) => (
     <Image
       {...props}
-      src={'/assets/icons/carbon_search.png'}
+      src={'/assets/icons/search.svg'}
       alt="logo"
-      width={20}
+      width={30}
       height={100}
     />
   ),
