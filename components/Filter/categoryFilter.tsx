@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import Typography from "../ui/typography";
 import { storefront } from "@/utils/shopify/storefront";
+import Link from "next/link";
 
 
 
@@ -18,26 +19,34 @@ async function fetchCollections() {
     }
   }
 
-export default function CategoryFilter({setSelectedCollection, selectedCollection}: any) {
+export default function CategoryFilter({}: any) {
  
     const [collections, setCollections] = useState([]);
     useEffect(() => {
         fetchCollections().then((data) => setCollections(data));
     },[])
     
+
     return (
         <div>
-             <Typography variant = 'title' className="lg:text-xl text-dark/80 font-bold"> Categorie</Typography>
-            {collections.map((collection: any) => {
-              if (collection.title === 'filterable-collection') {
-                collection.title.replace('filterable-collection', 'Alle Producten')
-              }
-            return (
-                  <div className="flex flex-row justify-between items-center mt-4" onClick = {() => setSelectedCollection(collection.name)}>
-                      <Typography variant = 'muted' className={`lg:text-sm text-dark/80 hover:cursor-pointer ${collection.title === selectedCollection ? 'text-dark font-bold' : ''} hover:text-gray-400`} >{collection.title}</Typography>
-                  </div>
-                )}
-            )}
+             <Typography variant = 'title' className="text-lg lg:text-xl text-dark/80 font-bold">Categorie</Typography>
+            <div className="max-h-[200px] overflow-y-auto custom-scrollbar max-w-[170px]">
+              {collections.map((collection: any) => {
+                if (collection.handle === 'filterable-collection') {
+                  collection.title.replace('filterable-collection', 'Alle Producten')
+                }
+              return (
+                    <Link href={`/shop/${collection.handle}`} className="flex flex-row justify-between items-center mt-4">
+                        <Typography variant = 'muted' 
+                          className={`lg:text-sm text-dark/80 
+                          hover:cursor-pointer hover:text-gray-400`} 
+                        >
+                            {collection.title}
+                        </Typography>
+                    </Link>
+                  )}
+              )}
+            </div>
         </div>
     )
 }

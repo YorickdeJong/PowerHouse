@@ -11,6 +11,10 @@ export default function FitSelect({selectedFit, setSelectedFit} : any) {
 
     const sizeObjects = [
         {
+            name: 'XXS',
+            inStock: true
+        },
+        {
             name: 'XS',
             inStock: true
         },
@@ -27,7 +31,11 @@ export default function FitSelect({selectedFit, setSelectedFit} : any) {
             inStock: true
         },
         {
-            name: 'xL',
+            name: 'XL',
+            inStock: true
+        },
+        {
+            name: 'XXL',
             inStock: true
         },
     ]   

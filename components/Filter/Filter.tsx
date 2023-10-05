@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Typography } from "@/components/ui/typography";
 import { RadioGroup } from "@headlessui/react";
 import { useMediaQuery } from "@/hook/media-query";
@@ -24,62 +24,60 @@ const colors = [
 ]
 
 
-export default function Filter({categories, collection}: any) {
-    const [paddingTop, setPaddingTop] = useState('pt-12');
+export default function Filter({setSelectedPrice, setSelectedColor, setSelectedFit, selectedColor, selectedFit, selectedPrice}: any) {
     const phone = useMediaQuery('(max-width: 768px)');
     const [isFilterVisible, setIsFilterVisible] = useState(false);
-    const [selectedColor, setSelectedColor] = useState({
-        name: '',
-        class: '',
-        selectedClass: ''
-    })
-    const [selectedCollection, setSelectedCollection] = useState();
-    // State to hold the selected minimum and maximum prices
-    const [selectedPrice, setSelectedPrice] = useState([0, 100]); // Initial min and max prices
+    const dropdownRef = useRef<HTMLDivElement | null>(null);
 
-    const [selectedFit, setSelectedFit] = useState<any>([{
-        name: '',
-        inStock: true
-    }]);
-  
+    const transition={
+        delay: 0.1,
+        duration: 0.25,
+        ease: [0.43, 0.13, 0.7, 0.99]
+      }
 
-    console.log('color', selectedColor)
     const slideIn = {
-        hidden: { x: '100%', opacity: 0 },
+        hidden: { x: '-20%', opacity: 0 },
         visible: { x: '0%', opacity: 1 },
         exit: { x: '100%', opacity: 0 },
       };
 
+
     useEffect(() => {
-      const handleScroll = () => {
-        if (window.scrollY > 200) {  // Replace 200 with the scroll height you want to check for
-          setPaddingTop('pt-0 mt-[-40px]');
-        } else {
-          setPaddingTop('pt-12');
-        }
-      };
-  
-      // Initial check
-      handleScroll();
-  
-      // Listen for scroll events
-      window.addEventListener('scroll', handleScroll);
-  
-      // Cleanup
-      return () => {
-        window.removeEventListener('scroll', handleScroll);
-      };
-    }, []);
+        console.log('isFilterVisible', isFilterVisible);
+        const handleClickOutside = (event: any) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsFilterVisible(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClickOutside);
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [dropdownRef]);
 
 
-    console.log('selectedcolor', selectedColor.name)
-    console.log('selectedprice', selectedPrice)
-    console.log('selectedfit', selectedFit.name)
-    console.log('selectedcollection', selectedCollection)
+    // useEffect(() => {
+    //   const handleScroll = () => {
+    //     if (window.scrollY > 200) {  // Replace 200 with the scroll height you want to check for
+    //       setPaddingTop('pt-0 mt-[-40px]');
+    //     } else {
+    //       setPaddingTop('pt-12');
+    //     }
+    //   };
+  
+    //   // Initial check
+    //   handleScroll();
+  
+    //   // Listen for scroll events
+    //   window.addEventListener('scroll', handleScroll);
+  
+    //   // Cleanup
+    //   return () => {
+    //     window.removeEventListener('scroll', handleScroll);
+    //   };
+    // }, []);
 
-    const link = !collection ? `/shop${categories}?color=${selectedColor?.name ? selectedColor.name : ''}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit?.name ? selectedFit.name : ''}&collection=${selectedCollection ? selectedCollection : 'filterable-collection'}` : 
-    `/shop${categories}?color=${selectedColor?.name ? selectedColor.name : ''}&min=${selectedPrice[0]}&max=${selectedPrice[1]}&fit=${selectedFit?.name ? selectedFit.name : ''}&collection=${categories}`
-    
     
     return (
         <>
@@ -96,13 +94,15 @@ export default function Filter({categories, collection}: any) {
         
             { (isFilterVisible || !phone) &&  
 
-
+        <div ref={dropdownRef}>
          <motion.div
+          
           initial="hidden"
           animate="visible"
           exit="exit"
+          transition={transition}
           variants={slideIn}
-            className={`md:fixed w-[250px] mb-20 ${paddingTop} 
+            className={`w-[450px] mb-20 absolute pb-10 shadow-b-1 px-10
                 transform transition-transform duration-150 ease-in-out bg-white
                 ${isFilterVisible && phone ? 'translate-x-0' : 'translate-x-full'}`}>
                 <div className="flex flex-row justify-between">
@@ -111,12 +111,9 @@ export default function Filter({categories, collection}: any) {
                 </div>
                 <div className="grid grid-cols-1 gap-8 md:gap-12 mt-2">
 
-                    {!collection && 
+
                         <CategoryFilter
-                            selectedCollection={selectedCollection}
-                            setSelectedCollection={setSelectedCollection}
                         />
-                    }
 
 
 
@@ -131,18 +128,9 @@ export default function Filter({categories, collection}: any) {
                         setSelectedFit={setSelectedFit}
                     />
 
-                    <MoneyRange 
-                        selectedPrice={selectedPrice}
-                        setSelectedPrice={setSelectedPrice}
-                    />
-
-                    <Link href={link}
-                    className="mt-2 lg:mt-[-10px] h-[40px] text-white text-lg bg-primary rounded-lg lg:text-xl font-bold items-center justify-center flex"
-                    >
-                        Zoek
-                    </Link>
                 </div>
             </motion.div>
+            </div>
         }
         </>
     )

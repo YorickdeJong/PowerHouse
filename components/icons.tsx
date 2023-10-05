@@ -98,6 +98,15 @@ export const Icons = {
       height={10}
     />
   ),
+  filter_2: (props : any) => (
+    <Image
+      {...props}
+      src={'/assets/icons/Settings.svg'}
+      alt="logo"
+      width={20}
+      height={10}
+    />
+  ),
   filter: (props : any) => (
     <Image
       {...props}

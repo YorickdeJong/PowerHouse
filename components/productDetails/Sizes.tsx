@@ -23,10 +23,10 @@ export default function Sizes({sizeObjects, selectedSize, setSelectedSize, card}
 
         <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
         <RadioGroup.Label className="sr-only">Choose a size</RadioGroup.Label>
-        <div className={cn("grid grid-cols-5 gap-4", {
-                'h-[30px]' : card
+        <div className={cn("grid grid-cols-4 gap-4 text-", {
+                'h-[40px]' : card
         })}>
-            {sizeObjects.slice(0,5).map((size : any) => (
+            {sizeObjects.map((size : any) => (
             <RadioGroup.Option
                 key={size.name}
                 value={size}
@@ -38,26 +38,26 @@ export default function Sizes({sizeObjects, selectedSize, setSelectedSize, card}
                     : 'cursor-not-allowed bg-gray-50 text-gray-200',
                     active ? 'ring-2 ring-primary' : '',
                     'group relative flex items-center justify-center rounded-md border px-4 text-sm font-medium uppercase hover:bg-gray-50 focus:outline-none sm:flex-1 ',
-                    card ? 'py-0 sm:py-0' : 'sm:py-6  py-3'
+                    card ? 'py-0 sm:py-2' : 'sm:py-2 py-3'
                 )
                 }
             >
                 {({ active, checked }: any) => (
                 <>
-                    <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
+                    <RadioGroup.Label as="span" className='text-sm'>{size.name}</RadioGroup.Label>
                     {size.inStock ? (
                     <span
                         className={classNames(
                         active ? 'border' : 'border-2',
                         checked ? 'border-primary' : 'border-transparent',
-                        'pointer-events-none absolute -inset-px rounded-md'
+                        'pointer-events-none absolute -inset-px rounded-md text-[10px]'
                         )}
                         aria-hidden="true"
                     />
                     ) : (
                     <span
                         aria-hidden="true"
-                        className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200"
+                        className="pointer-events-none absolute -inset-px rounded-md border-2 border-gray-200 text-[10px]"
                     >
                         <svg
                         className="absolute inset-0 h-full w-full stroke-2 text-gray-200"

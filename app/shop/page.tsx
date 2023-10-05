@@ -8,6 +8,7 @@ import { useMediaQuery } from '@/hook/media-query';
 import { useState } from 'react';
 import { Metadata } from 'next';
 import { WEBSITE_HOST_URL } from '@/lib/constants';
+import Products from '@/components/Filter/Products';
 
 // container prop defines max width of your container
 // Typography is a component that defines the font size and weight
@@ -72,8 +73,9 @@ export default async function ServicesPage({params, searchParams, children} : an
   return (
     <section className='bg-white pb-40' >
       <div className="container">
-        
-        <div className='flex md:flex-row flex-col'>
+
+      <Products products = {items} />        
+        {/* <div className='flex md:flex-row flex-col'>
           <div className="">
             <Filter categories=''/>
           </div>
@@ -98,7 +100,7 @@ export default async function ServicesPage({params, searchParams, children} : an
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </section>
   );
