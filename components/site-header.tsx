@@ -129,7 +129,7 @@ export default function Navbar() {
             )}
 
 
-          <Link href={!isLoggedIn ? '/account/login' : '/account/profile'} className='mt-[-2px]'>
+          <Link href={!isLoggedIn ? '/login' : '/account/profile'} className='mt-[-2px]'>
             <Icons.person 
             className='hover:opacity-60 cursor-pointer  text-[#121212] '
             />

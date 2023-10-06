@@ -13,7 +13,7 @@ interface BreadcrumbProps extends HTMLAttributes<HTMLDivElement> {
 
 export default function Breadcrumb({ className, ...props }: BreadcrumbProps) {
   let path = usePathname() || '';
-  path = path.includes('orders') ? '/account/orders/order' : path;
+  path = path.includes('orders/') ? '/account/orders/order' : path;
   const slug = path?.replaceAll('-', ' ')
   let slugSpace = slug?.split('/').filter(item => item.trim() !== '');
   console.log('SLUGS', slugSpace)

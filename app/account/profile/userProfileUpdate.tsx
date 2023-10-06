@@ -1,3 +1,4 @@
+'use client'
 import { useState } from "react";
 import { FaChevronCircleRight, FaChevronDown, FaChevronRight, FaPersonBooth, FaUser } from 'react-icons/fa';
 import {inter} from '@/lib/fonts';
@@ -56,6 +57,15 @@ export function UserDetails({user, token}: any) {
     }
   
     async function handleSubmit(event: any) {
+      console.log('form', formData)
+      console.log('token', token)
+
+      if (token === null || !token) {
+        console.log('no token')
+        throw new Error('No token found');
+      }
+
+
       event.preventDefault();
       console.log(formData);
       setFormData(formData);
@@ -64,16 +74,22 @@ export function UserDetails({user, token}: any) {
       // handle address updates
       try {
           // update customer and possibly password
-          console.log('form', formData)
+
+
+          
+
+
           const updated = await storefront({query: CUSTOMER_UPDATE_MUTATION, 
             variables: {
               customerAccessToken: token,
               customer: formData,
             }
           });
+
+          console.log('updated', updated)
   
           if (updated.status === 200) {
-            if (updated.body.data.customerUpdate.customerErrors.length){
+            if (updated.body.data.customerUpdate.customerErrors){
               console.log('error', updated.body.data.customerUpdate.customerErrors[0])
               return 
             }
@@ -93,18 +109,18 @@ export function UserDetails({user, token}: any) {
   
     return (
       <div>
-        <div className='flex lg:flex-row flex-col gap-2 lg:justify-between'>
-          <FaUser className='text-dark mt-6 ml-4' />
-          <Typography variant={'title'} className='text-dark/90'>Persoonlijke Informatie</Typography>
-         
-          {!isEditing ? <button onClick = {() => handleButtonPress()} className="px-4 lg:mt-3 mb-4 lg:mb-0 h-[40px] inline-block text-blue-600 border border-gray-300 rounded-md hover:bg-gray-100">
-            <i className="mr-1 fa fa-plus"></i> Wijzig gegevens
-          </button>
-          : <div></div>
-          } 
-  
-        </div>
-        <div className={`${inter.className} border-2 rounded-xl p-8 text-dark border-dark/60 mb-4 `}>
+        <div className={`${inter.className} border-[1px] rounded-xl p-8 text-dark border-[#CBCBCB] mb-4 `}>
+          <div className='flex lg:flex-row flex-col gap-2 lg:justify-between mb-6'>
+            <Typography variant={'title'} className='text-dark/90 lg:text-lg'>Persoonlijke Gegevens</Typography>
+          
+            {!isEditing ?
+            <button onClick = {() => handleButtonPress()} className="px-4 text-gray-600 text-sm">
+               Wijzig gegevens
+            </button>
+            : <div></div>
+            } 
+    
+          </div>
           {isEditing ? (
           <form onSubmit={handleSubmit} className='flex flex-col gap-2 overflow-hidden'>
               <label className={`text-dark flex flex-row`}>

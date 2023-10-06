@@ -6,7 +6,6 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { storefront } from '@/utils/shopify/storefront';
 import Typography from '@/components/ui/typography';
-import AccountHeader from '@/components/accountHeader';
 import Breadcrumb from '@/components/breadcrumb';
 
 const CUSTOMER_ORDER_QUERY = gql`
@@ -139,7 +138,7 @@ export default function OrderItem({params} : any)  {
     
     if (!accessToken) {
       // If the user is not logged in, redirect to the login page
-      router.push('/account/login'); // Replace with your login page route
+      router.push('/login'); // Replace with your login page route
     }
 
     console.log('accessToken', accessToken)
@@ -161,18 +160,15 @@ export default function OrderItem({params} : any)  {
 
 
   return (
-    <>
-    <AccountHeader slug={path}/>
-     <section className="min-h-full mx-8 md:mx-0">
-        <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <Breadcrumb pageTitle='/orders' />   
+
+    <main>
+     <section className="mt-24 mb-10 ml-10">
+            <Breadcrumb pageTitle='' />   
+            <div className="max-w-7xl py-6">
             {orderId && data ? <CustomerOrders order={order.order} /> : <Typography variant='title' className='text-dark/80'>Geen Bestellingen Geplaatst</Typography>}
           </div>
-        </main>
       </section>
-    
-    </>
+    </main>
   )
 }
 
@@ -186,7 +182,7 @@ const CustomerOrders = ({ order }: any) => {
       <Typography variant='title' className='text-dark/80 my-4 lg:my-0'>Bestelnummer: {order.orderNumber}</Typography>
       {order?.lineItems?.nodes?.map((node: any) => (
         <div className='mb-8 group border-2 rounded-xl p-6 border-dark/60 hover:bg-dark/10' key={node?.variant?.id}>
-          <Link href={`/shop/${node?.variant?.product.handle}`} className='flex flex-row'>
+          <Link href={`/shop/filterable-collection/${node?.variant?.product.handle}`} className='flex flex-row'>
             <div className='flex-shrink-0'>
               {/* Check if the image exists before rendering it */}
               {node?.variant?.image?.url && (

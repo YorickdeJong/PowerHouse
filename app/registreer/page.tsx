@@ -39,10 +39,6 @@ export default function Register() {
     }
   };
 
-
-    console.log('Shopify Store Domain:', process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN);
-
-    console.log('error', userErrors.message)
     return (
         <section className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
           <div className="sm:mx-auto sm:w-full sm:max-w-sm">
@@ -71,7 +67,7 @@ export default function Register() {
 
             <p className="mt-10 text-center text-sm text-gray-500">
               Heb je al een account?{' '}
-              <Link href="/account/login" className="ml-4 font-semibold leading-6 text-primary hover:text-primary/90">
+              <Link href="/login" className="ml-4 font-semibold leading-6 text-primary hover:text-primary/90">
                 Log hier in
               </Link>
             </p>

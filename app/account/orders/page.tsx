@@ -6,7 +6,8 @@ import Link from 'next/link'
 import { usePathname, useRouter } from 'next/navigation'
 import { storefront } from '@/utils/shopify/storefront';
 import Typography from '@/components/ui/typography';
-import AccountHeader from '@/components/accountHeader';
+import Breadcrumb from '@/components/breadcrumb';
+
 
 const ORDER_ITEM_FRAGMENT = gql`
   fragment OrderItem on Order {
@@ -107,7 +108,7 @@ export default function Orders({params} : any) {
     
     if (!accessToken) {
       // If the user is not logged in, redirect to the login page
-      router.push('/account/login'); // Replace with your login page route
+      router.push('/login'); // Replace with your login page route
     }
 
     console.log('accessToken', accessToken)
@@ -130,17 +131,14 @@ export default function Orders({params} : any) {
 
 
   return (
-    <>
-    <AccountHeader slug={path}/>
-     <section className="min-h-full mx-8 sm:mx-auto">
-        <main>
-          <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
-            <CustomerOrders orders={orders} />
-          </div>
-        </main>
-      </section>
-    
-    </>
+    <main>
+     <section className="mt-24 mb-10 ml-10">
+            <Breadcrumb pageTitle='' />   
+            <div className="max-w-7xl py-6">
+                <CustomerOrders orders={orders} />
+            </div>
+        </section>
+    </main>
   )
 }
 
@@ -173,8 +171,8 @@ const CustomerOrders = ({orders} : any) => {
                 </Typography>
                 <ul>
                   {order.lineItems.nodes.map((item: any) => (
-                    <li key={item.variant.id} className='text-dark/60 mt-2'>
-                      {item.title} - {item.quantity} x {Number(item.variant.priceV2.amount).toFixed(2)} {item.variant.priceV2.currencyCode}
+                    <li key={item?.variant?.id} className='text-dark/60 mt-2'>
+                      {item?.title} - {item?.quantity} x {Number(item?.variant?.priceV2?.amount)?.toFixed(2)} {item?.variant?.priceV2?.currencyCode}
                     </li>
                   ))}
                 </ul>
