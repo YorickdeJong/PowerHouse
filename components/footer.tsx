@@ -25,7 +25,7 @@ export default function Footer({ className, ...props }: FooterProps) {
             ))}
           </div>
         </div>{' '}
-        <div className="flex h-[54px] w-[179.05px] gap-[22.74px] bg-primary px-[28.42px] py-[14.21px] max-md:ml-auto">
+        <div className="flex h-[54px] w-[179.05px] gap-[22.74px] bg-primary px-[28.42px] py-[14.21px] max-md:ml-auto rounded-xl">
           <Link href={'/'}>
             <Icons.facebook className="fill-white stroke-none transition-all hover:fill-none hover:stroke-white" />
           </Link>

@@ -80,7 +80,7 @@ export default function Card({
       <Link href={linkHref}>
         <div
           className={cn(
-            'block space-y-3 overflow-hidden hover:scale-105 bg-white group',
+            'block space-y-3 overflow-hidden hover:scale-105 bg-white group ',
             className,
             {
               'group/image  cursor-pointer': image,
@@ -88,12 +88,12 @@ export default function Card({
             }
           )}
         >
-        <div className="overflow-hidden group ">
+        <div className="overflow-hidden group rounded-xl ">
           <Image
             src={image!}
             alt={''}
             className={cn(
-              '-mb-7 w-full h-[600px]   object-cover object-top hover:opacity-70',
+              '-mb-7 w-full h-[600px]   object-cover object-top hover:opacity-70 rounded-xl ',
             )}
             width={1000}
             height={600}
