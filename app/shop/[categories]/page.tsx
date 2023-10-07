@@ -82,7 +82,7 @@ export default async function ServicesPage({params, searchParams, children} : an
   return (
     <section className='bg-white pb-40' >
       <div className="container">
-      <Products products = {items} />        
+        <Products products = {items} />        
         {/* <div className='flex md:flex-row flex-col'>
           <div className="">
             <Filter categories={`/${params.categories}`} collection/>

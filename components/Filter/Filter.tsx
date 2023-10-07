@@ -57,27 +57,6 @@ export default function Filter({setSelectedPrice, setSelectedColor, setSelectedF
     }, [dropdownRef]);
 
 
-    // useEffect(() => {
-    //   const handleScroll = () => {
-    //     if (window.scrollY > 200) {  // Replace 200 with the scroll height you want to check for
-    //       setPaddingTop('pt-0 mt-[-40px]');
-    //     } else {
-    //       setPaddingTop('pt-12');
-    //     }
-    //   };
-  
-    //   // Initial check
-    //   handleScroll();
-  
-    //   // Listen for scroll events
-    //   window.addEventListener('scroll', handleScroll);
-  
-    //   // Cleanup
-    //   return () => {
-    //     window.removeEventListener('scroll', handleScroll);
-    //   };
-    // }, []);
-
     
     return (
         <>

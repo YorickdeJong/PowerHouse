@@ -190,7 +190,7 @@ export function UserAddresses({user, token} : any) {
         </div>
       </div>
     )
-  }
+}
 
   
 

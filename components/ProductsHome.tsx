@@ -47,7 +47,7 @@ export default function ProductsHome({items} : any){
                     </div>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 mt-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-20 mt-12">
                     {filteredProducts.reverse().slice(0,6).map((card: any) => (
                             <Card 
                                 className="box-shadow-2xl mb-4 md:mb-0"

@@ -24,7 +24,7 @@ export default async function NewCollection() {
 
     return (
         <section className="my-12 ">
-            <div className="container pt-10 md:pt-0">
+            <div className="max-w-[1400px] mx-auto pt-10 md:pt-0">
               <ProductsHome items={items} />
             </div>
         </section>

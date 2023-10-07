@@ -23,7 +23,7 @@ export default function Account() {
   const { user, accessToken } = useUser();
   const token = sessionStorage.getItem('accessToken');
 
-
+  
   console.log('accessToken', accessToken)
 
 
